@@ -7,7 +7,9 @@ using namespace std;
 class Person {
 private:
 	const string name;
-	const string birthday;
+	const int bday;
+	const int bmonth;
+	const int byear; 
 public:
-	Person(string name, string birthday) {};
+	Person(string name, intbday, int bmonth, int byear) {};
 };
