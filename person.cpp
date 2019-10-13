@@ -3,4 +3,4 @@
 
 using namespace std;
 
-Person::Person(string name, string birthday) : name(name), birthday(birthday) {};
+Person::Person(string name, int bday, int bmonth, int byear) : name(name), bday(bday), bmonth(bmonth), byear(byear) {};
