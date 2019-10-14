@@ -6,18 +6,24 @@
 
 using namespace std;
 
-enum enum_Posicao {GuardaRedes, Defese, Medio ,Avancado};
+enum enumPosition 
+{	
+	GuardaRedes, 			
+	Defesa,				
+	Medio,			
+	Avancado
+};
 
-class Players : public Person
+class Player : public Person
 {
 private:
-	enum_Posicao pos;
-	const string club;
+	enumPosition pos;
+	string club;
 	int peso;
 	int altura;
 	int valor_passe;
 	vector<string> convocatorias;
 	int seguro;
 public:
-	;
+	Player(string name, int bday, int bmonth, int byear, enumPosition pos, string club);
 };
