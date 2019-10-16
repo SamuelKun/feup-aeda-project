@@ -14,8 +14,8 @@ int main() {
     //int sair = 1;
 
 	//ZONA DE TESTE
-	Player cristiano("cristiano", 28, 06, 1980, Avancado, "fcp");
-
+	//Player cristiano("cristiano", 28, 06, 1980, Avancado, "fcp");
+    //Este exemplo já n funciona pq se introduziu a classe date
 
 	//
 	/*
