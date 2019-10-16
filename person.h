@@ -1,15 +1,14 @@
 #pragma once
 
 #include <string>
+#include "Date.h"
 
 using namespace std;
 
 class Person {
 private:
 	string name;
-	int bday;
-	int bmonth;
-	int byear; 
+	Date birth;
 public:
-	Person(string name, int bday, int bmonth, int byear);
+	Person(string name, Date birth);
 };
