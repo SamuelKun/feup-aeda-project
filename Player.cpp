@@ -1,7 +1,7 @@
 
 #include <string>
 #include <utility>
-#include "player.h"
+#include "Player.h"
 #include "Date.h"
 
 using namespace std;

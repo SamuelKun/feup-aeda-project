@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "menus.h"
+#include "Menus.h"
 
 using namespace std;
 

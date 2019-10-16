@@ -2,9 +2,9 @@
 
 //
 #include "string"
-#include "menus.h"
-#include "person.h"
-#include "player.h"
+#include "Menus.h"
+#include "Person.h"
+#include "Player.h"
 //
 
 using namespace std;

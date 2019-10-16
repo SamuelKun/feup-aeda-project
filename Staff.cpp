@@ -1,4 +1,4 @@
 #include <string>
-#include "staff.h"
+#include "Staff.h"
 
 using namespace std;
