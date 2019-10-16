@@ -111,10 +111,60 @@ int menu_info_app()
 }
 
 int menu_staff() {
-    return 0;
+    char menu;
+
+    system("CLS");
+    //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
+
+    cout <<  "Staff Menu " << endl << endl;
+
+    cout << "1. insert stuff " << endl;
+    cout << "0. Return to Main Menu " << endl;
+
+    cin.clear();
+    cin >> menu;
+
+    switch(menu)
+    {
+        case '1':    //View player info
+            // do stuff
+            return 1;//remove this line after inserting stuff
+            break;
+        case '0':    //Exit function
+            return 0;
+        default:     //Invalid input
+            cin.ignore(1000,'\n');
+            return 0;
+    }
+    return 1;
 }
-int menu_players() {
-    return 0;
+int menu_players()
+{
+    char menu;
+
+    system("CLS");
+    //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
+
+    cout <<  "Player Menu " << endl << endl;
+
+    cout << "1. insert stuff " << endl;
+    cout << "0. Return to Main Menu " << endl;
+
+    cin.clear();
+    cin >> menu;
+
+    switch(menu)
+    {
+        case '1':    //View player info
+            // do stuff
+            return 0;//remove this line after inserting stuff
+            break;
+        case '0':    //Exit function
+            return 1;
+        default:     //Invalid input
+            cin.ignore(1000,'\n');
+            return 0;
+    }
 }
 int mainMenu()
 {
@@ -147,11 +197,9 @@ int mainMenu()
             break;
         case '0':    //Exit function
             return 1;
-            break;
         default:     //Invalid input
             cin.ignore(1000,'\n');
             return 0;
-            break;
     }
 
 
