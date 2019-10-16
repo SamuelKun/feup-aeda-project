@@ -11,13 +11,14 @@ using namespace std;
 
 int main() {
 
-    int sair = 1;
+    //int sair = 1;
 
 	//ZONA DE TESTE
 	Player cristiano("cristiano", 28, 06, 1980, Avancado, "fcp");
 
 
 	//
+	/*
     try {
         while (sair != 0) {
             sair = menu_principal();
@@ -26,6 +27,7 @@ int main() {
         cerr << "Ocorreu um erro..." << endl;
         return 1;
     }
-    
+    */
+    while(!mainMenu());
     return 0;
 }

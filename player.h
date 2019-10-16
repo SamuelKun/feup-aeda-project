@@ -19,14 +19,12 @@ class Player : public Person
 private:
 	enumPosition pos;
 	string club;
-
 	int peso;
 	int altura;
 	int valor_passe;
 	vector<string> convocatorias;
 	int seguro;
-
-
 public:
+	Player(string name, int bday, int bmonth, int byear, enumPosition pos, string club, int peso, int altura, int valor_passe, int seguro);
 	Player(string name, int bday, int bmonth, int byear, enumPosition pos, string club);
 };

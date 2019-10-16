@@ -1,3 +1,4 @@
+/*
 #pragma once
 
 #include <vector>
@@ -27,3 +28,4 @@ private:
 public:
 	Player(string name, int bday, int bmonth, int byear, enumPosition pos, string club);
 };
+*/
