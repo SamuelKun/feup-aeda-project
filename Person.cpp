@@ -8,7 +8,7 @@ using namespace std;
 
 Person::Person(string name, Date birth) : name(std::move(name)), birth(birth) {}
 
-string Person::showName() {return name; }
+string Person::showName() const {return name; }
 
-Date Person::showBirthday() {return birth; }
+Date Person::showBirthday() const {return birth; }
 

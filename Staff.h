@@ -6,12 +6,16 @@
 
 using namespace std;
 
-enum enum_funcao {treinador_principal, treinador_secundario, medico};
+enum enumFunction {coach, coach_secondary, medic};
 
 class Staff : public Person
 {
-private:
-	int salario;
 public:
-	;
+    Staff(string name, Date birth, int salario , enumFunction function);
+    void Info() const;
+private:
+    int salario;
+    enumFunction function;
+
+
 };
