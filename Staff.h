@@ -13,6 +13,8 @@ class Staff : public Person
 public:
     Staff(string name, Date birth, int salario , enumFunction function);
     void Info() const;
+    int GetSalario() const;
+    string Getname() const;
 private:
     int salario;
     enumFunction function;

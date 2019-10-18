@@ -11,7 +11,13 @@ private:
 	Date birth;
 public:
 	Person(string name, Date birth);
-	string showName() const;
-	Date showBirthday() const;
-    //virtual void info() const = 0;
+
+	//Get Methods
+	string getName() const;
+	Date getBirthday() const;
+
+	//Show Methods
+	void showName() const;
+	void showBirthday()const;
+	//virtual void info() const = 0;
 };

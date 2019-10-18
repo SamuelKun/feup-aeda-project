@@ -10,9 +10,17 @@ Staff::Staff(string name, Date birth, int salario, enumFunction function) : Pers
 }
 void Staff::Info() const
 {
-    cout << "Name: " << Person::showName() << endl;
-    cout << "Date ";
-    Person::showBirthday();
+    //Person::showName();
+    //Person::showBirthday();
+    cout << endl << salario << endl;
 
+}
+
+int Staff::GetSalario() const {
+    return salario;
+}
+
+string Staff::Getname() const {
+    return Person::getName();
 }
 
