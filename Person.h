@@ -11,4 +11,7 @@ private:
 	Date birth;
 public:
 	Person(string name, Date birth);
+	string showName();
+	Date showBirthday();
+    //virtual void info() const = 0;
 };
