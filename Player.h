@@ -8,10 +8,10 @@ using namespace std;
 
 enum enumPosition
 {
-	GuardaRedes,
-	Defesa,
-	Medio,
-	Avancado
+	Goalkeeper,
+	Defense,
+	Midfield,
+	Forward
 };
 
 class Player : public Person
@@ -19,12 +19,12 @@ class Player : public Person
 private:
 	enumPosition pos;
 	string club;
-	int peso;
-	int altura;
-	int valor_passe;
-	vector<string> convocatorias;
-	int seguro;
+	int weight;
+	int height;
+	int value;
+	vector<string> convocatoria;
+	int insurance;
 public:
-	Player(string name, Date birth, enumPosition pos, string club, int peso, int altura, int valor_passe, int seguro);
+	Player(string name, Date birth, enumPosition pos, string club, int weight, int height, int value, int insurance);
 	Player(string name, Date birth, enumPosition pos, string club);
 };
