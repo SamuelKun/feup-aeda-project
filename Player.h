@@ -22,8 +22,9 @@ private:
 	int weight;
 	int height;
 	int value;
+    int insurance;
 	vector<string> convocatoria;
-	int insurance;
+
 public:
 	Player(string name, Date birth, enumPosition pos, string club, int weight, int height, int value, int insurance);
 	Player(string name, Date birth, enumPosition pos, string club, int weight, int height, int value);
@@ -33,11 +34,12 @@ public:
 	int getHeight() const;
 	int getValue() const;
 	int getInsurance() const;
-	// vector<string> getConvocatoria() const;
+	vector<string> getConvocatoria() const;
 	void setPos(enumPosition pos);
 	void setClub(string club);
 	void setWeight(int weight);
 	void setHeight(int height);
 	void setValue(int value);
 	void setInsurance(int insurance);
+	friend ostream & operator <<(ostream& os,const Person & p);
 };

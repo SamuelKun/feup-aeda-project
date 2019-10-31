@@ -70,3 +70,28 @@ void Player::setInsurance(int insurance) {
     this -> insurance = insurance;
 }
 
+vector<string> Player::getConvocatoria() const {
+    return convocatoria;
+}
+
+ostream &operator<<(ostream &os, const Player &p) {
+    vector<string>::const_iterator it;
+    vector<string> conv = p.getConvocatoria();
+
+    os << "All player data: " << endl << endl;
+    os << "Name: " << p.getName() << endl;
+    os << "Birthday: " << p.getBirthday() << endl;
+    os << "Position: " <<  p.getPosition() << endl;
+    os << "Club: " << p.getClub() << endl;
+    os << "Weight: " << p.getWeight() << endl;
+    os << "Height: " << p.getHeight() << endl;
+    os << "Value: " << p.getValue() << endl;
+    os << "Insurance: " << p.getInsurance() << endl;
+    for( it = conv.begin();it != conv.end();it++)
+    {
+        os << *it << endl;
+    }
+
+    return os;
+}
+
