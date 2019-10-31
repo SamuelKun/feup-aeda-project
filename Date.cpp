@@ -30,13 +30,7 @@ Date::Date(string date)
 }
 
 
-Date::Date(unsigned short day, unsigned short month, unsigned year)
-{
-    this->day = day;
-    this->month = month;
-    this->year = year;
-
-}
+Date::Date(unsigned short day, unsigned short month, unsigned year):day(day), month(month), year(year){}
 
 /*********************************
  * GET Methods

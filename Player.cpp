@@ -5,22 +5,10 @@
 
 using namespace std;
 
-Player::Player(string name, Date birth, enumPosition pos, string club, int weight, int height, int value, int insurance): Person(name,birth) {
-    this -> pos = pos;
-    this -> club = club;
-    this -> weight = weight;
-    this -> height = height;
-    this -> value = value;
-    this -> insurance = insurance;
+Player::Player(string name, Date birth, enumPosition pos, string club, int weight, int height, int value, int insurance): Person(name,birth),
+pos(pos), club(club), weight(weight), height(height),value(value), insurance(insurance){
 }
 
-Player::Player(string name, Date birth, enumPosition pos, string club, int weight, int height, int value) : Person(name,birth) {
-    this -> pos = pos;
-    this -> club = club;
-    this -> weight = weight;
-    this -> height = height;
-    this -> value = value;
-}
 
 enumPosition Player::getPosition() const {
     return pos;
@@ -73,6 +61,11 @@ void Player::setInsurance(int insurance) {
 vector<string> Player::getConvocatoria() const {
     return convocatoria;
 }
+
+bool Player::operator<(const Player &p) {
+    return Person::getName() < p.getName();
+}
+
 
 ostream &operator<<(ostream &os, const Player &p) {
     vector<string>::const_iterator it;

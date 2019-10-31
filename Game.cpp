@@ -3,55 +3,50 @@
 #include <utility>
 
 //Constructor(s)
-Game::Game(string country, string city, string stadium, vector<Player> v_called, vector<Player> v_played, vector<Person> v_referees) {
-    this->country = std::move(country);
-    this->city = std::move(city);
-    this->stadium = std::move(stadium);
-    this->v_called = std::move(v_called);
-    this->v_played = std::move(v_played);
-    this->v_referees= std::move(v_referees);
+Game::Game(const string &country,const string &city,const string &stadium, vector<Player> v_called, vector<Player> v_played, vector<Person> v_referees)
+:country(country),city(city),stadium(stadium),v_called(v_called),v_played(v_played),v_referees(v_referees){
 }
 
 //Get Methods
-string Game::GetCountry() const {
+string Game::getCountry() const {
     return country;
 }
 
-string Game::GetCity() const {
+string Game::getCity() const {
     return city;
 }
 
-string Game::GetStadium() const {
+string Game::getStadium() const {
     return stadium;
 }
 
-vector<Player> Game::GetCalled() const {
+vector<Player> Game::getCalled() const {
     return v_called;
 }
 
-vector<Player> Game::GetPlayed() const {
+vector<Player> Game::getPlayed() const {
     return v_played;
 }
 
-vector<Person> Game::GetReferees() const {
+vector<Person> Game::getReferees() const {
     return v_referees;
 }
 
 //Show Methods
-void Game::ShowCountry() const {
+void Game::showCountry() const {
     cout << country << endl;
 }
 
-void Game::ShowCity() const {
+void Game::showCity() const {
     cout << city << endl;
 
 }
 
-void Game::ShowStadium() const {
+void Game::showStadium() const {
     cout << stadium << endl;
 }
 
-void Game::ShowCalled() const {
+void Game::showCalled() const {
     /*Fazer overload na class player
     for(size_t i = 0; i < v_called.size();i++)
     {
@@ -60,7 +55,7 @@ void Game::ShowCalled() const {
      */
 }
 
-void Game::ShowPlayed() const {
+void Game::showPlayed() const {
     /*Fazer overload na class player
     for(size_t i = 0; i < v_played.size();i++)
     {
@@ -69,7 +64,7 @@ void Game::ShowPlayed() const {
      */
 }
 
-void Game::ShowReferees() const {
+void Game::showReferees() const {
     /*Fazer overload na class person
     for(size_t i = 0; i < v_referees.size();i++)
     {
@@ -79,7 +74,7 @@ void Game::ShowReferees() const {
 
 }
 
-void Game::ShowStats() const {
+void Game::showStats() const {
     /*Fazer overload na class Stats
     cout << stats;
      */

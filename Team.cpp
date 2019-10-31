@@ -9,6 +9,16 @@
 #include <string>
 #include <fstream>
 
+bool cmpPos( const Player &p1, const Player & p2)
+{
+    return p1.getPosition() > p2.getPosition();
+}
+bool cmpName( const Player &p1, const Player & p2)
+{
+    return p1.getName() > p2.getName();
+}
+
+
 Team::Team(string file_name) {
 
     //Read Agency File
@@ -70,4 +80,12 @@ Team::Team(string file_name) {
 
 vector<Player> Team::GetPlayers() const {
     return players;
+}
+
+void Team::sortByPosition() {
+    sort(players.begin(),players.end(),cmpPos());
+}
+
+void Team::sortByName(){
+    sort(players.begin(),players.end(),cmpName());
 }

@@ -26,8 +26,7 @@ private:
 	vector<string> convocatoria;
 
 public:
-	Player(string name, Date birth, enumPosition pos, string club, int weight, int height, int value, int insurance);
-	Player(string name, Date birth, enumPosition pos, string club, int weight, int height, int value);
+	Player(string name, Date birth, enumPosition pos, string club, int weight, int height, int value, int insurance = 0);
 	enumPosition getPosition() const;
 	string getClub() const;
 	int getWeight() const;
@@ -41,5 +40,7 @@ public:
 	void setHeight(int height);
 	void setValue(int value);
 	void setInsurance(int insurance);
-	friend ostream & operator <<(ostream& os,const Person & p);
+
+	bool operator <(const Player &p);
+	friend ostream & operator <<(ostream& os,const Player & p);
 };

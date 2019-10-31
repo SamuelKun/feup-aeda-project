@@ -9,25 +9,25 @@ using namespace std;
 class  Game
 {
 public:
-    Game(string country, string city, string stadium, vector<Player> v_called, vector<Player> v_played, vector<Person> v_referees);
+    Game(const string &country,const string &city, const string &stadium, vector<Player> v_called, vector<Player> v_played, vector<Person> v_referees);
 
     //Get Methods
-    string GetCountry() const;
-    string GetCity() const;
-    string GetStadium() const;
-    vector<Player> GetCalled() const;
-    vector<Player> GetPlayed() const;
-    vector<Person> GetReferees() const;
-    //Stats stats GetStats()const;
+    string getCountry() const;
+    string getCity() const;
+    string getStadium() const;
+    vector<Player> getCalled() const;
+    vector<Player> getPlayed() const;
+    vector<Person> getReferees() const;
+    //Stats stats getStats()const;
 
     //Show Methods
-    void ShowCountry() const;
-    void ShowCity() const;
-    void ShowStadium() const;
-    void ShowCalled() const;
-    void ShowPlayed() const;
-    void ShowReferees() const;
-    void ShowStats() const;
+    void showCountry() const;
+    void showCity() const;
+    void showStadium() const;
+    void showCalled() const;
+    void showPlayed() const;
+    void showReferees() const;
+    void showStats() const;
 
 
 private:

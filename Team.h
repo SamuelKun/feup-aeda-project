@@ -7,6 +7,7 @@
 #include <vector>
 #include "Player.h"
 
+
 class Team {
 private:
     vector<Player> players;
@@ -15,6 +16,9 @@ public:
     Team();
     Team(string file_name);
     vector<Player> GetPlayers() const;
+
+    void sortByPosition();
+    void sortByName();
 
 };
 
