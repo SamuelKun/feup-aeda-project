@@ -29,6 +29,9 @@ public:
     void showReferees() const;
     void showStats() const;
 
+    //Sort methods
+    void sortByName();
+
 
 private:
     string country;

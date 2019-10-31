@@ -1,6 +1,16 @@
 #include "Game.h"
+#include <algorithm>
 
 #include <utility>
+
+
+
+bool cmpName( const Person &p1, const Person & p2)
+{
+    return p1.getName() > p2.getName();
+}
+
+
 
 //Constructor(s)
 Game::Game(const string &country,const string &city,const string &stadium, vector<Player> v_called, vector<Player> v_played, vector<Person> v_referees)
@@ -78,5 +88,12 @@ void Game::showStats() const {
     /*Fazer overload na class Stats
     cout << stats;
      */
+}
+
+
+void Game::sortByName() {
+    sort(v_called.begin(),v_called.end(),cmpName);
+    sort(v_played.begin(),v_played.end(),cmpName);
+    sort(v_referees.begin(),v_referees.end(),cmpName);
 }
 
