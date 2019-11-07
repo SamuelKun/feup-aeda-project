@@ -5,29 +5,17 @@
 #include "Menus.h"
 #include "Person.h"
 #include "Player.h"
+#include "Team.h"
 //
 
 using namespace std;
 
 int main() {
 
-    //int sair = 1;
+    Team a("init.txt");
 
-	//ZONA DE TESTE
-	//Player cristiano("cristiano", 28, 06, 1980, Avancado, "fcp");
-    //Este exemplo já n funciona pq se introduziu a classe date
+    vector<Player *> p = a.GetPlayers();
 
-	//
-	/*
-    try {
-        while (sair != 0) {
-            sair = menu_principal();
-        }
-    } catch (...) {
-        cerr << "Ocorreu um erro..." << endl;
-        return 1;
-    }
-    */
-    while(!mainMenu());
+    //while(!mainMenu());
     return 0;
 }

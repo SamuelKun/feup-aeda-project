@@ -29,63 +29,58 @@ Team::Team(string file_name) {
     while (getline(info, str_temp)) all_info.push_back(str_temp);
 
     teamName = all_info[0];
-
-    ifstream team_info(all_info[1]);
-
     vector<string> tempVec;
 
-    /* 1º while - team.txt
+    /* 1º while - team.txt - CONVOCATÓRIAS!
+    */
+/*
+    ifstream team_info(all_info[1]);
+
     while (getline(team_info, str_temp)){
+        cout << str_temp << endl;
+
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else
         {
-            //pos = tempVec[0]; // Ver como fazer para passar
-            //jogador name 1
-            //jogador nome 2
-            // ... loop
+            Date tempBirth(10,10,10);
+            enumPosition a = Goalkeeper; // Apenas para testar vai ser mudado depois!!!
+            Player tempPlayer(tempVec[0], tempBirth, a, tempVec[3], std::stoi(tempVec[4]), std::stoi(tempVec[5]), stoi(tempVec[6]));
+            this->players.push_back(&tempPlayer);
+            tempVec.clear();
         }
-
-
     }
-     */
+*/
 
     // 2º while - jogadores.txt -> append no vector
-
     ifstream players_info(all_info[2]);
-    string str_temp2;
 
     while (getline(players_info, str_temp)){
         cout << str_temp << endl;
-        /*
-         * if (str_temp != "-----") tempVec.push_back(str_temp);
+
+        if (str_temp != "-----") tempVec.push_back(str_temp);
         else
         {
-
-            Date tempBirth(10,10,10);
-            //enumPosition a = Goalkeeper; // Apenas para testar vai ser mudado depois!!!
-            cout << tempVec[4] << endl;
-            cout << tempVec[5] << endl;
-            cout << tempVec[6] << endl;
-            //Player tempPlayer(tempVec[0], tempBirth, a, tempVec[3], std::stoi(tempVec[4]), std::stoi(tempVec[5]), stoi(tempVec[6]));
-            //this->players.push_back(tempPlayer);
-        }*/
+            Date tempBirth(tempVec[1]);
+            enumPosition a = Goalkeeper; // Apenas para testar vai ser mudado depois!!!
+            Player tempPlayer(tempVec[0], tempBirth, a, tempVec[3], std::stoi(tempVec[4]), std::stoi(tempVec[5]), stoi(tempVec[6]));
+            this->players.push_back(&tempPlayer);
+            tempVec.clear();
+            cout<<"Limpou? " << tempVec.size() << endl;
+        }
     }
 
     /* 3º while - jogos.txt
-
-
     */
-
 }
 
-vector<Player> Team::GetPlayers() const {
+vector<Player *> Team::GetPlayers() const {
     return players;
 }
 
 void Team::sortByPosition() {
-    sort(players.begin(),players.end(),cmpPos());
+    //sort(players.begin(),players.end(),cmpPos);
 }
 
 void Team::sortByName(){
-    sort(players.begin(),players.end(),cmpName());
+    //sort(players.begin(),players.end(),cmpName);
 }

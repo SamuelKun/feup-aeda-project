@@ -8,7 +8,6 @@ int info_app()
 {
     char menu;
 
-    system("CLS");
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
     cout << "This app was created by :" << endl << endl;
@@ -31,7 +30,6 @@ int info_app()
 int menu_staff() {
     char menu;
 
-    system("CLS");
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
     cout <<  "Staff Menu " << endl << endl;
@@ -60,7 +58,6 @@ int menu_players()
 {
     char menu;
 
-    system("CLS");
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
     cout <<  "Player Menu " << endl << endl;
@@ -88,7 +85,6 @@ int mainMenu()
 {
     char menu;
 
-    system("CLS");
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
     cout << "========================================= " << endl;
@@ -119,8 +115,6 @@ int mainMenu()
             cin.ignore(1000,'\n');
             return 0;
     }
-
-
 }
 
 

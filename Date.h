@@ -15,7 +15,7 @@ using namespace std;
 class Date{
 public:
     Date();
-    explicit Date(string date);
+    Date(string date);
     Date(unsigned short day, unsigned short month, unsigned year);
 
 

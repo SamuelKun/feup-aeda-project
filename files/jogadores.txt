@@ -1,33 +1,27 @@
-Goalkeeper
-Rui Patricio
-Beto
-Jose Sa
+Diogo Samuel
+28/06/2000
+GoalKeeper
+Portugal
+87
+170
+10000
+0
 -----
-Defense
-Pepe
-Jose Fonte
-Raphael Guerreiro
-Joao Cancelo
-Ruben Dias
-Nelson semedo
-Ruben Semedo
-Ferro
+Bernardo Vaz
+28/06/2000
+GoalKeeper
+Portugal
+87
+170
+10000
+0
 -----
-Midfield
-Joao Moutinho
-William Carvalho
-Joao Mario
-Danilo
-Renato Sanches
-Bruno Fernandes
-Pizzi
-Ruben Neves
+Diogo Samuel
+28/06/2000
+GoalKeeper
+Portugal
+87
+170
+10000
+0
 -----
-Forward
-Cristiano Ronaldo
-Bernardo Silva
-Andre Silva
-Rafa
-Joao Felix
------
-

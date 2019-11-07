@@ -10,12 +10,12 @@
 
 class Team {
 private:
-    vector<Player> players;
+    vector<Player *> players;
     string teamName;
 public:
     Team();
     Team(string file_name);
-    vector<Player> GetPlayers() const;
+    vector<Player *> GetPlayers() const;
 
     void sortByPosition();
     void sortByName();
