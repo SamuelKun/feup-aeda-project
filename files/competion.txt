@@ -1,3 +1,4 @@
+Worlds Championship
 called.txt
 games.txt
 28/06/2020

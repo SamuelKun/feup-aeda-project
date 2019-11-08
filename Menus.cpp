@@ -105,7 +105,9 @@ int menu_tournaments()
 
     cout <<  "Tournament Menu " << endl << endl;
 
-    cout << "1. Create a new f " << endl;
+    cout << "1. Show All Tournaments " << endl;
+    cout << "2. Select One Tournament " << endl;
+    cout << "3. " << endl;
     cout << "0. Return to Main Menu " << endl;
 
     cin.clear();
@@ -114,7 +116,9 @@ int menu_tournaments()
     switch(menu)
     {
         case '1':    //View player info
-            // do stuff
+            for(int i = 0; i < (national_team->getCompetion()).size(); i++){
+                cout << (*(national_team->getCompetion()[i]));
+            }
             return 0;//remove this line after inserting stuff
             break;
         case '0':    //Exit function
@@ -135,8 +139,9 @@ int mainMenu()
     cout << "========================================= \n" << endl;
     cout << "1. View player info" << endl;
     cout << "2. View staff info" << endl;
-    cout << "3. View app info" << endl;
-    cout << "4. Tournaments" << endl;
+    cout << "3. Tournaments" << endl;
+    cout << "4. Games" << endl;
+    cout << "5. View app info" << endl;
     cout << "0. Exit" << endl;
 
     cin.clear();
@@ -151,10 +156,10 @@ int mainMenu()
             while(!menu_staff());
             break;
         case '3':    //View app info
-            while(!info_app());
+            while(!menu_tournaments());
             break;
-        case '4':    //View app info
-            //while(!menu_tournaments());
+        case '5':    //View app info
+            while(!info_app());
             break;
         case '0':    //Exit function
             return 1;

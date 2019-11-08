@@ -27,13 +27,19 @@ public:
     //Stats stats getStats()const;
 };
 
+
 class Competion{
 private:
+    string name;
     vector<Player *> called;
     vector<Game *> team_games;
     Date start, end;
 public:
-    Competion(vector<Player *> called, vector<Game *> team_games, Date start, Date end);
+    Competion(string name, vector<Player *> called, vector<Game *> team_games, Date start, Date end);
+    string getCompetionName() const;
     vector<Player *> getCalled() const;
     vector<Game *> getGames() const;
+    friend ostream & operator<<(ostream &out, const Competion &comp);
 };
+
+

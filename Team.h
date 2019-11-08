@@ -15,14 +15,15 @@ private:
     string teamName;  /// \brief Team file
     vector<Player *> team_players; /// \brief Vector with Team's players
     vector<Staff *> team_staff; /// \brief Vector with Team's staff
+    vector<Game *> team_games;
     vector<Competion *> team_competions; /// \brief Vector with Team's competitions
 public:
     Team();
     Team(string file_name);
-    void read(string file_name);
     string getTeamName() const;
     vector<Player *> getPlayers() const;
     vector<Staff *> getStaff() const;
+    vector<Game *> getGame() const;
     vector<Competion *> getCompetion() const;
 };
 

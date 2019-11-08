@@ -67,13 +67,13 @@ vector<Competion *> read_competion(string info){
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
             //Ler Convocados
-            vector<Player *> comp_convocado = read_player(tempVec[0]);
+            vector<Player *> comp_convocado = read_player(tempVec[1]);
             //Ler Jogos
-            vector<Game *> competion_games = read_games(tempVec[1]);
+            vector<Game *> competion_games = read_games(tempVec[2]);
             //Data de começo e fim
-            Date startcomp(tempVec[2]);
-            Date endcomp(tempVec[3]);
-            Competion *tempComp = new Competion(comp_convocado, competion_games, startcomp, endcomp);
+            Date startcomp(tempVec[3]);
+            Date endcomp(tempVec[4]);
+            Competion *tempComp = new Competion(tempVec[0], comp_convocado, competion_games, startcomp, endcomp);
             competion.push_back(tempComp);
             tempVec.clear();
         }
@@ -102,20 +102,6 @@ Team::Team(string file_name) {
 
 }
 
-void Team::read(string file_name) {
-    //Read Agency File
-    ifstream info(file_name);
-    vector<string> file_info;
-    string str_temp;
-
-    while (getline(info, str_temp)) file_info.push_back(str_temp);
-
-    this->teamName = file_info[0];
-    this->team_players = read_player(file_info[1]);
-    this->team_staff = read_staff(file_info[2]);
-    this->team_competions = read_competion(file_info[3]);
-
-}
 /// \brief Get Method
 /// \return Team's name
 string Team::getTeamName() const {
@@ -135,4 +121,8 @@ vector<Staff *> Team::getStaff() const {
 /// \return Team's vector with Competitions
 vector<Competion *> Team::getCompetion() const {
     return team_competions;
+}
+
+vector<Game *> Team::getGame() const {
+    return team_games;
 }
