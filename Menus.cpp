@@ -89,13 +89,19 @@ int menu_players()
             cout << "0. Return to Main Menu " << endl;
             cin >> menu;
             return 1;//remove this line after inserting stuff
-            break;
         case '2':    //Exit function
-            national_team->findPlayer("Diogo").info();
+            try {
+                string name;
+                cin >> name;
+                cin.ignore(1000, '\n');
+                national_team->findPlayer(name).info();
+            }
+            catch(PlayerNotFound & er) {
+                cout << "Player " << er.getName() << " not found" << endl;
+            }
             return 1;
         case '0':
             return 1;
-            break;
         default:     //Invalid input
             cin.ignore(1000,'\n');
             return 0;

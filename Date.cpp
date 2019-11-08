@@ -123,7 +123,7 @@ Date &Date::operator-(const Date &other) {
 /// \return Ostream
 ostream& operator<<(ostream& out, const Date &date)
 {
-    out << date.getYear() << '/' << date.getMonth() << '/' << date.getDay();
+    out << date.getYear() << '/' << date.getMonth() << '/' << date.getDay() << endl;
     return out;
 }
 /// \brief Overloads ">>" operator to get a Date from user input

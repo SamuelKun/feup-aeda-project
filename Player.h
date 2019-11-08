@@ -40,3 +40,13 @@ public:
     bool operator==(const Player &p);
 
 };
+
+class PlayerNotFound{
+private:
+    string name;
+public:
+  PlayerNotFound(string name): name(name) {}
+  string getName() const{
+      return name;
+  }
+};

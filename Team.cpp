@@ -132,6 +132,5 @@ Player & Team::findPlayer(string name) {
         if (team_players[i]->getName().find(name) != string::npos)
             return *team_players[i];
     }
-    //throw(PlayerNotFound(name));
-
+    throw(PlayerNotFound(name));
 }
