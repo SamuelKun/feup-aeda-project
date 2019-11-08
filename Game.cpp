@@ -50,8 +50,13 @@ vector<Player *> Game::getCalledPlayers() const {
 /// \param team_games Competition's team games vector
 /// \param start Starting date
 /// \param end Ending date
-Competion::Competion(vector<Player *> called, vector<Game *> team_games, Date start, Date end): called(called), team_games(team_games), start(start), end(end) {
+Competion::Competion(string name, vector<Player *> called, vector<Game *> team_games, Date start, Date end): name(name), called(called), team_games(team_games),
+                                                                                                             start(start), end(end) {
 
+}
+
+string Competion::getCompetionName() const {
+    return name;
 }
 
 /// \brief Get method
@@ -66,3 +71,10 @@ vector<Game *> Competion::getGames() const {
     return team_games;
 }
 
+ostream &operator<<(ostream &out, const Competion &comp) {
+    out << "Competion name: " << comp.name << endl;
+    out << "Number of Games: " << comp.team_games.size() << endl;
+    out << "Start Date: " << comp.start << endl;
+    out << "End Date: " << comp.end << endl;
+    return out;
+}

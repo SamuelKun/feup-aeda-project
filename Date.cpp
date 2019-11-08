@@ -107,6 +107,13 @@ bool Date::isBefore(const Date &date)
     return year == date.year && month == date.month && day < date.day;
 }
 
+Date &Date::operator-(const Date &other) {
+    day -= other.day;
+    month -= other.month;
+    year -= other.year;
+    return *this;
+}
+
 /*********************************
  * ostream
  ********************************/
@@ -116,7 +123,7 @@ bool Date::isBefore(const Date &date)
 /// \return Ostream
 ostream& operator<<(ostream& out, const Date &date)
 {
-    out << date.getYear() << '/' << date.getMonth() << '/' << date.getDay() << endl;
+    out << date.getYear() << '/' << date.getMonth() << '/' << date.getDay();
     return out;
 }
 /// \brief Overloads ">>" operator to get a Date from user input
@@ -163,3 +170,5 @@ istream& operator>>(istream& in, Date &date)
 
     return in;
 }
+
+
