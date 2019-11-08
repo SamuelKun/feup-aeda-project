@@ -39,3 +39,6 @@ int menu_tournaments();
  * @return chooses between different menus or exiting the app
  */
 int mainMenu();
+int fileMenu();
+int firstMenu();
+
