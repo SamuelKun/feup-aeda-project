@@ -6,7 +6,6 @@
 
 using namespace std;
 extern Team *national_team;
-extern bool exiter = false;
 int info_app()
 {
     char menu;
@@ -167,7 +166,6 @@ int mainMenu()
             return 1;
         default:     //Invalid input
             cin.ignore(1000,'\n');
-            exiter = true;
             return 0;
     }
 }
@@ -176,7 +174,7 @@ int fileMenu(){
     string filename;
 
     cout << "Write the filename you wish to read: " << endl;
-    cout << "Press [0] to go back to the previous screen" << endl;
+    cout << "Press [0] to exit program" << endl;
     cin.clear();
     cin >> filename;
 
@@ -191,12 +189,11 @@ int fileMenu(){
         if(filename == "0") return 1;
     }
     national_team = new Team(filename);
-    while(!mainMenu());
+    mainMenu();
     return 1;
 }
 
 int firstMenu(){
-    if(exiter) return 0;
     char menu;
 
     cout << "========================================= " << endl;
@@ -223,5 +220,6 @@ int firstMenu(){
             cin.ignore(1000,'\n');
             return 0;
     }
+    return 1;
 }
 
