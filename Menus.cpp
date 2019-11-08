@@ -93,6 +93,9 @@ int menu_players()
         case '2':    //Exit function
             national_team->findPlayer("Diogo").info();
             return 1;
+        case '0':
+            return 1;
+            break;
         default:     //Invalid input
             cin.ignore(1000,'\n');
             return 0;
@@ -163,7 +166,7 @@ int mainMenu()
             while(!info_app());
             break;
         case '0':    //Exit function
-            return 1;
+            exit(0);
         default:     //Invalid input
             cin.ignore(1000,'\n');
             return 0;
@@ -177,8 +180,10 @@ int fileMenu(){
     cout << "Press [0] to exit program" << endl;
     cin.clear();
     cin >> filename;
-
     teamFile.open(filename);
+
+    if(filename == "0") return 1;
+
     while (teamFile.fail())
     {
         cin.clear();
@@ -189,7 +194,7 @@ int fileMenu(){
         if(filename == "0") return 1;
     }
     national_team = new Team(filename);
-    mainMenu();
+    while(!mainMenu());
     return 1;
 }
 
@@ -220,6 +225,5 @@ int firstMenu(){
             cin.ignore(1000,'\n');
             return 0;
     }
-    return 1;
 }
 
