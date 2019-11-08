@@ -15,7 +15,8 @@ bool cmpName( const Player &p1, const Player & p2)
     return p1.getName() > p2.getName();
 }
 
-
+/// \brief Constructor
+/// \param file_name file containing all data
 Team::Team(string file_name) {
 
     //Read Agency File
@@ -84,19 +85,23 @@ Team::Team(string file_name) {
         }
     }
 }
-
+/// \brief Get Method
+/// \return Team's name
 string Team::getTeamName() const {
     return teamName;
 }
-
+/// \brief Get Method
+/// \return Team's vector with teams players
 vector<Player *> Team::GetPlayers() const {
     return team_players;
 }
-
+/// \brief Get Method
+/// \return Team's vector with staff members
 vector<Staff *> Team::GetStaff() const {
     return team_staff;
 }
-
+/// \brief Get Method
+/// \return Team's vector with Competitions
 vector<Competion *> Team::Competion() const {
     return team_competions;
 }

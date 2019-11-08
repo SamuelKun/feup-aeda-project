@@ -12,10 +12,10 @@
 
 class Team {
 private:
-    string teamName;
-    vector<Player *> team_players;
-    vector<Staff *> team_staff;
-    vector<Competion *> team_competions;
+    string teamName;  /// \brief Team file
+    vector<Player *> team_players; /// \brief Vector with Team's players
+    vector<Staff *> team_staff; /// \brief Vector with Team's staff
+    vector<Competion *> team_competions; /// \brief Vector with Team's competitions
 public:
     Team();
     Team(string file_name);

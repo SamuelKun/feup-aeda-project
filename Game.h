@@ -9,12 +9,12 @@ using namespace std;
 class Game
 {
 private:
-    string country;
-    string city;
-    string stadium;
-    //vector<Player> v_called;
-    //vector<Player> v_played;
-    //vector<Person> v_referees;
+    string country;/*!< Game's country */
+    string city;   /*!< Game's city */
+    string stadium;/*!< Game's stadium */
+    //vector<Player> v_called   /*!< Vector with called players */
+    //vector<Player> v_played;  /*!< Vector with players that played the game */
+    //vector<Person> v_referees;/*!< Vector with referees */
     //Stats stats;
     //É necessário criar uma classe para as estatisticas todas
 public:
