@@ -85,6 +85,8 @@ vector<Competion *> read_competion(string info){
     return competion;
 }
 
+/// \brief Constructor
+/// \param file_name file containing team
 Team::Team(string file_name) {
     //Read Agency File
     ifstream info(file_name);
@@ -99,19 +101,23 @@ Team::Team(string file_name) {
     this->team_competions = read_competion(file_info[3]);
 
 }
-
+/// \brief Get Method
+/// \return Team's name
 string Team::getTeamName() const {
     return teamName;
 }
-
-vector<Player *> Team::getPlayers() const {
+/// \brief Get Method
+/// \return Team's vector with teams players
+vector<Player *> Team::GetPlayers() const {
     return team_players;
 }
-
-vector<Staff *> Team::getStaff() const {
+/// \brief Get Method
+/// \return Team's vector with staff members
+vector<Staff *> Team::GetStaff() const {
     return team_staff;
 }
-
-vector<Competion *> Team::getCompetion() const {
+/// \brief Get Method
+/// \return Team's vector with Competitions
+vector<Competion *> Team::Competion() const {
     return team_competions;
 }

@@ -12,8 +12,6 @@ int mainMenu();
  * @return
  */
 
-
-
 /**
  * This menu shows the app creators
  * @return goes back to the main menu
