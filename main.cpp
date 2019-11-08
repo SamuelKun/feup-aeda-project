@@ -12,9 +12,7 @@ using namespace std;
 
 int main() {
 
-    Team a("init.txt");
-
-    vector<Player *> p = a.GetPlayers();
+    Team t("init.txt");
 
     //while(!mainMenu());
     return 0;

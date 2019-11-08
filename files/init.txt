@@ -1,4 +1,3 @@
 Portugal
-equipa.txt
 jogadores.txt
-jogos.txt
+competion.txt

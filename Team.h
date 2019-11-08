@@ -6,20 +6,23 @@
 
 #include <vector>
 #include "Player.h"
+#include "Staff.h"
+#include "Game.h"
 
 
 class Team {
 private:
-    vector<Player *> players;
     string teamName;
+    vector<Player *> team_players;
+    vector<Staff *> team_staff;
+    vector<Competion *> team_competions;
 public:
     Team();
     Team(string file_name);
+    string getTeamName() const;
     vector<Player *> GetPlayers() const;
-
-    void sortByPosition();
-    void sortByName();
-
+    vector<Staff *> GetStaff() const;
+    vector<Competion *> Competion() const;
 };
 
 

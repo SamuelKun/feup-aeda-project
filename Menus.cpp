@@ -81,6 +81,33 @@ int menu_players()
             return 0;
     }
 }
+int menu_tournaments()
+{
+    char menu;
+
+    //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
+
+    cout <<  "Tournament Menu " << endl << endl;
+
+    cout << "1. Create a new f " << endl;
+    cout << "0. Return to Main Menu " << endl;
+
+    cin.clear();
+    cin >> menu;
+
+    switch(menu)
+    {
+        case '1':    //View player info
+            // do stuff
+            return 0;//remove this line after inserting stuff
+            break;
+        case '0':    //Exit function
+            return 1;
+        default:     //Invalid input
+            cin.ignore(1000,'\n');
+            return 0;
+    }
+}
 int mainMenu()
 {
     char menu;
@@ -93,6 +120,7 @@ int mainMenu()
     cout << "1. View player info" << endl;
     cout << "2. View staff info" << endl;
     cout << "3. View app info" << endl;
+    cout << "4. Tournaments" << endl;
     cout << "0. Exit" << endl;
 
     cin.clear();
@@ -108,6 +136,9 @@ int mainMenu()
             break;
         case '3':    //View app info
             while(!info_app());
+            break;
+        case '4':    //View app info
+            //while(!menu_tournaments());
             break;
         case '0':    //Exit function
             return 1;

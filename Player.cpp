@@ -5,14 +5,8 @@
 
 using namespace std;
 
-Player::Player(string name, Date birth, enumPosition pos, string club, int weight, int height, int value, int insurance): Person(name,birth),
-pos(pos), club(club), weight(weight), height(height),value(value), insurance(insurance){
-}
-
-
-enumPosition Player::getPosition() const {
-    return pos;
-}
+Player::Player(string name, Date birth, string club, int weight, int height, int value, int insurance): Person(name, birth), club(club), weight(weight),
+                                                                                                        height(height), value(value), insurance(insurance) {}
 
 string Player::getClub() const {
     return club;
@@ -34,9 +28,6 @@ int Player::getInsurance() const {
     return insurance;
 }
 
-void Player::setPos(enumPosition pos) {
-    this -> pos = pos;
-}
 
 void Player::setClub(string club) {
     this -> club = club;
@@ -58,33 +49,34 @@ void Player::setInsurance(int insurance) {
     this -> insurance = insurance;
 }
 
-vector<string> Player::getConvocatoria() const {
-    return convocatoria;
+void Player::info() const
+{
+    cout << "Name: " << getName() << endl;
+    cout << "Birthday: " << getBirthday() << endl;
+    cout << "Club: " << getClub() << endl;
+    cout << "Weight: " << getWeight() << endl;
+    cout << "Height: " << getHeight() << endl;
+    cout << "Value: " << getValue() << endl;
+    cout << "Insurance: " << getInsurance() << endl;
 }
 
+/*
 bool Player::operator<(const Player &p) {
-    return Person::getName() < p.getName();
+    return this->getName() < p.getName();
 }
-
 
 ostream &operator<<(ostream &os, const Player &p) {
     vector<string>::const_iterator it;
-    vector<string> conv = p.getConvocatoria();
 
     os << "All player data: " << endl << endl;
     os << "Name: " << p.getName() << endl;
     os << "Birthday: " << p.getBirthday() << endl;
-    os << "Position: " <<  p.getPosition() << endl;
     os << "Club: " << p.getClub() << endl;
     os << "Weight: " << p.getWeight() << endl;
     os << "Height: " << p.getHeight() << endl;
     os << "Value: " << p.getValue() << endl;
     os << "Insurance: " << p.getInsurance() << endl;
-    for( it = conv.begin();it != conv.end();it++)
-    {
-        os << *it << endl;
-    }
-
     return os;
 }
+*/
 

@@ -12,9 +12,9 @@ class Staff : public Person
 {
 public:
     Staff(string name, Date birth, int salario , enumFunction function);
-    void info() const;
     int getSalario() const;
     string getname() const;
+    void info() const;
 private:
     int salario;
     enumFunction function;

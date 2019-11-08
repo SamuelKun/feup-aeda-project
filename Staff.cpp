@@ -6,13 +6,6 @@ using namespace std;
 Staff::Staff(string name, Date birth, int salario, enumFunction function) : Person(name,birth),
 salario(salario), function(function){}
 
-void Staff::info() const
-{
-    //Person::showName();
-    //Person::showBirthday();
-    cout << endl << salario << endl;
-
-}
 
 int Staff::getSalario() const {
     return salario;
@@ -20,5 +13,10 @@ int Staff::getSalario() const {
 
 string Staff::getname() const {
     return Person::getName();
+}
+
+void Staff::info() const{
+    cout << "Name: " << getName() << endl;
+    cout << "Birthday: " << getBirthday() << endl;
 }
 
