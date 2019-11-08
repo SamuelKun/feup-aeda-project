@@ -91,7 +91,8 @@ int menu_players()
             cin >> menu;
             return 1;//remove this line after inserting stuff
             break;
-        case '0':    //Exit function
+        case '2':    //Exit function
+            national_team->findPlayer("Diogo").info();
             return 1;
         default:     //Invalid input
             cin.ignore(1000,'\n');

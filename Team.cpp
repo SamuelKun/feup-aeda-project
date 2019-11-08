@@ -99,7 +99,6 @@ Team::Team(string file_name) {
     this->team_players = read_player(file_info[1]);
     this->team_staff = read_staff(file_info[2]);
     this->team_competions = read_competion(file_info[3]);
-
 }
 
 /// \brief Get Method
@@ -125,4 +124,14 @@ vector<Competion *> Team::getCompetion() const {
 
 vector<Game *> Team::getGame() const {
     return team_games;
+}
+
+Player & Team::findPlayer(string name) {
+    for (size_t i = 0; i < team_players.size(); i++)
+    {
+        if (team_players[i]->getName().find(name) != string::npos)
+            return *team_players[i];
+    }
+    //throw(PlayerNotFound(name));
+
 }

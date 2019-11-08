@@ -25,6 +25,7 @@ public:
     vector<Staff *> getStaff() const;
     vector<Game *> getGame() const;
     vector<Competion *> getCompetion() const;
+    Player & findPlayer(string name);
 };
 
 
