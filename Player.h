@@ -35,4 +35,6 @@ public:
 	void setInsurance(int insurance);
     void info() const;
 
+    bool operator==(const Player &p);
+
 };
