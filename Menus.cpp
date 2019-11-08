@@ -195,7 +195,7 @@ int fileMenu(){
 }
 
 int firstMenu(){
-    if(exit) return 0;
+    if(exiter) return 0;
     char menu;
 
     cout << "========================================= " << endl;
