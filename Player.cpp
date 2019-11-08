@@ -12,12 +12,17 @@ using namespace std;
 /// \param height Player's height
 /// \param value Player's value
 /// \param insurance Player's insurance
-Player::Player(string name, Date birth, string club, int weight, int height, int value, int insurance): Person(name, birth), club(club), weight(weight),
-                                                                                                        height(height), value(value), insurance(insurance) {}
+Player::Player(string name, Date birth, string club, string position, int weight, int height, int value, int insurance): Person(name, birth), club(club), position(position),
+                                                                                                                        weight(weight), height(height), value(value),
+                                                                                                                        insurance(insurance) {}
 /// \brief Get Method
 /// \return Player's club
 string Player::getClub() const {
     return club;
+}
+
+string Player::getPosition() const {
+    return position;
 }
 /// \brief Get Method
 /// \return Player's weight
@@ -70,11 +75,13 @@ void Player::info() const
 {
     Person::info();
     cout << "Club: " << getClub() << endl;
+    cout << "Position: " << getPosition() << endl;
     cout << "Weight: " << getWeight() << endl;
     cout << "Height: " << getHeight() << endl;
     cout << "Value: " << getValue() << endl;
     cout << "Insurance: " << getInsurance() << endl;
 }
+
 
 
 

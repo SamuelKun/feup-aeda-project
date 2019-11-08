@@ -19,6 +19,7 @@ private:
 public:
     Team();
     Team(string file_name);
+    void read(string file_name);
     string getTeamName() const;
     vector<Player *> getPlayers() const;
     vector<Staff *> getStaff() const;

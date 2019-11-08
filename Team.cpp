@@ -1,7 +1,3 @@
-//
-// Created by samuel on 30/10/19.
-//
-
 #include "Player.h"
 #include "Team.h"
 #include "Game.h"
@@ -18,7 +14,7 @@ vector<Player *> read_player(string info){
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
             Date tempBirth(tempVec[1]);
-            Player *p = new Player(tempVec[0], tempBirth, tempVec[3], std::stoi(tempVec[4]), std::stoi(tempVec[5]), stoi(tempVec[6]));
+            Player *p = new Player(tempVec[0], tempBirth, tempVec[2], tempVec[3], stoi(tempVec[4]), stoi(tempVec[5]), stoi(tempVec[6]));
             players.push_back(p);
             tempVec.clear();
         }
@@ -86,8 +82,27 @@ vector<Competion *> read_competion(string info){
 }
 
 /// \brief Constructor
+Team::Team() {
+}
+
+/// \brief Constructor
 /// \param file_name file containing team
 Team::Team(string file_name) {
+    //Read Agency File
+    ifstream info(file_name);
+    vector<string> file_info;
+    string str_temp;
+
+    while (getline(info, str_temp)) file_info.push_back(str_temp);
+
+    this->teamName = file_info[0];
+    this->team_players = read_player(file_info[1]);
+    this->team_staff = read_staff(file_info[2]);
+    this->team_competions = read_competion(file_info[3]);
+
+}
+
+void Team::read(string file_name) {
     //Read Agency File
     ifstream info(file_name);
     vector<string> file_info;

@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include "Team.h"
 using namespace std;
 
 /**
@@ -18,7 +18,6 @@ int mainMenu();
  */
 int info_app();
 
-int test();
 /**
  * This menu allows you to view and change staff info
  * @return creates or views staff members, or returns to the main menu

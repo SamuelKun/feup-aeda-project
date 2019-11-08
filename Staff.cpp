@@ -18,6 +18,7 @@ double Staff::getWage() const {
 /// \brief Shows Staff Member's data
 void Staff::info() const{
     Person::info();
+    cout << "Position: " << this->function << endl;
     cout << "Earnings: " << this->wage << endl;
 }
 

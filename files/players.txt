@@ -1,7 +1,7 @@
 Diogo Samuel
 28/06/2000
-GoalKeeper
 Portugal
+GoalKeeper
 87
 170
 10000
@@ -9,8 +9,8 @@ Portugal
 -----
 Bernardo Vaz
 28/06/2000
-GoalKeeper
 Portugal
+GoalKeeper
 87
 170
 10000
@@ -18,8 +18,8 @@ Portugal
 -----
 Francisco
 28/06/2000
-GoalKeeper
 Portugal
+GoalKeeper
 87
 170
 10000

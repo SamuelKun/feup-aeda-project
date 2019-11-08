@@ -4,21 +4,7 @@
 #include "Team.h"
 
 using namespace std;
-
-int test(){
-
-    Team b("init.txt");
-    for (int i = 0; i< b.getPlayers().size(); i++){
-        b.getPlayers()[i]->info();
-        cout << endl;
-    }
-
-    vector<Game *> a = b.getCompetion()[0]->getGames();
-
-    cout << a[0]->getCity() <<" " << a[0]->getCountry() << " " << a[0]->getStadium() << endl;
-    cout << a[1]->getCity() <<" " << a[1]->getCountry() << " " << a[1]->getStadium() << endl;
-    return 1;
-}
+extern Team *national_team;
 
 int info_app()
 {
@@ -52,7 +38,8 @@ int menu_staff() {
 
     cout <<  "Staff Menu " << endl << endl;
 
-    cout << "1. insert stuff " << endl;
+    cout << "1. View Staff Members " << endl;
+    cout << "2. Search Staff Members " << endl;
     cout << "0. Return to Main Menu " << endl;
 
     cin.clear();
@@ -61,7 +48,12 @@ int menu_staff() {
     switch(menu)
     {
         case '1':    //View player info
-            // do stuff
+            for(int i = 0; i < (national_team->getStaff()).size(); i++){
+                (national_team->getStaff())[i]->info();
+                cout << endl;
+            }
+            cout << "0. Return to Main Menu " << endl;
+            cin >> menu;
             return 0;//remove this line after inserting stuff
             break;
         case '0':    //Exit function
@@ -80,7 +72,8 @@ int menu_players()
 
     cout <<  "Player Menu " << endl << endl;
 
-    cout << "1. View All Players " << endl;
+    cout << "1. View all Players " << endl;
+    cout << "2. Search Players " << endl;
     cout << "0. Return to Main Menu " << endl;
 
     cin.clear();
@@ -89,9 +82,13 @@ int menu_players()
     switch(menu)
     {
         case '1':    //View player info
-            while(!test());
-
-            return 0;//remove this line after inserting stuff
+            for(int i = 0; i < (national_team->getPlayers()).size(); i++){
+                (national_team->getPlayers())[i]->info();
+                cout << endl;
+            }
+            cout << "0. Return to Main Menu " << endl;
+            cin >> menu;
+            return 1;//remove this line after inserting stuff
             break;
         case '0':    //Exit function
             return 1;

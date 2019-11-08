@@ -12,17 +12,18 @@ using namespace std;
 class Player : public Person
 {
 private:
-	string club; //!*< Player's club.
-	int weight;  //!*< Player's weight.
-	int height;  //!*< Player's height.
-	int value;   //!*< Player's value.
-    int insurance; //!*< Player's insurance.
+	string club;     //!*< Player's club.
+	string position; //!*< Player's position.
+	int weight;      //!*< Player's weight in kg.
+	int height;      //!*< Player's height in cm.
+	int value;       //!*< Player's value in euros.
+    int insurance;   //!*< Player's insurance.
     //A calcular -> Nº dias do jogador na seleção * passe * 0.05;
 
 public:
-	Player(string name, Date birth, string club, int weight, int height, int value, int insurance = 0);
+	Player(string name, Date birth, string club, string position, int weight, int height, int value, int insurance = 0);
 	string getClub() const;
-	//string pos; ARRANJAR MANEIRA DE FAZER ISTO DEPOIS
+    string getPosition() const;
 	int getWeight() const;
 	int getHeight() const;
 	int getValue() const;
