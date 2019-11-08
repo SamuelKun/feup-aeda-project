@@ -3,16 +3,17 @@
 
 using namespace std;
 
-Staff::Staff(string name, Date birth, int salario, enumFunction function) : Person(name,birth),
-salario(salario), function(function){}
+Staff::Staff(string name, Date birth, double wage, string function) : Person(name,birth),
+                                                                       wage(wage), function(function){}
 
-
-int Staff::getSalario() const {
-    return salario;
+double Staff::getWage() const {
+    return wage;
 }
 
 void Staff::info() const{
     Person::info();
-    cout << "Salário: " << this->salario << endl;
+    cout << "Earnings: " << this->wage << endl;
 }
+
+
 

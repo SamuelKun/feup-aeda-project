@@ -101,8 +101,5 @@ public:
      * Player's insurance.
 	 */
     void info() const;
-	/*
-	bool operator <(const Player &p);
-	friend ostream & operator <<(ostream& os,const Player & p);
-	 */
+
 };

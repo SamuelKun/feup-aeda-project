@@ -2,7 +2,6 @@
 // Created by samuel on 30/10/19.
 //
 
-
 #include "Player.h"
 #include "Team.h"
 #include "Game.h"
@@ -10,93 +9,109 @@
 #include <string>
 #include <fstream>
 
-bool cmpName( const Player &p1, const Player & p2)
-{
-    return p1.getName() > p2.getName();
-}
-
-
-Team::Team(string file_name) {
-
-    //Read Agency File
-    ifstream info(file_name);
-    vector<string> all_info;
-    string str_temp;
-
-    while (getline(info, str_temp)) all_info.push_back(str_temp);
-
-    teamName = all_info[0];
+vector<Player *> read_player(string info){
+    ifstream players_info(info);
+    vector<Player *> players;
     vector<string> tempVec;
-
-    // 1º while - jogadores.txt -> append no vector
-    ifstream players_info(all_info[1]);
-
+    string str_temp;
     while (getline(players_info, str_temp)){
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
             Date tempBirth(tempVec[1]);
             Player *p = new Player(tempVec[0], tempBirth, tempVec[3], std::stoi(tempVec[4]), std::stoi(tempVec[5]), stoi(tempVec[6]));
-            this->team_players.push_back(p);
+            players.push_back(p);
             tempVec.clear();
         }
     }
+    return players;
+}
 
-    /* 2º while - competion.txt
-    */
+vector<Staff *> read_staff(string info){
+    ifstream staff_info(info);
+    vector<Staff *> staff;
+    vector<string> tempVec;
+    string str_temp;
 
-    ifstream competion_info(all_info[2]);
-    vector<string> temp2;
+    while (getline(staff_info, str_temp)){
+        if (str_temp != "-----") tempVec.push_back(str_temp);
+        else{
+            Date tempBirth(tempVec[1]);
+            Staff *p = new Staff(tempVec[0], tempBirth, std::stod(tempVec[2]), tempVec[3]);
+            staff.push_back(p);
+            tempVec.clear();
+        }
+    }
+    return staff;
+}
+
+vector<Game *> read_games(string info){
+    ifstream game_info(info);
+    vector<Game *> games;
+    vector<string> tempVec;
+    string str_temp;
+    while (getline(game_info, str_temp)){
+        if (str_temp != "-----") tempVec.push_back(str_temp);
+        else{
+            Date game_day(28, 06, 2000);
+            Game *g = new Game(tempVec[0], tempVec[1], tempVec[2], game_day);
+            games.push_back(g);
+            tempVec.clear();
+        }
+    }
+    return games;
+}
+
+vector<Competion *> read_competion(string info){
+    ifstream competion_info(info);
+    vector<Competion *> competion;
+    vector<string> tempVec;
+    string str_temp;
     while (getline(competion_info, str_temp)){
 
-        if (str_temp != "-----") temp2.push_back(str_temp);
+        if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
             //Ler Convocados
-            ifstream comp_conmInfo(temp2[0]);
-            vector<Player *> comp_convocado;
-            while (getline(comp_conmInfo, str_temp)){
-                if (str_temp != "-----") tempVec.push_back(str_temp);
-                else{
-                    Date tempBirth(tempVec[1]);
-                    Player *p = new Player(tempVec[0], tempBirth, tempVec[3], std::stoi(tempVec[4]), std::stoi(tempVec[5]), stoi(tempVec[6]));
-
-                    comp_convocado.push_back(p);
-                    tempVec.clear();
-                }
-            }
-            cout << comp_convocado[0]->getName() << endl << endl;
+            vector<Player *> comp_convocado = read_player(tempVec[0]);
             //Ler Jogos
-            ifstream comp_gameInfo(temp2[1]);
-            vector<Game *> comp_jogos;
-            while (getline(comp_gameInfo, str_temp)){
-                if (str_temp != "-----") tempVec.push_back(str_temp);
-                else{
-                    Game *g = new Game(tempVec[0], tempVec[1], tempVec[2]);
-                    comp_jogos.push_back(g);
-                    tempVec.clear();
-
-                }
-            }
-            Date startcomp(temp2[2]);
-            Date endcomp(temp2[3]);
-            class Competion tempComp(comp_convocado, comp_jogos, startcomp, endcomp);
-            this->team_competions.push_back(&tempComp);
+            vector<Game *> competion_games = read_games(tempVec[1]);
+            //Data de começo e fim
+            Date startcomp(tempVec[2]);
+            Date endcomp(tempVec[3]);
+            Competion *tempComp = new Competion(comp_convocado, competion_games, startcomp, endcomp);
+            competion.push_back(tempComp);
             tempVec.clear();
         }
     }
+    return competion;
+}
+
+Team::Team(string file_name) {
+    //Read Agency File
+    ifstream info(file_name);
+    vector<string> file_info;
+    string str_temp;
+
+    while (getline(info, str_temp)) file_info.push_back(str_temp);
+
+    this->teamName = file_info[0];
+    this->team_players = read_player(file_info[1]);
+    this->team_staff = read_staff(file_info[2]);
+    this->team_competions = read_competion(file_info[3]);
+
 }
 
 string Team::getTeamName() const {
     return teamName;
 }
 
-vector<Player *> Team::GetPlayers() const {
+vector<Player *> Team::getPlayers() const {
     return team_players;
 }
 
-vector<Staff *> Team::GetStaff() const {
+vector<Staff *> Team::getStaff() const {
     return team_staff;
 }
 
-vector<Competion *> Team::Competion() const {
+vector<Competion *> Team::getCompetion() const {
     return team_competions;
 }

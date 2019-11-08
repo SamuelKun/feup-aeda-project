@@ -5,6 +5,21 @@
 
 using namespace std;
 
+int test(){
+
+    Team b("init.txt");
+    for (int i = 0; i< b.getPlayers().size(); i++){
+        b.getPlayers()[i]->info();
+        cout << endl;
+    }
+
+    vector<Game *> a = b.getCompetion()[0]->getGames();
+
+    cout << a[0]->getCity() <<" " << a[0]->getCountry() << " " << a[0]->getStadium() << endl;
+    cout << a[1]->getCity() <<" " << a[1]->getCountry() << " " << a[1]->getStadium() << endl;
+    return 1;
+}
+
 int info_app()
 {
     char menu;
@@ -28,17 +43,7 @@ int info_app()
 
 }
 
-int test(){
 
-    char a;
-    Team b("init.txt");
-    for (int i = 0; i< b.GetPlayers().size(); i++){
-        b.GetPlayers()[i]->info();
-        cout << endl;
-    }
-    cin >> a;
-    return 0;
-}
 
 int menu_staff() {
     char menu;

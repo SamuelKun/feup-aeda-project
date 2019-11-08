@@ -15,8 +15,7 @@ string Person::getName() const {return name; }
 Date Person::getBirthday() const {return birth; }
 
 void Person::info() const {
-    cout << "Name: " << this->getName() << endl;
-    cout << "Birthday: " << this->getBirthday();
+    cout << "Name: " << this->name << endl;
+    cout << "Birthday: " << this->birth;
 }
-
 

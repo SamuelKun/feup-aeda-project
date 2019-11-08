@@ -20,9 +20,9 @@ public:
     Team();
     Team(string file_name);
     string getTeamName() const;
-    vector<Player *> GetPlayers() const;
-    vector<Staff *> GetStaff() const;
-    vector<Competion *> Competion() const;
+    vector<Player *> getPlayers() const;
+    vector<Staff *> getStaff() const;
+    vector<Competion *> getCompetion() const;
 };
 
 

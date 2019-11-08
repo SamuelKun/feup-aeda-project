@@ -2,19 +2,18 @@
 
 #include <vector>
 #include <string>
+#include <map>
 #include "Person.h"
 
 using namespace std;
 
-enum enumFunction {coach, coach_secondary, medic};
-
 class Staff : public Person
 {
 private:
-    int salario;
-    enumFunction function;
+    double wage;
+    string function;
 public:
-    Staff(string name, Date birth, int salario , enumFunction function);
-    int getSalario() const;
+    Staff(string name, Date birth, double wage, string function);
+    double getWage() const;
     void info() const;
 };

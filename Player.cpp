@@ -59,23 +59,5 @@ void Player::info() const
     cout << "Insurance: " << getInsurance() << endl;
 }
 
-/*
-bool Player::operator<(const Player &p) {
-    return this->getName() < p.getName();
-}
 
-ostream &operator<<(ostream &os, const Player &p) {
-    vector<string>::const_iterator it;
-
-    os << "All player data: " << endl << endl;
-    os << "Name: " << p.getName() << endl;
-    os << "Birthday: " << p.getBirthday() << endl;
-    os << "Club: " << p.getClub() << endl;
-    os << "Weight: " << p.getWeight() << endl;
-    os << "Height: " << p.getHeight() << endl;
-    os << "Value: " << p.getValue() << endl;
-    os << "Insurance: " << p.getInsurance() << endl;
-    return os;
-}
-*/
 

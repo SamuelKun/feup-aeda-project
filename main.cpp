@@ -11,6 +11,7 @@
 using namespace std;
 
 int main() {
-    while(!mainMenu());
+    while(!test());
+    //while(!mainMenu());
     return 0;
 }

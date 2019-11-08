@@ -30,5 +30,5 @@ public:
      *  Shows birthday
      */
 	virtual void info() const;
-	//virtual FUNÇÃO DE CADA UM IMPLEMENTAR DEPOIS
+	//virtual double earnings() = 0 const;
 };

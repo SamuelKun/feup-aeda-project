@@ -12,43 +12,28 @@ private:
     string country;
     string city;
     string stadium;
-    //vector<Player> v_called;
-    //vector<Player> v_played;
-    //vector<Person> v_referees;
+    Date gameDate;
+    vector<Player *> called_players;
     //Stats stats;
-    //É necessário criar uma classe para as estatisticas todas
 public:
-    Game(string country,string city, string stadium); //, vector<Player> v_called, vector<Player> v_played, vector<Person> v_referees);
-    //virtual
+    Game(string country, string city, string stadium, Date gameDate); //, vector<Player> v_called, vector<Player> v_played, vector<Person> v_referees);
+    Game(string country, string city, string stadium, Date gameDate, vector<Player *> called_players);
     //Get Methods
     string getCountry() const;
     string getCity() const;
     string getStadium() const;
-    /*
-    vector<Player> getCalled() const;
-    vector<Player> getPlayed() const;
-    vector<Person> getReferees() const;
+    Date getDate() const;
+    vector<Player *> getCalledPlayers() const;
     //Stats stats getStats()const;
-    */
-    //Show Methods
-    void showCountry() const;
-    void showCity() const;
-    void showStadium() const;
-    /*
-     void showCalled() const;
-    void showPlayed() const;
-    void showReferees() const;
-    void showStats() const;
-     */
 };
 
 class Competion{
 private:
-    vector<Player *> convocados;
+    vector<Player *> called;
     vector<Game *> team_games;
     Date start, end;
 public:
-    Competion(vector<Player *> convocados, vector<Game *> team_games, Date start, Date end);
-    vector<Player *> getConvocados() const;
+    Competion(vector<Player *> called, vector<Game *> team_games, Date start, Date end);
+    vector<Player *> getCalled() const;
     vector<Game *> getGames() const;
 };

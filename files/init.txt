@@ -1,3 +1,4 @@
 Portugal
-jogadores.txt
+players.txt
+staff.txt
 competion.txt

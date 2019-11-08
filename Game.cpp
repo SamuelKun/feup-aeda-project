@@ -3,18 +3,14 @@
 
 #include <utility>
 
-
-
-bool cmpName( const Person &p1, const Person & p2)
-{
-    return p1.getName() > p2.getName();
+//Constructor(s)
+Game::Game(string country, string city, string stadium, Date gameDay): country(country), city(city), stadium(stadium),
+                                                                                                   gameDate(gameDate) {
 }
 
-
-
-//Constructor(s)
-Game::Game(string country, string city, string stadium): country(country), city(city), stadium(stadium) {
-
+Game::Game(string country, string city, string stadium, Date gameDay,
+        vector<Player *> called_players): country(country), city(city), stadium(stadium), gameDate(gameDate),
+                                                                      called_players(called_players) {
 }
 
 //Get Methods
@@ -30,30 +26,24 @@ string Game::getStadium() const {
     return stadium;
 }
 
-
-//Show Methods
-void Game::showCountry() const {
-    cout << country << endl;
+Date Game::getDate() const {
+    return gameDate;
 }
 
-void Game::showCity() const {
-    cout << city << endl;
-
-}
-
-void Game::showStadium() const {
-    cout << stadium << endl;
+vector<Player *> Game::getCalledPlayers() const {
+    return called_players;
 }
 
 
-Competion::Competion(vector<Player *> convocados, vector<Game *> team_games, Date start, Date end): convocados(convocados), start(start), end(end) {
+Competion::Competion(vector<Player *> called, vector<Game *> team_games, Date start, Date end): called(called), team_games(team_games), start(start), end(end) {
 
 }
 
-vector<Player *> Competion::getConvocados() const {
-    return convocados;
+vector<Player *> Competion::getCalled() const {
+    return called;
 }
 
 vector<Game *> Competion::getGames() const {
     return team_games;
 }
+
