@@ -41,10 +41,9 @@ Date Game::getDate() const {
     return gameDate;
 }
 
-/// \brief Get method
-/// \return Called Players
-vector<Player *> Competion::getCalled() const {
-    return called;
+vector<Player *> Game::getCalledPlayers() const {
+    return called_players;
+}
 
 /// \brief Competition Constructor with the following data:
 /// \param convocados Competition's called players vector
@@ -54,7 +53,13 @@ vector<Player *> Competion::getCalled() const {
 Competion::Competion(vector<Player *> called, vector<Game *> team_games, Date start, Date end): called(called), team_games(team_games), start(start), end(end) {
 
 }
+
+/// \brief Get method
+/// \return Called Players
+vector<Player *> Competion::getCalled() const {
+    return called;
 }
+
 /// \brief Get Method
 /// \return Vector with played Games
 vector<Game *> Competion::getGames() const {

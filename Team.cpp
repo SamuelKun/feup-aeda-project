@@ -36,7 +36,7 @@ vector<Staff *> read_staff(string info){
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
             Date tempBirth(tempVec[1]);
-            Staff *p = new Staff(tempVec[0], tempBirth, std::stod(tempVec[2]), tempVec[3]);
+            Staff *p = new Staff(tempVec[0], tempBirth, stod(tempVec[2]), tempVec[3]);
             staff.push_back(p);
             tempVec.clear();
         }
@@ -108,16 +108,16 @@ string Team::getTeamName() const {
 }
 /// \brief Get Method
 /// \return Team's vector with teams players
-vector<Player *> Team::GetPlayers() const {
+vector<Player *> Team::getPlayers() const {
     return team_players;
 }
 /// \brief Get Method
 /// \return Team's vector with staff members
-vector<Staff *> Team::GetStaff() const {
+vector<Staff *> Team::getStaff() const {
     return team_staff;
 }
 /// \brief Get Method
 /// \return Team's vector with Competitions
-vector<Competion *> Team::Competion() const {
+vector<Competion *> Team::getCompetion() const {
     return team_competions;
 }
