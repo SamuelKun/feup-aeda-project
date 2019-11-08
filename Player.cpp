@@ -102,6 +102,18 @@ void Player::info() const
 bool Player::operator==(const Player &p) {
     return getName() == p.getName();
 }
+/// \brief Checks if the parameter Player has the same name
+/// \param p parameter of Player to compare name with
+/// \return true if both Players have the same name, false otherwise
+bool Player::equalName(Player p) const {
+    return getName() == p.getName();
+}
+/// \brief Checks if the parameter Plauer has the same position
+/// \param p Player parameter to compare positions with
+/// \return true if both Players have the same position, false otherwise
+bool Player::equalPosition(Player p) const {
+    return getPosition() == p.getPosition();
+}
 
 
 

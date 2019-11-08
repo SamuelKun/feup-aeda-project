@@ -34,6 +34,8 @@ public:
 	void setValue(int value);
 	void setInsurance(int insurance);
     void info() const;
+    bool equalName(Player p) const;
+    bool equalPosition(Player p) const;
 
     bool operator==(const Player &p);
 
