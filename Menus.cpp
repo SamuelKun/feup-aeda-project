@@ -6,7 +6,7 @@
 
 using namespace std;
 extern Team *national_team;
-
+extern bool exiter = false;
 int info_app()
 {
     char menu;
@@ -166,6 +166,7 @@ int mainMenu()
             return 1;
         default:     //Invalid input
             cin.ignore(1000,'\n');
+            exiter = true;
             return 0;
     }
 }
@@ -194,6 +195,7 @@ int fileMenu(){
 }
 
 int firstMenu(){
+    if(exit) return 0;
     char menu;
 
     cout << "========================================= " << endl;
