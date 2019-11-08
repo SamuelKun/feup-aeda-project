@@ -11,12 +11,8 @@ int Staff::getSalario() const {
     return salario;
 }
 
-string Staff::getname() const {
-    return Person::getName();
-}
-
 void Staff::info() const{
-    cout << "Name: " << getName() << endl;
-    cout << "Birthday: " << getBirthday() << endl;
+    Person::info();
+    cout << "Salário: " << this->salario << endl;
 }
 

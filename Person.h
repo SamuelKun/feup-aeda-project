@@ -11,9 +11,8 @@ private:
 	Date birth;
 public:
 	Person(string name, Date birth);
-
 	string getName() const;
 	Date getBirthday() const;
-	//Show Methods
-	//virtual void info() const = 0;
+	virtual void info() const;
+	//virtual FUNÇÃO DE CADA UM IMPLEMENTAR DEPOIS
 };

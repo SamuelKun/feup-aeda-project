@@ -51,8 +51,7 @@ void Player::setInsurance(int insurance) {
 
 void Player::info() const
 {
-    cout << "Name: " << getName() << endl;
-    cout << "Birthday: " << getBirthday() << endl;
+    Person::info();
     cout << "Club: " << getClub() << endl;
     cout << "Weight: " << getWeight() << endl;
     cout << "Height: " << getHeight() << endl;

@@ -35,8 +35,8 @@ Team::Team(string file_name) {
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
             Date tempBirth(tempVec[1]);
-            Player tempPlayer(tempVec[0], tempBirth, tempVec[3], std::stoi(tempVec[4]), std::stoi(tempVec[5]), stoi(tempVec[6]));
-            this->team_players.push_back(&tempPlayer);
+            Player *p = new Player(tempVec[0], tempBirth, tempVec[3], std::stoi(tempVec[4]), std::stoi(tempVec[5]), stoi(tempVec[6]));
+            this->team_players.push_back(p);
             tempVec.clear();
         }
     }
@@ -47,7 +47,6 @@ Team::Team(string file_name) {
     ifstream competion_info(all_info[2]);
     vector<string> temp2;
     while (getline(competion_info, str_temp)){
-        cout << str_temp << endl;
 
         if (str_temp != "-----") temp2.push_back(str_temp);
         else{
@@ -58,9 +57,9 @@ Team::Team(string file_name) {
                 if (str_temp != "-----") tempVec.push_back(str_temp);
                 else{
                     Date tempBirth(tempVec[1]);
-                    Player tempPlayer(tempVec[0], tempBirth, tempVec[3], std::stoi(tempVec[4]), std::stoi(tempVec[5]), stoi(tempVec[6]));
+                    Player *p = new Player(tempVec[0], tempBirth, tempVec[3], std::stoi(tempVec[4]), std::stoi(tempVec[5]), stoi(tempVec[6]));
 
-                    comp_convocado.push_back(&tempPlayer);
+                    comp_convocado.push_back(p);
                     tempVec.clear();
                 }
             }
@@ -71,30 +70,18 @@ Team::Team(string file_name) {
             while (getline(comp_gameInfo, str_temp)){
                 if (str_temp != "-----") tempVec.push_back(str_temp);
                 else{
-                    Game tempGame(tempVec[0], tempVec[1], tempVec[2]);
-                    comp_jogos.push_back(&tempGame);
+                    Game *g = new Game(tempVec[0], tempVec[1], tempVec[2]);
+                    comp_jogos.push_back(g);
                     tempVec.clear();
+
                 }
             }
             Date startcomp(temp2[2]);
             Date endcomp(temp2[3]);
-            cout << "Convocado" << comp_convocado.size() << endl;
             class Competion tempComp(comp_convocado, comp_jogos, startcomp, endcomp);
             this->team_competions.push_back(&tempComp);
             tempVec.clear();
         }
-    }
-    cout << team_competions.size();
-    for(int i = 0; i < team_competions.size();i++)
-    {
-        cout <<"here";
-        vector<Player*> a = team_competions[i]->getConvocados();
-        cout << a.size();
-        for(int i = 0; i < a.size();i++){
-            cout << "here";
-            cout << a[i]->getName();
-        }
-
     }
 }
 

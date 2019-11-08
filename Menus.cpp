@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Menus.h"
+#include "Team.h"
 
 using namespace std;
 
@@ -25,6 +26,18 @@ int info_app()
         return 0;
     }
 
+}
+
+int test(){
+
+    char a;
+    Team b("init.txt");
+    for (int i = 0; i< b.GetPlayers().size(); i++){
+        b.GetPlayers()[i]->info();
+        cout << endl;
+    }
+    cin >> a;
+    return 0;
 }
 
 int menu_staff() {
@@ -62,7 +75,7 @@ int menu_players()
 
     cout <<  "Player Menu " << endl << endl;
 
-    cout << "1. insert stuff " << endl;
+    cout << "1. View All Players " << endl;
     cout << "0. Return to Main Menu " << endl;
 
     cin.clear();
@@ -71,7 +84,8 @@ int menu_players()
     switch(menu)
     {
         case '1':    //View player info
-            // do stuff
+            while(!test());
+
             return 0;//remove this line after inserting stuff
             break;
         case '0':    //Exit function

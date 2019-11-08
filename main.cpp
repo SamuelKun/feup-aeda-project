@@ -11,9 +11,6 @@
 using namespace std;
 
 int main() {
-
-    Team t("init.txt");
-
-    //while(!mainMenu());
+    while(!mainMenu());
     return 0;
 }
