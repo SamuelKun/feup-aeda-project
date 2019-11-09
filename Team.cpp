@@ -87,6 +87,24 @@ void Team::addPlayer() {
     Player *play = new Player(n,b,c,pos,wei,hei,val,earn);
     team_players.push_back(play);
 }
+
+void Team::addStaff() {
+    string n, b, f;
+    double w;
+
+    cout << "Write the name of the Player you wish to add: " << endl;
+    getline(cin,n);
+    cin.ignore(1000, '\n');
+    cout << "Write " << n << "'s birthday " << endl;
+    cin >> b;
+    cout << "Write " << n << "'s wage " << endl;
+    cin >> w;
+    cout << "Write " << n << "'s function " << endl;
+    cin >> f;
+
+    Staff *s = new Staff(n,b,w,f);
+    team_staff.push_back(s);
+}
 /*
 vector<Player *> & Team::findPlayerByPos(string position) {
     vector<Player *> to_return;
