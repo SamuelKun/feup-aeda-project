@@ -109,6 +109,7 @@ int Team::addPlayer() {
 
     Player *play = new Player(n,b,c,pos,wei,hei,val,earn);
     team_players.push_back(play);
+    return 0;
 }
 
 int Team::addStaff() {
