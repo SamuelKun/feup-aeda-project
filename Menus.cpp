@@ -90,16 +90,19 @@ int menu_players()
             cin >> menu;
             return 1;//remove this line after inserting stuff
         case '2':    //Exit function
+            cout << "Write the name of the Player you want to search: " << endl;
+            cout << "0. Return to Player Menu" << endl;
             try {
                 string name;
                 cin >> name;
+                if(name == "0") return 0;
                 cin.ignore(1000, '\n');
                 national_team->findPlayer(name).info();
             }
             catch(PlayerNotFound & er) {
                 cout << "Player " << er.getName() << " not found" << endl;
             }
-            return 1;
+            return 0;
         case '0':
             return 1;
         default:     //Invalid input
