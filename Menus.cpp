@@ -120,11 +120,12 @@ int menu_tournaments()
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
-    cout <<  "Tournament Menu " << endl << endl;
+    cout << "========================================= " << endl;
+    cout << "                Competitions              " << endl;
+    cout << "========================================= \n" << endl;
 
-    cout << "1. Show All Tournaments " << endl;
-    cout << "2. Select One Tournament " << endl;
-    cout << "3. Pay Tournament" << endl;
+    cout << "1. Show all competitions " << endl;
+    cout << "2. Pay competitions fees" << endl;
     cout << "0. Return to Main Menu " << endl;
 
     cin.clear();
@@ -138,13 +139,19 @@ int menu_tournaments()
             }
             return 0;//remove this line after inserting stuff
             break;
-        case '3':
-            try {
-                national_team->getCompetion()[0]->payPlayers();
-                cout << "Pago aos jogadores" << endl;
+        case '2':
+            cout << "National Football Team Competitions - VERIFICAR ERRO DEPOIS" << endl;
+            for(int i = 0; i < (national_team->getCompetion()).size(); i++){
+                cout << i << ". " << national_team->getCompetion()[i]->getCompetionName() << " - Paid: " << national_team->getCompetion()[i]->getPaid() << endl;
             }
-            catch(AlreadyPaid & er) {
-                cout << "A competicaoo " << er.getName() << " já foi paga aos jogadores" << endl;
+            int index;
+            cin >> index; // VERIFICAR ERRO DEPOIS
+            try {
+                national_team->getCompetion()[index]->payPlayers();
+                cout << "Competition successfully paid!" << endl;
+            }
+            catch(AlreadyPaid &er) {
+                cout << "The " << er.getName() << " has already been paid to players." << endl;
             }
         case '0':    //Exit function
             return 1;
@@ -228,7 +235,7 @@ int firstMenu(){
     cout << "Choose and option:" << endl;
     cout << "1. Select the Team File to read " << endl;
     cout << "2. Create a new Team File " << endl;
-    cout << "0. Exit Program " << endl;
+    cout << "0. Exit Program" << endl;
 
     cin.clear();
     cin >> menu;

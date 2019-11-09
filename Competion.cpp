@@ -38,6 +38,10 @@ ostream &operator<<(ostream &out, const Competion &comp) {
     return out;
 }
 
+bool Competion::getPaid() const {
+    return paid;
+}
+
 void Competion::payPlayers() {
     if(!paid) {
         for (auto it = called.begin(); it != called.end(); it++)
@@ -47,3 +51,5 @@ void Competion::payPlayers() {
     else throw(AlreadyPaid(name));
 
 }
+
+
