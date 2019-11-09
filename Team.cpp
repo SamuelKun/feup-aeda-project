@@ -6,6 +6,20 @@
 #include <fstream>
 #include "utils.h"
 
+
+template <class form>
+void failInput(form input)
+{
+    while (cin.fail())
+    {
+        cin.clear();
+        cin.ignore();
+        cin.ignore(1000, '\n');
+        cout << "Not a valid number. Please reenter: ";
+        cin >> input;
+    }
+}
+
 /// \brief Constructor
 Team::Team() {
 }
@@ -90,21 +104,25 @@ int Team::addPlayer() {
     cout << "Write " << n << "'s weight " << endl;
     cout << "0. Return to the Player menu: " << endl;
     cin >> wei;
+    failInput(wei);
     if(wei == 0) return 0;
 
     cout << "Write " << n << "'s height " << endl;
     cout << "0. Return to the Player menu: " << endl;
     cin >> hei;
+    failInput(hei);
     if(hei == 0) return 0;
 
     cout << "Write " << n << "'s value " << endl;
     cout << "0. Return to the Player menu: " << endl;
     cin >> val;
+    failInput(val);
     if(val == 0) return 0;
 
     cout << "Write " << n << "'s earnings " << endl;
     cout << "0. Return to the Player menu: " << endl;
     cin >> earn;
+    failInput(earn);
     if(earn == 0) return 0;
 
     Player *play = new Player(n,b,c,pos,wei,hei,val,earn);
@@ -130,11 +148,13 @@ int Team::addStaff() {
     cout << "Write " << n << "'s wage " << endl;
     cout << "0. Return to the Player menu: " << endl;
     cin >> w;
+    failInput(w);
     if( w == 0) return 0;
 
     cout << "Write " << n   << "'s function " << endl;
     cout << "0. Return to the Player menu: " << endl;
     cin >> f;
+    failInput(f);
     if(f == "0") return 0;
 
     Staff *s = new Staff(n,b,w,f);
