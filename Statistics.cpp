@@ -11,10 +11,11 @@ std::ostream &operator<<(std::ostream &os, const Individual_Statistics &statisti
     return os;
 }
 
-Individual_Statistics::Individual_Statistics(int gs, int ga, int son, int soff, int min, float km, int yellow, int red,int inj):
+Individual_Statistics::Individual_Statistics(int gs, int ga, int son, int soff, int min, float km, int yellow, int red, int inj, int free_kicks, int cornerKicks):
     goals_scored(gs),goal_attempts(ga),shots_on_goal(son),
     shots_off_goal(soff), minutes_played(min), km_travelled(km),
-    yellow_cards(yellow), red_cards(red), injured(inj) {}
+    yellow_cards(yellow), red_cards(red), injured(inj),
+    free_kicks(free_kicks), corner_kicks(cornerKicks) {}
 
 int Individual_Statistics::getGoalsScored() const {
     return goals_scored;
@@ -88,11 +89,22 @@ void Individual_Statistics::setInjured(int injured) {
     Individual_Statistics::injured = injured;
 }
 
+int Individual_Statistics::getFreeKicks() const {
+    return free_kicks;
+}
 
-Colective_Statistics::Colective_Statistics(int goalsScored, int goalAttempts, int shotsOnGoal, int shotsOffGoal,float kmTravelled, int yellowCards, int redCards, int injured): goals_scored(goalsScored), goal_attempts(goalAttempts), shots_on_goal(shotsOnGoal),
+void Individual_Statistics::setFreeKicks(int freeKicks) {
+    free_kicks = freeKicks;
+}
+
+
+Colective_Statistics::Colective_Statistics(int ball_possession, int goalsScored, int goalAttempts, int shotsOnGoal, int shotsOffGoal,float kmTravelled, int yellowCards, int redCards, int injured, int freeKicks, int cornerKicks):
+    goals_scored(goalsScored), goal_attempts(goalAttempts),
+    shots_on_goal(shotsOnGoal), ball_possession(ball_possession),
     shots_off_goal(shotsOffGoal), km_travelled(kmTravelled),
     yellow_cards(yellowCards), red_cards(redCards),
-    injured(injured) {}
+    injured(injured), free_kicks(freeKicks),
+    corner_kicks(cornerKicks){}
 
 int Colective_Statistics::getGoalsScored() const {
     return goals_scored;
@@ -156,4 +168,72 @@ int Colective_Statistics::getInjured() const {
 
 void Colective_Statistics::setInjured(int injured) {
     Colective_Statistics::injured = injured;
+}
+
+void Colective_Statistics::addGoalsScored(int goalsScored) {
+    goals_scored += goalsScored;
+}
+
+void Colective_Statistics::addGoalAttempts(int goalAttempts) {
+    goal_attempts += goalAttempts;
+}
+
+void Colective_Statistics::addShotsOnGoal(int shotsOnGoal) {
+    shots_on_goal += shotsOnGoal;
+}
+
+void Colective_Statistics::addShotsOffGoal(int shotsOffGoal) {
+    shots_off_goal += shotsOffGoal;
+}
+
+void Colective_Statistics::addKmTravelled(float kmTravelled) {
+    km_travelled += kmTravelled;
+}
+
+void Colective_Statistics::addYellowCards(int yellowCards) {
+    yellow_cards += yellowCards;
+}
+
+void Colective_Statistics::addRedCards(int redCards) {
+    red_cards += redCards;
+}
+
+void Colective_Statistics::addInjured(int injured) {
+
+}
+
+int Colective_Statistics::getBallPossession() const {
+    return ball_possession;
+}
+
+void Colective_Statistics::setBallPossession(int ballPossession) {
+    ball_possession = ballPossession;
+}
+
+int Colective_Statistics::getFreeKicks() const {
+    return free_kicks;
+}
+
+void Colective_Statistics::setFreeKicks(int freeKicks) {
+    free_kicks = freeKicks;
+}
+
+int Colective_Statistics::getCornerKicks() const {
+    return corner_kicks;
+}
+
+void Colective_Statistics::setCornerKicks(int cornerKicks) {
+    corner_kicks = cornerKicks;
+}
+
+void Colective_Statistics::addBallPossession(int ballPossession) {
+    ball_possession += ballPossession;
+}
+
+void Colective_Statistics::addFreeKicks(int freeKicks) {
+    free_kicks += freeKicks;
+}
+
+void Colective_Statistics::addCornerKicks(int cornerKicks) {
+    corner_kicks += cornerKicks;
 }
