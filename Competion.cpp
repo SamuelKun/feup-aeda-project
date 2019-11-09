@@ -11,8 +11,7 @@
 /// \param end Ending date
 Competion::Competion(string name, vector<Player *> called, vector<Game *> team_games, Date start, Date end): name(name), called(called), team_games(team_games),
                                                                                                              start(start), end(end) {
-    for(auto it = called.begin(); it != called.end(); it++)
-        (*it)->setEarnings(1000);
+    paid = false;
 }
 
 string Competion::getCompetionName() const {
@@ -37,4 +36,14 @@ ostream &operator<<(ostream &out, const Competion &comp) {
     out << "Start Date: " << comp.start << endl;
     out << "End Date: " << comp.end << endl;
     return out;
+}
+
+void Competion::payPlayers() {
+    if(!paid) {
+        for (auto it = called.begin(); it != called.end(); it++)
+            (*it)->setEarnings(1000);
+        paid = true;
+    }
+    else throw(AlreadyPaid(name));
+
 }

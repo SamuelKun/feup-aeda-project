@@ -7,10 +7,6 @@ using namespace std;
  * @return
  */
 int mainMenu();
-/**
- *
- * @return
- */
 
 /**
  * This menu shows the app creators
@@ -23,11 +19,13 @@ int info_app();
  * @return creates or views staff members, or returns to the main menu
  */
 int menu_staff();
+
 /**
  * This menu allows you to view and change player info
  * @return creates or views players, or returns to the main menu
  */
 int menu_players();
+
 /**
  * This menu refers to all tournaments
  * It allows you to view tournaments or create new ones
@@ -39,6 +37,16 @@ int menu_tournaments();
  * @return chooses between different menus or exiting the app
  */
 int mainMenu();
+
+/**
+ *
+ * @return
+ */
 int fileMenu();
+
+/**
+ *
+ * @return
+ */
 int firstMenu();
 

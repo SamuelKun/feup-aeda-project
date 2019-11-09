@@ -120,7 +120,7 @@ int menu_tournaments()
 
     cout << "1. Show All Tournaments " << endl;
     cout << "2. Select One Tournament " << endl;
-    cout << "3. " << endl;
+    cout << "3. Pay Tournament" << endl;
     cout << "0. Return to Main Menu " << endl;
 
     cin.clear();
@@ -134,6 +134,14 @@ int menu_tournaments()
             }
             return 0;//remove this line after inserting stuff
             break;
+        case '3':
+            try {
+                national_team->getCompetion()[0]->payPlayers();
+                cout << "Pago aos jogadores" << endl;
+            }
+            catch(AlreadyPaid & er) {
+                cout << "A competicaoo " << er.getName() << " já foi paga aos jogadores" << endl;
+            }
         case '0':    //Exit function
             return 1;
         default:     //Invalid input
