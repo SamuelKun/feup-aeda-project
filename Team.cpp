@@ -6,7 +6,6 @@
 #include <fstream>
 #include "utils.h"
 
-
 template <class form>
 void failInput(form input)
 {
@@ -77,87 +76,87 @@ Player * Team::findPlayer(string name) {
 }
 
 int Team::addPlayer() {
-    string n, b, c, pos;
-    int wei,hei,val,earn;
+    string n, c, pos;
+    int wei,hei,val,earn,day,month,year;
+    char checker = false;
 
     cout << "Write the name of the Player you wish to add: " << endl;
-    cout << "0. Return to the Player menu: " << endl;
-    getline(cin,n);
+
     cin.ignore(1000, '\n');
-    if(n == "0") return 0;
+    getline(cin,n);
 
     cout << "Write " << n << "'s birthday " << endl;
-    cout << "0. Return to the Player menu: " << endl;
-    cin >> b;
-    if(b == "0") return 0;
+    cout << "Write " << n << "'s day of birth" << endl;
+    cin >> day; failInput(day);
+    cout << "Write " << n << "'s month of birth" << endl;
+    cin >> month; failInput(month);
+    cout << "Write " << n << "'s year of birth" << endl;
+    cin >> year; failInput(year);
 
     cout << "Write " << n << "'s club " << endl;
-    cout << "0. Return to the Player menu: " << endl;
     cin >> c;
-    if(c == "0") return 0;
 
     cout << "Write " << n << "'s position " << endl;
-    cout << "0. Return to the Player menu: " << endl;
     cin >> pos;
-    if(pos == "0") return 0;
 
     cout << "Write " << n << "'s weight " << endl;
-    cout << "0. Return to the Player menu: " << endl;
-    cin >> wei;
-    failInput(wei);
-    if(wei == 0) return 0;
+    cin >> wei;failInput(wei);
 
     cout << "Write " << n << "'s height " << endl;
-    cout << "0. Return to the Player menu: " << endl;
-    cin >> hei;
-    failInput(hei);
-    if(hei == 0) return 0;
+    cin >> hei;failInput(hei);
 
     cout << "Write " << n << "'s value " << endl;
-    cout << "0. Return to the Player menu: " << endl;
-    cin >> val;
-    failInput(val);
-    if(val == 0) return 0;
+    cin >> val;failInput(val);
 
     cout << "Write " << n << "'s earnings " << endl;
-    cout << "0. Return to the Player menu: " << endl;
-    cin >> earn;
-    failInput(earn);
-    if(earn == 0) return 0;
+    cin >> earn;failInput(earn);
 
-    Player *play = new Player(n,b,c,pos,wei,hei,val,earn);
+    cout << "Do you wish to add the Player you have created?: " << endl;
+    cout << "1. Add Player " << endl;
+    cout << "2. Cancel adding Player " << endl;
+    cin >> checker;
+    if(checker == '2') return 0;
+
+    Date *b = new Date(day,month,year);
+    Player *play = new Player(n,*b,c,pos,wei,hei,val,earn);
     team_players.push_back(play);
     return 0;
 }
 
 int Team::addStaff() {
-    string n, b, f;
+    string n, f;
     double w;
+    int day,month,year;
+    bool checker = false;
 
     cout << "Write the name of the Player you wish to add: " << endl;
-    cout << "0. Return to the Player menu: " << endl;
     cin.ignore(1000, '\n');
     getline(cin,n);
-    if( n == "0") return 0;
 
     cout << "Write " << n << "'s birthday " << endl;
-    cout << "0. Return to the Player menu: " << endl;
-    cin >> b;
-    if( b == "0") return 0;
+    cout << "Write " << n << "'s day of birth" << endl;
+    cin >> day; failInput(day);
+    cout << "Write " << n << "'s month of birth" << endl;
+    cin >> month; failInput(month);
+    cout << "Write " << n << "'s year of birth" << endl;
+    cin >> year; failInput(year);
 
     cout << "Write " << n << "'s wage " << endl;
-    cout << "0. Return to the Player menu: " << endl;
     cin >> w;
     failInput(w);
-    if( w == 0) return 0;
 
     cout << "Write " << n   << "'s function " << endl;
-    cout << "0. Return to the Player menu: " << endl;
     cin >> f;
     failInput(f);
-    if(f == "0") return 0;
 
-    Staff *s = new Staff(n,b,w,f);
+    cout << "Do you wish to add the Player you have created?: " << endl;
+    cout << "1. Add Player " << endl;
+    cout << "2. Cancel adding Player " << endl;
+    cin >> checker;
+    if(checker == '2') return 0;
+
+    Date *b = new Date(day,month,year);
+    Staff *s = new Staff(n,*b,w,f);
     team_staff.push_back(s);
     return 0;
 }
