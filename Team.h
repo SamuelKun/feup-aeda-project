@@ -33,8 +33,8 @@ public:
     vector<Staff *> & findStaffByFunction(string function);
     vector<Competion *> & findCompetionByDate(Date start, Date end);
 
-    void addPlayer();
-    void addStaff();
+    int addPlayer();
+    int addStaff();
 };
 
 

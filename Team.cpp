@@ -62,48 +62,83 @@ Player * Team::findPlayer(string name) {
     throw(PlayerNotFound(name));
 }
 
-void Team::addPlayer() {
+int Team::addPlayer() {
     string n, b, c, pos;
     int wei,hei,val,earn;
 
     cout << "Write the name of the Player you wish to add: " << endl;
+    cout << "0. Return to the Player menu: " << endl;
     getline(cin,n);
     cin.ignore(1000, '\n');
+    if(n == "0") return 0;
+
     cout << "Write " << n << "'s birthday " << endl;
+    cout << "0. Return to the Player menu: " << endl;
     cin >> b;
+    if(b == "0") return 0;
+
     cout << "Write " << n << "'s club " << endl;
+    cout << "0. Return to the Player menu: " << endl;
     cin >> c;
+    if(c == "0") return 0;
+
     cout << "Write " << n << "'s position " << endl;
+    cout << "0. Return to the Player menu: " << endl;
     cin >> pos;
+    if(pos == "0") return 0;
+
     cout << "Write " << n << "'s weight " << endl;
+    cout << "0. Return to the Player menu: " << endl;
     cin >> wei;
+    if(wei == 0) return 0;
+
     cout << "Write " << n << "'s height " << endl;
+    cout << "0. Return to the Player menu: " << endl;
     cin >> hei;
+    if(hei == 0) return 0;
+
     cout << "Write " << n << "'s value " << endl;
+    cout << "0. Return to the Player menu: " << endl;
     cin >> val;
+    if(val == 0) return 0;
+
     cout << "Write " << n << "'s earnings " << endl;
+    cout << "0. Return to the Player menu: " << endl;
     cin >> earn;
+    if(earn == 0) return 0;
 
     Player *play = new Player(n,b,c,pos,wei,hei,val,earn);
     team_players.push_back(play);
 }
 
-void Team::addStaff() {
+int Team::addStaff() {
     string n, b, f;
     double w;
 
     cout << "Write the name of the Player you wish to add: " << endl;
-    getline(cin,n);
+    cout << "0. Return to the Player menu: " << endl;
     cin.ignore(1000, '\n');
+    getline(cin,n);
+    if( n == "0") return 0;
+
     cout << "Write " << n << "'s birthday " << endl;
+    cout << "0. Return to the Player menu: " << endl;
     cin >> b;
+    if( b == "0") return 0;
+
     cout << "Write " << n << "'s wage " << endl;
+    cout << "0. Return to the Player menu: " << endl;
     cin >> w;
-    cout << "Write " << n << "'s function " << endl;
+    if( w == 0) return 0;
+
+    cout << "Write " << n   << "'s function " << endl;
+    cout << "0. Return to the Player menu: " << endl;
     cin >> f;
+    if(f == "0") return 0;
 
     Staff *s = new Staff(n,b,w,f);
     team_staff.push_back(s);
+    return 0;
 }
 /*
 vector<Player *> & Team::findPlayerByPos(string position) {
