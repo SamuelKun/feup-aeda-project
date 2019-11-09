@@ -40,6 +40,7 @@ int menu_staff() {
 
     cout << "1. View Staff Members " << endl;
     cout << "2. Search Staff Members " << endl;
+    cout << "3. Add Staff Members " << endl;
     cout << "0. Return to Main Menu " << endl;
 
     cin.clear();
@@ -58,6 +59,8 @@ int menu_staff() {
             break;
         case '0':    //Exit function
             return 1;
+        case '3':
+            return national_team->addStaff();
         default:     //Invalid input
             cin.ignore(1000,'\n');
             return 0;
@@ -105,8 +108,7 @@ int menu_players()
             }
             return 0;
         case '3':
-            national_team->addPlayer();
-            break;
+            return national_team->addPlayer();
         case '0':
             return 1;
         default:     //Invalid input
