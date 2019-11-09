@@ -61,6 +61,32 @@ Player * Team::findPlayer(string name) {
     }
     throw(PlayerNotFound(name));
 }
+
+void Team::addPlayer() {
+    string n, b, c, pos;
+    int wei,hei,val,earn;
+
+    cout << "Write the name of the Player you wish to add: " << endl;
+    getline(cin,n);
+    cin.ignore(1000, '\n');
+    cout << "Write " << n << "'s birthday " << endl;
+    cin >> b;
+    cout << "Write " << n << "'s club " << endl;
+    cin >> c;
+    cout << "Write " << n << "'s position " << endl;
+    cin >> pos;
+    cout << "Write " << n << "'s weight " << endl;
+    cin >> wei;
+    cout << "Write " << n << "'s height " << endl;
+    cin >> hei;
+    cout << "Write " << n << "'s value " << endl;
+    cin >> val;
+    cout << "Write " << n << "'s earnings " << endl;
+    cin >> earn;
+
+    Player *play = new Player(n,b,c,pos,wei,hei,val,earn);
+    team_players.push_back(play);
+}
 /*
 vector<Player *> & Team::findPlayerByPos(string position) {
     vector<Player *> to_return;

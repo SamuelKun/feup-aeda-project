@@ -51,3 +51,13 @@ public:
       return name;
   }
 };
+
+class PlayerAlreadyExists{
+private:
+    string name;
+public:
+    PlayerAlreadyExists(string name): name(name) {}
+    string getName() const{
+        return name;
+    }
+};

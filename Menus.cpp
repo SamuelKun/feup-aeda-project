@@ -74,6 +74,7 @@ int menu_players()
 
     cout << "1. View all Players " << endl;
     cout << "2. Search Players " << endl;
+    cout << "3. Add Player " << endl;
     cout << "0. Return to Main Menu " << endl;
 
     cin.clear();
@@ -103,6 +104,9 @@ int menu_players()
                 cout << "Player " << er.getName() << " not found" << endl;
             }
             return 0;
+        case '3':
+            national_team->addPlayer();
+            break;
         case '0':
             return 1;
         default:     //Invalid input
