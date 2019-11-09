@@ -17,18 +17,20 @@ private:
 	int weight;      //!*< Player's weight in kg.
 	int height;      //!*< Player's height in cm.
 	int value;       //!*< Player's value in euros.
-    int earnings;   //!*< Player's insurance.
-    //A calcular -> Nº dias do jogador na seleção * passe * 0.05;
+    double earnings; //!*< Player's earnings.
+    double insurance;//!*< Player's insurance.
+
 
 public:
     Player();
-	Player(string name, Date birth, string club, string position, int weight, int height, int value, double earnings = 0);
+	Player(string name, Date birth, string club, string position, int weight, int height, int value, double earnings);
 	string getClub() const;
     string getPosition() const;
 	int getWeight() const;
 	int getHeight() const;
 	int getValue() const;
 	double getEarnings() const;
+    double getInsurance() const;
 	void setClub(string club);
 	void setWeight(int weight);
 	void setHeight(int height);

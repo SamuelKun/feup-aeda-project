@@ -18,6 +18,7 @@ private:
     vector<Staff *> team_staff; /// \brief Vector with Team's staff
     vector<Game *> team_games;
     vector<Competion *> team_competions; /// \brief Vector with Team's competitions
+
 public:
     Team();
     Team(string file_name);
@@ -26,6 +27,8 @@ public:
     vector<Staff *> getStaff() const;
     vector<Game *> getGame() const;
     vector<Competion *> getCompetion() const;
+    double getMoneyPlayers() const;
+    double getMoneyStaff() const;
     Player * findPlayer(string name);
     vector<Player *> & findPlayerByPos(string position);
     Staff & findStaff(string name);

@@ -34,7 +34,9 @@ Player::Player() {
 /// \param insurance Player's insurance
 Player::Player(string name, Date birth, string club, string position, int weight, int height, int value, double earnings): Person(name, birth), club(club), position(position),
                                                                                                                         weight(weight), height(height), value(value),
-                                                                                                                        earnings(earnings) {}
+                                                                                                                        earnings(earnings) {
+    this->insurance = value * 0.005;
+}
 /// \brief Get Method
 /// \return Player's club
 string Player::getClub() const {
@@ -63,6 +65,10 @@ int Player::getValue() const {
 /// \return Player's insurance
 double Player::getEarnings() const {
     return earnings;
+}
+
+double Player::getInsurance() const {
+    return insurance;
 }
 
 /// \brief Set Method
@@ -119,7 +125,3 @@ bool Player::equalName(Player p) const {
 bool Player::equalPosition(Player p) const {
     return getPosition() == p.getPosition();
 }
-
-
-
-

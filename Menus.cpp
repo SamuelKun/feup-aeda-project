@@ -166,6 +166,31 @@ int menu_tournaments()
             return 0;
     }
 }
+
+int team_information()
+{
+    char menu;
+
+    //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
+
+    cout << "========================================= " << endl;
+    cout << "            Team Information             " << endl;
+    cout << "========================================= \n" << endl;
+
+    cout << "Team Name: " << national_team->getTeamName() << endl;
+    cout << "Number of Competitions: " << national_team->getCompetion().size() << endl;
+    cout << "Number of Players: " << national_team->getPlayers().size() << endl;
+    cout << "Money spent with players in competitions: " << national_team->getMoneyPlayers() << endl;
+    cout << "Money spent with staff per month: " << national_team->getMoneyStaff() << endl;
+    cout << "0. Return to Main Menu " << endl;
+
+    cin.clear();
+    cin >> menu;
+
+
+    return 1;
+
+}
 int mainMenu()
 {
     char menu;
@@ -181,6 +206,7 @@ int mainMenu()
     cout << "3. Tournaments Menu" << endl;
     cout << "4. Games Menu" << endl;
     cout << "5. View app info" << endl;
+    cout << "6. Team Information" << endl;
     cout << "0. Exit" << endl;
 
     cin.clear();
@@ -199,6 +225,9 @@ int mainMenu()
             break;
         case '5':    //View app info
             while(!info_app());
+            break;
+        case '6':    //View app info
+            while(!team_information());
             break;
         case '0':    //Exit function
             exit(0);

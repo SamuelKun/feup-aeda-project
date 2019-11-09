@@ -44,8 +44,10 @@ bool Competion::getPaid() const {
 
 void Competion::payPlayers() {
     if(!paid) {
-        for (auto it = called.begin(); it != called.end(); it++)
-            (*it)->setEarnings(1000);
+        for (auto it = called.begin(); it != called.end(); it++) {
+            double value = (*it)->getInsurance() * 30;
+            (*it)->setEarnings(value);
+        }
         paid = true;
     }
     else throw(AlreadyPaid(name));
