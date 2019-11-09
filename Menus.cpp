@@ -97,6 +97,7 @@ int menu_players()
             }
             cout << "Press any key to go back to Player Menu: " << endl;
             cin >> menu;
+            cin.ignore(1000,'\n');
             return 0;//remove this line after inserting stuff
         case '2':    //Exit function
             cout << "Write the name of the Player you want to search: " << endl;

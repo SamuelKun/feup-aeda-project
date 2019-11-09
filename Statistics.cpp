@@ -94,7 +94,7 @@ void Colective_Statistics::addBallPossession(int ballPossession) {
 }
 
 void Colective_Statistics::info() const {
-    cout << "goals_scored: " << goals_scored << endl;
+    cout << " goals_scored: " << goals_scored << endl;
     cout << " goal_attempts: " << goal_attempts << endl;
     cout << " shots_on_goal: " << shots_on_goal << endl;
     cout << " shots_off_goal: " << shots_off_goal << endl;
@@ -120,7 +120,7 @@ void Individual_Statistics::addMinutesPlayed(int minutesPlayed) {
 }
 
 void Individual_Statistics::info() const {
-    cout << "goals_scored: " << goals_scored << endl;
+    cout << " goals_scored: " << goals_scored << endl;
     cout << " goal_attempts: " << goal_attempts << endl;
     cout << " shots_on_goal: " << shots_on_goal << endl;
     cout << " shots_off_goal: " << shots_off_goal << endl;

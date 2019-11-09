@@ -18,6 +18,11 @@ void failInput(form input)
         cin >> input;
     }
 }
+void wait(){
+    string waiting;
+    cout << "Press any key to continue: " << endl;
+    getline(cin,waiting);
+}
 
 /// \brief Constructor
 Team::Team() {
@@ -76,7 +81,7 @@ Player * Team::findPlayer(string name) {
 }
 
 int Team::addPlayer() {
-    string n, c, pos, go_back;
+    string n, c, pos;
     int wei,hei,val,earn,day,month,year;
     char checker = false;
 
@@ -123,7 +128,7 @@ int Team::addPlayer() {
 
     cout << "Player added successfully!!" << endl;
     cout << "Press any button to continue" << endl;
-    cin >> go_back;
+    cin >> n;
     return 0;
 }
 
@@ -164,8 +169,7 @@ int Team::addStaff() {
     team_staff.push_back(s);
 
     cout << "Staff Member added successfully!!" << endl;
-    cout << "Press any button to continue" << endl;
-    cin >> go_back;
+    wait();
     return 0;
 }
 /*
