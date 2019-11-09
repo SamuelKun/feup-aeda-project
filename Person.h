@@ -14,6 +14,7 @@ private:
 	string name; /*!< Person's name */
 	Date birth;  /*!< Person's date of birth */
 public:
+    Person();
 	Person(string name, Date birth);
 	string getName() const;
 	Date getBirthday() const;

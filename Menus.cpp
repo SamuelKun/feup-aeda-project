@@ -97,7 +97,7 @@ int menu_players()
                 cin >> name;
                 if(name == "0") return 0;
                 cin.ignore(1000, '\n');
-                national_team->findPlayer(name).info();
+                national_team->findPlayer(name)->info();
             }
             catch(PlayerNotFound & er) {
                 cout << "Player " << er.getName() << " not found" << endl;

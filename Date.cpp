@@ -29,6 +29,7 @@ Date::Date(string date)
     year = stoi(date_temp[0]);
     month = stoi(date_temp[1]);
     day = stoi(date_temp[2]);
+
 }
 
 /// \brief Date constructor using ints

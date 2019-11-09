@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "Staff.h"
 #include "Game.h"
+#include "Competion.h"
 
 
 class Team {
@@ -25,7 +26,7 @@ public:
     vector<Staff *> getStaff() const;
     vector<Game *> getGame() const;
     vector<Competion *> getCompetion() const;
-    Player & findPlayer(string name);
+    Player * findPlayer(string name);
     vector<Player *> & findPlayerByPos(string position);
     Staff & findStaff(string name);
     Competion & findCompetion(string name);
