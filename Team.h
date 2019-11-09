@@ -26,6 +26,11 @@ public:
     vector<Game *> getGame() const;
     vector<Competion *> getCompetion() const;
     Player & findPlayer(string name);
+    vector<Player *> & findPlayerByPos(string position);
+    Staff & findStaff(string name);
+    Competion & findCompetion(string name);
+    vector<Staff *> & findStaffByFunction(string function);
+    vector<Competion *> & findCompetionByDate(Date start, Date end);
 };
 
 
