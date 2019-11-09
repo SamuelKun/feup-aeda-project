@@ -1,5 +1,5 @@
 #include "Statistics.h"
-#include <iostream>
+
 
 Statistics::Statistics(int goalsScored, int goalAttempts, int shotsOnGoal, int shotsOffGoal, float kmTravelled,int yellowCards, int redCards, int injured, int freeKicks, int cornerKicks):
         goals_scored(goalsScored),goal_attempts(goalAttempts),shots_on_goal(shotsOnGoal),
@@ -93,6 +93,20 @@ void Colective_Statistics::addBallPossession(int ballPossession) {
     ball_possession += ballPossession;
 }
 
+void Colective_Statistics::info() const {
+    cout << "goals_scored: " << goals_scored << endl;
+    cout << " goal_attempts: " << goal_attempts << endl;
+    cout << " shots_on_goal: " << shots_on_goal << endl;
+    cout << " shots_off_goal: " << shots_off_goal << endl;
+    cout << " km_travelled: " << km_travelled << endl;
+    cout << " yellow_cards: " << yellow_cards << endl;
+    cout << " red_cards: " << red_cards << endl;
+    cout << " injured: " << injured << endl;
+    cout << " free_kicks: " << free_kicks << endl;
+    cout << " corner_kicks: " << corner_kicks << endl;
+    cout << " ball_possession: " << ball_possession << endl;
+}
+
 Individual_Statistics::Individual_Statistics(int minutesPlayed, int goalsScored, int goalAttempts, int shotsOnGoal,int shotsOffGoal, float kmTravelled, int yellowCards, int redCards, int injured, int freeKicks, int cornerKicks):
     Statistics(goalsScored,goalAttempts,shotsOnGoal,shotsOffGoal,kmTravelled,yellowCards,redCards,injured,freeKicks,cornerKicks),
     minutes_played(minutesPlayed){}
@@ -103,4 +117,18 @@ int Individual_Statistics::getMinutesPlayed() const {
 
 void Individual_Statistics::addMinutesPlayed(int minutesPlayed) {
     minutes_played += minutesPlayed;
+}
+
+void Individual_Statistics::info() const {
+    cout << "goals_scored: " << goals_scored << endl;
+    cout << " goal_attempts: " << goal_attempts << endl;
+    cout << " shots_on_goal: " << shots_on_goal << endl;
+    cout << " shots_off_goal: " << shots_off_goal << endl;
+    cout << " km_travelled: " << km_travelled << endl;
+    cout << " yellow_cards: " << yellow_cards << endl;
+    cout << " red_cards: " << red_cards << endl;
+    cout << " injured: " << injured << endl;
+    cout << " free_kicks: " << free_kicks << endl;
+    cout << " corner_kicks: " << corner_kicks << endl;
+    cout << " minutes_played: " << minutes_played << endl;
 }

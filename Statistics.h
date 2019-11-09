@@ -2,9 +2,11 @@
 #include <iostream>
 #include <ostream>
 
+using namespace std;
+
 /// \brief This class refers to the individual statistics of a player during a match
 class Statistics {
-private:
+protected:
     int goals_scored;  /// \brief Number of goals scored
     int goal_attempts; /// \brief Number of goals attempted
     int shots_on_goal; /// \brief Number of shots on goal
@@ -18,7 +20,7 @@ private:
 public:
     explicit Statistics(int goalsScored = 0, int goalAttempts = 0, int shotsOnGoal = 0, int shotsOffGoal = 0, float kmTravelled = 0,
                int yellowCards = 0, int redCards = 0, int injured = 0, int freeKicks = 0, int cornerKicks = 0);
-
+    virtual void info() const = 0;
     int getGoalsScored() const;
     void addGoalsScored(int goalsScored);
     int getGoalAttempts() const;
@@ -46,7 +48,7 @@ private:
 public:
     Individual_Statistics(int minutesPlayed = 0, int goalsScored = 0, int goalAttempts = 0, int shotsOnGoal = 0, int shotsOffGoal = 0, float kmTravelled = 0,
                           int yellowCards = 0, int redCards = 0, int injured = 0, int freeKicks = 0, int cornerKicks = 0);
-
+    void info() const;
     int getMinutesPlayed() const;
     void addMinutesPlayed(int minutesPlayed);
 
@@ -59,7 +61,7 @@ private:
 public:
     Colective_Statistics(int ballPossession = 0, int goalsScored = 0, int goalAttempts = 0, int shotsOnGoal = 0, int shotsOffGoal = 0, float kmTravelled = 0,
                          int yellowCards = 0, int redCards = 0, int injured = 0, int freeKicks = 0, int cornerKicks = 0);
-
+    void info() const;
     int getBallPossession() const;
     void addBallPossession(int ballPossession);
 
