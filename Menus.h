@@ -2,51 +2,32 @@
 #include "Team.h"
 using namespace std;
 
-/**
- * This is the main menu which allows you to choose what you want to with this application
- * @return
- */
-int mainMenu();
 
-/**
- * This menu shows the app creators
- * @return goes back to the main menu
- */
+ /// \brief This menu shows the app creators
+ /// \return Goes back to the main menu
 int info_app();
 
-/**
- * This menu allows you to view and change staff info
- * @return creates or views staff members, or returns to the main menu
- */
+ /// \brief All Staff Member information is here
+ /// \return creates or views Staff Members, or returns to the main menu
 int menu_staff();
 
-/**
- * This menu allows you to view and change player info
- * @return creates or views players, or returns to the main menu
- */
+ /// \brief All Player information is here
+ /// \return creates or views Players, or returns to the main menu
 int menu_players();
 
-/**
- * This menu refers to all tournaments
- * It allows you to view tournaments or create new ones
- * @return creates or views tournaments, or returns to the main menu
- */
+ /// \brief All Tournament information is here
+ /// \return creates or views Tournaments, or returns to the main menu
 int menu_tournaments();
-/**
- * This menu allows you to move between menus in order to use the app properly
- * @return chooses between different menus or exiting the app
- */
+
+ /// \brief This menu allows you to move between sub menus in order to use the app properly
+ /// \return chooses between different menus or exiting the app
 int mainMenu();
 
-/**
- *
- * @return
- */
+/// \brief Allows the user to open a .txt file referring to a team
+/// \return Player/Staff/Tournaments Menus or App's info
 int fileMenu();
 
-/**
- *
- * @return
- */
+/// \brief Menu that either allows the user to open a file or create a new one
+/// \return Goes either to the File reading or File creating menus
 int firstMenu();
 

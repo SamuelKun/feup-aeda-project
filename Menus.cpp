@@ -36,7 +36,9 @@ int menu_staff() {
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
-    cout <<  "Staff Menu " << endl << endl;
+    cout << "========================================= " << endl;
+    cout << "               Staff Menu                 " << endl;
+    cout << "========================================= \n" << endl;
 
     cout << "1. View Staff Members " << endl;
     cout << "2. Search Staff Members " << endl;
@@ -55,8 +57,9 @@ int menu_staff() {
             }
             cout << "0. Return to Main Menu " << endl;
             cin >> menu;
-            return 0;//remove this line after inserting stuff
-            break;
+            return 0;
+        case '2':
+            return 0;
         case '0':    //Exit function
             return 1;
         case '3':
@@ -73,7 +76,9 @@ int menu_players()
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
-    cout <<  "Player Menu " << endl << endl;
+    cout << "========================================= " << endl;
+    cout << "               Player Menu                " << endl;
+    cout << "========================================= \n" << endl;
 
     cout << "1. View all Players " << endl;
     cout << "2. Search Players " << endl;
@@ -90,9 +95,9 @@ int menu_players()
                 (national_team->getPlayers())[i]->info();
                 cout << endl;
             }
-            cout << "0. Return to Main Menu " << endl;
+            cout << "Press any key to go back to Player Menu: " << endl;
             cin >> menu;
-            return 1;//remove this line after inserting stuff
+            return 0;//remove this line after inserting stuff
         case '2':    //Exit function
             cout << "Write the name of the Player you want to search: " << endl;
             cout << "0. Return to Player Menu" << endl;
@@ -123,7 +128,7 @@ int menu_tournaments()
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
     cout << "========================================= " << endl;
-    cout << "                Competitions              " << endl;
+    cout << "            Competitions Menu             " << endl;
     cout << "========================================= \n" << endl;
 
     cout << "1. Show all competitions " << endl;
@@ -140,7 +145,6 @@ int menu_tournaments()
                 cout << (*(national_team->getCompetion()[i]));
             }
             return 0;//remove this line after inserting stuff
-            break;
         case '2':
             cout << "National Football Team Competitions - VERIFICAR ERRO DEPOIS" << endl;
             for(int i = 0; i < (national_team->getCompetion()).size(); i++){
@@ -170,11 +174,12 @@ int mainMenu()
 
     cout << "========================================= " << endl;
     cout << "          National Football Team          " << endl;
+    cout << "                Main Menu                 " << endl;
     cout << "========================================= \n" << endl;
-    cout << "1. View player info" << endl;
-    cout << "2. View staff info" << endl;
-    cout << "3. Tournaments" << endl;
-    cout << "4. Games" << endl;
+    cout << "1. Player Menu" << endl;
+    cout << "2. Staff Menu" << endl;
+    cout << "3. Tournaments Menu" << endl;
+    cout << "4. Games Menu" << endl;
     cout << "5. View app info" << endl;
     cout << "0. Exit" << endl;
 
@@ -207,7 +212,7 @@ int fileMenu(){
     string filename;
 
     cout << "Write the filename you wish to read: " << endl;
-    cout << "Press [0] to exit program" << endl;
+    cout << "0. Go back to the previous menu" << endl;
     cin.clear();
     cin >> filename;
     teamFile.open(filename);

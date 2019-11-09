@@ -76,7 +76,7 @@ Player * Team::findPlayer(string name) {
 }
 
 int Team::addPlayer() {
-    string n, c, pos;
+    string n, c, pos, go_back;
     int wei,hei,val,earn,day,month,year;
     char checker = false;
 
@@ -120,11 +120,15 @@ int Team::addPlayer() {
     Date *b = new Date(day,month,year);
     Player *play = new Player(n,*b,c,pos,wei,hei,val,earn);
     team_players.push_back(play);
+
+    cout << "Player added successfully!!" << endl;
+    cout << "Press any button to continue" << endl;
+    cin >> go_back;
     return 0;
 }
 
 int Team::addStaff() {
-    string n, f;
+    string n, f , go_back;
     double w;
     int day,month,year;
     bool checker = false;
@@ -149,15 +153,19 @@ int Team::addStaff() {
     cin >> f;
     failInput(f);
 
-    cout << "Do you wish to add the Player you have created?: " << endl;
-    cout << "1. Add Player " << endl;
-    cout << "2. Cancel adding Player " << endl;
+    cout << "Do you wish to add the Staff Member you have created?: " << endl;
+    cout << "1. Add Staff Member " << endl;
+    cout << "2. Cancel adding Staff Member " << endl;
     cin >> checker;
     if(checker == '2') return 0;
 
     Date *b = new Date(day,month,year);
     Staff *s = new Staff(n,*b,w,f);
     team_staff.push_back(s);
+
+    cout << "Staff Member added successfully!!" << endl;
+    cout << "Press any button to continue" << endl;
+    cin >> go_back;
     return 0;
 }
 /*
