@@ -61,7 +61,7 @@ vector<Staff *> Team::getStaff() const {
 }
 /// \brief Get Method
 /// \return Team's vector with Competitions
-vector<Competion *> Team::getCompetion() const {
+vector<Competition *> Team::getCompetion() const {
     return team_competions;
 }
 
@@ -205,7 +205,7 @@ Staff & Team::findStaff(string name) {
     throw(StaffNotFound(name));
 }
 
-Competion & Team::findCompetion(string name) {
+Competition & Team::findCompetion(string name) {
     for (size_t i = 0; i < team_competions.size(); i++)
     {
         if (team_competions[i]->getCompetionName().find(name) != string::npos)
@@ -225,8 +225,8 @@ vector<Staff *> & Team::findStaffByFunction(string function) {
     else { return to_return; }
 }
 
-vector<Competion *> & Team::findCompetionByDate(Date start, Date end) {
-    vector<Competion *> to_return;
+vector<Competition *> & Team::findCompetionByDate(Date start, Date end) {
+    vector<Competition *> to_return;
     for (size_t i = 0; i < team_competions.size(); i++) {
         if (team_competions[i]->getStartDate() >= start && team_competions[i]->getEndDate() <= end) {
             to_return.push_back(team_competions[i]);

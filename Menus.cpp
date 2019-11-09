@@ -149,7 +149,7 @@ int menu_tournaments()
         case '2':
             cout << "National Football Team Competitions - VERIFICAR ERRO DEPOIS" << endl;
             for(int i = 0; i < (national_team->getCompetion()).size(); i++){
-                cout << i << ". " << national_team->getCompetion()[i]->getCompetionName() << " - Paid: " << national_team->getCompetion()[i]->getPaid() << endl;
+                cout << i << ". " << national_team->getCompetion()[i]->getCompetitionName() << " - Paid: " << national_team->getCompetion()[i]->getPaid() << endl;
             }
             int index;
             cin >> index; // VERIFICAR ERRO DEPOIS

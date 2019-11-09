@@ -64,9 +64,9 @@ vector<Game *> read_games(string info){
     return games;
 }
 
-vector<Competion *> read_competion(string info, Team * t){
+vector<Competition *> read_competion(string info, Team * t){
     ifstream competion_info(info);
-    vector<Competion *> competion;
+    vector<Competition *> competion;
     vector<string> tempVec;
     string str_temp;
     while (getline(competion_info, str_temp)){
@@ -88,7 +88,7 @@ vector<Competion *> read_competion(string info, Team * t){
             //Data de começo e fim
             Date startcomp(tempVec[3]);
             Date endcomp(tempVec[4]);
-            Competion *tempComp = new Competion(tempVec[0], comp_convocado, competion_games, startcomp, endcomp);
+            Competition *tempComp = new Competition(tempVec[0], comp_convocado, competion_games, startcomp, endcomp);
             competion.push_back(tempComp);
             tempVec.clear();
         }
