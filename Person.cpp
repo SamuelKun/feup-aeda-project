@@ -6,6 +6,10 @@
 
 using namespace std;
 
+Person::Person() {
+
+}
+
 //Constructor(s)
 /// \brief Person Constructor with the following data:
 /// \param name Person's name
@@ -25,4 +29,5 @@ void Person::info() const {
     cout << "Name: " << this->name << endl;
     cout << "Birthday: " << this->birth;
 }
+
 

@@ -57,7 +57,7 @@ vector<Game *> read_games(string info){
     return games;
 }
 
-vector<Competion *> read_competion(string info){
+vector<Competion *> read_competion(string info, Team * t){
     ifstream competion_info(info);
     vector<Competion *> competion;
     vector<string> tempVec;
@@ -67,9 +67,17 @@ vector<Competion *> read_competion(string info){
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
             //Ler Convocados
-            vector<Player *> comp_convocado = read_player(tempVec[1]);
+            vector<Player *> comp_convocado;
+            ifstream called(tempVec[1]);
+            vector<string> called_vec;
+            while (getline(called, str_temp)) called_vec.push_back(str_temp);
+
+            for(auto it = called_vec.begin(); it != called_vec.end(); it++)
+                comp_convocado.push_back(t->findPlayer(*it));
+
             //Ler Jogos
             vector<Game *> competion_games = read_games(tempVec[2]);
+
             //Data de começo e fim
             Date startcomp(tempVec[3]);
             Date endcomp(tempVec[4]);
@@ -98,7 +106,9 @@ Team::Team(string file_name) {
     this->teamName = file_info[0];
     this->team_players = read_player(file_info[1]);
     this->team_staff = read_staff(file_info[2]);
-    this->team_competions = read_competion(file_info[3]);
+    cout << team_players[0] << endl;
+    this->team_competions = read_competion(file_info[3], this);
+    cout << team_competions[0]->getCalled()[0];
 }
 
 /// \brief Get Method
@@ -126,15 +136,15 @@ vector<Game *> Team::getGame() const {
     return team_games;
 }
 
-Player & Team::findPlayer(string name) {
+Player * Team::findPlayer(string name) {
     for (size_t i = 0; i < team_players.size(); i++)
     {
         if (team_players[i]->getName().find(name) != string::npos)
-            return *team_players[i];
+            return team_players[i];
     }
     throw(PlayerNotFound(name));
 }
-
+/*
 vector<Player *> & Team::findPlayerByPos(string position) {
     vector<Player *> to_return;
     for (size_t i = 0; i < team_players.size(); i++) {
@@ -185,3 +195,4 @@ vector<Competion *> & Team::findCompetionByDate(Date start, Date end) {
     if (to_return.empty()) { throw(NoCompetionsIn(Date start, Date end)); }
     else { return to_return; }
 }
+*/

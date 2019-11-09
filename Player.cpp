@@ -19,6 +19,11 @@ bool cmp_player_by_position(Player *p1, Player *p2){
     return p1->getPosition() == p2->getPosition();
 }
 
+
+Player::Player() {
+}
+
+
 /// \brief Player constructor with the following« data
 /// \param name Player's name
 /// \param birth Player's birthday
@@ -27,9 +32,9 @@ bool cmp_player_by_position(Player *p1, Player *p2){
 /// \param height Player's height
 /// \param value Player's value
 /// \param insurance Player's insurance
-Player::Player(string name, Date birth, string club, string position, int weight, int height, int value, int insurance): Person(name, birth), club(club), position(position),
+Player::Player(string name, Date birth, string club, string position, int weight, int height, int value, double earnings): Person(name, birth), club(club), position(position),
                                                                                                                         weight(weight), height(height), value(value),
-                                                                                                                        insurance(insurance) {}
+                                                                                                                        earnings(earnings) {}
 /// \brief Get Method
 /// \return Player's club
 string Player::getClub() const {
@@ -56,8 +61,8 @@ int Player::getValue() const {
 }
 /// \brief Get Method
 /// \return Player's insurance
-int Player::getInsurance() const {
-    return insurance;
+double Player::getEarnings() const {
+    return earnings;
 }
 
 /// \brief Set Method
@@ -82,8 +87,8 @@ void Player::setValue(int value) {
 }
 /// \brief Set Method
 /// \param insurance Player's insurance
-void Player::setInsurance(int insurance) {
-    this -> insurance = insurance;
+void Player::setEarnings(double value) {
+    this -> earnings += value;
 }
 ///\brief Shows players data
 void Player::info() const
@@ -94,7 +99,7 @@ void Player::info() const
     cout << "Weight: " << getWeight() << endl;
     cout << "Height: " << getHeight() << endl;
     cout << "Value: " << getValue() << endl;
-    cout << "Insurance: " << getInsurance() << endl;
+    cout << "Total Earnings: " << getEarnings() << endl;
 }
 /// \brief Checks if Player's name is equal to the one given by parameter
 /// \param p Compare with this Player's name
