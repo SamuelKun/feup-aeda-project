@@ -43,7 +43,8 @@ int menu_players()
             cout << "0. Return to Player Menu" << endl;
             try {
                 string name;
-                cin >> name;
+                cin.ignore(1000, '\n');
+                getline(cin, name);
                 if(name == "0") return 0;
                 cin.ignore(1000, '\n');
                 national_team->findPlayer(name)->info();
@@ -90,11 +91,23 @@ int menu_staff() {
             cin >> menu;
             return 0;
         case '2':
+            cout << "Write the name of the Staff you want to search: " << endl;
+            cout << "0. Return to Staff Menu" << endl;
+            try {
+                string name;
+                cin.ignore(1000, '\n');
+                getline(cin, name);
+                if(name == "0") return 0;
+                national_team->findStaff(name)->info();
+            }
+            catch(PersonNotFound & er) {
+                cout << "Staff member " << er.getName() << " not found" << endl;
+            }
             return 0;
-        case '0':    //Exit function
-            return 1;
         case '3':
             return national_team->addStaff();
+        case '0':    //Exit function
+            return 1;
         default:     //Invalid input
             cin.ignore(1000,'\n');
             return 0;
@@ -163,7 +176,18 @@ int menu_games(){
 
     cin.clear();
     cin >> menu;
-    return 1;
+
+
+    switch(menu) {
+        case '1':
+            return 1;
+        case '2':
+            return 1;
+        default:     //Invalid input
+            cin.ignore(1000, '\n');
+            return 0;
+    }
+
 }
 
 int menu_info()
@@ -224,7 +248,7 @@ int mainMenu() {
     cout << "========================================= \n" << endl;
     cout << "1. Player Menu" << endl;
     cout << "2. Staff Menu" << endl;
-    cout << "3. Competions Menu" << endl;
+    cout << "3. Competitions Menu" << endl;
     cout << "4. Games Menu" << endl;
     cout << "5. View Team Stats" << endl;
     cout << "6. App Info" << endl;

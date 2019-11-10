@@ -6,10 +6,10 @@ Coach
 Rui Pedro
 28/06/2000
 1200
-Coach
+Doctor
 -----
-Rui Manuel
+Manuel Costa
 28/06/2000
 1200
-Coach
+Psychologist
 -----

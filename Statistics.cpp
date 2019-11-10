@@ -11,9 +11,6 @@ int Statistics::getGoalsScored() const {
     return goals_scored;
 }
 
-void Statistics::addGoalsScored(int goalsScored) {
-    goals_scored += goalsScored;
-}
 
 int Statistics::getGoalAttempts() const {
     return goal_attempts;
