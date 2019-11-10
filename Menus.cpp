@@ -6,30 +6,59 @@
 
 using namespace std;
 extern Team *national_team;
-int info_app()
+
+int menu_players()
 {
     char menu;
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
+    Player xd;
+    cout << "========================================= " << endl;
+    cout << "               Player Menu                " << endl;
+    cout << "========================================= \n" << endl;
 
-    cout << "This app was created by :" << endl << endl;
-    cout << "Diogo Samuel Fernandes" << endl;
-    cout << "Hugo Guimaraes" << endl;
-    cout << "Joao Pires" << endl << endl;
+    cout << "1. View all Players " << endl;
+    cout << "2. Search Players " << endl;
+    cout << "3. Add Player " << endl;
+    cout << "0. Return to Main Menu " << endl;
 
-    cout << "Press [1] to go back to the main menu" << endl;
     cin.clear();
     cin >> menu;
-    if (menu == '1') {cin.ignore(1000,'\n'); return 1;}
-    else
+
+    switch(menu)
     {
-        cin.ignore(1000,'\n');
-        return 0;
+        case '1':    //View player info
+            for(int i = 0; i < (national_team->getPlayers()).size(); i++){
+                (national_team->getPlayers())[i]->info();
+                cout << endl;
+            }
+            cout << "Press any key to go back to Player Menu: " << endl;
+            cin >> menu;
+            cin.ignore(1000,'\n');
+            return 0;//remove this line after inserting stuff
+        case '2':    //Exit function
+            cout << "Write the name of the Player you want to search: " << endl;
+            cout << "0. Return to Player Menu" << endl;
+            try {
+                string name;
+                cin >> name;
+                if(name == "0") return 0;
+                cin.ignore(1000, '\n');
+                national_team->findPlayer(name)->info();
+            }
+            catch(PersonNotFound & er) {
+                cout << "Player " << er.getName() << " not found" << endl;
+            }
+            return 0;
+        case '3':
+            return national_team->addPlayer();
+        case '0':
+            return 1;
+        default:     //Invalid input
+            cin.ignore(1000,'\n');
+            return 0;
     }
-
 }
-
-
 
 int menu_staff() {
     char menu;
@@ -70,58 +99,7 @@ int menu_staff() {
     }
     return 1;
 }
-int menu_players()
-{
-    char menu;
 
-    //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
-
-    cout << "========================================= " << endl;
-    cout << "               Player Menu                " << endl;
-    cout << "========================================= \n" << endl;
-
-    cout << "1. View all Players " << endl;
-    cout << "2. Search Players " << endl;
-    cout << "3. Add Player " << endl;
-    cout << "0. Return to Main Menu " << endl;
-
-    cin.clear();
-    cin >> menu;
-
-    switch(menu)
-    {
-        case '1':    //View player info
-            for(int i = 0; i < (national_team->getPlayers()).size(); i++){
-                (national_team->getPlayers())[i]->info();
-                cout << endl;
-            }
-            cout << "Press any key to go back to Player Menu: " << endl;
-            cin >> menu;
-            cin.ignore(1000,'\n');
-            return 0;//remove this line after inserting stuff
-        case '2':    //Exit function
-            cout << "Write the name of the Player you want to search: " << endl;
-            cout << "0. Return to Player Menu" << endl;
-            try {
-                string name;
-                cin >> name;
-                if(name == "0") return 0;
-                cin.ignore(1000, '\n');
-                national_team->findPlayer(name)->info();
-            }
-            catch(PlayerNotFound & er) {
-                cout << "Player " << er.getName() << " not found" << endl;
-            }
-            return 0;
-        case '3':
-            return national_team->addPlayer();
-        case '0':
-            return 1;
-        default:     //Invalid input
-            cin.ignore(1000,'\n');
-            return 0;
-    }
-}
 int menu_tournaments()
 {
     char menu;
@@ -142,19 +120,19 @@ int menu_tournaments()
     switch(menu)
     {
         case '1':    //View player info
-            for(int i = 0; i < (national_team->getCompetion()).size(); i++){
-                cout << (*(national_team->getCompetion()[i]));
+            for(int i = 0; i < (national_team->getCompetition()).size(); i++){
+                cout << (*(national_team->getCompetition()[i]));
             }
             return 0;//remove this line after inserting stuff
         case '2':
             cout << "National Football Team Competitions - VERIFICAR ERRO DEPOIS" << endl;
-            for(int i = 0; i < (national_team->getCompetion()).size(); i++){
-                cout << i << ". " << national_team->getCompetion()[i]->getCompetitionName() << " - Paid: " << national_team->getCompetion()[i]->getPaid() << endl;
+            for(int i = 0; i < (national_team->getCompetition()).size(); i++){
+                cout << i << ". " << national_team->getCompetition()[i]->getCompetitionName() << " - Paid: " << national_team->getCompetition()[i]->getPaid() << endl;
             }
             int index;
             cin >> index; // VERIFICAR ERRO DEPOIS
             try {
-                national_team->getCompetion()[index]->payPlayers();
+                national_team->getCompetition()[index]->payPlayers();
                 cout << "Competition successfully paid!" << endl;
             }
             catch(AlreadyPaid &er) {
@@ -168,7 +146,25 @@ int menu_tournaments()
     }
 }
 
-int team_information()
+int menu_games(){
+    char menu;
+
+    //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
+
+    cout << "========================================= " << endl;
+    cout << "            Games Menu             " << endl;
+    cout << "========================================= \n" << endl;
+
+    cout << "1. Show all games " << endl;
+    cout << "2. Search a Game" << endl;
+    cout << "0. Return to Main Menu " << endl;
+
+    cin.clear();
+    cin >> menu;
+    return 1;
+}
+
+int menu_info()
 {
     char menu;
 
@@ -179,8 +175,9 @@ int team_information()
     cout << "========================================= \n" << endl;
 
     cout << "Team Name: " << national_team->getTeamName() << endl;
-    cout << "Number of Competitions: " << national_team->getCompetion().size() << endl;
     cout << "Number of Players: " << national_team->getPlayers().size() << endl;
+    cout << "Number of Competitions: " << national_team->getCompetition().size() << endl;
+    cout << "Competitions not paid: " << national_team->missingPay() << endl;
     cout << "Money spent with players in competitions: " << national_team->getMoneyPlayers() << endl;
     cout << "Money spent with staff per month: " << national_team->getMoneyStaff() << endl;
     cout << "0. Return to Main Menu " << endl;
@@ -192,8 +189,29 @@ int team_information()
     return 1;
 
 }
-int mainMenu()
-{
+
+int menu_credits() {
+    char menu;
+
+    //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
+
+    cout << "This app was created by :" << endl << endl;
+    cout << "Diogo Samuel Fernandes" << endl;
+    cout << "Hugo Guimaraes" << endl;
+    cout << "Joao Pires" << endl << endl;
+
+    cout << "Press [1] to go back to the main menu" << endl;
+    cin.clear();
+    cin >> menu;
+    if (menu == '1') {cin.ignore(1000,'\n'); return 1;}
+    else {
+        cin.ignore(1000,'\n');
+        return 0;
+    }
+
+}
+
+int mainMenu() {
     char menu;
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
@@ -204,10 +222,10 @@ int mainMenu()
     cout << "========================================= \n" << endl;
     cout << "1. Player Menu" << endl;
     cout << "2. Staff Menu" << endl;
-    cout << "3. Tournaments Menu" << endl;
+    cout << "3. Competions Menu" << endl;
     cout << "4. Games Menu" << endl;
-    cout << "5. View app info" << endl;
-    cout << "6. Team Information" << endl;
+    cout << "5. View Team Stats" << endl;
+    cout << "6. App Info" << endl;
     cout << "0. Exit" << endl;
 
     cin.clear();
@@ -224,11 +242,14 @@ int mainMenu()
         case '3':    //View app info
             while(!menu_tournaments());
             break;
+        case '4':    //View app info
+            while(!menu_games());
+            break;
         case '5':    //View app info
-            while(!info_app());
+            while(!menu_info());
             break;
         case '6':    //View app info
-            while(!team_information());
+            while(!menu_credits());
             break;
         case '0':    //Exit function
             exit(0);
@@ -237,6 +258,7 @@ int mainMenu()
             return 0;
     }
 }
+
 int fileMenu(){
     ifstream teamFile;
     string filename;
@@ -263,7 +285,7 @@ int fileMenu(){
     return 1;
 }
 
-int firstMenu(){
+int initMenu(){
     char menu;
 
     cout << "========================================= " << endl;

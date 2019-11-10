@@ -2,6 +2,7 @@
 #include <utility>
 #include "Player.h"
 #include "Date.h"
+#include "string"
 
 using namespace std;
 /// \brief Unary predicate for finding Players by name
@@ -107,12 +108,7 @@ void Player::info() const
     cout << "Value: " << getValue() << endl;
     cout << "Total Earnings: " << getEarnings() << endl;
 }
-/// \brief Checks if Player's name is equal to the one given by parameter
-/// \param p Compare with this Player's name
-/// \return True if players have the same name, false otherwise
-bool Player::operator==(const Player &p) {
-    return getName() == p.getName();
-}
+
 /// \brief Checks if the parameter Player has the same name
 /// \param p parameter of Player to compare name with
 /// \return true if both Players have the same name, false otherwise
@@ -124,4 +120,49 @@ bool Player::equalName(Player p) const {
 /// \return true if both Players have the same position, false otherwise
 bool Player::equalPosition(Player p) const {
     return getPosition() == p.getPosition();
+}
+
+void Player::setPosition(string pos) {
+    this->position = pos;
+}
+
+istream &operator>>(istream &in, Player &player) {
+    string n, c, pos;
+    int wei,hei,val,earn;
+    Date d;
+
+    cout << "Write the name of the Player you wish to add: " << endl;
+
+    in.ignore(1000, '\n');
+    getline(cin,n);
+
+    cout << "Write " << n << "'s birthday " << endl;
+    in >> d;
+
+    cout << "Write " << n << "'s club " << endl;
+    in >> c;
+
+    cout << "Write " << n << "'s position " << endl;
+    in >> pos;
+
+    cout << "Write " << n << "'s weight " << endl;
+    in >> wei;
+
+    cout << "Write " << n << "'s height " << endl;
+    in >> hei;
+
+    cout << "Write " << n << "'s value " << endl;
+    in >> val;
+
+    cout << "Write " << n << "'s earnings " << endl;
+    in >> earn;
+
+    player.setName(n);
+    player.setBirthday(d);
+    player.setClub(c);
+    player.setPosition(pos);
+    player.setWeight(wei);
+    player.setHeight(hei);
+    player.setValue(val);
+    return in;
 }

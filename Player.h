@@ -31,7 +31,9 @@ public:
 	int getValue() const;
 	double getEarnings() const;
     double getInsurance() const;
+
 	void setClub(string club);
+    void setPosition(string pos);
 	void setWeight(int weight);
 	void setHeight(int height);
 	void setValue(int value);
@@ -40,26 +42,5 @@ public:
     bool equalName(Player p) const;
     bool equalPosition(Player p) const;
 
-    bool operator==(const Player &p);
-
-};
-
-class PlayerNotFound{
-private:
-    string name;
-public:
-  PlayerNotFound(string name): name(name) {}
-  string getName() const{
-      return name;
-  }
-};
-
-class PlayerAlreadyExists{
-private:
-    string name;
-public:
-    PlayerAlreadyExists(string name): name(name) {}
-    string getName() const{
-        return name;
-    }
+    friend istream& operator>>(istream& in, const Player & player);
 };

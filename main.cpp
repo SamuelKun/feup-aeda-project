@@ -15,7 +15,7 @@ Team *national_team;
 
 int main() {
 
-    while(!firstMenu());
+    while(!initMenu());
 
     return 0;
 }

@@ -6,18 +6,6 @@
 #include <fstream>
 #include "utils.h"
 
-template <class form>
-void failInput(form input)
-{
-    while (cin.fail())
-    {
-        cin.clear();
-        cin.ignore();
-        cin.ignore(1000, '\n');
-        cout << "Not a valid number. Please reenter: ";
-        cin >> input;
-    }
-}
 void wait(){
     string waiting;
     cout << "Press any key to continue: " << endl;
@@ -41,7 +29,7 @@ Team::Team(string file_name) {
     this->teamName = file_info[0];
     this->team_players = read_player(file_info[1]);
     this->team_staff = read_staff(file_info[2]);
-    this->team_competions = read_competion(file_info[3], this);
+    this->team_competitions = read_competion(file_info[3], this);
 }
 
 /// \brief Get Method
@@ -61,8 +49,8 @@ vector<Staff *> Team::getStaff() const {
 }
 /// \brief Get Method
 /// \return Team's vector with Competitions
-vector<Competition *> Team::getCompetion() const {
-    return team_competions;
+vector<Competition *> Team::getCompetition() const {
+    return team_competitions;
 }
 
 vector<Game *> Team::getGame() const {
@@ -75,7 +63,7 @@ Player * Team::findPlayer(string name) {
         if (team_players[i]->getName().find(name) != string::npos)
             return team_players[i];
     }
-    throw(PlayerNotFound(name));
+    throw(PersonNotFound(name));
 }
 
 int Team::addPlayer() {
@@ -184,6 +172,24 @@ double Team::getMoneyStaff() const {
         money += team_staff[i]->getWage();
     return money;
 }
+
+int Team::missingPay() {
+    double not_paid = 0;
+    for (size_t i = 0; i < team_competitions.size(); i++)
+        if (!(team_competitions[i]->getPaid()))
+            not_paid++;
+    return not_paid;
+}
+
+Staff * Team::findStaff(string name) {
+    for (size_t i = 0; i < team_staff.size(); i++)
+    {
+        if (team_staff[i]->getName().find(name) != string::npos)
+            return team_staff[i];
+    }
+    throw(PersonNotFound(name));
+}
+
 /*
 vector<Player *> & Team::findPlayerByPos(string position) {
     vector<Player *> to_return;
@@ -197,19 +203,14 @@ vector<Player *> & Team::findPlayerByPos(string position) {
 }
 
 Staff & Team::findStaff(string name) {
-    for (size_t i = 0; i < team_staff.size(); i++)
-    {
-        if (team_staff[i]->getName().find(name) != string::npos)
-            return *team_staff[i];
-    }
-    throw(StaffNotFound(name));
+
 }
 
 Competition & Team::findCompetion(string name) {
-    for (size_t i = 0; i < team_competions.size(); i++)
+    for (size_t i = 0; i < team_competitions.size(); i++)
     {
-        if (team_competions[i]->getCompetionName().find(name) != string::npos)
-            return *team_competions[i];
+        if (team_competitions[i]->getCompetionName().find(name) != string::npos)
+            return *team_competitions[i];
     }
     throw(CompetionNotFound(name));
 }
@@ -227,9 +228,9 @@ vector<Staff *> & Team::findStaffByFunction(string function) {
 
 vector<Competition *> & Team::findCompetionByDate(Date start, Date end) {
     vector<Competition *> to_return;
-    for (size_t i = 0; i < team_competions.size(); i++) {
-        if (team_competions[i]->getStartDate() >= start && team_competions[i]->getEndDate() <= end) {
-            to_return.push_back(team_competions[i]);
+    for (size_t i = 0; i < team_competitions.size(); i++) {
+        if (team_competitions[i]->getStartDate() >= start && team_competitions[i]->getEndDate() <= end) {
+            to_return.push_back(team_competitions[i]);
         }
     }
     if (to_return.empty()) { throw(NoCompetionsIn(Date start, Date end)); }

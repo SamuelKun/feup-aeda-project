@@ -5,36 +5,41 @@
 #pragma once
 
 #include <vector>
-#include "Player.h"
 #include "Staff.h"
 #include "Game.h"
 #include "Competition.h"
+#include "Player.h"
 
+using namespace std;
 
 class Team {
 private:
     string teamName;  /// \brief Team file
     vector<Player *> team_players; /// \brief Vector with Team's players
     vector<Staff *> team_staff; /// \brief Vector with Team's staff
-    vector<Game *> team_games;
-    vector<Competition *> team_competions; /// \brief Vector with Team's competitions
+    vector<Game *> team_games; /// \brief Vector with Team's Games
+    vector<Competition *> team_competitions; /// \brief Vector with Team's competitions
 
 public:
     Team();
     Team(string file_name);
+
     string getTeamName() const;
     vector<Player *> getPlayers() const;
     vector<Staff *> getStaff() const;
     vector<Game *> getGame() const;
-    vector<Competition *> getCompetion() const;
+    vector<Competition *> getCompetition() const;
     double getMoneyPlayers() const;
     double getMoneyStaff() const;
+    int missingPay();
     Player * findPlayer(string name);
+    Staff * findStaff(string name);
+    /*
     vector<Player *> & findPlayerByPos(string position);
-    Staff & findStaff(string name);
     Competition & findCompetion(string name);
     vector<Staff *> & findStaffByFunction(string function);
     vector<Competition *> & findCompetionByDate(Date start, Date end);
+    */
 
     int addPlayer();
     int addStaff();

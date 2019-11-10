@@ -108,13 +108,6 @@ bool Date::isBefore(const Date &date)
     return year == date.year && month == date.month && day < date.day;
 }
 
-Date &Date::operator-(const Date &other) {
-    day -= other.day;
-    month -= other.month;
-    year -= other.year;
-    return *this;
-}
-
 /*********************************
  * ostream
  ********************************/

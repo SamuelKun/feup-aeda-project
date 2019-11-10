@@ -33,8 +33,6 @@ public:
 
     friend ostream& operator<<(ostream& out, const Date & date);
     friend istream& operator>>(istream& in, Date & date);
-    Date& operator-(const Date& other);
-
 
 private:
     unsigned day;
