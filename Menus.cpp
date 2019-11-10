@@ -220,14 +220,12 @@ int menu_games(){
 
                 national_team->findGame(country,city,stadium)->info();
             }
-            catch(CountryNotFound & er) {
-                cout << "Country " << er.getCountry() << " not found" << endl;
-            }
-            catch(CityNotFound & er) {
-                cout << "City " << er.getCity() << " not found" << endl;
-            }
-            catch(StadiumNotFound & er) {
-                cout << "Stadium " << er.getStadium() << " not found" << endl;
+            catch(GameNotFound & er) {
+                cout << "Game:" << endl;
+                cout << "Country: " << er.getCountry() << endl;
+                cout << "City: " << er.getCity() << endl;
+                cout << "Stadium: " << er.getStadium() << endl;
+                cout << "This Game wasn't found" << endl;
             }
             return 0;
         case '3':

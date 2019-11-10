@@ -30,27 +30,15 @@ public:
 
     //Stats stats getStats()const;
 };
-class CountryNotFound{
-    string country;
-    CountryNotFound(string country) : country(country){}
+class GameNotFound{
+    string country,city,stadium;
 
 public:
+    GameNotFound(string country,string city,string stadium) :
+            country(country), city(city), stadium(stadium){}
     string getCountry() const {return country;}
-};
-
-class StadiumNotFound{
-    string stadium;
-    StadiumNotFound(string stadium) : stadium(stadium){}
-
-public:
+    string getCity() const {return city;}
     string getStadium() const {return stadium;}
 };
 
-class CityNotFound{
-    string city;
-    CityNotFound(string city) : city(city){}
-
-public:
-    string getCity() const {return city;}
-};
 #endif

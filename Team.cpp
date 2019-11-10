@@ -193,10 +193,11 @@ Game *Team::findGame(string country, string city, string stadium) {
     for(size_t i = 0 ; i < team_games.size(); i++){
         if( team_games[i]->getCountry().find(country) != string::npos &&
             team_games[i]->getCity().find(city) != string::npos &&
-            team_games[i]->getStadium().find(stadium) != string::npos)
+            team_games[i]->getStadium().find(stadium) != string::npos){
             return team_games[i];
+        }
     }
-    return nullptr;
+    throw GameNotFound(country,city,stadium);
 }
 
 /*
