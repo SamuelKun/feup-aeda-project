@@ -15,10 +15,6 @@ string Person::getName() const {return name; }
 
 Date Person::getBirthday() const {return birth; }
 
-void Person::info() const {
-    cout << setw(19) << this->name << " | " << setw(10) << this->birth.getDate() <<" | ";
-}
-
 void Person::setName(string name) {
     this->name = name;
 }
@@ -27,4 +23,12 @@ void Person::setBirthday(Date birth) {
     this->birth = birth;
 }
 
+void Person::infoTable() const {
+    cout << setw(19) << this->name << " | " << setw(10) << this->birth.getDate() <<" | ";
+}
+
+void Person::info() const {
+    cout << "Name: " << this->name << endl;
+    cout << "Birthday: " << this->birth;
+}
 

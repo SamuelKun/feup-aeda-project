@@ -34,8 +34,8 @@ public:
 	void setBirthday(Date birth);
 
     /// \brief Shows Person's data
-	virtual void info() const;
-
+	virtual void infoTable() const;
+    virtual void info() const;
 	//virtual double earnings() = 0 const;
 };
 
