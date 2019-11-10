@@ -10,7 +10,7 @@
 using namespace std;
 extern Team *national_team;
 
-void wait(){
+void wait_2(){
     string waiting;
     cout << "Press any key to continue: " << endl;
     getline(cin,waiting);
@@ -214,7 +214,7 @@ int menu_games(){
                 (*it)->info();
                 cout << endl;
             }
-            wait();
+            wait_2();
             return 0;
         case '2':
             try {
@@ -239,7 +239,7 @@ int menu_games(){
                 cout << "Stadium: " << er.getStadium() << endl;
                 cout << "This Game wasn't found" << endl;
             }
-            wait();
+            wait_2();
             return 0;
         case '3':
             return 1;
