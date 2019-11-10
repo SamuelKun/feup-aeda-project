@@ -44,11 +44,11 @@ public:
 
 };
 
-class NoPlayersForPos{
+class PositionNotFound{
 private:
     string position;
 public:
-    NoPlayersForPos(string position): position(position) {}
+    PositionNotFound(string position): position(position) {}
     string getPosition() const{
         return position;
     }

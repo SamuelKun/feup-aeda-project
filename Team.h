@@ -31,7 +31,7 @@ public:
     double getMoneyStaff() const;
 
     int missingPay();
-
+    void addGame(Game * g);
     void showPlayersTable() const;
 
     void sortPlayersName();
@@ -39,13 +39,15 @@ public:
     void sortPlayersValue();
 
     Player * findPlayer(string name);
-    Staff * findStaff(string name);
-    Game * findGame(string country, string city, string stadium );
 
-    vector<Player *> findPlayerByPos(string position);
+    vector<Player *> findPlayerName(string name);
+    vector<Staff *> findStaffName(string name);
+    Game * findGame(string country, string city, string stadium);
+
+    vector<Player *> findPlayerPos(string position);
     Competition * findCompetition(string name);
     vector<Staff *> findStaffByFunction(string function);
-    vector<Competition *> & findCompetitionByDate(Date start, Date end);
+    vector<Competition *> findCompetitionByDate(Date start, Date end);
 
     int addPlayer();
     int addStaff();

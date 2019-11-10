@@ -56,8 +56,11 @@ int menu_searchPlayers() {
                 string name;
                 getline(cin, name);
                 if (name == "0") return 0;
-                national_team->findPlayer(name)->info();
-                cout << endl;
+                vector<Player *> to_print = national_team->findPlayerName(name);
+                for (size_t i = 0; i < to_print.size(); i++) {
+                    to_print[i]->info();
+                    cout << endl;
+                }
             }
             catch (PersonNotFound &er) {
                 cout << "Player " << er.getName() << " not found" << endl;
@@ -71,13 +74,13 @@ int menu_searchPlayers() {
                 cin.ignore(1000, '\n');
                 getline(cin, position);
                 if (position == "0") return 0;
-                vector<Player *> to_print = national_team->findPlayerByPos(position);
+                vector<Player *> to_print = national_team->findPlayerPos(position);
                 for (size_t i = 0; i < to_print.size(); i++) {
                     to_print[i]->info();
                     cout << endl;
                 }
             }
-            catch (NoPlayersForPos &er) {
+            catch (PositionNotFound &er) {
                 cout << "Players for position " << er.getPosition() << " not found" << endl;
             }
             wait_2();
@@ -91,7 +94,7 @@ int menu_searchPlayers() {
 
 int menu_players()
 {
-    char menu, mu;
+    char menu;
     string toSort;
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
     cout << "========================================= " << endl;
@@ -105,10 +108,11 @@ int menu_players()
 
     cin.clear();
     cin >> menu;
-    cin.ignore(1000, '\n');
+
     switch(menu)
     {
         case '1':    //View player info - Table
+            cin.ignore(1000, '\n');
             while(!menu_allPlayers());
             return 0;//remove this line after inserting stuff
         case '2':    //Exit function
@@ -147,7 +151,11 @@ int menu_searchStaffMembers(){
                 cin.ignore(1000, '\n');
                 getline(cin, name);
                 if(name == "0") return 0;
-                national_team->findStaff(name)->info();
+                vector<Staff *> to_print = national_team->findStaffName(name);
+                for (size_t i = 0; i < to_print.size(); i++) {
+                    to_print[i]->info();
+                    cout << endl;
+                }
             }
             catch(PersonNotFound & er) {
                 cout << "Staff member " << er.getName() << " not found" << endl;
@@ -219,6 +227,66 @@ int menu_staff() {
     return 1;
 }
 
+int menu_games(){
+    char menu;
+
+    //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
+
+    cout << "========================================= " << endl;
+    cout << "             Games Menu                   " << endl;
+    cout << "========================================= \n" << endl;
+
+    cout << "1. Show all games " << endl;
+    cout << "2. Search a Game" << endl;
+    cout << "0. Return to Main Menu " << endl << endl;
+
+    cin.clear();
+    cin >> menu;
+    vector<Game *> print_it = national_team->getGame();
+    switch(menu) {
+        case '1':
+
+            for(size_t i = 0; i < print_it.size(); i++){
+                print_it[i]->info();
+                cout << endl;
+            }
+            wait_2();
+            return 0;
+        case '2':
+            try {
+                cout << "Write the name of the Game's country: " << endl;
+                string country,city,stadium;
+                cin.ignore(1000, '\n');
+                getline(cin, country);
+
+                cout << "Write the name of the Game's city: " << endl;
+                getline(cin, city);
+
+                cout << "Write the name of the Game's stadium: " << endl;
+                getline(cin, stadium);
+
+                national_team->findGame(country,city,stadium)->info();
+            }
+            catch(GameNotFound & er) {
+                cout << endl;
+                cout << "Game:" << endl;
+                cout << "Country: " << er.getCountry() << endl;
+                cout << "City: " << er.getCity() << endl;
+                cout << "Stadium: " << er.getStadium() << endl;
+                cout << "This Game wasn't found" << endl;
+            }
+            wait_2();
+            return 0;
+        case '0':
+            return 1;
+        default:     //Invalid input
+            cin.ignore(1000, '\n');
+            return 0;
+    }
+
+}
+
+
 int menu_tournaments()
 {
     char menu;
@@ -263,64 +331,6 @@ int menu_tournaments()
             cin.ignore(1000,'\n');
             return 0;
     }
-}
-
-int menu_games(){
-    char menu;
-
-    //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
-
-    cout << "========================================= " << endl;
-    cout << "             Games Menu                   " << endl;
-    cout << "========================================= \n" << endl;
-
-    cout << "1. Show all games " << endl;
-    cout << "2. Search a Game" << endl;
-    cout << "0. Return to Main Menu " << endl << endl;
-
-    cin.clear();
-    cin >> menu;
-
-    switch(menu) {
-        case '1':
-            for(auto it = national_team->getGame().begin();it != national_team->getGame().end(); it++){
-                (*it)->info();
-                cout << endl;
-            }
-            wait_2();
-            return 0;
-        case '2':
-            try {
-                cout << "Write the name of the Game's country: " << endl;
-                string country,city,stadium;
-                cin.ignore(1000, '\n');
-                getline(cin, country);
-
-                cout << "Write the name of the Game's city: " << endl;
-                getline(cin, city);
-
-                cout << "Write the name of the Game's stadium: " << endl;
-                getline(cin, stadium);
-
-                national_team->findGame(country,city,stadium)->info();
-            }
-            catch(GameNotFound & er) {
-                cout << endl;
-                cout << "Game:" << endl;
-                cout << "Country: " << er.getCountry() << endl;
-                cout << "City: " << er.getCity() << endl;
-                cout << "Stadium: " << er.getStadium() << endl;
-                cout << "This Game wasn't found" << endl;
-            }
-            wait_2();
-            return 0;
-        case '3':
-            return 1;
-        default:     //Invalid input
-            cin.ignore(1000, '\n');
-            return 0;
-    }
-
 }
 
 int menu_info()

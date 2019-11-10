@@ -59,7 +59,7 @@ vector<Staff *> read_staff(string info){
     return staff;
 }
 
-vector<Game *> read_games(string info){
+vector<Game *> read_games(string info, vector<Player *> called_players){
     ifstream game_info(info);
     vector<Game *> games;
     vector<string> tempVec;
@@ -68,7 +68,7 @@ vector<Game *> read_games(string info){
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
             Date game_day(28, 06, 2000);
-            Game *g = new Game(tempVec[0], tempVec[1], tempVec[2], game_day);
+            Game *g = new Game(tempVec[0], tempVec[1], tempVec[2], game_day, called_players);
             games.push_back(g);
             tempVec.clear();
         }
@@ -95,7 +95,10 @@ vector<Competition *> read_competion(string info, Team * t){
                 comp_convocado.push_back(t->findPlayer(*it));
 
             //Ler Jogos
-            vector<Game *> competion_games = read_games(tempVec[2]);
+            vector<Game *> competion_games = read_games(tempVec[2], comp_convocado);
+            //Atualizar os jogos todos da equipa
+            for(size_t i = 0; i < competion_games.size(); i++)
+                t->addGame(competion_games[i]);
 
             //Data de começo e fim
             Date startcomp(tempVec[3]);

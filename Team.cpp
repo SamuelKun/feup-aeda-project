@@ -122,24 +122,6 @@ void Team::sortPlayersValue() {
 }
 
 
-Staff * Team::findStaff(string name) {
-    for (size_t i = 0; i < team_staff.size(); i++)
-    {
-        if (team_staff[i]->getName().find(name) != string::npos)
-            return team_staff[i];
-    }
-    throw(PersonNotFound(name));
-}
-
-Player * Team::findPlayer(string name) {
-    for (size_t i = 0; i < team_players.size(); i++)
-    {
-        if (team_players[i]->getName().find(name) != string::npos)
-            return team_players[i];
-    }
-    throw(PersonNotFound(name));
-}
-
 int Team::addPlayer() {
     string n, c, pos;
     int wei,hei,val,earn,day,month,year;
@@ -233,6 +215,28 @@ int Team::addStaff() {
     return 0;
 }
 
+vector<Player *> Team::findPlayerName(string name) {
+    vector<Player *> v_players;
+    for (size_t i = 0; i < team_players.size(); i++) {
+        if (team_players[i]->getName().find(name) != string::npos) {
+            v_players.push_back(team_players[i]);
+        }
+    }
+    if (v_players.empty()) throw(PersonNotFound(name));
+    else return v_players;
+}
+
+vector<Staff *> Team::findStaffName(string name) {
+    vector<Staff *> v_staff;
+    for (size_t i = 0; i < team_staff.size(); i++)
+    {
+        if (team_staff[i]->getName().find(name) != string::npos)
+            v_staff.push_back(team_staff[i]);
+    }
+    if (v_staff.empty()) throw(PersonNotFound(name));
+    else return v_staff;
+}
+
 Game *Team::findGame(string country, string city, string stadium) {
     for(size_t i = 0 ; i < team_games.size(); i++){
         if( team_games[i]->getCountry().find(country) != string::npos &&
@@ -246,15 +250,15 @@ Game *Team::findGame(string country, string city, string stadium) {
 
 // Added 10/11/2019 - Joao
 
-vector<Player *> Team::findPlayerByPos(string position) {
+vector<Player *> Team::findPlayerPos(string position) {
     vector<Player *> v_players;
     for (size_t i = 0; i < team_players.size(); i++) {
         if (team_players[i]->getPosition().find(position) != string::npos) {
             v_players.push_back(team_players[i]);
         }
     }
-    if (v_players.empty()) { throw NoPlayersForPos(position); }
-    else { return v_players; }
+    if (v_players.empty()) throw(PositionNotFound(position));
+    else return v_players;
 }
 
 Competition * Team::findCompetition(string name) {
@@ -277,7 +281,7 @@ vector<Staff *> Team::findStaffByFunction(string function) {
     else { return v_staff; }
 }
 
-vector<Competition *> & Team::findCompetitionByDate(Date start, Date end) {
+vector<Competition *> Team::findCompetitionByDate(Date start, Date end) {
     vector<Competition *> to_return;
     for (size_t i = 0; i < team_competitions.size(); i++) {
         if ((team_competitions[i]->getStartDate().isBefore(start) || team_competitions[i]->getStartDate().isEqualTo(start)) && ( 
@@ -289,4 +293,17 @@ vector<Competition *> & Team::findCompetitionByDate(Date start, Date end) {
         throw(NoCompetitionsIn(start, end)); 
     } else { 
         return to_return; }
+}
+
+Player *Team::findPlayer(string name) {
+    for (size_t i = 0; i < team_players.size(); i++)
+    {
+        if (team_players[i]->getName().find(name) != string::npos)
+            return team_players[i];
+    }
+    throw(PersonNotFound(name));
+}
+
+void Team::addGame(Game *g) {
+    team_games.push_back(g);
 }
