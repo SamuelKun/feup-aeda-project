@@ -14,8 +14,28 @@ void wait_2(){
     getline(cin,waiting);
 }
 
-int menu_searchPlayers()
-{
+int menu_allPlayers() {
+    string toSort;
+    national_team->showPlayersTable();
+    cout << "To sort write \"sort [ Name | Position | Value ]\" " << endl;
+    cout << "Write something else to go back!" << endl;
+    getline(cin, toSort);
+    if(toSort == "sort Name" || toSort == "sort name"){
+        national_team->sortPlayersName();
+        return 0;
+    }
+    if(toSort == "sort Position" || toSort == "sort position"){
+        national_team->sortPlayersPosition();
+        return 0;
+    }
+    if(toSort == "sort Value" || toSort == "sort value") {
+        national_team->sortPlayersValue();
+        return 0;
+    }
+    return 1;
+}
+
+int menu_searchPlayers() {
     char menu;
 
     cout << "========================================= " << endl;
@@ -28,13 +48,12 @@ int menu_searchPlayers()
 
     cin.clear();
     cin >> menu;
-
+    cin.ignore(1000, '\n');
     switch(menu) {
         case '1':
             try {
                 cout << "Write the name of the player you wish to find: " << endl;
                 string name;
-                cin.ignore(1000, '\n');
                 getline(cin, name);
                 if (name == "0") return 0;
                 national_team->findPlayer(name)->info();
@@ -72,8 +91,8 @@ int menu_searchPlayers()
 
 int menu_players()
 {
-    char menu;
-
+    char menu, mu;
+    string toSort;
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
     cout << "========================================= " << endl;
     cout << "               Player Menu                " << endl;
@@ -86,22 +105,11 @@ int menu_players()
 
     cin.clear();
     cin >> menu;
-
+    cin.ignore(1000, '\n');
     switch(menu)
     {
         case '1':    //View player info - Table
-            cout << setw(19) << "Name" << " | " << setw(10) << "Date" <<" | ";
-            cout << setw(12) << "Position" << " | " << setw(10) << "Position" << " | " << setw(6) << "Weight" << " | " << setw(8) << "Height" << " | " << setw(7) << "Value" << " | " << setw(9) <<  "Earnings" << " |" << endl;
-            for(int i = 0; i < (national_team->getPlayers()).size(); i++){
-                (national_team->getPlayers())[i]->infoTable();
-            }
-            cout << "Press any key to go back to Player Menu: " << endl;
-            cout << "Sort by:" << endl;
-            cout << "Position" << endl;
-            cout << "Name" << endl << endl;
-
-            cin >> menu;
-            cin.ignore(1000,'\n');
+            while(!menu_allPlayers());
             return 0;//remove this line after inserting stuff
         case '2':    //Exit function
             while(!menu_searchPlayers());

@@ -4,21 +4,6 @@
 #include "Date.h"
 
 using namespace std;
-/// \brief Unary predicate for finding Players by name
-/// \param p1 Pointer to first Player
-/// \param p2 Pinter to second Player
-/// \return true if both Players have the same name, false otherwise
-bool cmp_player_by_name(Player *p1, Player *p2){
-    return p1->getName() == p2->getName();
-}
-/// \brief Unary predicate for finding Players by position
-/// \param p1 Pointer to first Player
-/// \param p2 Pinter to second Player
-/// \return true if both Players have the same position, false otherwise
-bool cmp_player_by_position(Player *p1, Player *p2){
-    return p1->getPosition() == p2->getPosition();
-}
-
 
 Player::Player() {
 }

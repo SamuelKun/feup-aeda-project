@@ -1,6 +1,8 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <iomanip>
+#include <algorithm>
 
 #include "Team.h"
 #include "utils.h"
@@ -77,6 +79,48 @@ int Team::missingPay() {
             not_paid++;
     return not_paid;
 }
+
+void Team::showPlayersTable() const {
+    cout << setw(19) << "Name" << " | " << setw(10) << "Date" <<" | ";
+    cout << setw(12) << "Position" << " | " << setw(10) << "Position" << " | " << setw(6) << "Weight" << " | " << setw(8) << "Height" << " | " << setw(7) << "Value" << " | " << setw(9) <<  "Earnings" << " |" << endl;
+    for(int i = 0; i < team_players.size(); i++){
+        team_players[i]->infoTable();
+    }
+}
+
+bool cmpName(const Player * p1, const Player * p2){
+    return p1->getName() < p2->getName();
+}
+
+bool cmpPosition(const Player * p1, const Player * p2){
+    string pos[4] = {"Goalkeeper", "Defender", "Midfielder", "Forward"};
+    int p1v, p2v;
+    for(size_t i = 0; i < 4; i++)
+        if (pos[i] == p1->getPosition()) p1v = i;
+
+    for(size_t i = 0; i < 4; i++)
+        if (pos[i] == p2->getPosition()) p2v = i;
+
+    return p1v < p2v;
+}
+
+bool cmpValue(const Player * p1, const Player * p2){
+    return p1->getValue() > p2->getValue();
+}
+
+
+void Team::sortPlayersName() {
+    sort(team_players.begin(), team_players.end(), cmpName);
+}
+
+void Team::sortPlayersPosition() {
+    sort(team_players.begin(), team_players.end(), cmpPosition);
+}
+
+void Team::sortPlayersValue() {
+    sort(team_players.begin(), team_players.end(), cmpValue);
+}
+
 
 Staff * Team::findStaff(string name) {
     for (size_t i = 0; i < team_staff.size(); i++)
@@ -246,4 +290,3 @@ vector<Competition *> & Team::findCompetitionByDate(Date start, Date end) {
     } else { 
         return to_return; }
 }
-

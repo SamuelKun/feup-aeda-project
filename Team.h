@@ -32,6 +32,12 @@ public:
 
     int missingPay();
 
+    void showPlayersTable() const;
+
+    void sortPlayersName();
+    void sortPlayersPosition();
+    void sortPlayersValue();
+
     Player * findPlayer(string name);
     Staff * findStaff(string name);
     Game * findGame(string country, string city, string stadium );
