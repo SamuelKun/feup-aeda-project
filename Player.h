@@ -39,6 +39,7 @@ public:
 	void setHeight(int height);
 	void setValue(int value);
 	void setEarnings(double value);
+    void infoTable() const;
     void info() const;
 
 };

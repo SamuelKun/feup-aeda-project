@@ -4,8 +4,6 @@
 #include <fstream>
 
 #include "Menus.h"
-#include "Team.h"
-
 
 using namespace std;
 extern Team *national_team;
@@ -75,7 +73,7 @@ int menu_players()
     cout << "               Player Menu                " << endl;
     cout << "========================================= \n" << endl;
 
-    cout << "1. View all Players " << endl;
+    cout << "1. View all players" << endl;
     cout << "2. Search Players " << endl;
     cout << "3. Add Player " << endl;
     cout << "0. Return to Main Menu " << endl;
@@ -85,11 +83,11 @@ int menu_players()
 
     switch(menu)
     {
-        case '1':    //View player info
+        case '1':    //View player info - Table
             cout << setw(19) << "Name" << " | " << setw(10) << "Date" <<" | ";
             cout << setw(12) << "Position" << " | " << setw(10) << "Position" << " | " << setw(6) << "Weight" << " | " << setw(8) << "Height" << " | " << setw(7) << "Value" << " | " << setw(9) <<  "Earnings" << " |" << endl;
             for(int i = 0; i < (national_team->getPlayers()).size(); i++){
-                (national_team->getPlayers())[i]->info();
+                (national_team->getPlayers())[i]->infoTable();
             }
             cout << "Press any key to go back to Player Menu: " << endl;
             cout << "Sort by:" << endl;

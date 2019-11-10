@@ -103,10 +103,20 @@ void Player::setPosition(string pos) {
 }
 
 ///\brief Shows players data
-void Player::info() const
+void Player::infoTable() const
 {
-    Person::info();
+    Person::infoTable();
     cout << setw(12) << getClub() << " | " << setw(10) << getPosition() << " | " << setw(6) << getWeight() << " | " << setw(8) << getHeight() << " | " << setw(7) << getValue() << " | " << setw(9) <<  getEarnings() << " |" << endl;
+}
+
+void Player::info() const {
+    Person::info();
+    cout << "Club: " << getClub() << endl;
+    cout << "Position: " << getPosition() << endl;
+    cout << "Weight: " << getWeight() << endl;
+    cout << "Height: " << getHeight() << endl;
+    cout << "Value: " << getValue() << endl;
+    cout << "Total Earnings: " << getEarnings() << endl;
 }
 
 
