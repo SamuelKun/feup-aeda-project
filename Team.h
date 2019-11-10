@@ -36,9 +36,9 @@ public:
     Staff * findStaff(string name);
     Game * findGame(string country, string city, string stadium );
 
-    vector<Player *> & findPlayerByPos(string position);
+    vector<Player *> findPlayerByPos(string position);
     Competition * findCompetition(string name);
-    vector<Staff *> & findStaffByFunction(string function);
+    vector<Staff *> findStaffByFunction(string function);
     vector<Competition *> & findCompetitionByDate(Date start, Date end);
 
     int addPlayer();

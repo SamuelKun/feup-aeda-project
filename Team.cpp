@@ -202,15 +202,15 @@ Game *Team::findGame(string country, string city, string stadium) {
 
 // Added 10/11/2019 - Joao
 
-vector<Player *> & Team::findPlayerByPos(string position) {
-    vector<Player *> to_return;
+vector<Player *> Team::findPlayerByPos(string position) {
+    vector<Player *> v_players;
     for (size_t i = 0; i < team_players.size(); i++) {
-        if (team_players[i]->getPosition() == position) {
-            to_return.push_back(team_players[i]);
+        if (team_players[i]->getPosition().find(position) != string::npos) {
+            v_players.push_back(team_players[i]);
         }
     }
-    if (to_return.empty()) { throw(NoPlayersForPos(position)); }
-    else { return to_return; }
+    if (v_players.empty()) { throw NoPlayersForPos(position); }
+    else { return v_players; }
 }
 
 Competition * Team::findCompetition(string name) {
@@ -219,18 +219,18 @@ Competition * Team::findCompetition(string name) {
         if (team_competitions[i]->getCompetitionName().find(name) != string::npos)
             return team_competitions[i];
     }
-    throw(CompetitionNotFound(name));
+    throw CompetitionNotFound(name);
 }
 
-vector<Staff *> & Team::findStaffByFunction(string function) {
-    vector<Staff *> to_return;
+vector<Staff *> Team::findStaffByFunction(string function) {
+    vector<Staff *> v_staff;
     for (size_t i = 0; i < team_staff.size(); i++) {
         if (team_staff[i]->getFunction() == function) {
-            to_return.push_back(team_staff[i]);
+            v_staff.push_back(team_staff[i]);
         }
     }
-    if (to_return.empty()) { throw(NoStaffForFunction(function)); }
-    else { return to_return; }
+    if (v_staff.empty()) { throw(NoStaffForFunction(function)); }
+    else { return v_staff; }
 }
 
 vector<Competition *> & Team::findCompetitionByDate(Date start, Date end) {

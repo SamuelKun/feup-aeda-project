@@ -29,6 +29,6 @@ void Person::infoTable() const {
 
 void Person::info() const {
     cout << "Name: " << this->name << endl;
-    cout << "Birthday: " << this->birth;
+    cout << "Birthday: " << this->birth << endl;
 }
 

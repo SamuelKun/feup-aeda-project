@@ -24,7 +24,7 @@ int menu_searchPlayers()
 
     cout << "1. Search by Name " << endl;
     cout << "2. Search by Position " << endl;
-    cout << "0. Return to Player Menu " << endl;
+    cout << "0. Return to Player Menu " << endl << endl;
 
     cin.clear();
     cin >> menu;
@@ -32,30 +32,36 @@ int menu_searchPlayers()
     switch(menu) {
         case '1':
             try {
+                cout << "Write the name of the player you wish to find: " << endl;
                 string name;
                 cin.ignore(1000, '\n');
                 getline(cin, name);
                 if (name == "0") return 0;
                 national_team->findPlayer(name)->info();
+                cout << endl;
             }
             catch (PersonNotFound &er) {
                 cout << "Player " << er.getName() << " not found" << endl;
             }
+            wait_2();
             return 0;
         case '2':
             try {
+                cout << "Write the position of the Player(s) you wish to find: " << endl;
                 string position;
                 cin.ignore(1000, '\n');
                 getline(cin, position);
                 if (position == "0") return 0;
                 vector<Player *> to_print = national_team->findPlayerByPos(position);
-                for (int i = 0; i < to_print.size(); i++) {
+                for (size_t i = 0; i < to_print.size(); i++) {
                     to_print[i]->info();
+                    cout << endl;
                 }
             }
             catch (NoPlayersForPos &er) {
                 cout << "Players for position " << er.getPosition() << " not found" << endl;
             }
+            wait_2();
             return 0;
         case '0':
             return 1;
@@ -76,7 +82,7 @@ int menu_players()
     cout << "1. View all players" << endl;
     cout << "2. Search Players " << endl;
     cout << "3. Add Player " << endl;
-    cout << "0. Return to Main Menu " << endl;
+    cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
     cin >> menu;
@@ -92,7 +98,8 @@ int menu_players()
             cout << "Press any key to go back to Player Menu: " << endl;
             cout << "Sort by:" << endl;
             cout << "Position" << endl;
-            cout << "Name" << endl;
+            cout << "Name" << endl << endl;
+
             cin >> menu;
             cin.ignore(1000,'\n');
             return 0;//remove this line after inserting stuff
@@ -117,7 +124,7 @@ int menu_searchStaffMembers(){
 
     cout << "1. Search by Name " << endl;
     cout << "2. Search by Staff Function " << endl;
-    cout << "0. Return to Main Menu " << endl;
+    cout << "0. Return to Staff Menu " << endl << endl;
 
     cin.clear();
     cin >> menu;
@@ -125,7 +132,8 @@ int menu_searchStaffMembers(){
     switch(menu){
         case '1':
             cout << "Write the name of the Staff you want to search: " << endl;
-            cout << "0. Return to Staff Menu" << endl;
+            cout << "0. Return to Staff Menu" << endl << endl;
+
             try {
                 string name;
                 cin.ignore(1000, '\n');
@@ -136,6 +144,7 @@ int menu_searchStaffMembers(){
             catch(PersonNotFound & er) {
                 cout << "Staff member " << er.getName() << " not found" << endl;
             }
+            wait_2();
             return 0;
         case '2':
             cout << "Write the function of the Staff you want to search: " << endl;
@@ -146,13 +155,15 @@ int menu_searchStaffMembers(){
                 getline(cin, function);
                 if(function == "0") return 0;
                 vector<Staff *> to_print = national_team->findStaffByFunction(function);
-                for (int i = 0; i < to_print.size(); i++) {
+                for (size_t i = 0; i < to_print.size(); i++) {
                     to_print[i]->info();
+                    cout << endl;
                 }
             }
             catch(NoStaffForFunction & er) {
                 cout << "No Staff members for function " << er.getFunction() << endl;
             }
+            wait_2();
             return 0;
         case '0':
             return 1;
@@ -172,7 +183,7 @@ int menu_staff() {
     cout << "1. View all Staff Members " << endl;
     cout << "2. Search Staff Members " << endl;
     cout << "3. Add Staff Members " << endl;
-    cout << "0. Return to Main Menu " << endl;
+    cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
     cin >> menu;
@@ -184,8 +195,7 @@ int menu_staff() {
                 (national_team->getStaff())[i]->info();
                 cout << endl;
             }
-            cout << "0. Return to Main Menu " << endl;
-            cin >> menu;
+            wait_2();
             return 0;
         case '2':
             while(!menu_searchStaffMembers());
@@ -213,7 +223,7 @@ int menu_tournaments()
 
     cout << "1. Show all competitions " << endl;
     cout << "2. Pay competitions fees" << endl;
-    cout << "0. Return to Main Menu " << endl;
+    cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
     cin >> menu;
@@ -258,7 +268,7 @@ int menu_games(){
 
     cout << "1. Show all games " << endl;
     cout << "2. Search a Game" << endl;
-    cout << "0. Return to Main Menu " << endl;
+    cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
     cin >> menu;
@@ -321,14 +331,12 @@ int menu_info()
     cout << "Competitions not paid: " << national_team->missingPay() << endl;
     cout << "Money spent with players in competitions: " << national_team->getMoneyPlayers() << endl;
     cout << "Money spent with staff per month: " << national_team->getMoneyStaff() << endl;
-    cout << "0. Return to Main Menu " << endl;
+    cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
     cin >> menu;
 
-
     return 1;
-
 }
 
 int menu_credits() {
@@ -367,7 +375,7 @@ int mainMenu() {
     cout << "4. Games Menu" << endl;
     cout << "5. View Team Stats" << endl;
     cout << "6. App Info" << endl;
-    cout << "0. Exit" << endl;
+    cout << "0. Exit" << endl << endl;
 
     cin.clear();
     cin >> menu;
@@ -434,7 +442,7 @@ int initMenu(){
     cout << "Choose and option:" << endl;
     cout << "1. Select the Team File to read " << endl;
     cout << "2. Create a new Team File " << endl;
-    cout << "0. Exit Program" << endl;
+    cout << "0. Exit Program" << endl << endl;
 
     cin.clear();
     cin >> menu;
