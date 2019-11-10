@@ -1,7 +1,4 @@
 #include "Game.h"
-#include <algorithm>
-
-#include <utility>
 
 //Constructor(s)
 /// \brief Game constructor with the following data:

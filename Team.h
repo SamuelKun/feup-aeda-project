@@ -1,14 +1,12 @@
-//
-// Created by samuel on 30/10/19.
-//
-
-#pragma once
+#ifndef AEDA_TEAM_H
+#define AEDA_TEAM_H
 
 #include <vector>
+
 #include "Staff.h"
+#include "Player.h"
 #include "Game.h"
 #include "Competition.h"
-#include "Player.h"
 
 using namespace std;
 
@@ -45,4 +43,4 @@ public:
     int addStaff();
 };
 
-
+#endif

@@ -1,8 +1,7 @@
-#pragma once
+#ifndef AEDA_STAFF_H
+#define AEDA_STAFF_H
 
-#include <vector>
 #include <string>
-#include <map>
 #include "Person.h"
 
 using namespace std;
@@ -10,10 +9,12 @@ using namespace std;
 class Staff : public Person
 {
 private:
-    double wage;
+    double salary;
     string function;
 public:
-    Staff(string name, Date birth, double wage, string function);
-    double getWage() const;
+    Staff(string name, Date birth, double salary, string function);
+    double getSalary() const;
     void info() const;
 };
+
+#endif

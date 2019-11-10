@@ -1,8 +1,8 @@
 #ifndef AEDA_COMPETITION_H
 #define AEDA_COMPETITION_H
 
-#include "Game.h"
 #include "Player.h"
+#include "Game.h"
 #include <string>
 #include <vector>
 

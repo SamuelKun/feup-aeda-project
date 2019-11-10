@@ -1,7 +1,3 @@
-//
-// Created by diogo on 09/11/2019.
-//
-
 #include "Competition.h"
 
 /// \brief Competition Constructor with the following data:

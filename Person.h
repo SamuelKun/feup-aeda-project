@@ -1,4 +1,5 @@
-#pragma once
+#ifndef AEDA_PERSON_H
+#define AEDA_PERSON_H
 
 #include <string>
 #include "Date.h"
@@ -48,3 +49,4 @@ public:
     }
 };
 
+#endif

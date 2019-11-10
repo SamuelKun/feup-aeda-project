@@ -1,10 +1,5 @@
-//
-// Created by diogo on 16/10/2019.
-//
-
-#include "Date.h"
-#include <fstream>
 #include <sstream>
+#include "Date.h"
 
 using namespace std;
 

@@ -1,3 +1,6 @@
+#ifndef AEDA_MENUS_H
+#define AEDA_MENUS_H
+
 #include <iostream>
 #include "Team.h"
 using namespace std;
@@ -42,3 +45,4 @@ int createNewTeamMenu();
 /// \return Goes either to the File reading or File creating menus
 int initMenu();
 
+#endif

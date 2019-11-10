@@ -1,6 +1,6 @@
-#pragma once
+#ifndef AEDA_PLAYER_H
+#define AEDA_PLAYER_H
 
-#include <vector>
 #include <string>
 #include "Person.h"
 
@@ -39,8 +39,6 @@ public:
 	void setValue(int value);
 	void setEarnings(double value);
     void info() const;
-    bool equalName(Player p) const;
-    bool equalPosition(Player p) const;
-
-    friend istream& operator>>(istream& in, const Player & player);
 };
+
+#endif //AEDA_UTILS_H

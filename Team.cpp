@@ -1,9 +1,8 @@
-#include "Player.h"
-#include "Team.h"
-#include "Game.h"
 #include <vector>
 #include <string>
 #include <fstream>
+
+#include "Team.h"
 #include "utils.h"
 
 void wait(){
@@ -169,7 +168,7 @@ double Team::getMoneyPlayers() const {
 double Team::getMoneyStaff() const {
     double money = 0;
     for (size_t i = 0; i < team_staff.size(); i++)
-        money += team_staff[i]->getWage();
+        money += team_staff[i]->getSalary();
     return money;
 }
 

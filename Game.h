@@ -1,4 +1,5 @@
-#pragma once
+#ifndef AEDA_GAME_H
+#define AEDA_GAME_H
 
 #include <string>
 #include <vector>
@@ -27,5 +28,4 @@ public:
     //Stats stats getStats()const;
 };
 
-
-
+#endif

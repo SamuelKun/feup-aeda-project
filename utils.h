@@ -6,7 +6,6 @@
 #include <fstream>
 #include <sstream>
 
-#include "Team.h"
 #include "Game.h"
 #include "Person.h"
 #include "Staff.h"
