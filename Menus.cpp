@@ -10,6 +10,12 @@
 using namespace std;
 extern Team *national_team;
 
+void wait(){
+    string waiting;
+    cout << "Press any key to continue: " << endl;
+    getline(cin,waiting);
+}
+
 int menu_searchPlayers()
 {
     char menu;
@@ -206,7 +212,9 @@ int menu_games(){
         case '1':
             for(auto it = national_team->getGame().begin();it != national_team->getGame().end(); it++){
                 (*it)->info();
+                cout << endl;
             }
+            wait();
             return 0;
         case '2':
             try {
@@ -216,22 +224,22 @@ int menu_games(){
                 getline(cin, country);
 
                 cout << "Write the name of the Game's city: " << endl;
-                cin.ignore(1000, '\n');
                 getline(cin, city);
 
                 cout << "Write the name of the Game's stadium: " << endl;
-                cin.ignore(1000, '\n');
                 getline(cin, stadium);
 
                 national_team->findGame(country,city,stadium)->info();
             }
             catch(GameNotFound & er) {
+                cout << endl;
                 cout << "Game:" << endl;
                 cout << "Country: " << er.getCountry() << endl;
                 cout << "City: " << er.getCity() << endl;
                 cout << "Stadium: " << er.getStadium() << endl;
                 cout << "This Game wasn't found" << endl;
             }
+            wait();
             return 0;
         case '3':
             return 1;
