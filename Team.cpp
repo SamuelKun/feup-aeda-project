@@ -232,11 +232,12 @@ vector<Staff *> & Team::findStaffByFunction(string function) {
     if (to_return.empty()) { throw(NoStaffForFunction(function)); }
     else { return to_return; }
 }
-/*
+
 vector<Competition *> & Team::findCompetitionByDate(Date start, Date end) {
     vector<Competition *> to_return;
     for (size_t i = 0; i < team_competitions.size(); i++) {
-        if (team_competitions[i]->getStartDate() >= start && team_competitions[i]->getEndDate() <= end) {
+        if ((team_competitions[i]->getStartDate().isBefore(start) || team_competitions[i]->getStartDate().isEqualTo(start)) && ( 
+        team_competitions[i]->getEndDate().isAfter(end) || team_competitions[i]->getEndDate().isEqualTo(end))) {
             to_return.push_back(team_competitions[i]);
         }
     }
@@ -245,4 +246,4 @@ vector<Competition *> & Team::findCompetitionByDate(Date start, Date end) {
     } else { 
         return to_return; }
 }
-*/
+
