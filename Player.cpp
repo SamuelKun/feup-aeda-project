@@ -42,7 +42,8 @@ Player::Player(string name, Date birth, string club, string position, int weight
 string Player::getClub() const {
     return club;
 }
-
+/// \brief Get Method
+/// \return Player's position
 string Player::getPosition() const {
     return position;
 }

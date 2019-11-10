@@ -45,7 +45,19 @@ int menu_searchPlayers()
             }
             return 0;
         case '2':
-            //João, mete aqui a procura de Players por posição
+            try {
+                string position;
+                cin.ignore(1000, '\n');
+                getline(cin, position);
+                if (position == "0") return 0;
+                vector<Player *> to_print = national_team->findPlayerByPos(position);
+                for (int i = 0; i < to_print.size(); i++) {
+                    to_print[i]->info();
+                }
+            }
+            catch (NoPlayersForPos &er) {
+                cout << "Players for position " << er.getPosition() << " not found" << endl;
+            }
             return 0;
         case '0':
             return 1;

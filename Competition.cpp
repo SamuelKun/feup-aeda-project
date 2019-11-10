@@ -50,4 +50,12 @@ void Competition::payPlayers() {
 
 }
 
+Date Competition::getStartDate() const {
+    return start;
+}
+
+Date Competition::getEndDate() const{
+    return end;
+}
+
 

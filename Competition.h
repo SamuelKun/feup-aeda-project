@@ -21,6 +21,8 @@ public:
     bool getPaid() const;
     vector<Player *> getCalled() const;
     vector<Game *> getGames() const;
+    Date getStartDate() const;
+    Date getEndDate() const;
     friend ostream & operator<<(ostream &out, const Competition &comp);
 };
 
@@ -29,6 +31,30 @@ class AlreadyPaid{
 public:
     AlreadyPaid(string name): name(name){}
     string getName(){return name;}
+};
+
+class CompetitionNotFound{
+private:
+    string name;
+public:
+    CompetitionNotFound(string name): name(name) {}
+    string getName() const{
+        return name;
+    }
+};
+
+class NoCompetitionsIn{
+private:
+    Date start;
+    Date end;
+public:
+    NoCompetitionsIn(Date start, Date end): start(start), end(end) {}
+    Date getStart() const{
+        return start;
+    }
+    Date getEnd() const{
+        return end;
+    }
 };
 
 #endif

@@ -10,10 +10,15 @@ using namespace std;
 /// \param function Staff Member's function
 Staff::Staff(string name, Date birth, double salary, string function) : Person(name,birth),
                                                                        salary(salary), function(function){}
-/// Get Method
+/// \brief Get Method
 /// \return Staff Member's wage
 double Staff::getSalary() const {
     return salary;
+}
+/// \brief Get Method 
+/// \return Staff Member's function
+string Staff::getFunction() const {
+    return function;
 }
 /// \brief Shows Staff Member's data
 void Staff::info() const{

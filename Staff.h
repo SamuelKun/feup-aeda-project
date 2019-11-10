@@ -14,7 +14,18 @@ private:
 public:
     Staff(string name, Date birth, double salary, string function);
     double getSalary() const;
+    string getFunction() const;
     void info() const;
+};
+
+class NoStaffForFunction{
+private:
+    string function;
+public:
+    NoStaffForFunction(string function): function(function) {}
+    string getFunction() const{
+        return function;
+    }
 };
 
 #endif

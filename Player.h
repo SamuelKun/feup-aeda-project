@@ -43,4 +43,14 @@ public:
 
 };
 
+class NoPlayersForPos{
+private:
+    string position;
+public:
+    NoPlayersForPos(string position): position(position) {}
+    string getPosition() const{
+        return position;
+    }
+};
+
 #endif //AEDA_UTILS_H
