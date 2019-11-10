@@ -19,12 +19,18 @@ void wait_2(){
 int menu_searchPlayers()
 {
     char menu;
+
+    cout << "========================================= " << endl;
+    cout << "           Search Player Menu             " << endl;
+    cout << "========================================= \n" << endl;
+
     cout << "1. Search by Name " << endl;
     cout << "2. Search by Position " << endl;
     cout << "0. Return to Player Menu " << endl;
 
     cin.clear();
     cin >> menu;
+
     switch(menu) {
         case '1':
             try {
@@ -39,13 +45,13 @@ int menu_searchPlayers()
             }
             return 0;
         case '2':
+            //João, mete aqui a procura de Players por posição
             return 0;
         case '0':
             return 1;
         default:
             return 0;
     }
-
 }
 
 int menu_players()
@@ -53,7 +59,6 @@ int menu_players()
     char menu;
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
-    Player xd;
     cout << "========================================= " << endl;
     cout << "               Player Menu                " << endl;
     cout << "========================================= \n" << endl;
@@ -93,7 +98,44 @@ int menu_players()
             return 0;
     }
 }
+int menu_searchStaffMembers(){
+    char menu;
 
+    cout << "========================================= " << endl;
+    cout << "           Search Staff Menu              " << endl;
+    cout << "========================================= \n" << endl;
+
+    cout << "1. Search by Name " << endl;
+    cout << "2. Search by Staff Function " << endl;
+    cout << "0. Return to Main Menu " << endl;
+
+    cin.clear();
+    cin >> menu;
+
+    switch(menu){
+        case '1':
+            cout << "Write the name of the Staff you want to search: " << endl;
+            cout << "0. Return to Staff Menu" << endl;
+            try {
+                string name;
+                cin.ignore(1000, '\n');
+                getline(cin, name);
+                if(name == "0") return 0;
+                national_team->findStaff(name)->info();
+            }
+            catch(PersonNotFound & er) {
+                cout << "Staff member " << er.getName() << " not found" << endl;
+            }
+            return 0;
+        case '2':
+            //João, mete aqui a procura de staff members por função
+            return 0;
+        case '0':
+            return 1;
+        default:
+            return 0;
+    }
+}
 int menu_staff() {
     char menu;
 
@@ -103,7 +145,7 @@ int menu_staff() {
     cout << "               Staff Menu                 " << endl;
     cout << "========================================= \n" << endl;
 
-    cout << "1. View Staff Members " << endl;
+    cout << "1. View all Staff Members " << endl;
     cout << "2. Search Staff Members " << endl;
     cout << "3. Add Staff Members " << endl;
     cout << "0. Return to Main Menu " << endl;
@@ -122,18 +164,7 @@ int menu_staff() {
             cin >> menu;
             return 0;
         case '2':
-            cout << "Write the name of the Staff you want to search: " << endl;
-            cout << "0. Return to Staff Menu" << endl;
-            try {
-                string name;
-                cin.ignore(1000, '\n');
-                getline(cin, name);
-                if(name == "0") return 0;
-                national_team->findStaff(name)->info();
-            }
-            catch(PersonNotFound & er) {
-                cout << "Staff member " << er.getName() << " not found" << endl;
-            }
+            while(!menu_searchStaffMembers());
             return 0;
         case '3':
             return national_team->addStaff();
