@@ -11,6 +11,7 @@ int menu_searchPlayers();
 /// \return creates or views Players, or returns to the main menu
 int menu_players();
 
+int menu_searchStaffMembers();
 /// \brief All Staff Member information is here
 /// \return creates or views Staff Members, or returns to the main menu
 int menu_staff();
