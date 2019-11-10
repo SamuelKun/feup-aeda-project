@@ -138,7 +138,21 @@ int menu_searchStaffMembers(){
             }
             return 0;
         case '2':
-            //João, mete aqui a procura de staff members por função
+            cout << "Write the function of the Staff you want to search: " << endl;
+            cout << "0. Return to Staff Menu" << endl;
+            try {
+                string function;
+                cin.ignore(1000, '\n');
+                getline(cin, function);
+                if(function == "0") return 0;
+                vector<Staff *> to_print = national_team->findStaffByFunction(function);
+                for (int i = 0; i < to_print.size(); i++) {
+                    to_print[i]->info();
+                }
+            }
+            catch(NoStaffForFunction & er) {
+                cout << "No Staff members for function " << er.getFunction() << endl;
+            }
             return 0;
         case '0':
             return 1;
