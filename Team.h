@@ -29,18 +29,21 @@ public:
     vector<Competition *> getCompetition() const;
     double getMoneyPlayers() const;
     double getMoneyStaff() const;
+
     int missingPay();
+
     Player * findPlayer(string name);
     Staff * findStaff(string name);
+
+    int addPlayer();
+    int addStaff();
+
     /*
     vector<Player *> & findPlayerByPos(string position);
     Competition & findCompetion(string name);
     vector<Staff *> & findStaffByFunction(string function);
     vector<Competition *> & findCompetionByDate(Date start, Date end);
     */
-
-    int addPlayer();
-    int addStaff();
 };
 
 #endif

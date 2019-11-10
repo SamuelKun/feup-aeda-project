@@ -13,6 +13,7 @@ private:
     vector<Game *> team_games;
     Date start, end;
     bool paid;
+
 public:
     Competition(string name, vector<Player *> called, vector<Game *> team_games, Date start, Date end);
     string getCompetitionName() const;

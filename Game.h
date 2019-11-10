@@ -17,9 +17,9 @@ private:
     vector<Player *> called_players; /*!< Vector with called players */
     //Stats stats;
 public:
-    Game(string country, string city, string stadium, Date gameDate); //, vector<Player> v_called, vector<Player> v_played, vector<Person> v_referees);
+    Game(string country, string city, string stadium, Date gameDate);
     Game(string country, string city, string stadium, Date gameDate, vector<Player *> called_players);
-    //Get Methods
+
     string getCountry() const;
     string getCity() const;
     string getStadium() const;

@@ -56,6 +56,37 @@ vector<Game *> Team::getGame() const {
     return team_games;
 }
 
+double Team::getMoneyPlayers() const {
+    double money = 0;
+    for (size_t i = 0; i < team_players.size(); i++)
+        money += team_players[i]->getEarnings();
+    return money;
+}
+
+double Team::getMoneyStaff() const {
+    double money = 0;
+    for (size_t i = 0; i < team_staff.size(); i++)
+        money += team_staff[i]->getSalary();
+    return money;
+}
+
+int Team::missingPay() {
+    double not_paid = 0;
+    for (size_t i = 0; i < team_competitions.size(); i++)
+        if (!(team_competitions[i]->getPaid()))
+            not_paid++;
+    return not_paid;
+}
+
+Staff * Team::findStaff(string name) {
+    for (size_t i = 0; i < team_staff.size(); i++)
+    {
+        if (team_staff[i]->getName().find(name) != string::npos)
+            return team_staff[i];
+    }
+    throw(PersonNotFound(name));
+}
+
 Player * Team::findPlayer(string name) {
     for (size_t i = 0; i < team_players.size(); i++)
     {
@@ -156,37 +187,6 @@ int Team::addStaff() {
     cout << "Staff Member added successfully!!" << endl;
     wait();
     return 0;
-}
-
-double Team::getMoneyPlayers() const {
-    double money = 0;
-    for (size_t i = 0; i < team_players.size(); i++)
-        money += team_players[i]->getEarnings();
-    return money;
-}
-
-double Team::getMoneyStaff() const {
-    double money = 0;
-    for (size_t i = 0; i < team_staff.size(); i++)
-        money += team_staff[i]->getSalary();
-    return money;
-}
-
-int Team::missingPay() {
-    double not_paid = 0;
-    for (size_t i = 0; i < team_competitions.size(); i++)
-        if (!(team_competitions[i]->getPaid()))
-            not_paid++;
-    return not_paid;
-}
-
-Staff * Team::findStaff(string name) {
-    for (size_t i = 0; i < team_staff.size(); i++)
-    {
-        if (team_staff[i]->getName().find(name) != string::npos)
-            return team_staff[i];
-    }
-    throw(PersonNotFound(name));
 }
 
 /*
