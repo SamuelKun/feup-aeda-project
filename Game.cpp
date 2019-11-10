@@ -41,3 +41,15 @@ Date Game::getDate() const {
 vector<Player *> Game::getCalledPlayers() const {
     return called_players;
 }
+
+void Game::info() const {
+    cout << country << endl;
+    cout << city << endl;
+    cout << stadium << endl;
+    cout << gameDate << endl;
+    auto it = called_players.begin();
+    for (; it != called_players.end(); it++){
+        (*it)->info();
+    }
+}
+

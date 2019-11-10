@@ -2,6 +2,7 @@
 #define AEDA_PLAYER_H
 
 #include <string>
+#include <ostream>
 #include "Person.h"
 
 using namespace std;
@@ -39,6 +40,7 @@ public:
 	void setValue(int value);
 	void setEarnings(double value);
     void info() const;
+
 };
 
 #endif //AEDA_UTILS_H
