@@ -17,10 +17,10 @@ public:
     Date(string date);
     Date(unsigned short day, unsigned short month, unsigned year);
 
-
     unsigned short getDay() const;
     unsigned short getMonth() const;
     unsigned getYear() const;
+    string getDate() const;
 
     void setDay(unsigned short day);
     void setMonth(unsigned short month);

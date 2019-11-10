@@ -1,4 +1,5 @@
 #include <sstream>
+#include <iomanip>
 #include "Date.h"
 
 using namespace std;
@@ -8,7 +9,7 @@ Date::Date()
 {
 }
 /// \brief Date constructor
-/// \param date Date string in the format YYYY / MM / DD
+/// \param date Date string in the format DD // MM // YYYY
 Date::Date(string date)
 {
 
@@ -16,14 +17,13 @@ Date::Date(string date)
     string temp;
     vector<string> date_temp;
 
-    while (getline(date_info, temp, '/'))
-    {
+    while (getline(date_info, temp, '/')) {
         date_temp.push_back(temp);
     }
 
-    year = stoi(date_temp[0]);
+    day = stoi(date_temp[0]);
     month = stoi(date_temp[1]);
-    day = stoi(date_temp[2]);
+    year = stoi(date_temp[2]);
 
 }
 
@@ -55,6 +55,11 @@ unsigned Date::getYear() const
 {
     return year;
 }
+
+string Date::getDate() const {
+    return to_string(day) + "/" + to_string(month) + "/" + to_string(year);
+}
+
 
 /*********************************
  * SET Methods
@@ -112,7 +117,7 @@ bool Date::isBefore(const Date &date)
 /// \return Ostream
 ostream& operator<<(ostream& out, const Date &date)
 {
-    out << date.getYear() << '/' << date.getMonth() << '/' << date.getDay() << endl;
+    out << date.getYear() << '/' << date.getMonth() << '/' << date.getDay();
     return out;
 }
 /// \brief Overloads ">>" operator to get a Date from user input
@@ -159,5 +164,6 @@ istream& operator>>(istream& in, Date &date)
 
     return in;
 }
+
 
 

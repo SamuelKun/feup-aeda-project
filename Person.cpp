@@ -1,4 +1,5 @@
 #include <string>
+#include <iomanip>
 #include "Person.h"
 #include "Date.h"
 
@@ -15,8 +16,7 @@ string Person::getName() const {return name; }
 Date Person::getBirthday() const {return birth; }
 
 void Person::info() const {
-    cout << "Name: " << this->name << endl;
-    cout << "Birthday: " << this->birth;
+    cout << setw(19) << this->name << " | " << setw(10) << this->birth.getDate() <<" | ";
 }
 
 void Person::setName(string name) {

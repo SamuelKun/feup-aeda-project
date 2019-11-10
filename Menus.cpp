@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <fstream>
 
@@ -62,11 +63,15 @@ int menu_players()
     switch(menu)
     {
         case '1':    //View player info
+            cout << setw(19) << "Name" << " | " << setw(10) << "Date" <<" | ";
+            cout << setw(12) << "Position" << " | " << setw(10) << "Position" << " | " << setw(6) << "Weight" << " | " << setw(8) << "Height" << " | " << setw(7) << "Value" << " | " << setw(9) <<  "Earnings" << " |" << endl;
             for(int i = 0; i < (national_team->getPlayers()).size(); i++){
                 (national_team->getPlayers())[i]->info();
-                cout << endl;
             }
             cout << "Press any key to go back to Player Menu: " << endl;
+            cout << "Sort by:" << endl;
+            cout << "Position" << endl;
+            cout << "Name" << endl;
             cin >> menu;
             cin.ignore(1000,'\n');
             return 0;//remove this line after inserting stuff
@@ -362,7 +367,6 @@ int fileMenu(){
 
 int initMenu(){
     char menu;
-
     cout << "========================================= " << endl;
     cout << "          National Football Team          " << endl;
     cout << "========================================= \n" << endl;
