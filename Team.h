@@ -34,6 +34,7 @@ public:
 
     Player * findPlayer(string name);
     Staff * findStaff(string name);
+    Game * findGame(string country, string city, string stadium );
 
     int addPlayer();
     int addStaff();

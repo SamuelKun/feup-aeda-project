@@ -187,7 +187,7 @@ int menu_games(){
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
     cout << "========================================= " << endl;
-    cout << "            Games Menu             " << endl;
+    cout << "             Games Menu                   " << endl;
     cout << "========================================= \n" << endl;
 
     cout << "1. Show all games " << endl;
@@ -197,11 +197,40 @@ int menu_games(){
     cin.clear();
     cin >> menu;
 
-
     switch(menu) {
         case '1':
-            return 1;
+            for(auto it = national_team->getGame().begin();it != national_team->getGame().end(); it++){
+                (*it)->info();
+            }
+            return 0;
         case '2':
+            try {
+                cout << "Write the name of the Game's country: " << endl;
+                string country,city,stadium;
+                cin.ignore(1000, '\n');
+                getline(cin, country);
+
+                cout << "Write the name of the Game's city: " << endl;
+                cin.ignore(1000, '\n');
+                getline(cin, city);
+
+                cout << "Write the name of the Game's stadium: " << endl;
+                cin.ignore(1000, '\n');
+                getline(cin, stadium);
+
+                national_team->findGame(country,city,stadium)->info();
+            }
+            catch(CountryNotFound & er) {
+                cout << "Country " << er.getCountry() << " not found" << endl;
+            }
+            catch(CityNotFound & er) {
+                cout << "City " << er.getCity() << " not found" << endl;
+            }
+            catch(StadiumNotFound & er) {
+                cout << "Stadium " << er.getStadium() << " not found" << endl;
+            }
+            return 0;
+        case '3':
             return 1;
         default:     //Invalid input
             cin.ignore(1000, '\n');

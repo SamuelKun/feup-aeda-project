@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <ostream>
 #include "Player.h"
 
 using namespace std;
@@ -20,12 +21,36 @@ public:
     Game(string country, string city, string stadium, Date gameDate);
     Game(string country, string city, string stadium, Date gameDate, vector<Player *> called_players);
 
+    void info() const ;
     string getCountry() const;
     string getCity() const;
     string getStadium() const;
     Date getDate() const;
     vector<Player *> getCalledPlayers() const;
+
     //Stats stats getStats()const;
 };
+class CountryNotFound{
+    string country;
+    CountryNotFound(string country) : country(country){}
 
+public:
+    string getCountry() const {return country;}
+};
+
+class StadiumNotFound{
+    string stadium;
+    StadiumNotFound(string stadium) : stadium(stadium){}
+
+public:
+    string getStadium() const {return stadium;}
+};
+
+class CityNotFound{
+    string city;
+    CityNotFound(string city) : city(city){}
+
+public:
+    string getCity() const {return city;}
+};
 #endif
