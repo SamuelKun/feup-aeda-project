@@ -5,6 +5,8 @@
 #include "Team.h"
 using namespace std;
 
+int menu_searchPlayers();
+
 /// \brief All Player information is here
 /// \return creates or views Players, or returns to the main menu
 int menu_players();

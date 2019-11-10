@@ -1,9 +1,15 @@
+#include <iostream>
 #include "Statistics.h"
 
 
-Statistics::Statistics(int goalsScored, int shots, int ballPossession, float kmTravelled, int yellowCards, int redCards,int injured, int freeKicks, int cornerKicks) :
-    goals_scored(goalsScored), shots(shots),
-    ball_possession(ballPossession), km_travelled(kmTravelled),
+Statistics::Statistics() {
+
+}
+
+
+Statistics::Statistics(int goalsScored, int goalsConceded, int shots, int ballPossession, float kmTravelled, int yellowCards, int redCards,int injured, int freeKicks, int cornerKicks) :
+    goals_scored(goalsScored), goals_conceded(goalsConceded),
+    shots(shots), ball_possession(ballPossession), km_travelled(kmTravelled),
     yellow_cards(yellowCards), red_cards(redCards),
     injured(injured), free_kicks(freeKicks),
     corner_kicks(cornerKicks) {}
@@ -14,6 +20,14 @@ int Statistics::getGoalsScored() const {
 
 void Statistics::setGoalsScored(int goalsScored) {
     goals_scored = goalsScored;
+}
+
+int Statistics::getGoalsConceded() const {
+    return goals_conceded;
+}
+
+void Statistics::setGoalsConceded(int goalsConceded) {
+    this->goals_conceded = goalsConceded;
 }
 
 int Statistics::getShots() const {
@@ -78,4 +92,18 @@ int Statistics::getCornerKicks() const {
 
 void Statistics::setCornerKicks(int cornerKicks) {
     corner_kicks = cornerKicks;
+}
+
+void Statistics::info() const {
+    cout << goals_scored << endl;
+    cout << goals_conceded << endl;
+    cout << shots << endl;
+    cout << ball_possession << endl;
+    cout << km_travelled << endl;
+    cout << yellow_cards << endl;
+    cout << red_cards << endl;
+    cout << injured << endl;
+    cout << free_kicks << endl;
+    cout << corner_kicks << endl;
+
 }

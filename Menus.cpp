@@ -9,6 +9,38 @@
 using namespace std;
 extern Team *national_team;
 
+int menu_searchPlayers()
+{
+    char menu;
+    cout << "1. Search by Name " << endl;
+    cout << "2. Search by Position " << endl;
+    cout << "0. Return to Player Menu " << endl;
+
+    cin.clear();
+    cin >> menu;
+    switch(menu) {
+        case '1':
+            try {
+                string name;
+                cin.ignore(1000, '\n');
+                getline(cin, name);
+                if (name == "0") return 0;
+                national_team->findPlayer(name)->info();
+            }
+            catch (PersonNotFound &er) {
+                cout << "Player " << er.getName() << " not found" << endl;
+            }
+            return 0;
+        case '2':
+            return 0;
+        case '0':
+            return 1;
+        default:
+            return 0;
+    }
+
+}
+
 int menu_players()
 {
     char menu;
@@ -39,19 +71,7 @@ int menu_players()
             cin.ignore(1000,'\n');
             return 0;//remove this line after inserting stuff
         case '2':    //Exit function
-            cout << "Write the name of the Player you want to search: " << endl;
-            cout << "0. Return to Player Menu" << endl;
-            try {
-                string name;
-                cin.ignore(1000, '\n');
-                getline(cin, name);
-                if(name == "0") return 0;
-                cin.ignore(1000, '\n');
-                national_team->findPlayer(name)->info();
-            }
-            catch(PersonNotFound & er) {
-                cout << "Player " << er.getName() << " not found" << endl;
-            }
+            while(!menu_searchPlayers());
             return 0;
         case '3':
             return national_team->addPlayer();

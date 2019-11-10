@@ -5,31 +5,9 @@ using namespace std;
 
 /// \brief This class refers to the individual statistics of a player during a match
 class Statistics {
-public:
-    Statistics(int goalsScored = 0, int shots = 0, int ballPossession = 0, float kmTravelled = 0, int yellowCards = 0, int redCards = 0,
-               int injured = 0, int freeKicks = 0, int cornerKicks = 0);
-
-    int getGoalsScored() const;
-    void setGoalsScored(int goalsScored);
-    int getShots() const;
-    void setShots(int shots);
-    int getBallPossession() const;
-    void setBallPossession(int ballPossession);
-    float getKmTravelled() const;
-    void setKmTravelled(float kmTravelled);
-    int getYellowCards() const;
-    void setYellowCards(int yellowCards);
-    int getRedCards() const;
-    void setRedCards(int redCards);
-    int getInjured() const;
-    void setInjured(int injured);
-    int getFreeKicks() const;
-    void setFreeKicks(int freeKicks);
-    int getCornerKicks() const;
-    void setCornerKicks(int cornerKicks);
-
-protected:
+private:
     int goals_scored;   /// \brief Number of goals scored
+    int goals_conceded;   /// \brief Number of goals scored
     int shots;          /// \brief Number of shots on goal
     int ball_possession;/// \brief Ball possession as percentage
     float km_travelled; /// \brief Number of kilometres travelled
@@ -39,6 +17,35 @@ protected:
     int free_kicks;     /// \brief Number of free kicks
     int corner_kicks;   /// \brief Number of corners
 public:
+    Statistics();
+    Statistics(int goalsScored, int goalsConceded, int shots, int ballPossession, float kmTravelled, int yellowCards, int redCards,
+               int injured0, int freeKicks, int cornerKicks);
+
+    int getGoalsScored() const;
+    int getShots() const;
+    int getBallPossession() const;
+    float getKmTravelled() const;
+    int getYellowCards() const;
+    int getRedCards() const;
+    int getInjured() const;
+    int getFreeKicks() const;
+    int getCornerKicks() const;
+
+    void setGoalsScored(int goalsScored);
+    void setShots(int shots);
+    void setBallPossession(int ballPossession);
+    void setKmTravelled(float kmTravelled);
+    void setYellowCards(int yellowCards);
+    void setRedCards(int redCards);
+    void setInjured(int injured);
+    void setFreeKicks(int freeKicks);
+    void setCornerKicks(int cornerKicks);
+
+    void info() const;
+
+    int getGoalsConceded() const;
+
+    void setGoalsConceded(int goalsConceded);
 
 };
 
