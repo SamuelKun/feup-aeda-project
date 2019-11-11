@@ -482,7 +482,7 @@ int menu_tournament_games(Competition * comp){
     cout << "2. Search a Game" << endl;
     cout << "3. Add a Game" << endl;
     cout << "4. Add Game Statistics - To be done " << endl;
-    cout << "0. Return to Main Menu " << endl << endl;
+    cout << "0. Return to Competition " << endl << endl;
 
     cin.clear();
     cin >> menu;
@@ -565,7 +565,7 @@ int menu_singleCompetition(Competition* comp){
     char menu;
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
-
+    /*
     cout << "National Football Team Competitions - VERIFICAR ERRO DEPOIS" << endl;
     for(int i = 0; i < (national_team->getCompetition()).size(); i++){
         cout << i << ". " << national_team->getCompetition()[i]->getCompetitionName() << " - Paid: " << national_team->getCompetition()[i]->getPaid() << endl;
@@ -573,16 +573,19 @@ int menu_singleCompetition(Competition* comp){
     int index;
     cin >> index; // VERIFICAR ERRO DEPOIS
 
+
     Competition * singleCompetition = national_team->getCompetition()[index];
+    */
 
     cout << "========================================= " << endl;
-    cout << "            Competitions Menu             " << endl;
-    cout << "========================================= \n" << endl;
+    cout << "            Competition Menu             " << endl;
+    cout << "========================================= " << endl;
+    cout << "This menu is about the Competition:" << endl;
+    cout << comp->getCompetitionName() << endl << endl;
 
-    cout << "1. View all games from this competition" << endl;
+    cout << "1. Games Menu" << endl;
     cout << "2. View called Players" << endl;
-    cout << "3. Games Menu" << endl;
-    cout << "4. Add Game Statistics - To be done " << endl;
+    cout << "3. Add Game Statistics - To be done" << endl;
 
     cin.clear();
     cin >> menu;
@@ -590,17 +593,14 @@ int menu_singleCompetition(Competition* comp){
 
     switch(menu){
         case '1':
-            for(size_t i = 0; i < singleCompetition->getGames().size(); i++)
-                comp->getGames()[i]->info();
-            return 0;
-        case '2':
-            for(size_t i = 0; i < singleCompetition->getCalled().size(); i++)
-                comp->getCalled()[i]->infoTable();
-            return 0;
-        case '3':
             while(!menu_tournament_games(comp));
             return 0;
-        case '4':
+        case '2':
+            for(size_t i = 0; i < comp->getCalled().size(); i++)
+                comp->getCalled()[i]->infoTable();
+            waitInput();
+            return 0;
+        case '3':
             return 0;
         case '0':    //Exit function
             return 1;
