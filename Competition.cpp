@@ -37,14 +37,27 @@ ostream &operator<<(ostream &out, const Competition &comp) {
     return out;
 }
 
+
 bool Competition::getPaid() const {
     return paid;
 }
 
+
+double Competition::getMoneyInsurance() const {
+    double value = 0;
+    int numDays = start.daysUntil(end);
+    for (auto it = called.begin(); it != called.end(); it++) {
+        value += (*it)->getInsurance() * numDays;
+    }
+    return value;
+}
+
+
 void Competition::payPlayers() {
     if(!paid) {
+        int numDays = start.daysUntil(end);
         for (auto it = called.begin(); it != called.end(); it++) {
-            double value = (*it)->getInsurance() * start.daysUntil(end);
+            double value = (*it)->getInsurance() * numDays;
             (*it)->setEarnings(value);
         }
         paid = true;
@@ -90,21 +103,19 @@ void Competition::addGame(Game * g) {
     team_games.push_back(g);
 }
 
-Game * Competition::findGame(string opponent, string country, string city, string stadium, Date date) const {
+Game * Competition::findGame(string opponent, Date date) const {
     vector<Game *> v_games;
     for(size_t i = 0 ; i < team_games.size(); i++){
         if( team_games[i]->getOpponent().find(opponent) != string::npos &&
-            team_games[i]->getCountry().find(country) != string::npos &&
-            team_games[i]->getCity().find(city) != string::npos &&
-            team_games[i]->getStadium().find(stadium) != string::npos &&
             team_games[i]->getDate().isEqualTo(date)){
             return team_games[i];
         }
     }
-    throw GameNotFound(opponent,country,city,stadium,date);
+    throw GameNotFound(opponent,date);
 }
 
 Competition::Competition(string name, vector<Player *> called, Date start, Date end):
 name(name),called(called),start(start),end(end){}
+
 
 

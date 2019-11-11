@@ -440,25 +440,31 @@ int menu_games(){
         case '2':
             try {
                 cout << "Write the name of the Game's country: " << endl;
-                string country,city,stadium;
-                getline(cin, country);
+                string opponent;
+                Date d;
+                getline(cin, opponent);
+                cout << "Write the Date of Game: " << endl;
+                cin >> d;
 
-                cout << "Write the name of the Game's city: " << endl;
-                getline(cin, city);
+                vector<Game *> all_games = national_team->getGames();
+                for(size_t i = 0; i < all_games.size(); i++) {
+                    if(all_games[i]->getOpponent() == opponent && all_games[i]->getDate().isEqualTo(d)){
+                        all_games[i]->info();
+                        waitInput();
+                        return 0;
+                    }
+                }
+                throw(GameNotFound(opponent, d));
 
-                cout << "Write the name of the Game's stadium: " << endl;
-                getline(cin, stadium);
-
-                national_team->findGame(country,city,stadium)->info();
             }
             catch(GameNotFound & er) {
                 cout << endl;
                 cout << "Game:" << endl;
-                cout << "Country: " << er.getCountry() << endl;
-                cout << "City: " << er.getCity() << endl;
-                cout << "Stadium: " << er.getStadium() << endl;
+                cout << "Opponent: " << er.getOpponent() << endl;
+                cout << "Date: " << er.getDate() << endl;
                 cout << "This Game wasn't found" << endl;
             }
+
             waitInput();
             return 0;
         case '0':
@@ -476,7 +482,7 @@ int menu_tournament_games(Competition * comp){
     cout << "             Games Menu                   " << endl;
     cout << "========================================= \n" << endl;
 
-    cout << "1. Show all games " << endl;
+    cout << "1. Show all games from this competition" << endl;
     cout << "2. Search a Game" << endl;
     cout << "3. Add a Game" << endl;
     cout << "4. Add Game Statistics" << endl;
@@ -495,28 +501,19 @@ int menu_tournament_games(Competition * comp){
             return 0;
         case '2':
             try {
-                string country,city,stadium,opponent;
+                cout << "Write the name of the Game's Opponent: " << endl;
+                string opponent;
                 Date d;
-                cout << "Write the Game's opponent " << endl;
-                getline(cin,opponent);
-                cout << "Write the Game's country " << endl;
-                getline(cin,country);
-                cout << "Write the Game's city " << endl;
-                getline(cin,city);
-                cout << "Write the Game's stadium " << endl;
-                getline(cin,stadium);
-                cout << "Write the Game's date " << endl;
-                cin >> d;
+                getline(cin, opponent);
 
-                comp->findGame(opponent,country,city,stadium,d)->info(); //Redefinir isto
+                cout << "Write the Date of Game: " << endl;
+                cin >> d;
+                comp->findGame(opponent, d)->info();
             }
             catch(GameNotFound &er) {
                 cout << endl;
                 cout << "Game:" << endl;
                 cout << "Opponent: " << er.getOpponent() << endl;
-                cout << "Country: " << er.getCountry() << endl;
-                cout << "City: " << er.getCity() << endl;
-                cout << "Stadium: " << er.getStadium() << endl;
                 cout << "Date: " << er.getDate() << endl;
                 cout << "This Game wasn't found" << endl;
             }
@@ -634,7 +631,7 @@ int menu_singleCompetition(Competition* comp){
 
     cout << "1. Competition Games" << endl;
     cout << "2. View called Players" << endl;
-    cout << "3. Money spent in this competion" << endl;
+    cout << "3. Money spent in this competition (Excluding Staff Members Salary)" << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -651,6 +648,10 @@ int menu_singleCompetition(Competition* comp){
             waitInput();
             return 0;
         case '3':
+            cout << "Accommodation:  " << comp->getMoneyAccommodation() << endl;
+            cout << "Paid to players as Insurances:  " << comp->getMoneyInsurance() << endl;
+            cout << endl;
+            waitInput();
             return 0;
         case '0':    //Exit function
             return 1;
@@ -671,9 +672,10 @@ int menu_tournaments()
     cout << "========================================= \n" << endl;
 
     cout << "1. Show all competitions" << endl;
-    cout << "2. Pay competitions fees" << endl;
-    cout << "3. Detailed information about one competition" << endl;
-    cout << "4. Create a new Competition " << endl;
+    cout << "2. Information about all games" << endl;
+    cout << "3. Pay competitions fees" << endl;
+    cout << "4. Detailed information about one competition" << endl;
+    cout << "5. Create a new Competition " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -689,6 +691,9 @@ int menu_tournaments()
             waitInput();
             return 0;
         case '2':
+            while(!menu_games());
+            return 0;
+        case '3':
             cout << "National Football Team Competitions - VERIFICAR ERRO DEPOIS" << endl;
             for(int i = 0; i < (national_team->getCompetition()).size(); i++){
                 cout << i << ". " << national_team->getCompetition()[i]->getCompetitionName() << " - Paid: " << national_team->getCompetition()[i]->getPaid() << endl;
@@ -705,7 +710,7 @@ int menu_tournaments()
             }
             waitInput();
             return 0;
-        case '3':
+        case '4':
             try{
                 string name;
 
@@ -726,7 +731,7 @@ int menu_tournaments()
                 waitInput();
             }
             return 0;
-        case '4':
+        case '5':
             try{
                 string name, players, checker;
                 Date start,end;
@@ -832,7 +837,6 @@ int menu_credits() {
         cin.ignore(1000,'\n');
         return 0;
     }
-
 }
 
 int mainMenu() {
@@ -847,9 +851,8 @@ int mainMenu() {
     cout << "1. Player Menu" << endl;
     cout << "2. Staff Menu" << endl;
     cout << "3. Competitions Menu" << endl;
-    cout << "4. Games Menu" << endl;
-    cout << "5. View Team Stats" << endl;
-    cout << "6. App Info" << endl;
+    cout << "4. View Team Stats" << endl;
+    cout << "5. App Info" << endl;
     cout << "0. Exit" << endl << endl;
 
     cin.clear();
@@ -868,12 +871,9 @@ int mainMenu() {
             while(!menu_tournaments());
             return 0;
         case '4':    //View app info
-            while(!menu_games());
-            return 0;
-        case '5':    //View app info
             while(!menu_info());
             return 0;
-        case '6':    //View app info
+        case '5':    //View app info
             while(!menu_credits());
             return 0;
         case '0':    //Exit function

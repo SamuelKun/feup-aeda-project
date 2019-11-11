@@ -32,21 +32,14 @@ public:
 
 };
 class GameNotFound{
-    std::string country,city,stadium,opponent;
+    std::string opponent;
     Date d;
 
 public:
-    GameNotFound(std::string country, std::string city, std::string stadium) :
-            country(country), city(city), stadium(stadium){}
-
-    GameNotFound(std::string opponent, std::string country, std::string city, std::string stadium, Date date) :
-    opponent(opponent),country(country), city(city),
-    stadium(stadium),d(date){}
+    GameNotFound(std::string opponent, Date date) :
+            opponent(opponent), d(date){}
 
     std::string getOpponent() const {return opponent;}
-    std::string getCountry() const {return country;}
-    std::string getCity() const {return city;}
-    std::string getStadium() const {return stadium;}
     Date getDate() const {return d;}
 
 };

@@ -21,6 +21,7 @@ public:
     std::string getCompetitionName() const;
     void payPlayers();
     bool getPaid() const;
+    double getMoneyInsurance() const;
     double getMoneyAccommodation() const;
     std::vector<Player *> getCalled() const;
     std::vector<Game *> getGames() const;
@@ -33,8 +34,7 @@ public:
 
     void addGame(Game * g);
 
-
-    Game * findGame(std::string opponent, std::string country, std::string city, std::string stadium,Date date) const;
+    Game * findGame(std::string opponent, Date date) const;
 };
 
 class AlreadyPaid{

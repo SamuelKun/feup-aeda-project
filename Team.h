@@ -43,7 +43,6 @@ public:
     void removePlayer(Player * p);
     void removeStaff(Staff * s);
 
-
     double getMoneyPlayers() const;
     double getMoneyStaff() const;
     double getMoneyAccommodation() const;
@@ -64,21 +63,12 @@ public:
     std::vector<Player *> findPlayerName(std::string name);
     std::vector<Staff *> findStaffName(std::string name);
 
-    Game * findGame(std::string country, std::string city, std::string stadium); // Colocar como vetor
-
     std::vector<Player *> findPlayerPos(std::string position);
     std::vector<Staff *> findStaffFunction(std::string function);
 
-    std::vector<Competition *> findCompetition(std::string name); // Colocar como vetor
+    std::vector<Competition *> findCompetition(std::string name);
     std::vector<Competition *> findCompetitionDate(Date start, Date end);
 
 };
-/* Esta excecao provavelmente n vai ser necessaria
-class TooManyPlayersFound{
-    vector<Player *> players;
-public:
-    TooManyPlayersFound(vector<Player *> players ): players(players){}
-    vector<Player *> getPlayers() const {return players;}
-};
-*/
+
 #endif

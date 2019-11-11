@@ -199,19 +199,6 @@ vector<Staff *> Team::findStaffName(string name) {
     else return v_staff;
 }
 
-Game *Team::findGame(string country, string city, string stadium) {
-    vector<Game *> team_games = Team::getGames();
-    for(size_t i = 0 ; i < team_games.size(); i++){
-        if( team_games[i]->getCountry().find(country) != string::npos &&
-            team_games[i]->getCity().find(city) != string::npos &&
-            team_games[i]->getStadium().find(stadium) != string::npos){
-            return team_games[i];
-        }
-    }
-    throw GameNotFound(country,city,stadium);
-}
-
-
 vector<Player *> Team::findPlayerPos(string position) {
     vector<Player *> v_players;
     for (size_t i = 0; i < team_players.size(); i++) {
