@@ -138,6 +138,7 @@ int menu_players()
             try{
                 string n, c, pos;
                 int wei,hei,val,earn;
+                string checker;
                 Date d;
 
                 cout << "Write the name of the Player you wish to add: " << endl;
