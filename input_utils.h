@@ -34,5 +34,4 @@ void checkPosition(string &position){
     }
 }
 
-
 #endif //FEUP_AEDA_PROJECT_INPUT_UTILS_H

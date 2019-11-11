@@ -221,13 +221,14 @@ vector<Player *> Team::findPlayerPos(string position) {
     else return v_players;
 }
 
-Competition * Team::findCompetition(string name) {
-    for (size_t i = 0; i < team_competitions.size(); i++)
-    {
-        if (team_competitions[i]->getCompetitionName() == name )
-            return team_competitions[i];
+vector<Competition *> Team::findCompetition(string name) {
+    vector<Competition *> comp;
+    for (size_t i = 0; i < team_competitions.size(); i++) {
+        if (team_competitions[i]->getCompetitionName().find(name) != string::npos)
+            comp.push_back(team_competitions[i]);
     }
-    throw CompetitionNotFound(name);
+    if(comp.empty()) throw CompetitionNotFound(name);
+    else return comp;
 }
 
 vector<Staff *> Team::findStaffFunction(string function) {
