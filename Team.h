@@ -15,7 +15,6 @@ private:
     string teamName;  /// \brief Team file
     vector<Player *> team_players; /// \brief Vector with Team's players
     vector<Staff *> team_staff; /// \brief Vector with Team's staff
-    vector<Game *> team_games; /// \brief Vector with Team's Games
     vector<Competition *> team_competitions; /// \brief Vector with Team's competitions
 
 public:
@@ -24,12 +23,10 @@ public:
     string getTeamName() const;
     vector<Player *> getPlayers() const;
     vector<Staff *> getStaff() const;
-    vector<Game *> getGame() const;
+    vector<Game *> getGames() const;
     vector<Competition *> getCompetition() const;
     void addPlayer(Player* p);
     int addStaff();
-    void addGame();
-    void addGame(Game * g);
 
     void removePlayer(Player * p);
 

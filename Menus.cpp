@@ -332,7 +332,7 @@ int menu_games(){
     cin.ignore(1000,'\n');
 
 
-    vector<Game *> print_it = national_team->getGame();
+    vector<Game *> print_it = national_team->getGames();
     switch(menu) {
         case '1':
 
