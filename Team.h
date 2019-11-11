@@ -31,7 +31,7 @@ public:
 
     /**
     * @brief Getter
-     * @return string with team name
+    * @return string with team name
     */
     string getTeamName() const;
     vector<Player *> getPlayers() const;

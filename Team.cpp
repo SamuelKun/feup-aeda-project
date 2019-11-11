@@ -7,12 +7,6 @@
 #include "Team.h"
 #include "utils.h"
 
-void wait(){
-    string waiting;
-    cout << "Press any key to continue: " << endl;
-    getline(cin,waiting);
-}
-
 /// \brief Constructor
 Team::Team() {
 }

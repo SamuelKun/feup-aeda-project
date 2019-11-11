@@ -3,40 +3,11 @@
 #include <string>
 #include <fstream>
 
-
 #include "Menus.h"
+#include "input_utils.h"
 
 using namespace std;
 extern Team *national_team;
-
-template <class form>
-void failInput_2(form input)
-{
-    while (cin.fail())
-    {
-        cin.clear();
-        cin.ignore();
-        cin.ignore(1000, '\n');
-        cout << "Not a valid number. Please reenter: ";
-        cin >> input;
-    }
-}
-
-void wait_2(){
-    string waiting;
-    cout << "Press any key to continue: " << endl;
-    getline(cin,waiting);
-}
-void correctPosition(string &position){
-    while(position != "Goalkeeper" && position != "Defender" &&
-    position != "Midfielder" && position != "Forward"){
-        cin.clear();
-        cin.ignore(1000, '\n');
-        cout << "Not a valid position. Please reenter: " << endl;
-        cout << "Goalkeeper/Defender/Midfielder/Forward" << endl;
-        cin >> position;
-    }
-}
 
 int menu_allPlayers() {
     string toSort;
@@ -90,7 +61,7 @@ int menu_searchPlayers() {
             catch (PersonNotFound &er) {
                 cout << "Player " << er.getName() << " not found" << endl;
             }
-            wait_2();
+            waitInput();
             return 0;
         case '2':
             try {
@@ -108,7 +79,7 @@ int menu_searchPlayers() {
             catch (PositionNotFound &er) {
                 cout << "Players for position " << er.getPosition() << " not found" << endl;
             }
-            wait_2();
+            waitInput();
             return 0;
         case '0':
             return 1;
@@ -148,25 +119,33 @@ int menu_players()
             try{
                 string n, c, pos;
                 int wei,hei,val,earn;
-                string checker;
                 Date d;
+                string checker;
 
                 cout << "Write the name of the Player you wish to add: " << endl;
                 getline(cin,n);
+
                 cout << "Write " << n << "'s birthday " << endl;
                 cin >> d;
+
                 cout << "Write " << n << "'s club " << endl;
                 cin >> c;
+
                 cout << "Write " << n << "'s position " << endl;
-                cin >> pos;correctPosition(pos);
+                cin >> pos; checkPosition(pos);
+
                 cout << "Write " << n << "'s weight " << endl;
-                cin >> wei;failInput_2(wei);
+                cin >> wei;
+                failInput(wei);
                 cout << "Write " << n << "'s height " << endl;
-                cin >> hei;failInput_2(hei);
+                cin >> hei;
+                failInput(hei);
                 cout << "Write " << n << "'s value " << endl;
-                cin >> val;failInput_2(val);
+                cin >> val;
+                failInput(val);
                 cout << "Write " << n << "'s earnings " << endl;
-                cin >> earn;failInput_2(earn);
+                cin >> earn;
+                failInput(earn);
 
                 Player *play = new Player(n,d,c,pos,wei,hei,val,earn);
 
@@ -189,7 +168,7 @@ int menu_players()
             catch(CantUseThatName &er){
                 cout << "Can't use " << er.getName() << " has a name!!" << endl;
             }
-            wait_2();
+            waitInput();
             return 0;
         case '4':
             try {
@@ -225,7 +204,7 @@ int menu_players()
                 cout << "Can't remove: " << endl;
                 cout << "More than 1 Player named " << er.getName() << " was found!!" << endl;
             }
-            wait_2();
+            waitInput();
             return 0;
         case '0':
             return 1;
@@ -268,7 +247,7 @@ int menu_searchStaffMembers(){
             catch(PersonNotFound & er) {
                 cout << "Staff member " << er.getName() << " not found" << endl;
             }
-            wait_2();
+            waitInput();
             return 0;
         case '2':
             cout << "Write the function of the Staff you want to search: " << endl;
@@ -287,7 +266,7 @@ int menu_searchStaffMembers(){
             catch(FunctionNotFound & er) {
                 cout << "No Staff members for function " << er.getFunction() << endl;
             }
-            wait_2();
+            waitInput();
             return 0;
         case '0':
             return 1;
@@ -345,7 +324,6 @@ int menu_staff() {
             try {
                 string n, f, checker;
                 double w;
-                int day, month, year;
                 Date d;
 
                 cout << "Write the name of the Staff Member you wish to add: " << endl;
@@ -354,13 +332,12 @@ int menu_staff() {
                 cin >> d;
                 cout << "Write " << n << "'s wage " << endl;
                 cin >> w;
-                failInput_2(w);
+                failInput(w);
                 cout << "Write " << n << "'s function " << endl;
                 cin >> f;
-                failInput_2(f);
+                failInput(f);
 
-                Date *b = new Date(day, month, year);
-                Staff *s = new Staff(n, *b, w, f);
+                Staff *s = new Staff(n, d, w, f);
 
                 cout << "Do you wish to add the Staff Member you have created?: " << endl;
                 cout << "1. Add Staff Member " << endl;
@@ -381,7 +358,7 @@ int menu_staff() {
             catch(CantUseThatName &er){
                 cout << "Can't use " << er.getName() << " has a name!!" << endl;
             }
-            wait_2();
+            waitInput();
             return 0;
         case '4':
             try{
@@ -420,7 +397,7 @@ int menu_staff() {
                 cout << "Can't remove: " << endl;
                 cout << "More than 1 Staff Member named " << er.getName() << " was found!!" << endl;
             }
-            wait_2();
+            waitInput();
             return 0;
         case '0':    //Exit function
             return 1;
@@ -456,7 +433,7 @@ int menu_games(){
                 print_it[i]->info();
                 cout << endl;
             }
-            wait_2();
+            waitInput();
             return 0;
         case '2':
             try {
@@ -480,7 +457,7 @@ int menu_games(){
                 cout << "Stadium: " << er.getStadium() << endl;
                 cout << "This Game wasn't found" << endl;
             }
-            wait_2();
+            waitInput();
             return 0;
         case '0':
             return 1;
@@ -563,7 +540,7 @@ int menu_tournaments()
             for(int i = 0; i < (national_team->getCompetition()).size(); i++){
                 cout << (*(national_team->getCompetition()[i]));
             }
-            wait_2();
+            waitInput();
             return 0;
         case '2':
             cout << "National Football Team Competitions - VERIFICAR ERRO DEPOIS" << endl;
@@ -579,7 +556,7 @@ int menu_tournaments()
             catch(AlreadyPaid &er) {
                 cout << "The " << er.getName() << " has already been paid to players." << endl;
             }
-            wait_2();
+            waitInput();
             return 0;
         case '3':
             while(!menu_singleCompetition())
