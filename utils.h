@@ -12,19 +12,6 @@
 #include "Player.h"
 #include "Statistics.h"
 
-template <class form>
-void failInput(form input)
-{
-    while (cin.fail())
-    {
-        cin.clear();
-        cin.ignore();
-        cin.ignore(1000, '\n');
-        cout << "Not a valid number. Please reenter: ";
-        cin >> input;
-    }
-}
-
 vector<Player *> read_player(string info){
     ifstream players_info(info);
     vector<Player *> players;
