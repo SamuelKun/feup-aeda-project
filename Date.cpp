@@ -127,8 +127,9 @@ ostream& operator<<(ostream& out, const Date &date)
 istream& operator>>(istream& in, Date &date)
 {
     int this_year, this_month, this_day;
-    cout << "	Year: ";
+    cout << "Year:";
     in >> this_year;
+    in.ignore(1000,'\n');
     while (in.fail())
     {
         in.clear();
@@ -137,8 +138,9 @@ istream& operator>>(istream& in, Date &date)
         cout << "Not a valid number. Please reenter: ";
         in >> this_year;
     }
-    cout << "	Month: ";
+    cout << "Month:";
     in >> this_month;
+    in.ignore(1000,'\n');
     while (cin.fail())
     {
         in.clear();
@@ -147,8 +149,9 @@ istream& operator>>(istream& in, Date &date)
         cout << "Not a valid number. Please reenter: ";
         in >> this_month;
     }
-    cout << "	Day: ";
+    cout << "Day:";
     in >> this_day;
+    in.ignore(1000,'\n');
     while (in.fail())
     {
         in.clear();
