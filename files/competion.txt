@@ -5,3 +5,10 @@ games.txt
 28/07/2020
 1000.98
 -----
+Worlds Championship
+called.txt
+games.txt
+30/09/2019
+28/07/2020
+1000.98
+-----

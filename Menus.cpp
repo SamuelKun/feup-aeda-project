@@ -702,7 +702,10 @@ int menu_tournaments()
                         cout << "Index too high!!" << endl;
                         continue;
                     }
-                    else if( find(v_index.begin(),v_index.end(),index) != v_index.end() )
+                    else if( find(v_index.begin(),v_index.end(),index) != v_index.end()){
+                        cout << "Player was already added!!" << endl;
+                        continue;
+                    }
                     v_players.push_back(team_players[index]);
                     cout << team_players[index]->getName() << " was successfully added!!" << endl;
                 }
