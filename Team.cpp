@@ -96,7 +96,7 @@ void Team::showPlayersTable() const {
 
 void Team::showStaffTable() const {
     cout << setw(19) << "Name" << " | " << setw(10) << "Date" <<" | ";
-    cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | ";
+    cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " << endl;
     for(int i = 0; i < team_staff.size(); i++){
         team_staff[i]->infoTable();
     }

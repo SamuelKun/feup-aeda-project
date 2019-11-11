@@ -24,7 +24,7 @@ string Staff::getFunction() const {
 
 void Staff::infoTable() const {
     Person::infoTable();
-    cout << setw(12) << this->function << " | " << setw(9) << this->salary << " | ";
+    cout << setw(12) << this->function << " | " << setw(9) << this->salary << " | " << endl;
 }
 /// \brief Shows Staff Member's data
 void Staff::info() const{
