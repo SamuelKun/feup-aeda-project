@@ -43,14 +43,17 @@ vector<Player *> Game::getCalledPlayers() const {
 }
 
 void Game::info() const {
+    cout << "------------------------------------------------ Game ---------------------------------------------------" <<endl;
     cout << "Country: " << country << endl;
     cout << "City: " <<city << endl;
     cout << "Stadium: " <<stadium << endl;
     cout << "Date: " <<gameDate << endl;
-
-    auto it = called_players.begin();
-    for (; it != called_players.end(); it++){
+    cout << "--------------------------------------------- Called Players -------------------------------------------" <<endl;
+    for (auto it = called_players.begin(); it != called_players.end(); it++){
         (*it)->infoTable();
     }
+    cout << "--------------------------------------------- Game Statistics -------------------------------------------" <<endl;
+    game_stats.info();
+    cout << "---------------------------------------------------------------------------------------------------------" <<endl;
 }
 

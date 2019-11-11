@@ -54,8 +54,15 @@ vector<Competition *> Team::getCompetition() const {
     return team_competitions;
 }
 
-vector<Game *> Team::getGame() const {
-    return team_games;
+vector<Game *> Team::getGames() const {
+    vector<Game *> ret_games;
+    for (size_t i = 0; i < team_competitions.size(); i++) {
+        vector<Game *> competitions_games = team_competitions[i]->getGames();
+        for (size_t j = 0; j < competitions_games.size();j++){
+            ret_games.push_back(competitions_games[i]);
+        }
+    }
+    return ret_games;
 }
 
 double Team::getMoneyPlayers() const {
@@ -147,10 +154,6 @@ void Team::addStaff(Staff* s) {
 
 }
 
-void Team::addGame(Game *g) {
-    team_games.push_back(g);
-}
-
 vector<Player *> Team::findPlayerName(string name) {
     vector<Player *> v_players;
     for (size_t i = 0; i < team_players.size(); i++) {
@@ -174,6 +177,7 @@ vector<Staff *> Team::findStaffName(string name) {
 }
 
 Game *Team::findGame(string country, string city, string stadium) {
+    vector<Game *> team_games = Team::getGames();
     for(size_t i = 0 ; i < team_games.size(); i++){
         if( team_games[i]->getCountry().find(country) != string::npos &&
             team_games[i]->getCity().find(city) != string::npos &&
@@ -183,6 +187,7 @@ Game *Team::findGame(string country, string city, string stadium) {
     }
     throw GameNotFound(country,city,stadium);
 }
+
 
 vector<Player *> Team::findPlayerPos(string position) {
     vector<Player *> v_players;
