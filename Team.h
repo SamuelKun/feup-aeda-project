@@ -8,14 +8,12 @@
 #include "Game.h"
 #include "Competition.h"
 
-using namespace std;
-
 class Team {
 private:
-    string teamName;  /// \brief Team file
-    vector<Player *> team_players; /// \brief Vector with Team's players
-    vector<Staff *> team_staff; /// \brief Vector with Team's staff
-    vector<Competition *> team_competitions; /// \brief Vector with Team's competitions
+    std::string teamName;  /// \brief Team file
+    std::vector<Player *> team_players; /// \brief Vector with Team's players
+    std::vector<Staff *> team_staff; /// \brief Vector with Team's staff
+    std::vector<Competition *> team_competitions; /// \brief Vector with Team's competitions
 
 public:
     /**
@@ -27,17 +25,17 @@ public:
     * @brief Constructor
      * @param file_name file with team information
     */
-    Team(string file_name);
+    Team(std::string file_name);
 
     /**
     * @brief Getter
     * @return string with team name
     */
-    string getTeamName() const;
-    vector<Player *> getPlayers() const;
-    vector<Staff *> getStaff() const;
-    vector<Game *> getGames() const;
-    vector<Competition *> getCompetition() const;
+    std::string getTeamName() const;
+    std::vector<Player *> getPlayers() const;
+    std::vector<Staff *> getStaff() const;
+    std::vector<Game *> getGames() const;
+    std::vector<Competition *> getCompetition() const;
     void addPlayer(Player* p);
     void addStaff(Staff * s);
     void addCompetition(Competition* comp);
@@ -61,18 +59,18 @@ public:
     void sortStaffName();
     void sortStaffFunction();
 
-    Player * findPlayer(string name); // Necessário para ler, alterar depois
+    Player * findPlayer(std::string name); // Necessário para ler, alterar depois
 
-    vector<Player *> findPlayerName(string name);
-    vector<Staff *> findStaffName(string name);
+    std::vector<Player *> findPlayerName(std::string name);
+    std::vector<Staff *> findStaffName(std::string name);
 
-    Game * findGame(string country, string city, string stadium); // Colocar como vetor
+    Game * findGame(std::string country, std::string city, std::string stadium); // Colocar como vetor
 
-    vector<Player *> findPlayerPos(string position);
-    vector<Staff *> findStaffFunction(string function);
+    std::vector<Player *> findPlayerPos(std::string position);
+    std::vector<Staff *> findStaffFunction(std::string function);
 
-    vector<Competition *> findCompetition(string name); // Colocar como vetor
-    vector<Competition *> findCompetitionDate(Date start, Date end);
+    std::vector<Competition *> findCompetition(std::string name); // Colocar como vetor
+    std::vector<Competition *> findCompetitionDate(Date start, Date end);
 
 };
 /* Esta excecao provavelmente n vai ser necessaria

@@ -1,8 +1,6 @@
 #ifndef AEDA_STATISTICS_H
 #define AEDA_STATISTICS_H
 
-using namespace std;
-
 /// \brief This class refers to the individual statistics of a player during a match
 class Statistics {
 private:

@@ -8,25 +8,25 @@
 
 class Competition{
 private:
-    string name;
-    vector<Player *> called;
-    vector<Game *> team_games;
+    std::string name;
+    std::vector<Player *> called;
+    std::vector<Game *> team_games;
     Date start, end;
     double moneyAccommodation;
     bool paid;
 
 public:
-    Competition(string name, vector<Player *> called, Date start, Date end);
-    Competition(string name, vector<Player *> called, vector<Game *> team_games, Date start, Date end, double moneyAccommodation);
-    string getCompetitionName() const;
+    Competition(std::string name, std::vector<Player *> called, Date start, Date end);
+    Competition(std::string name, std::vector<Player *> called, std::vector<Game *> team_games, Date start, Date end, double moneyAccommodation);
+    std::string getCompetitionName() const;
     void payPlayers();
     bool getPaid() const;
     double getMoneyAccommodation() const;
-    vector<Player *> getCalled() const;
-    vector<Game *> getGames() const;
+    std::vector<Player *> getCalled() const;
+    std::vector<Game *> getGames() const;
     Date getStartDate() const;
     Date getEndDate() const;
-    friend ostream & operator<<(ostream &out, const Competition &comp);
+    friend std::ostream & operator<<(std::ostream &out, const Competition &comp);
 
     void showPlayers() const;
     void showGames() const;
@@ -34,22 +34,22 @@ public:
     void addGame(Game * g);
 
 
-    Game * findGame(string opponent,string country,string city,string stadium,Date date) const;
+    Game * findGame(std::string opponent, std::string country, std::string city, std::string stadium,Date date) const;
 };
 
 class AlreadyPaid{
-    string name;
+    std::string name;
 public:
-    AlreadyPaid(string name): name(name){}
-    string getName(){return name;}
+    AlreadyPaid(std::string name): name(name){}
+    std::string getName(){return name;}
 };
 
 class CompetitionNotFound{
 private:
-    string name;
+    std::string name;
 public:
-    CompetitionNotFound(string name): name(name) {}
-    string getName() const{
+    CompetitionNotFound(std::string name): name(name) {}
+    std::string getName() const{
         return name;
     }
 };
@@ -69,10 +69,10 @@ public:
 };
 class CompetitionAlreadyExists{
 private:
-    string name;
+    std::string name;
 public:
-    CompetitionAlreadyExists(string name): name(name) {}
-    string getName() const{
+    CompetitionAlreadyExists(std::string name): name(name) {}
+    std::string getName() const{
         return name;
     }
 };

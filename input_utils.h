@@ -7,30 +7,30 @@
 template <class form>
 void failInput(form input)
 {
-    while (cin.fail())
+    while (std::cin.fail())
     {
-        cin.clear();
-        cin.ignore();
-        cin.ignore(1000, '\n');
-        cout << "Not a valid number. Please reenter: ";
-        cin >> input;
+        std::cin.clear();
+        std::cin.ignore();
+        std::cin.ignore(1000, '\n');
+        std::cout << "Not a valid number. Please reenter: ";
+        std::cin >> input;
     }
 }
 
 void waitInput(){
-    string waiting;
-    cout << "Press any key to continue: " << endl;
-    getline(cin,waiting);
+    std::string waiting;
+    std::cout << "Press any key to continue: " << std::endl;
+    getline(std::cin,waiting);
 }
 
-void checkPosition(string &position){
+void checkPosition(std::string &position){
     while(position != "Goalkeeper" && position != "Defender" &&
           position != "Midfielder" && position != "Forward"){
-        cin.clear();
-        cin.ignore(1000, '\n');
-        cout << "Not a valid position. Please reenter: " << endl;
-        cout << "Goalkeeper/Defender/Midfielder/Forward" << endl;
-        cin >> position;
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');
+        std::cout << "Not a valid position. Please reenter: " << std::endl;
+        std::cout << "Goalkeeper/Defender/Midfielder/Forward" << std::endl;
+        std::cin >> position;
     }
 }
 

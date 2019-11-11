@@ -472,8 +472,6 @@ int menu_games(){
 int menu_tournament_games(Competition * comp){
     char menu;
 
-    //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
-
     cout << "========================================= " << endl;
     cout << "             Games Menu                   " << endl;
     cout << "========================================= \n" << endl;
@@ -481,8 +479,8 @@ int menu_tournament_games(Competition * comp){
     cout << "1. Show all games " << endl;
     cout << "2. Search a Game" << endl;
     cout << "3. Add a Game" << endl;
-    cout << "4. Add Game Statistics - To be done " << endl;
-    cout << "0. Return to Competition " << endl << endl;
+    cout << "4. Add Game Statistics" << endl;
+    cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
     cin >> menu;
@@ -510,9 +508,9 @@ int menu_tournament_games(Competition * comp){
                 cout << "Write the Game's date " << endl;
                 cin >> d;
 
-                comp->findGame(opponent,country,city,stadium,d)->info();
+                comp->findGame(opponent,country,city,stadium,d)->info(); //Redefinir isto
             }
-            catch(GameNotFound & er) {
+            catch(GameNotFound &er) {
                 cout << endl;
                 cout << "Game:" << endl;
                 cout << "Opponent: " << er.getOpponent() << endl;
@@ -528,6 +526,7 @@ int menu_tournament_games(Competition * comp){
             try{
                 string country,city,stadium,opponent;
                 Date d;
+                Statistics stats;
                 cout << "Write the Game's opponent " << endl;
                 getline(cin,opponent);
                 cout << "Write the Game's country " << endl;
@@ -539,7 +538,7 @@ int menu_tournament_games(Competition * comp){
                 cout << "Write the Game's date " << endl;
                 cin >> d;
 
-                Game *g = new Game(opponent,country,city,stadium,d);
+                Game *g = new Game(opponent,country,city,stadium, d, comp->getCalled(), stats);
                 comp->addGame(g);
             }
             catch(GameAlreadyExists &er){
@@ -553,6 +552,69 @@ int menu_tournament_games(Competition * comp){
                 cout << "This Game already exists!!" << endl;
             }
             return 0;
+
+        case '4':
+            try {
+
+                ///fazer isto melhor
+                for(size_t i = 0; i < comp->getGames().size(); i++)
+                {
+                    cout << i << "  ->" << comp->getGames()[i]->getStadium() << endl;
+                }
+                int idx;
+                cout << "Index:" << endl;
+                cin >> idx;
+                /// FAZER ISTO MELHOR - temporario
+
+                string checker;
+                int goalS, goalsC, shots, ballP, yellowC, redC, injured, freeKicks, cornerKicks;
+                cout << "Number of goals scored: " << endl;
+                cin >> goalS;
+                failInput(goalS);
+                cout << "Number of goals conceded: " <<  endl;
+                cin >> goalsC;
+                failInput(goalsC);
+                cout << "Number of shots: " <<endl;
+                cin >> shots;
+                failInput(shots);
+                cout << "Percentage of ball possession: "  << endl;
+                cin >> ballP;
+                failInput(ballP);
+                cout << "Number of yellow cards: "  << endl;
+                cin >> yellowC;
+                failInput(yellowC);
+                cout << "Number of red cards: "  << endl;
+                cin >> redC;
+                failInput(redC);
+                cout << "Number of Injured players: " << endl;
+                cin >> injured;
+                failInput(injured);
+                cout << "Number of free kicks: "  << endl;
+                cin >> freeKicks;
+                failInput(freeKicks);
+                cout << "Number of corner kicks: " << endl;
+                cin >> cornerKicks;
+                failInput(cornerKicks);
+
+                Statistics stats(goalS, goalsC, shots, ballP, yellowC, redC, injured, freeKicks, cornerKicks);
+
+                cout << "Do you want to update the statistics of this game?" << endl;
+                cout << "1. Update Statistics" << endl;
+                cout << "Any other key. Cancel this action" << endl;
+                cin.ignore(1000, '\n');
+                getline(cin, checker);
+                if (checker != "1") {
+                    cout << "Statistics not updated!" << endl;
+                } else {
+                    comp->getGames()[idx]->setStats(stats);
+                    cout << "Status updated!" << endl;
+                }
+
+            }
+            catch(...) {
+                cout << "Error occured";
+            }
+            return 0;
         case '0':
             return 1;
         default:     //Invalid input
@@ -564,28 +626,16 @@ int menu_tournament_games(Competition * comp){
 int menu_singleCompetition(Competition* comp){
     char menu;
 
-    //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
-    /*
-    cout << "National Football Team Competitions - VERIFICAR ERRO DEPOIS" << endl;
-    for(int i = 0; i < (national_team->getCompetition()).size(); i++){
-        cout << i << ". " << national_team->getCompetition()[i]->getCompetitionName() << " - Paid: " << national_team->getCompetition()[i]->getPaid() << endl;
-    }
-    int index;
-    cin >> index; // VERIFICAR ERRO DEPOIS
-
-
-    Competition * singleCompetition = national_team->getCompetition()[index];
-    */
-
     cout << "========================================= " << endl;
-    cout << "            Competition Menu             " << endl;
+    cout << "            Competition Menu              " << endl;
     cout << "========================================= " << endl;
     cout << "This menu is about the Competition:" << endl;
     cout << comp->getCompetitionName() << endl << endl;
 
-    cout << "1. Games Menu" << endl;
+    cout << "1. Competition Games" << endl;
     cout << "2. View called Players" << endl;
-    cout << "3. Add Game Statistics - To be done" << endl;
+    cout << "3. Money spent in this competion" << endl;
+    cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
     cin >> menu;
@@ -665,7 +715,7 @@ int menu_tournaments()
                 if(comp.size() > 1){
                     for(size_t i = 0; i < comp.size(); i++)
                         cout << *comp[i] << endl;
-                    cout << " More than 1 Competion named " << name << " was found!!" << endl;
+                    cout << " More than 1 Competition named " << name << " was found!!" << endl;
                     cout << "Please try again! "<< endl;
                 }
                 else
@@ -713,18 +763,19 @@ int menu_tournaments()
                 cin.clear();
                 cin.ignore(1000,'\n');
                 cout << "This Competition currently has no games" << endl;
-                cout << "Use the menu system do add games if needed!!" << endl;
+                cout << "Use the menu system do add games if needed!" << endl;
                 cout << "Are you sure you want to add this competition?" << endl;
-                cout << "1. Add " << name << endl;
-                cout << "0. Go back without adding " << name << endl;
+                cout << "1. Add games to this competition" << name << endl;
+                cout << "0. Go back without adding games " << name << endl;
+
                 getline(cin,checker);
                 if(checker == "0") return 0;
                 else{
-                    Competition* comp = new Competition(name,v_players,start,end);
+                    Competition * comp = new Competition(name, v_players, start, end);
                     national_team->addCompetition(comp);
                 }
             }
-            catch( CompetitionAlreadyExists &er){
+            catch(CompetitionAlreadyExists &er){
                 cout << "Competition " << er.getName() << " already exists!!" << endl;
             }
             waitInput();

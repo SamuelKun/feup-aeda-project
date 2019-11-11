@@ -1,5 +1,7 @@
 #include "Competition.h"
 
+using namespace std;
+
 /// \brief Competition Constructor with the following data:
 /// \param convocados Competition's called players vector
 /// \param team_games Competition's team games vector

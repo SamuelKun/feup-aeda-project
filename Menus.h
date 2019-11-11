@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "Team.h"
-using namespace std;
 
 int menu_searchPlayers();
 

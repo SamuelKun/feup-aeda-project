@@ -9,18 +9,16 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 class Date{
 public:
     Date();
-    Date(string date);
+    Date(std::string date);
     Date(unsigned short day, unsigned short month, unsigned year);
 
     unsigned short getDay() const;
     unsigned short getMonth() const;
     unsigned getYear() const;
-    string getDate() const;
+    std::string getDate() const;
 
     void setDay(unsigned short day);
     void setMonth(unsigned short month);
@@ -32,8 +30,8 @@ public:
 
     int daysUntil(const Date &date) const;
 
-    friend ostream& operator<<(ostream& out, const Date & date);
-    friend istream& operator>>(istream& in, Date & date);
+    friend std::ostream& operator<<(std::ostream& out, const Date & date);
+    friend std::istream& operator>>(std::istream& in, Date & date);
 
 private:
     unsigned day;

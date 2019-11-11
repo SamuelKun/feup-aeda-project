@@ -7,6 +7,8 @@
 #include "Team.h"
 #include "utils.h"
 
+using namespace std;
+
 /// \brief Constructor
 Team::Team() {
 }

@@ -4,15 +4,13 @@
 #include <string>
 #include "Date.h"
 
-using namespace std;
-
 //!
 /*! Class for a person
  *
  */
 class Person {
 private:
-	string name; /*!< Person's name */
+    std::string name; /*!< Person's name */
 	Date birth;  /*!< Person's date of birth */
 public:
     Person();
@@ -20,17 +18,17 @@ public:
     /// \brief Person Constructor with the following data:
     /// \param name Person's name
     /// \param birth Person's birthday
-	Person(string name, Date birth);
+	Person(std::string name, Date birth);
 
     /// \brief Get Method
     /// \return Person's name
-	string getName() const;
+    std::string getName() const;
 
     /// \brief Get Method
     /// \return Person's birthdy
 	Date getBirthday() const;
 
-	void setName(string name);
+	void setName(std::string name);
 	void setBirthday(Date birth);
 
     /// \brief Shows Person's data
@@ -40,20 +38,20 @@ public:
 
 class PersonNotFound{
 private:
-    string name;
+    std::string name;
 public:
-    PersonNotFound(string name): name(name) {}
-    string getName() const{
+    PersonNotFound(std::string name): name(name) {}
+    std::string getName() const{
         return name;
     }
 };
 
 class TooManyPeopleFound{
 private:
-    string name;
+    std::string name;
 public:
-    TooManyPeopleFound(string name): name(name) {}
-    string getName() const{
+    TooManyPeopleFound(std::string name): name(name) {}
+    std::string getName() const{
         return name;
     }
 };

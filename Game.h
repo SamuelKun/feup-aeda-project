@@ -3,66 +3,65 @@
 
 #include <string>
 #include <vector>
-#include <ostream>
+
+#include "Date.h"
 #include "Player.h"
 #include "Statistics.h"
-
-using namespace std;
 
 class Game
 {
 private:
-    string opponent;
-    string country; /*!< Game's country */
-    string city;    /*!< Game's city    */
-    string stadium; /*!< Game's stadium */
+    std::string opponent;
+    std::string country; /*!< Game's country */
+    std::string city;    /*!< Game's city    */
+    std::string stadium; /*!< Game's stadium */
     Date gameDate;  /*!< Game's Date    */
-    vector<Player *> called_players; /*!< Vector with called players */
+    std::vector<Player *> called_players; /*!< Vector with called players */
     Statistics game_stats;
 public:
-    Game(string opponent, string country, string city, string stadium, Date gameDate);
-    Game(string opponent, string country, string city, string stadium, Date gameDate, vector<Player *> called_players, Statistics stats);
+    Game(std::string opponent, std::string country, std::string city, std::string stadium, Date gameDate, std::vector<Player *> called_players, Statistics stats);
 
-    string getOpponent() const;
-    string getCountry() const;
-    string getCity() const;
-    string getStadium() const;
+    std::string getOpponent() const;
+    std::string getCountry() const;
+    std::string getCity() const;
+    std::string getStadium() const;
     Date getDate() const;
-    vector<Player *> getCalledPlayers() const;
+    void setStats(Statistics stats);
+    std::vector<Player *> getCalledPlayers() const;
     void info() const;
-    //Stats stats getStats()const;
+
 };
 class GameNotFound{
-    string country,city,stadium,opponent;
+    std::string country,city,stadium,opponent;
     Date d;
 
 public:
-    GameNotFound(string country,string city,string stadium) :
+    GameNotFound(std::string country, std::string city, std::string stadium) :
             country(country), city(city), stadium(stadium){}
 
-    GameNotFound(string opponent,string country,string city,string stadium,Date date) :
+    GameNotFound(std::string opponent, std::string country, std::string city, std::string stadium, Date date) :
     opponent(opponent),country(country), city(city),
     stadium(stadium),d(date){}
 
-    string getOpponent() const {return opponent;}
-    string getCountry() const {return country;}
-    string getCity() const {return city;}
-    string getStadium() const {return stadium;}
+    std::string getOpponent() const {return opponent;}
+    std::string getCountry() const {return country;}
+    std::string getCity() const {return city;}
+    std::string getStadium() const {return stadium;}
     Date getDate() const {return d;}
 
 };
 
 class GameAlreadyExists{
-    string country,city,stadium,opponent;
+    std::string country,city,stadium,opponent;
     Date d;
 
 public:
-    GameAlreadyExists(string opponent, string country,string city,string stadium, Date d) :
+    GameAlreadyExists(std::string opponent, std::string country, std::string city, std::string stadium, Date d) :
             opponent(opponent),country(country), city(city), stadium(stadium), d(d){}
-    string getCountry() const {return country;}
-    string getCity() const {return city;}
-    string getStadium() const {return stadium;}
-    string getOpponent() const {return opponent;}
+    std::string getCountry() const {return country;}
+    std::string getCity() const {return city;}
+    std::string getStadium() const {return stadium;}
+    std::string getOpponent() const {return opponent;}
     Date getDate() const {return d;}
 };
 

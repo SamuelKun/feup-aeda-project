@@ -12,11 +12,11 @@
 #include "Player.h"
 #include "Statistics.h"
 
-vector<Player *> read_player(string info){
-    ifstream players_info(info);
-    vector<Player *> players;
-    vector<string> tempVec;
-    string str_temp;
+std::vector<Player *> read_player(std::string info){
+    std::ifstream players_info(info);
+    std::vector<Player *> players;
+    std::vector<std::string> tempVec;
+    std::string str_temp;
     while (getline(players_info, str_temp)){
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
@@ -29,11 +29,11 @@ vector<Player *> read_player(string info){
     return players;
 }
 
-vector<Staff *> read_staff(string info){
-    ifstream staff_info(info);
-    vector<Staff *> staff;
-    vector<string> tempVec;
-    string str_temp;
+std::vector<Staff *> read_staff(std::string info){
+    std::ifstream staff_info(info);
+    std::vector<Staff *> staff;
+    std::vector<std::string> tempVec;
+    std::string str_temp;
 
     while (getline(staff_info, str_temp)){
         if (str_temp != "-----") tempVec.push_back(str_temp);
@@ -47,15 +47,15 @@ vector<Staff *> read_staff(string info){
     return staff;
 }
 
-vector<Game *> read_games(string info, vector<Player *> called_players){
-    ifstream game_info(info);
-    vector<Game *> games;
-    vector<string> tempVec;
-    string str_temp;
+std::vector<Game *> read_games(std::string info, std::vector<Player *> called_players){
+    std::ifstream game_info(info);
+    std::vector<Game *> games;
+    std::vector<std::string> tempVec;
+    std::string str_temp;
     while (getline(game_info, str_temp)){
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
-            cout << tempVec[0];
+            std::cout << tempVec[0];
             Date game_day(tempVec[4]);
             Statistics game_stats(stoi(tempVec[5]),stoi(tempVec[6]),stoi(tempVec[7]),stoi(tempVec[8]),stoi(tempVec[9]),stoi(tempVec[10]),stoi(tempVec[11]),stoi(tempVec[12]), stoi(tempVec[13]));
             Game *g = new Game(tempVec[0], tempVec[1], tempVec[2], tempVec[3], game_day, called_players, game_stats);
@@ -66,26 +66,26 @@ vector<Game *> read_games(string info, vector<Player *> called_players){
     return games;
 }
 
-vector<Competition *> read_competion(string info, Team * t){
-    ifstream competion_info(info);
-    vector<Competition *> competion;
-    vector<string> tempVec;
-    string str_temp;
+std::vector<Competition *> read_competion(std::string info, Team * t){
+    std::ifstream competion_info(info);
+    std::vector<Competition *> competion;
+    std::vector<std::string> tempVec;
+    std::string str_temp;
     while (getline(competion_info, str_temp)){
 
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
             //Ler Convocados
-            vector<Player *> comp_convocado;
-            ifstream called(tempVec[1]);
-            vector<string> called_vec;
+            std::vector<Player *> comp_convocado;
+            std::ifstream called(tempVec[1]);
+            std::vector<std::string> called_vec;
             while (getline(called, str_temp)) called_vec.push_back(str_temp);
 
             for(auto it = called_vec.begin(); it != called_vec.end(); it++)
                 comp_convocado.push_back(t->findPlayer(*it));
 
             //Ler Jogos
-            vector<Game *> competion_games = read_games(tempVec[2], comp_convocado);
+            std::vector<Game *> competion_games = read_games(tempVec[2], comp_convocado);
             //Data de começo e fim
             Date startcomp(tempVec[3]);
             Date endcomp(tempVec[4]);

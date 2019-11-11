@@ -1,15 +1,17 @@
 #include "Game.h"
 
+using namespace std;
+
 //Constructor(s)
+
 /// \brief Game constructor with the following data:
-/// \param country Game's country
+/// \param opponent
+/// \param country country Game's country
 /// \param city Game's city
 /// \param stadium Game's stadium
 /// \param gameDate Game's date
-Game::Game(string opponent, string country, string city, string stadium, Date gameDate): opponent(opponent), country(country), city(city), stadium(stadium),
-                                                                                                   gameDate(gameDate) {
-}
-
+/// \param called_players Called Players
+/// \param stats  Game's Statistics
 Game::Game(string opponent, string country, string city, string stadium, Date gameDate,
         vector<Player *> called_players, Statistics stats): opponent(opponent), country(country), city(city), stadium(stadium), gameDate(gameDate),
                                                                       called_players(called_players), game_stats(stats) {
@@ -60,5 +62,9 @@ void Game::info() const {
 
 string Game::getOpponent() const {
     return opponent;
+}
+
+void Game::setStats(Statistics stats) {
+    this->game_stats = stats;
 }
 

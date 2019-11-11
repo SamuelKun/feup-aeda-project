@@ -4,56 +4,54 @@
 #include <string>
 #include "Person.h"
 
-using namespace std;
-
 class Staff : public Person
 {
 private:
     double salary;
-    string function;
+    std::string function;
 public:
-    Staff(string name, Date birth, double salary, string function);
+    Staff(std::string name, Date birth, double salary, std::string function);
     double getSalary() const;
-    string getFunction() const;
+    std::string getFunction() const;
     void infoTable() const;
     void info() const;
 };
 
 class StaffMemberNotFound{
 private:
-    string name;
+    std::string name;
 public:
-    StaffMemberNotFound(string name): name(name) {}
-    string getName() const{
+    StaffMemberNotFound(std::string name): name(name) {}
+    std::string getName() const{
         return name;
     }
 };
 
 class FunctionNotFound{
 private:
-    string function;
+    std::string function;
 public:
-    FunctionNotFound(string function): function(function) {}
-    string getFunction() const{
+    FunctionNotFound(std::string function): function(function) {}
+    std::string getFunction() const{
         return function;
     }
 };
 class StaffMemberAlreadyExists{
 private:
-    string name;
+    std::string name;
 public:
-    StaffMemberAlreadyExists(string name): name(name) {}
-    string getName() const{
+    StaffMemberAlreadyExists(std::string name): name(name) {}
+    std::string getName() const{
         return name;
     }
 };
 
 class TooManyStaffFound{
 private:
-    string name;
+    std::string name;
 public:
-    TooManyStaffFound(string name): name(name) {}
-    string getName() const{
+    TooManyStaffFound(std::string name): name(name) {}
+    std::string getName() const{
         return name;
     }
 };

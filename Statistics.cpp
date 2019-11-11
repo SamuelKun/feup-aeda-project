@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Statistics.h"
 
+using namespace std;
 
 Statistics::Statistics(): goals_scored(0), goals_conceded(0), shots(0), ball_possession(0), yellow_cards(0), red_cards(0),
                             injured(0), free_kicks(0), corner_kicks(0) {
