@@ -297,6 +297,24 @@ int menu_searchStaffMembers(){
             return 0;
     }
 }
+
+int menu_allStaff() {
+    string toSort;
+    national_team->showStaffTable();
+    cout << "To sort write \"sort [ Name | Function ]\" " << endl;
+    cout << "Write something else to go back!" << endl;
+    getline(cin, toSort);
+    if(toSort == "sort Name" || toSort == "sort name"){
+        national_team->sortStaffName();
+        return 0;
+    }
+    if(toSort == "sort Function" || toSort == "sort function") {
+        national_team->sortStaffFunction();
+        return 0;
+    }
+    return 1;
+}
+
 int menu_staff() {
     char menu;
 
@@ -319,11 +337,7 @@ int menu_staff() {
     switch(menu)
     {
         case '1':    //View player info
-            for(int i = 0; i < (national_team->getStaff()).size(); i++){
-                (national_team->getStaff())[i]->info();
-                cout << endl;
-            }
-            wait_2();
+            while(!menu_allStaff());
             return 0;
         case '2':
             while(!menu_searchStaffMembers());
@@ -439,7 +453,6 @@ int menu_games(){
     vector<Game *> print_it = national_team->getGames();
     switch(menu) {
         case '1':
-
             for(size_t i = 0; i < print_it.size(); i++){
                 print_it[i]->info();
                 cout << endl;
