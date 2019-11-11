@@ -481,6 +481,7 @@ int menu_tournament_games(Competition * comp){
     cout << "1. Show all games " << endl;
     cout << "2. Search a Game" << endl;
     cout << "3. Add a Game" << endl;
+    cout << "4. Add Game Statistics - To be done " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -643,7 +644,8 @@ int menu_tournaments()
                 cout << i << ". " << national_team->getCompetition()[i]->getCompetitionName() << " - Paid: " << national_team->getCompetition()[i]->getPaid() << endl;
             }
             int index;
-            cin >> index; // VERIFICAR ERRO DEPOIS
+            cin >> index;
+            cin.ignore(1000,'\n');
             try {
                 national_team->getCompetition()[index]->payPlayers();
                 cout << "Competition successfully paid!" << endl;
@@ -656,16 +658,23 @@ int menu_tournaments()
         case '3':
             try{
                 string name;
-                Competition* comp;
+
                 cout << "Choose the name of the Competition you wish to view: " << endl;
                 getline(cin,name);
-                comp = national_team->findCompetition(name);
-                while(!menu_singleCompetition(comp));
+                vector<Competition *> comp = national_team->findCompetition(name);
+                if(comp.size() > 1){
+                    for(size_t i = 0; i < comp.size(); i++)
+                        cout << *comp[i] << endl;
+                    cout << " More than 1 Competion named " << name << " was found!!" << endl;
+                    cout << "Please try again! "<< endl;
+                }
+                else
+                    while(!menu_singleCompetition(comp[0]));
             }
             catch(CompetitionNotFound &er){
                 cout << "No competition named " << er.getName() << endl;
+                waitInput();
             }
-            waitInput();
             return 0;
         case '4':
             try{

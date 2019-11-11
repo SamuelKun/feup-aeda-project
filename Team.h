@@ -70,7 +70,7 @@ public:
     vector<Player *> findPlayerPos(string position);
     vector<Staff *> findStaffFunction(string function);
 
-    Competition * findCompetition(string name); // Colocar como vetor
+    vector<Competition *> findCompetition(string name); // Colocar como vetor
     vector<Competition *> findCompetitionDate(Date start, Date end);
 
 };
