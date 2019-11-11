@@ -5,6 +5,7 @@
 #include <vector>
 #include <ostream>
 #include "Player.h"
+#include "Statistics.h"
 
 using namespace std;
 
@@ -16,7 +17,7 @@ private:
     string stadium; /*!< Game's stadium */
     Date gameDate;  /*!< Game's Date    */
     vector<Player *> called_players; /*!< Vector with called players */
-    //Stats stats;
+    Statistics game_stats;
 public:
     Game(string country, string city, string stadium, Date gameDate);
     Game(string country, string city, string stadium, Date gameDate, vector<Player *> called_players);

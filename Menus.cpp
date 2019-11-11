@@ -137,19 +137,13 @@ int menu_players()
         case '3':
             try{
                 string n, c, pos;
-                int wei,hei,val,earn,day,month,year;
-                char checker = false;
-                vector<Player*> players;
+                int wei,hei,val,earn;
+                Date d;
 
                 cout << "Write the name of the Player you wish to add: " << endl;
                 getline(cin,n);
                 cout << "Write " << n << "'s birthday " << endl;
-                cout << "Write " << n << "'s day of birth" << endl;
-                cin >> day; failInput_2(day);
-                cout << "Write " << n << "'s month of birth" << endl;
-                cin >> month; failInput_2(month);
-                cout << "Write " << n << "'s year of birth" << endl;
-                cin >> year; failInput_2(year);
+                cin >> d;
                 cout << "Write " << n << "'s club " << endl;
                 cin >> c;
                 cout << "Write " << n << "'s position " << endl;
@@ -163,8 +157,7 @@ int menu_players()
                 cout << "Write " << n << "'s earnings " << endl;
                 cin >> earn;failInput_2(earn);
 
-                Date *b = new Date(day,month,year);
-                Player *play = new Player(n,*b,c,pos,wei,hei,val,earn);
+                Player *play = new Player(n,d,c,pos,wei,hei,val,earn);
 
                 national_team->addPlayer(play);
             }
@@ -353,7 +346,6 @@ int menu_games(){
             try {
                 cout << "Write the name of the Game's country: " << endl;
                 string country,city,stadium;
-                cin.ignore(1000, '\n');
                 getline(cin, country);
 
                 cout << "Write the name of the Game's city: " << endl;
