@@ -27,11 +27,10 @@ void wait_2(){
     cout << "Press any key to continue: " << endl;
     getline(cin,waiting);
 }
-void correctPosition(string position){
-    while(position != "Goalkeeper" || position != "Defender" ||
-    position != "Midfielder" || position != "Forward"){
+void correctPosition(string &position){
+    while(position != "Goalkeeper" && position != "Defender" &&
+    position != "Midfielder" && position != "Forward"){
         cin.clear();
-        cin.ignore();
         cin.ignore(1000, '\n');
         cout << "Not a valid position. Please reenter: " << endl;
         cout << "Goalkeeper/Defender/Midfielder/Forward" << endl;
@@ -159,7 +158,7 @@ int menu_players()
                 cout << "Write " << n << "'s club " << endl;
                 cin >> c;
                 cout << "Write " << n << "'s position " << endl;
-                cin >> pos;
+                cin >> pos;correctPosition(pos);
                 cout << "Write " << n << "'s weight " << endl;
                 cin >> wei;failInput_2(wei);
                 cout << "Write " << n << "'s height " << endl;
@@ -551,7 +550,8 @@ int menu_tournaments()
             for(int i = 0; i < (national_team->getCompetition()).size(); i++){
                 cout << (*(national_team->getCompetition()[i]));
             }
-            return 0;//remove this line after inserting stuff
+            wait_2();
+            return 0;
         case '2':
             cout << "National Football Team Competitions - VERIFICAR ERRO DEPOIS" << endl;
             for(int i = 0; i < (national_team->getCompetition()).size(); i++){
@@ -566,6 +566,7 @@ int menu_tournaments()
             catch(AlreadyPaid &er) {
                 cout << "The " << er.getName() << " has already been paid to players." << endl;
             }
+            wait_2();
             return 0;
         case '3':
             while(!menu_singleCompetition())
