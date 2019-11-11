@@ -75,4 +75,17 @@ void Competition::showGames() const {
     }
 }
 
+void Competition::addGame(Game * g) {
+    for(size_t i = 0;i < team_games.size();i++ ){
+        if(team_games[i]->getOpponent() == g->getOpponent()&&
+           team_games[i]->getCountry() == g->getCountry()&&
+           team_games[i]->getCity() == g->getCity()&&
+           team_games[i]->getStadium() == g->getStadium()&&
+           team_games[i]->getDate().isEqualTo(g->getDate())){
+            throw GameAlreadyExists(g->getOpponent(),g->getCountry(),g->getCity(),g->getStadium(),g->getDate());
+        }
+    }
+    team_games.push_back(g);
+}
+
 
