@@ -186,16 +186,13 @@ int menu_players()
                 cout << "Write the name of the player you wish to remove: " << endl;
                 string name;
                 getline(cin,name);
-                if (name == "0") return 0;
+
                 vector<Player *> to_print = national_team->findPlayerName(name);
                 for (size_t i = 0; i < to_print.size(); i++) {
                     to_print[i]->info();
                     cout << endl;
                 }
-                if(to_print.size() > 1){
-                    cout << "Can't remove: " << endl;
-                    cout << "More than 1 Player was found!!" << endl;
-                }
+                if(to_print.size() > 1){ throw TooManyPeopleFound(name);}
                 else{
                     string checker;
                     cout << "Do you wish to remove " << to_print[0]->getName() << endl;
@@ -213,6 +210,10 @@ int menu_players()
             }
             catch (PersonNotFound &er) {
                 cout << "Player " << er.getName() << " not found" << endl;
+            }
+            catch (TooManyPeopleFound &er){
+                cout << "Can't remove: " << endl;
+                cout << "More than 1 Player named " << er.getName() << " was found!!" << endl;
             }
             wait_2();
             return 0;
@@ -366,6 +367,43 @@ int menu_staff() {
             wait_2();
             return 0;
         case '4':
+            try{
+                string name;
+                vector <Staff *> v_staff;
+
+                cout << "Write the name of the Staff member you wish to remove: " << endl;
+                getline(cin,name);
+                v_staff = national_team->findStaffName(name);
+
+                for (size_t i = 0; i < v_staff.size(); i++) {
+                    v_staff[i]->info();
+                    cout << endl;
+                }
+                if(v_staff.size() > 1){ throw TooManyStaffFound(name);}
+
+                else{
+                    string checker;
+                    cout << "Do you wish to remove " << v_staff[0]->getName() << "?" << endl;
+                    cout << "1. Remove Staff Member " << endl;
+                    cout << "Any other key. Cancel removing Staff Member " << endl;
+                    getline(cin,checker);
+                    if (checker != "1"){
+                        cout << "Staff Member was not removed!!" << endl;
+                    }
+                    else{
+                        national_team->removeStaff(v_staff[0]);
+                        cout << "Staff Member successfully removed" << endl;
+                    }
+                }
+            }
+            catch (StaffMemberNotFound &er) {
+                cout << "Staff Member " << er.getName() << " not found" << endl;
+            }
+            catch (TooManyStaffFound &er){
+                cout << "Can't remove: " << endl;
+                cout << "More than 1 Staff Member named " << er.getName() << " was found!!" << endl;
+            }
+            wait_2();
             return 0;
         case '0':    //Exit function
             return 1;

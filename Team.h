@@ -31,6 +31,7 @@ public:
     void addGame(Game * g);
 
     void removePlayer(Player * p);
+    void removeStaff(Staff * s);
 
 
     double getMoneyPlayers() const;

@@ -254,3 +254,15 @@ void Team::removePlayer( Player * p) {
 
 }
 
+void Team::removeStaff(Staff *s) {
+    bool found_staff = false;
+    for(size_t i = 0; i < team_staff.size();i++){
+        if(team_staff[i]->getName() == s->getName()){
+            found_staff = true;
+            team_staff.erase(team_staff.begin()+i);
+            break;
+        }
+    }
+    if(!found_staff) throw (StaffMemberNotFound(s->getName()));
+}
+
