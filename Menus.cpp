@@ -138,7 +138,7 @@ int menu_players()
             try{
                 string n, c, pos;
                 int wei,hei,val,earn,day,month,year;
-                char checker = false;
+                string checker;
                 vector<Player*> players;
 
                 cout << "Write the name of the Player you wish to add: " << endl;
@@ -166,8 +166,18 @@ int menu_players()
                 Date *b = new Date(day,month,year);
                 Player *play = new Player(n,*b,c,pos,wei,hei,val,earn);
 
-                national_team->addPlayer(play);
-                //cout << "Player successfully added!!" << endl;
+                cout << "Do you wish to add " << n << " as a Player?" << endl;
+                cout << "1. Add Player " << endl;
+                cout << "Any other key. Cancel adding Player " << endl;
+                cin.ignore(1000,'\n');
+                getline(cin,checker);
+                if (checker != "1"){
+                    cout << "Player was not added!" << endl;
+                }
+                else{
+                    national_team->addPlayer(play);
+                    cout << "Player successfully added!!" << endl;
+                }
             }
             catch(PlayerAlreadyExists &er){
                 cout << "Player " << er.getName() << " already exists!!" << endl;
@@ -175,7 +185,6 @@ int menu_players()
             catch(CantUseThatName &er){
                 cout << "Can't use " << er.getName() << " has a name!!" << endl;
             }
-            cin.ignore(1000,'\n');
             wait_2();
             return 0;
         case '4':
