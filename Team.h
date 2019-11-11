@@ -21,37 +21,37 @@ private:
 public:
     Team();
     Team(string file_name);
-
     string getTeamName() const;
     vector<Player *> getPlayers() const;
     vector<Staff *> getStaff() const;
     vector<Game *> getGame() const;
     vector<Competition *> getCompetition() const;
+    int addPlayer();
+    int addStaff();
+    void addGame();
+    void addGame(Game * g);
     double getMoneyPlayers() const;
     double getMoneyStaff() const;
-
     int missingPay();
-    void addGame(Game * g);
+
     void showPlayersTable() const;
+    void showGameTable() const;
+    void showStaffTable() const;
 
     void sortPlayersName();
     void sortPlayersPosition();
     void sortPlayersValue();
 
-    Player * findPlayer(string name);
+    Player * findPlayer(string name); // Necessário para ler, alterar depois
 
     vector<Player *> findPlayerName(string name);
     vector<Staff *> findStaffName(string name);
-    Game * findGame(string country, string city, string stadium);
+    Game * findGame(string country, string city, string stadium); // Colocar como vetor
 
     vector<Player *> findPlayerPos(string position);
-    Competition * findCompetition(string name);
-    vector<Staff *> findStaffByFunction(string function);
-    vector<Competition *> findCompetitionByDate(Date start, Date end);
-
-    int addPlayer();
-    int addStaff();
-    
+    Competition * findCompetition(string name); // Colocar como vetor
+    vector<Staff *> findStaffFunction(string function);
+    vector<Competition *> findCompetitionDate(Date start, Date end);
 };
 
 #endif

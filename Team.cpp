@@ -215,6 +215,10 @@ int Team::addStaff() {
     return 0;
 }
 
+void Team::addGame(Game *g) {
+    team_games.push_back(g);
+}
+
 vector<Player *> Team::findPlayerName(string name) {
     vector<Player *> v_players;
     for (size_t i = 0; i < team_players.size(); i++) {
@@ -248,8 +252,6 @@ Game *Team::findGame(string country, string city, string stadium) {
     throw GameNotFound(country,city,stadium);
 }
 
-// Added 10/11/2019 - Joao
-
 vector<Player *> Team::findPlayerPos(string position) {
     vector<Player *> v_players;
     for (size_t i = 0; i < team_players.size(); i++) {
@@ -270,18 +272,18 @@ Competition * Team::findCompetition(string name) {
     throw CompetitionNotFound(name);
 }
 
-vector<Staff *> Team::findStaffByFunction(string function) {
+vector<Staff *> Team::findStaffFunction(string function) {
     vector<Staff *> v_staff;
     for (size_t i = 0; i < team_staff.size(); i++) {
         if (team_staff[i]->getFunction() == function) {
             v_staff.push_back(team_staff[i]);
         }
     }
-    if (v_staff.empty()) { throw(NoStaffForFunction(function)); }
+    if (v_staff.empty()) { throw(FunctionNotFound(function)); }
     else { return v_staff; }
 }
 
-vector<Competition *> Team::findCompetitionByDate(Date start, Date end) {
+vector<Competition *> Team::findCompetitionDate(Date start, Date end) {
     vector<Competition *> to_return;
     for (size_t i = 0; i < team_competitions.size(); i++) {
         if ((team_competitions[i]->getStartDate().isBefore(start) || team_competitions[i]->getStartDate().isEqualTo(start)) && ( 
@@ -304,6 +306,3 @@ Player *Team::findPlayer(string name) {
     throw(PersonNotFound(name));
 }
 
-void Team::addGame(Game *g) {
-    team_games.push_back(g);
-}

@@ -96,6 +96,7 @@ vector<Competition *> read_competion(string info, Team * t){
 
             //Ler Jogos
             vector<Game *> competion_games = read_games(tempVec[2], comp_convocado);
+
             //Atualizar os jogos todos da equipa
             for(size_t i = 0; i < competion_games.size(); i++)
                 t->addGame(competion_games[i]);

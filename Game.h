@@ -21,13 +21,13 @@ public:
     Game(string country, string city, string stadium, Date gameDate);
     Game(string country, string city, string stadium, Date gameDate, vector<Player *> called_players);
 
-    void info() const ;
+
     string getCountry() const;
     string getCity() const;
     string getStadium() const;
     Date getDate() const;
     vector<Player *> getCalledPlayers() const;
-
+    void info() const;
     //Stats stats getStats()const;
 };
 class GameNotFound{

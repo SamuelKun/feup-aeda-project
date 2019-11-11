@@ -36,7 +36,6 @@ public:
     /// \brief Shows Person's data
 	virtual void infoTable() const;
     virtual void info() const;
-	//virtual double earnings() = 0 const;
 };
 
 class PersonNotFound{

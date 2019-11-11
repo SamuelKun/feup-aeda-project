@@ -170,13 +170,13 @@ int menu_searchStaffMembers(){
                 cin.ignore(1000, '\n');
                 getline(cin, function);
                 if(function == "0") return 0;
-                vector<Staff *> to_print = national_team->findStaffByFunction(function);
+                vector<Staff *> to_print = national_team->findStaffFunction(function);
                 for (size_t i = 0; i < to_print.size(); i++) {
                     to_print[i]->info();
                     cout << endl;
                 }
             }
-            catch(NoStaffForFunction & er) {
+            catch(FunctionNotFound & er) {
                 cout << "No Staff members for function " << er.getFunction() << endl;
             }
             wait_2();

@@ -1,5 +1,6 @@
 #include <string>
 #include "Staff.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -20,12 +21,14 @@ double Staff::getSalary() const {
 string Staff::getFunction() const {
     return function;
 }
+
+void Staff::infoTable() const {
+    Person::infoTable();
+    cout << setw(12) << this->function << " | " << setw(9) << this->salary << " | ";
+}
 /// \brief Shows Staff Member's data
 void Staff::info() const{
     Person::info();
     cout << "Position: " << this->function << endl;
     cout << "Earnings: " << this->salary << endl;
 }
-
-
-

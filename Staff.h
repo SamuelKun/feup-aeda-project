@@ -15,14 +15,15 @@ public:
     Staff(string name, Date birth, double salary, string function);
     double getSalary() const;
     string getFunction() const;
+    void infoTable() const;
     void info() const;
 };
 
-class NoStaffForFunction{
+class FunctionNotFound{
 private:
     string function;
 public:
-    NoStaffForFunction(string function): function(function) {}
+    FunctionNotFound(string function): function(function) {}
     string getFunction() const{
         return function;
     }
