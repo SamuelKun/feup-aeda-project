@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <string>
 #include <fstream>
+#include <algorithm>
 
 #include "Menus.h"
 #include "input_utils.h"
@@ -621,7 +622,7 @@ int menu_tournaments()
     cout << "1. Show all competitions" << endl;
     cout << "2. Pay competitions fees" << endl;
     cout << "3. Detailed information about one competition" << endl;
-    cout << "4. Create a Single Game / Competition - To be done " << endl;
+    cout << "4. Create a new Competition " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -667,6 +668,42 @@ int menu_tournaments()
             waitInput();
             return 0;
         case '4':
+            try{
+                string name, players;
+                Date start,end;
+                vector<Player*> v_players;
+                vector<Player*> team_players = national_team->getPlayers();
+                vector<int> v_index;
+                size_t n = team_players.size();
+
+                cout << "Write the Competition's name: " << endl;
+                getline(cin,name);
+                cout << "Write " << name << "'s beginning date: " << endl;
+                cin >> start;
+                cout << "Write " << name << "'s ending date: " << endl;
+                cin >> end; cout << endl;
+
+                national_team->showPlayersTable(); cout << endl;
+
+                cout << "Write the index of the player you wish to add" << endl;
+                cout << "Press any char that is not a number to stop adding " << endl;
+                cout << "Example: Press [a] to exit" << endl;
+                while(cin >> index && !cin.eof()) {
+                    if(index >= n){
+                        cout << "Index too high!!" << endl;
+                        continue;
+                    }
+                    else if( find(v_index.begin(),v_index.end(),index) != v_index.end() )
+                    v_players.push_back(team_players[index]);
+                    cout << team_players[index]->getName() << " was successfully added!!" << endl;
+                }
+                cin.clear();
+                cin.ignore(1000,'\n');
+            }
+            catch( CompetitionNotFound &er){
+                cout << "Competition already exists!!" << endl;
+            }
+            waitInput();
             return 0;
         case '0':    //Exit function
             return 1;
