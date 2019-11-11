@@ -303,6 +303,7 @@ int menu_staff() {
     cout << "1. View all Staff Members " << endl;
     cout << "2. Search Staff Members " << endl;
     cout << "3. Add Staff Members " << endl;
+    cout << "4. Remove Staff Members " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -322,7 +323,56 @@ int menu_staff() {
             while(!menu_searchStaffMembers());
             return 0;
         case '3':
-            return national_team->addStaff();
+            try {
+                string n, f, checker;
+                double w;
+                int day, month, year;
+
+                cout << "Write the name of the Staff Member you wish to add: " << endl;
+                getline(cin, n);
+                cout << "Write " << n << "'s birthday " << endl;
+                cout << "Write " << n << "'s day of birth" << endl;
+                cin >> day;
+                failInput_2(day);
+                cout << "Write " << n << "'s month of birth" << endl;
+                cin >> month;
+                failInput_2(month);
+                cout << "Write " << n << "'s year of birth" << endl;
+                cin >> year;
+                failInput_2(year);
+                cout << "Write " << n << "'s wage " << endl;
+                cin >> w;
+                failInput_2(w);
+                cout << "Write " << n << "'s function " << endl;
+                cin >> f;
+                failInput_2(f);
+
+                Date *b = new Date(day, month, year);
+                Staff *s = new Staff(n, *b, w, f);
+
+                cout << "Do you wish to add the Staff Member you have created?: " << endl;
+                cout << "1. Add Staff Member " << endl;
+                cout << "Any other key. Cancel adding Staff Member " << endl;
+                cin.ignore(1000,'\n');
+                getline(cin,checker);
+                if (checker != "1"){
+                    cout << "Staff Member was not added!!" << endl;
+                }
+                else{
+                    national_team->addStaff(s);
+                    cout << n << " was successfully added as a Staff member!!" << endl;
+                }
+            }
+            catch(StaffMemberAlreadyExists &er){
+                cout << "The Staff Member " << er.getName() << " already exists!!" << endl;
+            }
+            catch(CantUseThatName &er){
+                cout << "Can't use " << er.getName() << " has a name!!" << endl;
+            }
+            wait_2();
+            return 0;
+        case '4':
+            return 0;
         case '0':    //Exit function
             return 1;
         default:     //Invalid input

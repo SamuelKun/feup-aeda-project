@@ -131,50 +131,20 @@ void Team::addPlayer(Player* p) {
             throw PlayerAlreadyExists(p->getName());
         }
     }
-
    team_players.push_back(p);
-
 }
 
-int Team::addStaff() {
-    string n, f , go_back;
-    double w;
-    int day,month,year;
-    bool checker = false;
+void Team::addStaff(Staff* s) {
+    if(s->getName() == "") throw CantUseThatName(s->getName());
 
-    cout << "Write the name of the Player you wish to add: " << endl;
-    cin.ignore(1000, '\n');
-    getline(cin,n);
+    for(size_t i = 0; i < team_staff.size();i++){
+        if(team_staff[i]->getName() == s->getName()){
+            throw StaffMemberAlreadyExists(s->getName());
+        }
+    }
 
-    cout << "Write " << n << "'s birthday " << endl;
-    cout << "Write " << n << "'s day of birth" << endl;
-    cin >> day; failInput(day);
-    cout << "Write " << n << "'s month of birth" << endl;
-    cin >> month; failInput(month);
-    cout << "Write " << n << "'s year of birth" << endl;
-    cin >> year; failInput(year);
-
-    cout << "Write " << n << "'s wage " << endl;
-    cin >> w;
-    failInput(w);
-
-    cout << "Write " << n   << "'s function " << endl;
-    cin >> f;
-    failInput(f);
-
-    cout << "Do you wish to add the Staff Member you have created?: " << endl;
-    cout << "1. Add Staff Member " << endl;
-    cout << "2. Cancel adding Staff Member " << endl;
-    cin >> checker;
-    if(checker == '2') return 0;
-
-    Date *b = new Date(day,month,year);
-    Staff *s = new Staff(n,*b,w,f);
     team_staff.push_back(s);
 
-    cout << "Staff Member added successfully!!" << endl;
-    wait();
-    return 0;
 }
 
 void Team::addGame(Game *g) {

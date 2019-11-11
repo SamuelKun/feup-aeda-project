@@ -27,7 +27,7 @@ public:
     vector<Game *> getGame() const;
     vector<Competition *> getCompetition() const;
     void addPlayer(Player* p);
-    int addStaff();
+    void addStaff(Staff * s);
     void addGame();
     void addGame(Game * g);
 
