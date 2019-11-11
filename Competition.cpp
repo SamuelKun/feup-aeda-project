@@ -102,4 +102,7 @@ Game * Competition::findGame(string opponent, string country, string city, strin
     throw GameNotFound(opponent,country,city,stadium,date);
 }
 
+Competition::Competition(string name, vector<Player *> called, Date start, Date end):
+name(name),called(called),start(start),end(end){}
+
 

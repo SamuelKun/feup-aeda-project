@@ -16,6 +16,7 @@ private:
     bool paid;
 
 public:
+        Competition(string name, vector<Player *> called, Date start, Date end);
     Competition(string name, vector<Player *> called, vector<Game *> team_games, Date start, Date end, double moneyAccommodation);
     string getCompetitionName() const;
     void payPlayers();
