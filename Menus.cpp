@@ -27,6 +27,17 @@ void wait_2(){
     cout << "Press any key to continue: " << endl;
     getline(cin,waiting);
 }
+void correctPosition(string position){
+    while(position != "Goalkeeper" || position != "Defender" ||
+    position != "Midfielder" || position != "Forward"){
+        cin.clear();
+        cin.ignore();
+        cin.ignore(1000, '\n');
+        cout << "Not a valid position. Please reenter: " << endl;
+        cout << "Goalkeeper/Defender/Midfielder/Forward" << endl;
+        cin >> input;
+    }
+}
 
 int menu_allPlayers() {
     string toSort;
