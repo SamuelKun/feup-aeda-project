@@ -495,12 +495,20 @@ int menu_singleCompetition(){
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
+    cout << "National Football Team Competitions - VERIFICAR ERRO DEPOIS" << endl;
+    for(int i = 0; i < (national_team->getCompetition()).size(); i++){
+        cout << i << ". " << national_team->getCompetition()[i]->getCompetitionName() << " - Paid: " << national_team->getCompetition()[i]->getPaid() << endl;
+    }
+    int index;
+    cin >> index; // VERIFICAR ERRO DEPOIS
+    Competition * singleCompetition = national_team->getCompetition()[index];
+
     cout << "========================================= " << endl;
     cout << "            Competitions Menu             " << endl;
     cout << "========================================= \n" << endl;
 
-    cout << "1. View all games from this competition - To be done " << endl;
-    cout << "2. View called Players - To be done " << endl;
+    cout << "1. View all games from this competition" << endl;
+    cout << "2. View called Players" << endl;
     cout << "3. Add a Game - To be done " << endl;
     cout << "4. Add Game Statistics - To be done " << endl;
 
@@ -509,9 +517,14 @@ int menu_singleCompetition(){
     cin.ignore(1000,'\n');
     switch(menu){
         case '1':
+            for(size_t i = 0; i < singleCompetition->getGames().size(); i++)
+                singleCompetition->getGames()[i]->info();
             return 0;
         case '2':
+            for(size_t i = 0; i < singleCompetition->getCalled().size(); i++)
+                singleCompetition->getCalled()[i]->infoTable();
             return 0;
+
         case '3':
             return 0;
         case '4':
@@ -534,9 +547,9 @@ int menu_tournaments()
     cout << "            Competitions Menu             " << endl;
     cout << "========================================= \n" << endl;
 
-    cout << "1. Show all competitions " << endl;
+    cout << "1. Show all competitions" << endl;
     cout << "2. Pay competitions fees" << endl;
-    cout << "3. Detailed information about one competition - To be done " << endl;
+    cout << "3. Detailed information about one competition" << endl;
     cout << "4. Create a Single Game / Competition - To be done " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
