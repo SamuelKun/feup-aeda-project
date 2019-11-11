@@ -698,16 +698,17 @@ int menu_tournaments()
                 cout << "Press any char that is not a number to stop adding " << endl;
                 cout << "Example: Press [a] to exit" << endl;
                 while(cin >> index && !cin.eof()) {
-                    if(index >= n){
+                    if (index >= n) {
                         cout << "Index too high!!" << endl;
                         continue;
-                    }
-                    else if( find(v_index.begin(),v_index.end(),index) != v_index.end()){
-                        cout << "Player was already added!!" << endl;
+                    } else if (find(v_index.begin(), v_index.end(), index) != v_index.end()) {
+                        cout << team_players[index] << " was already added!!" << endl;
                         continue;
+                    } else {
+                        v_players.push_back(team_players[index]);
+                        v_index.push_back(index);
+                        cout << team_players[index]->getName() << " was successfully added!!" << endl;
                     }
-                    v_players.push_back(team_players[index]);
-                    cout << team_players[index]->getName() << " was successfully added!!" << endl;
                 }
                 cin.clear();
                 cin.ignore(1000,'\n');
