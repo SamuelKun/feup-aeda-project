@@ -167,6 +167,7 @@ int menu_players()
                 Player *play = new Player(n,*b,c,pos,wei,hei,val,earn);
 
                 national_team->addPlayer(play);
+                //cout << "Player successfully added!!" << endl;
             }
             catch(PlayerAlreadyExists &er){
                 cout << "Player " << er.getName() << " already exists!!" << endl;
@@ -174,6 +175,7 @@ int menu_players()
             catch(CantUseThatName &er){
                 cout << "Can't use " << er.getName() << " has a name!!" << endl;
             }
+            cin.ignore(1000,'\n');
             wait_2();
             return 0;
         case '4':
