@@ -26,10 +26,14 @@ public:
     vector<Staff *> getStaff() const;
     vector<Game *> getGame() const;
     vector<Competition *> getCompetition() const;
-    int addPlayer();
+    void addPlayer(Player* p);
     int addStaff();
     void addGame();
     void addGame(Game * g);
+
+    void removePlayer(Player * p);
+
+
     double getMoneyPlayers() const;
     double getMoneyStaff() const;
     int missingPay();
@@ -52,6 +56,14 @@ public:
     Competition * findCompetition(string name); // Colocar como vetor
     vector<Staff *> findStaffFunction(string function);
     vector<Competition *> findCompetitionDate(Date start, Date end);
-};
 
+};
+/* Esta excecao provavelmente n vai ser necessaria
+class TooManyPlayersFound{
+    vector<Player *> players;
+public:
+    TooManyPlayersFound(vector<Player *> players ): players(players){}
+    vector<Player *> getPlayers() const {return players;}
+};
+*/
 #endif

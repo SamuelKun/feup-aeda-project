@@ -3,10 +3,24 @@
 #include <string>
 #include <fstream>
 
+
 #include "Menus.h"
 
 using namespace std;
 extern Team *national_team;
+
+template <class form>
+void failInput_2(form input)
+{
+    while (cin.fail())
+    {
+        cin.clear();
+        cin.ignore();
+        cin.ignore(1000, '\n');
+        cout << "Not a valid number. Please reenter: ";
+        cin >> input;
+    }
+}
 
 void wait_2(){
     string waiting;
@@ -48,7 +62,8 @@ int menu_searchPlayers() {
 
     cin.clear();
     cin >> menu;
-    cin.ignore(1000, '\n');
+    cin.ignore(1000,'\n');
+
     switch(menu) {
         case '1':
             try {
@@ -71,9 +86,9 @@ int menu_searchPlayers() {
             try {
                 cout << "Write the position of the Player(s) you wish to find: " << endl;
                 string position;
-                cin.ignore(1000, '\n');
                 getline(cin, position);
                 if (position == "0") return 0;
+                cout << endl;
                 vector<Player *> to_print = national_team->findPlayerPos(position);
                 for (size_t i = 0; i < to_print.size(); i++) {
                     to_print[i]->info();
@@ -95,7 +110,7 @@ int menu_searchPlayers() {
 int menu_players()
 {
     char menu;
-    string toSort;
+
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
     cout << "========================================= " << endl;
     cout << "               Player Menu                " << endl;
@@ -104,22 +119,98 @@ int menu_players()
     cout << "1. View all players" << endl;
     cout << "2. Search Players " << endl;
     cout << "3. Add Player " << endl;
+    cout << "4. Remove Player " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
     cin >> menu;
+    cin.ignore(1000,'\n');
 
     switch(menu)
     {
         case '1':    //View player info - Table
-            cin.ignore(1000, '\n');
             while(!menu_allPlayers());
             return 0;//remove this line after inserting stuff
         case '2':    //Exit function
             while(!menu_searchPlayers());
             return 0;
         case '3':
-            return national_team->addPlayer();
+            try{
+                string n, c, pos;
+                int wei,hei,val,earn,day,month,year;
+                char checker = false;
+                vector<Player*> players;
+
+                cout << "Write the name of the Player you wish to add: " << endl;
+                getline(cin,n);
+                cout << "Write " << n << "'s birthday " << endl;
+                cout << "Write " << n << "'s day of birth" << endl;
+                cin >> day; failInput_2(day);
+                cout << "Write " << n << "'s month of birth" << endl;
+                cin >> month; failInput_2(month);
+                cout << "Write " << n << "'s year of birth" << endl;
+                cin >> year; failInput_2(year);
+                cout << "Write " << n << "'s club " << endl;
+                cin >> c;
+                cout << "Write " << n << "'s position " << endl;
+                cin >> pos;
+                cout << "Write " << n << "'s weight " << endl;
+                cin >> wei;failInput_2(wei);
+                cout << "Write " << n << "'s height " << endl;
+                cin >> hei;failInput_2(hei);
+                cout << "Write " << n << "'s value " << endl;
+                cin >> val;failInput_2(val);
+                cout << "Write " << n << "'s earnings " << endl;
+                cin >> earn;failInput_2(earn);
+
+                Date *b = new Date(day,month,year);
+                Player *play = new Player(n,*b,c,pos,wei,hei,val,earn);
+
+                national_team->addPlayer(play);
+            }
+            catch(PlayerAlreadyExists &er){
+                cout << "Player " << er.getName() << " already exists!!" << endl;
+            }
+            catch(CantUseThatName &er){
+                cout << "Can't use " << er.getName() << " has a name!!" << endl;
+            }
+            wait_2();
+            return 0;
+        case '4':
+            try {
+                cout << "Write the name of the player you wish to remove: " << endl;
+                string name;
+                getline(cin,name);
+                if (name == "0") return 0;
+                vector<Player *> to_print = national_team->findPlayerName(name);
+                for (size_t i = 0; i < to_print.size(); i++) {
+                    to_print[i]->info();
+                    cout << endl;
+                }
+                if(to_print.size() > 1){
+                    cout << "Can't remove: " << endl;
+                    cout << "More than 1 Player was found!!" << endl;
+                }
+                else{
+                    string checker;
+                    cout << "Do you wish to remove " << to_print[0]->getName() << endl;
+                    cout << "1. Remove Player " << endl;
+                    cout << "Any other key. Cancel removing Player " << endl;
+                    getline(cin,checker);
+                    if (checker != "1"){
+                        cout << "Player was not removed!!" << endl;
+                    }
+                    else{
+                        national_team->removePlayer(to_print[0]);
+                        cout << "Player successfully removed" << endl;
+                    }
+                }
+            }
+            catch (PersonNotFound &er) {
+                cout << "Player " << er.getName() << " not found" << endl;
+            }
+            wait_2();
+            return 0;
         case '0':
             return 1;
         default:     //Invalid input
@@ -140,6 +231,7 @@ int menu_searchStaffMembers(){
 
     cin.clear();
     cin >> menu;
+    cin.ignore(1000,'\n');
 
     switch(menu){
         case '1':
@@ -184,6 +276,7 @@ int menu_searchStaffMembers(){
         case '0':
             return 1;
         default:
+            cin.ignore(1000,'\n');
             return 0;
     }
 }
@@ -203,6 +296,7 @@ int menu_staff() {
 
     cin.clear();
     cin >> menu;
+    cin.ignore(1000,'\n');
 
     switch(menu)
     {
@@ -242,6 +336,9 @@ int menu_games(){
 
     cin.clear();
     cin >> menu;
+    cin.ignore(1000,'\n');
+
+
     vector<Game *> print_it = national_team->getGame();
     switch(menu) {
         case '1':
@@ -303,6 +400,7 @@ int menu_tournaments()
 
     cin.clear();
     cin >> menu;
+    cin.ignore(1000,'\n');
 
     switch(menu)
     {
@@ -353,6 +451,7 @@ int menu_info()
 
     cin.clear();
     cin >> menu;
+    cin.ignore(1000,'\n');
 
     return 1;
 }
@@ -397,27 +496,28 @@ int mainMenu() {
 
     cin.clear();
     cin >> menu;
+    cin.ignore(1000,'\n');
 
     switch(menu)
     {
         case '1':    //View player info
             while(!menu_players());
-            break;
+            return 0;
         case '2':    //View staff info
             while(!menu_staff());
-            break;
+            return 0;
         case '3':    //View app info
             while(!menu_tournaments());
-            break;
+            return 0;
         case '4':    //View app info
             while(!menu_games());
-            break;
+            return 0;
         case '5':    //View app info
             while(!menu_info());
-            break;
+            return 0;
         case '6':    //View app info
             while(!menu_credits());
-            break;
+            return 0;
         case '0':    //Exit function
             exit(0);
         default:     //Invalid input
@@ -434,6 +534,7 @@ int fileMenu(){
     cout << "0. Go back to the previous menu" << endl;
     cin.clear();
     cin >> filename;
+    cin.ignore(1000,'\n');
     teamFile.open(filename);
 
     if(filename == "0") return 1;
@@ -464,6 +565,7 @@ int initMenu(){
 
     cin.clear();
     cin >> menu;
+    cin.ignore(1000,'\n');
 
     switch(menu){
         case '1': //Select the Team File to read

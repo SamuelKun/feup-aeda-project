@@ -122,56 +122,18 @@ void Team::sortPlayersValue() {
 }
 
 
-int Team::addPlayer() {
-    string n, c, pos;
-    int wei,hei,val,earn,day,month,year;
-    char checker = false;
+void Team::addPlayer(Player* p) {
 
-    cout << "Write the name of the Player you wish to add: " << endl;
+    if(p->getName() == "") throw CantUseThatName(p->getName());
 
-    cin.ignore(1000, '\n');
-    getline(cin,n);
+    for(size_t i = 0; i < team_players.size();i++){
+        if(team_players[i]->getName().find(p->getName()) != string::npos ){
+            throw PlayerAlreadyExists(p->getName());
+        }
+    }
 
-    cout << "Write " << n << "'s birthday " << endl;
-    cout << "Write " << n << "'s day of birth" << endl;
-    cin >> day; failInput(day);
-    cout << "Write " << n << "'s month of birth" << endl;
-    cin >> month; failInput(month);
-    cout << "Write " << n << "'s year of birth" << endl;
-    cin >> year; failInput(year);
+   team_players.push_back(p);
 
-    cout << "Write " << n << "'s club " << endl;
-    cin >> c;
-
-    cout << "Write " << n << "'s position " << endl;
-    cin >> pos;
-
-    cout << "Write " << n << "'s weight " << endl;
-    cin >> wei;failInput(wei);
-
-    cout << "Write " << n << "'s height " << endl;
-    cin >> hei;failInput(hei);
-
-    cout << "Write " << n << "'s value " << endl;
-    cin >> val;failInput(val);
-
-    cout << "Write " << n << "'s earnings " << endl;
-    cin >> earn;failInput(earn);
-
-    cout << "Do you wish to add the Player you have created?: " << endl;
-    cout << "1. Add Player " << endl;
-    cout << "2. Cancel adding Player " << endl;
-    cin >> checker;
-    if(checker == '2') return 0;
-
-    Date *b = new Date(day,month,year);
-    Player *play = new Player(n,*b,c,pos,wei,hei,val,earn);
-    team_players.push_back(play);
-
-    cout << "Player added successfully!!" << endl;
-    cout << "Press any button to continue" << endl;
-    cin >> n;
-    return 0;
 }
 
 int Team::addStaff() {
@@ -304,5 +266,16 @@ Player *Team::findPlayer(string name) {
             return team_players[i];
     }
     throw(PersonNotFound(name));
+}
+
+void Team::removePlayer( Player * p) {
+
+    for(size_t i = 0; i < team_players.size();i++){
+        if(team_players[i]->getName() == p->getName()){
+            team_players.erase(team_players.begin()+i);
+        }
+    }
+
+
 }
 

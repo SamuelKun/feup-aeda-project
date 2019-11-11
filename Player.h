@@ -54,4 +54,24 @@ public:
     }
 };
 
+class PlayerAlreadyExists{
+private:
+    string name;
+public:
+    PlayerAlreadyExists(string name): name(name) {}
+    string getName() const{
+        return name;
+    }
+};
+
+class CantUseThatName{
+private:
+    string name;
+public:
+    CantUseThatName(string name): name(name) {}
+    string getName() const{
+        return name;
+    }
+};
+
 #endif //AEDA_UTILS_H
