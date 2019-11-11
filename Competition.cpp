@@ -5,9 +5,10 @@
 /// \param team_games Competition's team games vector
 /// \param start Starting date
 /// \param end Ending date
-Competition::Competition(string name, vector<Player *> called, vector<Game *> team_games, Date start, Date end): name(name), called(called), team_games(team_games),
-                                                                                                                 start(start), end(end) {
-    paid = false;
+Competition::Competition(string name, vector<Player *> called, vector<Game *> team_games, Date start, Date end, double moneyAccommodation): name(name), called(called), team_games(team_games),
+                                                                                                                 start(start), end(end), moneyAccommodation(moneyAccommodation) {
+    this->paid = false;
+
 }
 
 string Competition::getCompetitionName() const {
@@ -41,7 +42,7 @@ bool Competition::getPaid() const {
 void Competition::payPlayers() {
     if(!paid) {
         for (auto it = called.begin(); it != called.end(); it++) {
-            double value = (*it)->getInsurance() * 30;
+            double value = (*it)->getInsurance() * start.daysUntil(end);
             (*it)->setEarnings(value);
         }
         paid = true;
@@ -56,6 +57,10 @@ Date Competition::getStartDate() const {
 
 Date Competition::getEndDate() const{
     return end;
+}
+
+double Competition::getMoneyAccommodation() const {
+    return moneyAccommodation;
 }
 
 

@@ -30,6 +30,8 @@ public:
     bool isAfter(const Date &date);
     bool isBefore(const Date &date);
 
+    int daysUntil(const Date &date) const;
+
     friend ostream& operator<<(ostream& out, const Date & date);
     friend istream& operator>>(istream& in, Date & date);
 

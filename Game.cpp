@@ -44,6 +44,7 @@ vector<Player *> Game::getCalledPlayers() const {
 
 void Game::info() const {
     cout << "------------------------------------------------ Game ---------------------------------------------------" <<endl;
+    cout << "Opponent: "  << opponent << endl;
     cout << "Country: " << country << endl;
     cout << "City: " <<city << endl;
     cout << "Stadium: " <<stadium << endl;

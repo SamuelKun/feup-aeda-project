@@ -12,13 +12,15 @@ private:
     vector<Player *> called;
     vector<Game *> team_games;
     Date start, end;
+    double moneyAccommodation;
     bool paid;
 
 public:
-    Competition(string name, vector<Player *> called, vector<Game *> team_games, Date start, Date end);
+    Competition(string name, vector<Player *> called, vector<Game *> team_games, Date start, Date end, double moneyAccommodation);
     string getCompetitionName() const;
     void payPlayers();
     bool getPaid() const;
+    double getMoneyAccommodation() const;
     vector<Player *> getCalled() const;
     vector<Game *> getGames() const;
     Date getStartDate() const;

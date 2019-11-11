@@ -35,7 +35,7 @@ void correctPosition(string position){
         cin.ignore(1000, '\n');
         cout << "Not a valid position. Please reenter: " << endl;
         cout << "Goalkeeper/Defender/Midfielder/Forward" << endl;
-        cin >> input;
+        cin >> position;
     }
 }
 
@@ -594,6 +594,7 @@ int menu_info()
     cout << "Number of Players: " << national_team->getPlayers().size() << endl;
     cout << "Number of Competitions: " << national_team->getCompetition().size() << endl;
     cout << "Competitions not paid: " << national_team->missingPay() << endl;
+    cout << "Money spent with accommodation: " << national_team->getMoneyAccommodation() << endl;
     cout << "Money spent with players in competitions: " << national_team->getMoneyPlayers() << endl;
     cout << "Money spent with staff per month: " << national_team->getMoneyStaff() << endl;
     cout << "0. Return to Main Menu " << endl << endl;

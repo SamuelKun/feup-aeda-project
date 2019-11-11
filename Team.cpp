@@ -271,14 +271,11 @@ Player *Team::findPlayer(string name) {
 }
 
 void Team::removePlayer( Player * p) {
-
     for(size_t i = 0; i < team_players.size();i++){
         if(team_players[i]->getName() == p->getName()){
             team_players.erase(team_players.begin()+i);
         }
     }
-
-
 }
 
 void Team::removeStaff(Staff *s) {
@@ -292,4 +289,13 @@ void Team::removeStaff(Staff *s) {
     }
     if(!found_staff) throw (StaffMemberNotFound(s->getName()));
 }
+
+double Team::getMoneyAccommodation() const {
+    double money = 0;
+    for (size_t i = 0; i < team_competitions.size(); i++)
+        money += team_competitions[i]->getMoneyAccommodation();
+    return money;
+}
+
+
 

@@ -117,7 +117,7 @@ bool Date::isBefore(const Date &date)
 /// \return Ostream
 ostream& operator<<(ostream& out, const Date &date)
 {
-    out << date.getYear() << '/' << date.getMonth() << '/' << date.getDay();
+    out << date.getDay() << '/' << date.getMonth() << '/' << date.getYear();
     return out;
 }
 /// \brief Overloads ">>" operator to get a Date from user input
@@ -166,6 +166,21 @@ istream& operator>>(istream& in, Date &date)
     date.day = this_day;
 
     return in;
+}
+
+int Date::daysUntil(const Date &date) const {
+    int monthDays[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    long int n1 = year*365 + day;
+
+    for (int i=0; i< month - 1; i++)
+        n1 += monthDays[i];
+
+    long int n2 = date.getYear()*365 + date.getDay();
+
+    for (int i=0; i<date.getMonth() - 1; i++)
+        n2 += monthDays[i];
+    return n2 - n1;
 }
 
 

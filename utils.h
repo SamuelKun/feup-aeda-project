@@ -102,7 +102,7 @@ vector<Competition *> read_competion(string info, Team * t){
             //Data de começo e fim
             Date startcomp(tempVec[3]);
             Date endcomp(tempVec[4]);
-            Competition *tempComp = new Competition(tempVec[0], comp_convocado, competion_games, startcomp, endcomp);
+            Competition *tempComp = new Competition(tempVec[0], comp_convocado, competion_games, startcomp, endcomp, stod(tempVec[5]));
             competion.push_back(tempComp);
             tempVec.clear();
         }

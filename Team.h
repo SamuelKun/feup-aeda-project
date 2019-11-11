@@ -18,8 +18,21 @@ private:
     vector<Competition *> team_competitions; /// \brief Vector with Team's competitions
 
 public:
+    /**
+    * @brief Default constructor
+    */
     Team();
+
+    /**
+    * @brief Constructor
+     * @param file_name file with team information
+    */
     Team(string file_name);
+
+    /**
+    * @brief Getter
+     * @return string with team name
+    */
     string getTeamName() const;
     vector<Player *> getPlayers() const;
     vector<Staff *> getStaff() const;
@@ -34,6 +47,7 @@ public:
 
     double getMoneyPlayers() const;
     double getMoneyStaff() const;
+    double getMoneyAccommodation() const;
     int missingPay();
 
     void showPlayersTable() const;
@@ -50,11 +64,13 @@ public:
 
     vector<Player *> findPlayerName(string name);
     vector<Staff *> findStaffName(string name);
+
     Game * findGame(string country, string city, string stadium); // Colocar como vetor
 
     vector<Player *> findPlayerPos(string position);
-    Competition * findCompetition(string name); // Colocar como vetor
     vector<Staff *> findStaffFunction(string function);
+
+    Competition * findCompetition(string name); // Colocar como vetor
     vector<Competition *> findCompetitionDate(Date start, Date end);
 
 };
