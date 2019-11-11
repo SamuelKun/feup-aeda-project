@@ -292,5 +292,14 @@ double Team::getMoneyAccommodation() const {
     return money;
 }
 
+void Team::addCompetition(Competition *comp) {
+    for(size_t i = 0; i < team_competitions.size();i++){
+        if(team_competitions[i]->getCompetitionName() == comp->getCompetitionName()){
+            throw CompetitionAlreadyExists(comp->getCompetitionName());
+        }
+    }
+    team_competitions.push_back(comp);
+}
+
 
 

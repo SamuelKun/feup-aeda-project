@@ -678,7 +678,7 @@ int menu_tournaments()
             return 0;
         case '4':
             try{
-                string name, players;
+                string name, players, checker;
                 Date start,end;
                 vector<Player*> v_players;
                 vector<Player*> team_players = national_team->getPlayers();
@@ -711,9 +711,20 @@ int menu_tournaments()
                 }
                 cin.clear();
                 cin.ignore(1000,'\n');
+                cout << "This Competition currently has no games" << endl;
+                cout << "Use the menu system do add games if needed!!" << endl;
+                cout << "Are you sure you want to add this competition?" << endl;
+                cout << "1. Add " << name << endl;
+                cout << "0. Go back without adding " << name << endl;
+                getline(cin,checker);
+                if(checker == "0") return 0;
+                else{
+                    Competition* comp = new Competition(name,v_players,start,end);
+                    national_team->addCompetition(comp);
+                }
             }
-            catch( CompetitionNotFound &er){
-                cout << "Competition already exists!!" << endl;
+            catch( CompetitionAlreadyExists &er){
+                cout << "Competition " << er.getName() << " already exists!!" << endl;
             }
             waitInput();
             return 0;

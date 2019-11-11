@@ -16,7 +16,7 @@ private:
     bool paid;
 
 public:
-        Competition(string name, vector<Player *> called, Date start, Date end);
+    Competition(string name, vector<Player *> called, Date start, Date end);
     Competition(string name, vector<Player *> called, vector<Game *> team_games, Date start, Date end, double moneyAccommodation);
     string getCompetitionName() const;
     void payPlayers();
@@ -32,6 +32,7 @@ public:
     void showGames() const;
 
     void addGame(Game * g);
+
 
     Game * findGame(string opponent,string country,string city,string stadium,Date date) const;
 };
@@ -66,5 +67,15 @@ public:
         return end;
     }
 };
+class CompetitionAlreadyExists{
+private:
+    string name;
+public:
+    CompetitionAlreadyExists(string name): name(name) {}
+    string getName() const{
+        return name;
+    }
+};
+
 
 #endif

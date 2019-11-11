@@ -40,6 +40,7 @@ public:
     vector<Competition *> getCompetition() const;
     void addPlayer(Player* p);
     void addStaff(Staff * s);
+    void addCompetition(Competition* comp);
 
     void removePlayer(Player * p);
     void removeStaff(Staff * s);
