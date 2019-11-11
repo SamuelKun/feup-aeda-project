@@ -386,7 +386,39 @@ int menu_games(){
     }
 
 }
+int menu_singleCompetition(){
+    char menu;
 
+    //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
+
+    cout << "========================================= " << endl;
+    cout << "            Competitions Menu             " << endl;
+    cout << "========================================= \n" << endl;
+
+    cout << "1. View all games from this competition - To be done " << endl;
+    cout << "2. View called Players - To be done " << endl;
+    cout << "3. Add a Game - To be done " << endl;
+    cout << "4. Add Game Statistics - To be done " << endl;
+
+    cin.clear();
+    cin >> menu;
+    cin.ignore(1000,'\n');
+    switch(menu){
+        case '1':
+            return 0;
+        case '2':
+            return 0;
+        case '3':
+            return 0;
+        case '4':
+            return 0;
+        case '0':    //Exit function
+            return 1;
+        default:     //Invalid input
+            cin.ignore(1000,'\n');
+            return 0;
+    }
+}
 
 int menu_tournaments()
 {
@@ -400,6 +432,8 @@ int menu_tournaments()
 
     cout << "1. Show all competitions " << endl;
     cout << "2. Pay competitions fees" << endl;
+    cout << "3. Detailed information about one competition - To be done " << endl;
+    cout << "4. Create a Single Game / Competition - To be done " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -427,6 +461,12 @@ int menu_tournaments()
             catch(AlreadyPaid &er) {
                 cout << "The " << er.getName() << " has already been paid to players." << endl;
             }
+            return 0;
+        case '3':
+            while(!menu_singleCompetition())
+            return 0;
+        case '4':
+            return 0;
         case '0':    //Exit function
             return 1;
         default:     //Invalid input

@@ -2,14 +2,14 @@
 #include "Statistics.h"
 
 
-Statistics::Statistics(): goals_scored(0), goals_conceded(0), shots(0), ball_possession(0), km_travelled(0), yellow_cards(0), red_cards(0),
+Statistics::Statistics(): goals_scored(0), goals_conceded(0), shots(0), ball_possession(0), yellow_cards(0), red_cards(0),
                             injured(0), free_kicks(0), corner_kicks(0) {
 }
 
 
-Statistics::Statistics(int goalsScored, int goalsConceded, int shots, int ballPossession, float kmTravelled, int yellowCards, int redCards,int injured, int freeKicks, int cornerKicks) :
+Statistics::Statistics(int goalsScored, int goalsConceded, int shots, int ballPossession, int yellowCards, int redCards,int injured, int freeKicks, int cornerKicks) :
     goals_scored(goalsScored), goals_conceded(goalsConceded),
-    shots(shots), ball_possession(ballPossession), km_travelled(kmTravelled),
+    shots(shots), ball_possession(ballPossession),
     yellow_cards(yellowCards), red_cards(redCards),
     injured(injured), free_kicks(freeKicks),
     corner_kicks(cornerKicks) {
@@ -45,14 +45,6 @@ int Statistics::getBallPossession() const {
 
 void Statistics::setBallPossession(int ballPossession) {
     ball_possession = ballPossession;
-}
-
-float Statistics::getKmTravelled() const {
-    return km_travelled;
-}
-
-void Statistics::setKmTravelled(float kmTravelled) {
-    km_travelled = kmTravelled;
 }
 
 int Statistics::getYellowCards() const {
@@ -100,7 +92,6 @@ void Statistics::info() const {
     cout << "Goal Conceded: " << goals_conceded << endl;
     cout << "Shots: " <<shots << endl;
     cout << "Ball Possession: " <<ball_possession << endl;
-    cout << "Km Travelled: " << km_travelled << endl;
     cout << "Yellow Cards: " <<yellow_cards << endl;
     cout << "Red Cards: " << red_cards << endl;
     cout << "Injured Players: " << injured << endl;

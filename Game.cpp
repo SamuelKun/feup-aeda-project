@@ -6,13 +6,13 @@
 /// \param city Game's city
 /// \param stadium Game's stadium
 /// \param gameDate Game's date
-Game::Game(string country, string city, string stadium, Date gameDate): country(country), city(city), stadium(stadium),
+Game::Game(string opponent, string country, string city, string stadium, Date gameDate): opponent(opponent), country(country), city(city), stadium(stadium),
                                                                                                    gameDate(gameDate) {
 }
 
-Game::Game(string country, string city, string stadium, Date gameDate,
-        vector<Player *> called_players): country(country), city(city), stadium(stadium), gameDate(gameDate),
-                                                                      called_players(called_players) {
+Game::Game(string opponent, string country, string city, string stadium, Date gameDate,
+        vector<Player *> called_players, Statistics stats): opponent(opponent), country(country), city(city), stadium(stadium), gameDate(gameDate),
+                                                                      called_players(called_players), game_stats(stats) {
 }
 
 //Get Methods

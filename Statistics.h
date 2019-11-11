@@ -10,7 +10,6 @@ private:
     int goals_conceded;   /// \brief Number of goals scored
     int shots;          /// \brief Number of shots on goal
     int ball_possession;/// \brief Ball possession as percentage
-    float km_travelled; /// \brief Number of kilometres travelled
     int yellow_cards;   /// \brief Number of yellow cards received
     int red_cards;      /// \brief Number of red cards received
     int injured;        /// \brief 1 if injured, 0 otherwise
@@ -18,13 +17,12 @@ private:
     int corner_kicks;   /// \brief Number of corners
 public:
     Statistics();
-    Statistics(int goalsScored, int goalsConceded, int shots, int ballPossession, float kmTravelled, int yellowCards, int redCards,
-               int injured0, int freeKicks, int cornerKicks);
+    Statistics(int goalsScored, int goalsConceded, int shots, int ballPossession, int yellowCards, int redCards,
+               int injured, int freeKicks, int cornerKicks);
 
     int getGoalsScored() const;
     int getShots() const;
     int getBallPossession() const;
-    float getKmTravelled() const;
     int getYellowCards() const;
     int getRedCards() const;
     int getInjured() const;
@@ -34,7 +32,6 @@ public:
     void setGoalsScored(int goalsScored);
     void setShots(int shots);
     void setBallPossession(int ballPossession);
-    void setKmTravelled(float kmTravelled);
     void setYellowCards(int yellowCards);
     void setRedCards(int redCards);
     void setInjured(int injured);

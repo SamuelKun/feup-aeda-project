@@ -10,6 +10,7 @@
 #include "Person.h"
 #include "Staff.h"
 #include "Player.h"
+#include "Statistics.h"
 
 template <class form>
 void failInput(form input)
@@ -67,8 +68,9 @@ vector<Game *> read_games(string info, vector<Player *> called_players){
     while (getline(game_info, str_temp)){
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
-            Date game_day(28, 06, 2000);
-            Game *g = new Game(tempVec[0], tempVec[1], tempVec[2], game_day, called_players);
+            Date game_day(tempVec[4]);
+            Statistics game_stats(stoi(tempVec[5]),stoi(tempVec[6]),stoi(tempVec[7]),stoi(tempVec[8]),stoi(tempVec[9]),stoi(tempVec[10]),stoi(tempVec[11]),stoi(tempVec[12]), stoi(tempVec[13]));
+            Game *g = new Game(tempVec[0], tempVec[1], tempVec[2], tempVec[3], game_day, called_players, game_stats);
             games.push_back(g);
             tempVec.clear();
         }

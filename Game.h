@@ -12,6 +12,7 @@ using namespace std;
 class Game
 {
 private:
+    string opponent;
     string country; /*!< Game's country */
     string city;    /*!< Game's city    */
     string stadium; /*!< Game's stadium */
@@ -19,8 +20,8 @@ private:
     vector<Player *> called_players; /*!< Vector with called players */
     Statistics game_stats;
 public:
-    Game(string country, string city, string stadium, Date gameDate);
-    Game(string country, string city, string stadium, Date gameDate, vector<Player *> called_players);
+    Game(string opponent, string country, string city, string stadium, Date gameDate);
+    Game(string opponent, string country, string city, string stadium, Date gameDate, vector<Player *> called_players, Statistics stats);
 
 
     string getCountry() const;
