@@ -322,19 +322,12 @@ int menu_staff() {
                 string n, f, checker;
                 double w;
                 int day, month, year;
+                Date d;
 
                 cout << "Write the name of the Staff Member you wish to add: " << endl;
                 getline(cin, n);
                 cout << "Write " << n << "'s birthday " << endl;
-                cout << "Write " << n << "'s day of birth" << endl;
-                cin >> day;
-                failInput_2(day);
-                cout << "Write " << n << "'s month of birth" << endl;
-                cin >> month;
-                failInput_2(month);
-                cout << "Write " << n << "'s year of birth" << endl;
-                cin >> year;
-                failInput_2(year);
+                cin >> d;
                 cout << "Write " << n << "'s wage " << endl;
                 cin >> w;
                 failInput_2(w);
