@@ -31,6 +31,8 @@ public:
     void showGames() const;
 
     void addGame(Game * g);
+
+    Game * findGame(string opponent,string country,string city,string stadium,Date date) const;
 };
 
 class AlreadyPaid{
