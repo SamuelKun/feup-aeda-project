@@ -134,7 +134,7 @@ void Team::addPlayer(Player* p) {
     if(p->getName() == "") throw CantUseThatName(p->getName());
 
     for(size_t i = 0; i < team_players.size();i++){
-        if(team_players[i]->getName().find(p->getName()) != string::npos ){
+        if(team_players[i]->getName() == p->getName()){
             throw PlayerAlreadyExists(p->getName());
         }
     }

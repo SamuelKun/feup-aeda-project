@@ -159,7 +159,18 @@ int menu_players()
 
                 Player *play = new Player(n,d,c,pos,wei,hei,val,earn);
 
-                national_team->addPlayer(play);
+                cout << "Do you wish to add " << n << " as a Player?" << endl;
+                cout << "1. Add Player " << endl;
+                cout << "Any other key. Cancel adding Player " << endl;
+                cin.ignore(1000,'\n');
+                getline(cin,checker);
+                if (checker != "1"){
+                    cout << "Player was not added!" << endl;
+                }
+                else{
+                    national_team->addPlayer(play);
+                    cout << "Player successfully added!!" << endl;
+                }
             }
             catch(PlayerAlreadyExists &er){
                 cout << "Player " << er.getName() << " already exists!!" << endl;
