@@ -23,7 +23,7 @@ public:
     Game(string opponent, string country, string city, string stadium, Date gameDate);
     Game(string opponent, string country, string city, string stadium, Date gameDate, vector<Player *> called_players, Statistics stats);
 
-
+    string getOpponent() const;
     string getCountry() const;
     string getCity() const;
     string getStadium() const;
@@ -41,6 +41,20 @@ public:
     string getCountry() const {return country;}
     string getCity() const {return city;}
     string getStadium() const {return stadium;}
+};
+
+class GameAlreadyExists{
+    string country,city,stadium,opponent;
+    Date d;
+
+public:
+    GameAlreadyExists(string opponent, string country,string city,string stadium, Date d) :
+            opponent(opponent),country(country), city(city), stadium(stadium), d(d){}
+    string getCountry() const {return country;}
+    string getCity() const {return city;}
+    string getStadium() const {return stadium;}
+    string getOpponent() const {return opponent;}
+    Date getDate() const {return d;}
 };
 
 #endif

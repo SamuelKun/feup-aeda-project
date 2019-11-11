@@ -58,3 +58,7 @@ void Game::info() const {
     cout << "---------------------------------------------------------------------------------------------------------" <<endl;
 }
 
+string Game::getOpponent() const {
+    return opponent;
+}
+

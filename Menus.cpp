@@ -8,6 +8,7 @@
 
 using namespace std;
 extern Team *national_team;
+extern Competition* current_competition;
 
 template <class form>
 void failInput_2(form input)
@@ -490,7 +491,7 @@ int menu_games(){
     }
 
 }
-int menu_singleCompetition(){
+int menu_singleCompetition(Competition* comp){
     char menu;
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
@@ -501,6 +502,7 @@ int menu_singleCompetition(){
     }
     int index;
     cin >> index; // VERIFICAR ERRO DEPOIS
+
     Competition * singleCompetition = national_team->getCompetition()[index];
 
     cout << "========================================= " << endl;
@@ -509,23 +511,50 @@ int menu_singleCompetition(){
 
     cout << "1. View all games from this competition" << endl;
     cout << "2. View called Players" << endl;
-    cout << "3. Add a Game - To be done " << endl;
+    cout << "3. Add a Game" << endl;
     cout << "4. Add Game Statistics - To be done " << endl;
 
     cin.clear();
     cin >> menu;
     cin.ignore(1000,'\n');
+
     switch(menu){
         case '1':
             for(size_t i = 0; i < singleCompetition->getGames().size(); i++)
-                singleCompetition->getGames()[i]->info();
+                comp->getGames()[i]->info();
             return 0;
         case '2':
             for(size_t i = 0; i < singleCompetition->getCalled().size(); i++)
-                singleCompetition->getCalled()[i]->infoTable();
+                comp->getCalled()[i]->infoTable();
             return 0;
-
         case '3':
+            try{
+                string country,city,stadium,opponent;
+                Date d;
+                cout << "Write the Game's opponent " << endl;
+                getline(cin,opponent);
+                cout << "Write the Game's country " << endl;
+                getline(cin,country);
+                cout << "Write the Game's city " << endl;
+                getline(cin,city);
+                cout << "Write the Game's stadium " << endl;
+                getline(cin,stadium);
+                cout << "Write the Game's date " << endl;
+                cin >> d;
+
+                Game *g = new Game(opponent,country,city,stadium,d);
+                comp->addGame(g);
+            }
+            catch(GameAlreadyExists &er){
+                cout << endl;
+                cout << "Game:" << endl;
+                cout << "Opponent: " << er.getOpponent() << endl;
+                cout << "Country: " << er.getCountry() << endl;
+                cout << "City: " << er.getCity() << endl;
+                cout << "Stadium: " << er.getStadium() << endl;
+                cout << "Date: " << er.getDate() << endl;
+                cout << "This Game wasn't found" << endl;
+            }
             return 0;
         case '4':
             return 0;
@@ -582,7 +611,18 @@ int menu_tournaments()
             wait_2();
             return 0;
         case '3':
-            while(!menu_singleCompetition())
+            try{
+                string name;
+                Competition* comp;
+                cout << "Choose the name of the Competition you wish to view: " << endl;
+                getline(cin,name);
+                comp = national_team->findCompetition(name);
+                while(!menu_singleCompetition(comp));
+            }
+            catch(CompetitionNotFound &er){
+                cout << "No competition named " << er.getName() << endl;
+            }
+            wait_2();
             return 0;
         case '4':
             return 0;

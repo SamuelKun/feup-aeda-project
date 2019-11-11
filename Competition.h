@@ -29,6 +29,8 @@ public:
 
     void showPlayers() const;
     void showGames() const;
+
+    void addGame(Game * g);
 };
 
 class AlreadyPaid{
