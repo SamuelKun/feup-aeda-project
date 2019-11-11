@@ -63,4 +63,16 @@ double Competition::getMoneyAccommodation() const {
     return moneyAccommodation;
 }
 
+void Competition::showPlayers() const {
+    for(size_t i = 0; i < called.size();i++){
+        called[i]->info();
+    }
+}
+
+void Competition::showGames() const {
+    for(size_t i = 0; i < team_games.size();i++){
+        team_games[i]->info();
+    }
+}
+
 

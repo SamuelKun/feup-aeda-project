@@ -26,6 +26,9 @@ public:
     Date getStartDate() const;
     Date getEndDate() const;
     friend ostream & operator<<(ostream &out, const Competition &comp);
+
+    void showPlayers() const;
+    void showGames() const;
 };
 
 class AlreadyPaid{
