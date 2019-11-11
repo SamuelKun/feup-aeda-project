@@ -468,16 +468,17 @@ int menu_games(){
     }
 
 }
-int menu_singleCompetition(Competition* comp){
+int menu_tournament_games(Competition * comp){
     char menu;
 
+    //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
     cout << "========================================= " << endl;
-    cout << "            Competitions Menu             " << endl;
+    cout << "             Games Menu                   " << endl;
     cout << "========================================= \n" << endl;
 
-    cout << "1. View all games from this competition" << endl;
-    cout << "2. View called Players" << endl;
+    cout << "1. Show all games " << endl;
+    cout << "2. Search a Game" << endl;
     cout << "3. Add a Game" << endl;
     cout << "4. Add Game Statistics - To be done " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
@@ -485,14 +486,42 @@ int menu_singleCompetition(Competition* comp){
     cin.clear();
     cin >> menu;
     cin.ignore(1000,'\n');
-    switch(menu){
+
+
+    vector<Game *> v_games = comp->getGames();
+    switch(menu) {
         case '1':
-            for(size_t i = 0; i < comp->getGames().size(); i++)
-                comp->getGames()[i]->info();
+            comp->showGames();
+            waitInput();
             return 0;
         case '2':
-            for(size_t i = 0; i < comp->getCalled().size(); i++)
-                comp->getCalled()[i]->infoTable();
+            try {
+                string country,city,stadium,opponent;
+                Date d;
+                cout << "Write the Game's opponent " << endl;
+                getline(cin,opponent);
+                cout << "Write the Game's country " << endl;
+                getline(cin,country);
+                cout << "Write the Game's city " << endl;
+                getline(cin,city);
+                cout << "Write the Game's stadium " << endl;
+                getline(cin,stadium);
+                cout << "Write the Game's date " << endl;
+                cin >> d;
+
+                comp->findGame(opponent,country,city,stadium,d)->info();
+            }
+            catch(GameNotFound & er) {
+                cout << endl;
+                cout << "Game:" << endl;
+                cout << "Opponent: " << er.getOpponent() << endl;
+                cout << "Country: " << er.getCountry() << endl;
+                cout << "City: " << er.getCity() << endl;
+                cout << "Stadium: " << er.getStadium() << endl;
+                cout << "Date: " << er.getDate() << endl;
+                cout << "This Game wasn't found" << endl;
+            }
+            waitInput();
             return 0;
         case '3':
             try{
@@ -520,8 +549,55 @@ int menu_singleCompetition(Competition* comp){
                 cout << "City: " << er.getCity() << endl;
                 cout << "Stadium: " << er.getStadium() << endl;
                 cout << "Date: " << er.getDate() << endl;
-                cout << "This Game wasn't found" << endl;
+                cout << "This Game already exists!!" << endl;
             }
+            return 0;
+        case '0':
+            return 1;
+        default:     //Invalid input
+            cin.ignore(1000, '\n');
+            return 0;
+    }
+
+}
+int menu_singleCompetition(Competition* comp){
+    char menu;
+
+    //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
+
+    cout << "National Football Team Competitions - VERIFICAR ERRO DEPOIS" << endl;
+    for(int i = 0; i < (national_team->getCompetition()).size(); i++){
+        cout << i << ". " << national_team->getCompetition()[i]->getCompetitionName() << " - Paid: " << national_team->getCompetition()[i]->getPaid() << endl;
+    }
+    int index;
+    cin >> index; // VERIFICAR ERRO DEPOIS
+
+    Competition * singleCompetition = national_team->getCompetition()[index];
+
+    cout << "========================================= " << endl;
+    cout << "            Competitions Menu             " << endl;
+    cout << "========================================= \n" << endl;
+
+    cout << "1. View all games from this competition" << endl;
+    cout << "2. View called Players" << endl;
+    cout << "3. Games Menu" << endl;
+    cout << "4. Add Game Statistics - To be done " << endl;
+
+    cin.clear();
+    cin >> menu;
+    cin.ignore(1000,'\n');
+
+    switch(menu){
+        case '1':
+            for(size_t i = 0; i < singleCompetition->getGames().size(); i++)
+                comp->getGames()[i]->info();
+            return 0;
+        case '2':
+            for(size_t i = 0; i < singleCompetition->getCalled().size(); i++)
+                comp->getCalled()[i]->infoTable();
+            return 0;
+        case '3':
+            while(!menu_tournament_games(comp));
             return 0;
         case '4':
             return 0;
@@ -598,7 +674,6 @@ int menu_tournaments()
                 cout << "No competition named " << er.getName() << endl;
                 waitInput();
             }
-
             return 0;
         case '4':
             return 0;

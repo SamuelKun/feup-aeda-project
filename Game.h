@@ -33,14 +33,23 @@ public:
     //Stats stats getStats()const;
 };
 class GameNotFound{
-    string country,city,stadium;
+    string country,city,stadium,opponent;
+    Date d;
 
 public:
     GameNotFound(string country,string city,string stadium) :
             country(country), city(city), stadium(stadium){}
+
+    GameNotFound(string opponent,string country,string city,string stadium,Date date) :
+    opponent(opponent),country(country), city(city),
+    stadium(stadium),d(date){}
+
+    string getOpponent() const {return opponent;}
     string getCountry() const {return country;}
     string getCity() const {return city;}
     string getStadium() const {return stadium;}
+    Date getDate() const {return d;}
+
 };
 
 class GameAlreadyExists{

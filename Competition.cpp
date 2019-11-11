@@ -88,4 +88,18 @@ void Competition::addGame(Game * g) {
     team_games.push_back(g);
 }
 
+Game * Competition::findGame(string opponent, string country, string city, string stadium, Date date) const {
+    vector<Game *> v_games;
+    for(size_t i = 0 ; i < team_games.size(); i++){
+        if( team_games[i]->getOpponent().find(opponent) != string::npos &&
+            team_games[i]->getCountry().find(country) != string::npos &&
+            team_games[i]->getCity().find(city) != string::npos &&
+            team_games[i]->getStadium().find(stadium) != string::npos &&
+            team_games[i]->getDate().isEqualTo(date)){
+            return team_games[i];
+        }
+    }
+    throw GameNotFound(opponent,country,city,stadium,date);
+}
+
 
