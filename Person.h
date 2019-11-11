@@ -48,4 +48,15 @@ public:
     }
 };
 
+class TooManyPeopleFound{
+private:
+    string name;
+public:
+    TooManyPeopleFound(string name): name(name) {}
+    string getName() const{
+        return name;
+    }
+};
+
+
 #endif

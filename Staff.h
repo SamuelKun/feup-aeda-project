@@ -19,6 +19,16 @@ public:
     void info() const;
 };
 
+class StaffMemberNotFound{
+private:
+    string name;
+public:
+    StaffMemberNotFound(string name): name(name) {}
+    string getName() const{
+        return name;
+    }
+};
+
 class FunctionNotFound{
 private:
     string function;
@@ -28,5 +38,25 @@ public:
         return function;
     }
 };
+class StaffMemberAlreadyExists{
+private:
+    string name;
+public:
+    StaffMemberAlreadyExists(string name): name(name) {}
+    string getName() const{
+        return name;
+    }
+};
+
+class TooManyStaffFound{
+private:
+    string name;
+public:
+    TooManyStaffFound(string name): name(name) {}
+    string getName() const{
+        return name;
+    }
+};
+
 
 #endif
