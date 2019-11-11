@@ -94,7 +94,16 @@ void Team::showPlayersTable() const {
     }
 }
 
-bool cmpName(const Player * p1, const Player * p2){
+void Team::showStaffTable() const {
+    cout << setw(19) << "Name" << " | " << setw(10) << "Date" <<" | ";
+    cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | ";
+    for(int i = 0; i < team_staff.size(); i++){
+        team_staff[i]->infoTable();
+    }
+}
+
+
+bool cmpName(const Person * p1, const Person * p2){
     return p1->getName() < p2->getName();
 }
 
@@ -106,6 +115,18 @@ bool cmpPosition(const Player * p1, const Player * p2){
 
     for(size_t i = 0; i < 4; i++)
         if (pos[i] == p2->getPosition()) p2v = i;
+
+    return p1v < p2v;
+}
+
+bool cmpFunction(const Staff * p1, const Staff * p2){
+    string pos[2] = {"Coach", "Doctor"};
+    int p1v, p2v;
+    for(size_t i = 0; i < 2; i++)
+        if (pos[i] == p1->getFunction()) p1v = i;
+
+    for(size_t i = 0; i < 2; i++)
+        if (pos[i] == p2->getFunction()) p2v = i;
 
     return p1v < p2v;
 }
@@ -127,6 +148,13 @@ void Team::sortPlayersValue() {
     sort(team_players.begin(), team_players.end(), cmpValue);
 }
 
+void Team::sortStaffName() {
+    sort(team_staff.begin(), team_staff.end(), cmpName);
+}
+
+void Team::sortStaffFunction() {
+    sort(team_staff.begin(), team_staff.end(), cmpFunction);
+}
 
 void Team::addPlayer(Player* p) {
 

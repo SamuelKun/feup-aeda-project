@@ -27,8 +27,6 @@ public:
     vector<Competition *> getCompetition() const;
     void addPlayer(Player* p);
     void addStaff(Staff * s);
-    void addGame();
-    void addGame(Game * g);
 
     void removePlayer(Player * p);
     void removeStaff(Staff * s);
@@ -39,12 +37,14 @@ public:
     int missingPay();
 
     void showPlayersTable() const;
-    void showGameTable() const;
     void showStaffTable() const;
 
     void sortPlayersName();
     void sortPlayersPosition();
     void sortPlayersValue();
+
+    void sortStaffName();
+    void sortStaffFunction();
 
     Player * findPlayer(string name); // Necessário para ler, alterar depois
 
