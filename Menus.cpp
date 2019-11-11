@@ -435,7 +435,6 @@ int menu_games(){
     vector<Game *> print_it = national_team->getGames();
     switch(menu) {
         case '1':
-
             for(size_t i = 0; i < print_it.size(); i++){
                 print_it[i]->info();
                 cout << endl;

@@ -58,9 +58,8 @@ vector<Game *> Team::getGames() const {
     vector<Game *> ret_games;
     for (size_t i = 0; i < team_competitions.size(); i++) {
         vector<Game *> competitions_games = team_competitions[i]->getGames();
-        for (size_t j = 0; j < competitions_games.size();j++){
-            ret_games.push_back(competitions_games[i]);
-        }
+        for (size_t j = 0; j < competitions_games.size();j++)
+            ret_games.push_back(competitions_games[j]);
     }
     return ret_games;
 }
