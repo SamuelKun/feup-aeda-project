@@ -340,6 +340,7 @@ void Team::updateFile() {
         c << team_competitions[i]->getStartDate() << endl;
         c << team_competitions[i]->getEndDate() << endl;
         c << team_competitions[i]->getMoneyAccommodation() << endl;
+        c << team_competitions[i]->getPaid() << endl;
         c << "-----" << endl;
     }
 }

@@ -23,7 +23,7 @@ public:
     /// \param called Competition's called players
     /// \param start Competition's starting date
     /// \param end Competition's ending date
-    Competition(std::string name, std::vector<Player *> called, Date start, Date end);
+    Competition(std::string name, std::vector<Player *> called, Date start, Date end, double moneyAccomodation);
     /// \brief Competition Constructor without games.
     /// \param name Competition's name
     /// \param called Competition's called players as Player pointers
@@ -31,7 +31,7 @@ public:
     /// \param start Competition's starting date
     /// \param end Competition's ending date
     /// \param moneyAccommodation Competition's money accommodation
-    Competition(std::string name, std::vector<Player *> called, std::vector<Game *> team_games, Date start, Date end, double moneyAccommodation);
+    Competition(std::string name, std::vector<Player *> called, std::vector<Game *> team_games, Date start, Date end, double moneyAccommodation, bool paid);
     /// \brief Get Method.
     /// \return Competition's name
     std::string getCompetitionName() const;
