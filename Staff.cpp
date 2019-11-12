@@ -24,3 +24,12 @@ void Staff::info() const{
     cout << "Position: " << this->function << endl;
     cout << "Earnings: " << this->salary << endl;
 }
+
+std::ostream &operator<<(std::ostream &out, const Staff &s) {
+    out << s.getName() << endl;
+    out << s.getBirthday() << endl;
+    out << s.salary << endl;
+    out << s.function;
+
+    return out;
+}

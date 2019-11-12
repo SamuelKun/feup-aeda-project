@@ -63,7 +63,6 @@ std::vector<Game *> read_games(std::string info, std::vector<Player *> called_pl
     while (getline(game_info, str_temp)){
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
-            std::cout << tempVec[0];
             Date game_day(tempVec[4]);
             Statistics game_stats(stoi(tempVec[5]),stoi(tempVec[6]),stoi(tempVec[7]),stoi(tempVec[8]),stoi(tempVec[9]),stoi(tempVec[10]),stoi(tempVec[11]),stoi(tempVec[12]), stoi(tempVec[13]));
             Game *g = new Game(tempVec[0], tempVec[1], tempVec[2], tempVec[3], game_day, called_players, game_stats);

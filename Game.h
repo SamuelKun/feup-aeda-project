@@ -56,6 +56,8 @@ public:
     /// \brief Shows Game's info.
     void info() const;
 
+    friend std::ostream &operator<<(std::ostream &out, const Game &g);
+
 };
 /// \brief Class for throwing exception when no such Game is found.
 class GameNotFound{

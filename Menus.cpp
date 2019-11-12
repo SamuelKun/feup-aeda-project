@@ -5,6 +5,7 @@
 #include <algorithm>
 
 #include "Menus.h"
+#include "Team.h"
 #include "input_utils.h"
 
 using namespace std;
@@ -932,7 +933,7 @@ int menu_credits() {
     }
 }
 
-int mainMenu() {
+int mainMenu(string &file_name) {
     char menu;
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
@@ -946,8 +947,9 @@ int mainMenu() {
     cout << "3. Competitions Menu" << endl;
     cout << "4. View Team Stats" << endl;
     cout << "5. App Info" << endl;
+    cout << "6. Save Information" << endl;
     cout << "0. Exit" << endl << endl;
-    national_team->updateFile();
+
     cin.clear();
     cin >> menu;
     cin.ignore(1000,'\n');
@@ -968,6 +970,11 @@ int mainMenu() {
             return 0;
         case '5':    //View app info
             while(!menu_credits());
+            return 0;
+        case '6':
+            national_team->updateFile(file_name);
+            cout << endl << "Information saved successfully in file: " << file_name << endl;
+            waitInput();
             return 0;
         case '0':    //Exit function
             exit(0);
@@ -1000,7 +1007,24 @@ int fileMenu(){
         if(filename == "0") return 1;
     }
     national_team = new Team(filename);
-    while(!mainMenu());
+    while(!mainMenu(filename));
+    return 1;
+}
+
+int createNewTeamMenu(){
+    string teamname;
+
+    cout << "Write the name of your Team" << endl;
+    cout << "0. Go back to the previous menu" << endl;
+    cin.clear();
+    cin >> teamname;
+    cin.ignore(1000,'\n');
+
+    if(teamname == "0") return 1;
+
+    national_team = new Team();
+    national_team->setTeamName(teamname);
+    while(!mainMenu(teamname));
     return 1;
 }
 
@@ -1023,6 +1047,7 @@ int initMenu(){
             while(!fileMenu());
             return 0;
         case '2': //Create a new Team File
+            while(!createNewTeamMenu());
             return 0;
         case '0': //Exits program
             return 1;

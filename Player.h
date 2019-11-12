@@ -74,6 +74,8 @@ public:
     /// \brief Shows Player's attributes.
     void info() const;
 
+    friend std::ostream& operator<<(std::ostream& out, const Player &p);
+
 };
 /// \brief Class for throwing exceptions when no position is found.
 class PositionNotFound{

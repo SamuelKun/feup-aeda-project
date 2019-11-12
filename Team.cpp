@@ -285,32 +285,23 @@ void Team::addCompetition(Competition *comp) {
     team_competitions.push_back(comp);
 }
 
-void Team::updateFile() {
+void Team::updateFile(string file_name) {
 
-    ofstream init("init.txt");
+    ofstream init(file_name);
     init << teamName << endl;
     init << "players.txt" << endl;
     init << "staff.txt" << endl;
     init << "competition.txt" << endl;
 
+
     ofstream p("players.txt");
     for (size_t i = 0; i < team_players.size(); i++) {
-        p << team_players[i]->getName() << endl;
-        p << team_players[i]->getBirthday() << endl;
-        p << team_players[i]->getClub() << endl;
-        p << team_players[i]->getPosition() << endl;
-        p << team_players[i]->getWeight() << endl;
-        p << team_players[i]->getHeight() << endl;
-        p << team_players[i]->getValue() << endl;
-        p << team_players[i]->getEarnings() << endl;
+        p << (*team_players[i]) << endl;
         p << "-----" << endl;
     }
     ofstream s("staff.txt");
     for (size_t i = 0; i < team_staff.size(); i++) {
-        s << team_staff[i]->getName() << endl;
-        s << team_staff[i]->getBirthday() << endl;
-        s << team_staff[i]->getSalary() << endl;
-        s << team_staff[i]->getFunction() << endl;
+        s << (*team_staff[i]) << endl;
         s << "-----" << endl;
     }
 
@@ -320,20 +311,20 @@ void Team::updateFile() {
     int num = 0;
     for (size_t i = 0; i < team_competitions.size(); i++) {
         c << team_competitions[i]->getCompetitionName() << endl;
+
         ofstream call("called" + to_string(num) + ".txt");
         c << "called" + to_string(num) + ".txt" << endl;
-        for(size_t j = 0; j < team_competitions[i]->getCalled().size(); j++){
-            call << team_competitions[i]->getCalled()[j]->getName() << endl;
-        }
+
+        vector<Player *> called_write = team_competitions[i]->getCalled();
+        for(size_t j = 0; j < team_competitions[i]->getCalled().size(); j++)
+            call << called_write[j]->getName() << endl;
+
         ofstream gam("games" + to_string(num) + ".txt");
         c << "games" + to_string(num) + ".txt" << endl;
-        for(size_t j = 0; j < team_competitions[i]->getGames().size(); j++){
-            gam << team_competitions[i]->getGames()[j]->getOpponent() << endl;
-            gam << team_competitions[i]->getGames()[j]->getCountry() << endl;
-            gam << team_competitions[i]->getGames()[j]->getCity() << endl;
-            gam << team_competitions[i]->getGames()[j]->getStadium() << endl;
-            gam << team_competitions[i]->getGames()[j]->getDate() << endl;
-            gam << team_competitions[i]->getGames()[j]->getStatistics() << endl;
+
+        vector<Game *> games_write = team_competitions[i]->getGames();
+        for(size_t j = 0; j < games_write.size(); j++) {
+            gam << (*games_write[j]) << endl;
             gam << "-----" << endl;
         }
         num++;
@@ -356,6 +347,10 @@ void Team::removeCompetition(Competition *c) {
     if(!found){
         throw CompetitionNotFound(c->getCompetitionName());
     }
+}
+
+void Team::setTeamName(string team_name) {
+this->teamName = team_name;
 }
 
 

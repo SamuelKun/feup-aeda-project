@@ -27,6 +27,8 @@ public:
     void infoTable() const;
     /// \brief Shows Staff's info.
     void info() const;
+
+    friend std::ostream &operator<<(std::ostream &out, const Staff &s);
 };
 
 /// \brief Class for throwing exception when no Staff Member with such name was found.

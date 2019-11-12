@@ -1,8 +1,7 @@
 #ifndef AEDA_MENUS_H
 #define AEDA_MENUS_H
 
-#include <iostream>
-#include "Team.h"
+#include <string>
 
 /// \brief Menu for searching Players by Name or Position.
 /// \return if 0, menu_searchPlayers(), menu_Players() otherwise
@@ -30,7 +29,7 @@ int menu_info();
 int menu_credits();
  /// \brief This menu allows you to move between sub menus in order to use the app properly
  /// \return chooses between different menus or exiting the app
-int mainMenu();
+int mainMenu(std::string &file_name);
 /// \brief Allows the user to open a .txt file referring to a team
 /// \return Player/Staff/Tournaments Menus or App's info
 int fileMenu();

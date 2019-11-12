@@ -56,3 +56,15 @@ Statistics Game::getStatistics() const {
     return this->game_stats;
 }
 
+std::ostream &operator<<(std::ostream &out, const Game &g) {
+    out << g.opponent << endl;
+    out << g.country << endl;
+    out << g.city << endl;
+    out << g.stadium << endl;
+    out << g.gameDate << endl;
+    out << g.game_stats;
+    return out;
+}
+
+
+

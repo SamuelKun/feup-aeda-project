@@ -85,4 +85,16 @@ void Player::info() const {
     cout << "Total Earnings: " << getEarnings() << endl;
 }
 
+ostream &operator<<(ostream &out, const Player &p) {
+    out << p.getName() << endl;
+    out  << p.getBirthday() << endl;
+    out  << p.club << endl;
+    out  << p.position << endl;
+    out << p.weight << endl;
+    out  << p.height << endl;
+    out  << p.value << endl;
+    out  << p.earnings;
+    return out;
+}
+
 
