@@ -32,6 +32,7 @@ public:
     /// \param start Competition's starting date
     /// \param end Competition's ending date
     /// \param moneyAccommodation Competition's money accommodation
+    /// \param paid Competition's money paid
     Competition(std::string name, std::vector<Player *> called, std::vector<Game *> team_games, Date start, Date end, double moneyAccommodation, bool paid);
     /// \brief Get Method.
     /// \return Competition's name
