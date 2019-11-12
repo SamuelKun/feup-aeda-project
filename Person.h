@@ -37,9 +37,13 @@ public:
 /// \brief Class for throwing exceptions when a Person is not found
 class PersonNotFound{
 private:
-    std::string name;
+    std::string name; //! Name of the Person that wasn't found
 public:
+    /// \brief Class constructor for throwing exceptions when a Person is not found.
+    /// \param name
     PersonNotFound(std::string name): name(name) {}
+    /// \brief Get Method
+    /// \return Name of the Person that wasn't found
     std::string getName() const{
         return name;
     }
@@ -47,9 +51,13 @@ public:
 /// \brief Class for throwing exceptions when too many Person are found
 class TooManyPeopleFound{
 private:
-    std::string name;
+    std::string name; //! Name that caused too many People to be found
 public:
+    /// \brief Class constructor for throwing exceptions when too many Person are found
+    /// \param name Name that caused too many People to be found
     TooManyPeopleFound(std::string name): name(name) {}
+    /// \brief Get Method.
+    /// \return Name that caused too many People to be found
     std::string getName() const{
         return name;
     }

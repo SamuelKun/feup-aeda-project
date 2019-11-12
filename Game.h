@@ -72,16 +72,36 @@ public:
 };
 /// \brief Class for throwing exception when Game already exists.
 class GameAlreadyExists{
-    std::string country,city,stadium,opponent;
-    Date d;
+    std::string country; //! country that already exists
+    std::string city;    //! city that already exists
+    std::string stadium; //! stadium that already exists
+    std::string opponent;//! opponent that already exists
+    Date d;              //! day that already exists
 
 public:
+    /// \brief Class constructor for throwing exception when Game already exists.
+    /// \param opponent opponent that already exists
+    /// \param country country that already exists
+    /// \param city city that already exists
+    /// \param stadium stadium that already exists
+    /// \param d date that already exists
     GameAlreadyExists(std::string opponent, std::string country, std::string city, std::string stadium, Date d) :
             opponent(opponent),country(country), city(city), stadium(stadium), d(d){}
+
+    /// \brief Get Method.
+    /// \return country that already exists
     std::string getCountry() const {return country;}
+    /// \brief Get Method.
+    /// \return city that already exists
     std::string getCity() const {return city;}
+    /// \brief Get Method.
+    /// \return stadium that already exists
     std::string getStadium() const {return stadium;}
+    /// \brief Get Method.
+    /// \return opponent that already exists
     std::string getOpponent() const {return opponent;}
+    /// \brief Get Method.
+    /// \return date that already exists
     Date getDate() const {return d;}
 };
 

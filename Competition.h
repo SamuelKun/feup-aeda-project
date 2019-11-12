@@ -103,10 +103,17 @@ private:
     Date start;
     Date end;
 public:
+    /// \brief Class constructor for throwing exception when no Competitions were found.
+    /// \param start Starting Date
+    /// \param end Ending Date
     NoCompetitionsIn(Date start, Date end): start(start), end(end) {}
+    /// \brief Get Method.
+    /// \return Starting Date
     Date getStart() const{
         return start;
     }
+    /// \brief Get Method.
+    /// \return Ending Date
     Date getEnd() const{
         return end;
     }
@@ -114,9 +121,13 @@ public:
 /// \brief Class for throwing exception when the Competition already exists.
 class CompetitionAlreadyExists{
 private:
-    std::string name;
+    std::string name; //! Name of the Competition that already exists
 public:
+    /// \brief Class constructor for throwing exception when the Competition already exists.
+    /// \param name Name of the Competition that already exists
     CompetitionAlreadyExists(std::string name): name(name) {}
+    /// \brief Get Method
+    /// \return Name of the Competition that already exists
     std::string getName() const{
         return name;
     }

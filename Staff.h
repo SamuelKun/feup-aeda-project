@@ -42,9 +42,13 @@ public:
 /// \brief Class for throwing exception when no Staff Member with such function was found.
 class FunctionNotFound{
 private:
-    std::string function;
+    std::string function; //! function that doesn't exist
 public:
+    /// \brief Class constructor for throwing exception when no Staff Member with such function was found.
+    /// \param function function that doesn't exist
     FunctionNotFound(std::string function): function(function) {}
+    /// \brief Get Method
+    /// \return function that doesn't exist
     std::string getFunction() const{
         return function;
     }
@@ -52,9 +56,13 @@ public:
 /// \brief Class for throwing exception when a Staff Member with this name already exists.
 class StaffMemberAlreadyExists{
 private:
-    std::string name;
+    std::string name; //! Name of the Staff that already exists
 public:
+    /// \brief Class constructor for throwing exception when a Staff Member with this name already exists.
+    /// \param name Name of the Staff that already exists
     StaffMemberAlreadyExists(std::string name): name(name) {}
+    /// \brief Get Method.
+    /// \return Name of the Staff that already exists
     std::string getName() const{
         return name;
     }
@@ -62,9 +70,13 @@ public:
 /// \brief Class for throwing exception when too many Staff Members were found.
 class TooManyStaffFound{
 private:
-    std::string name;
+    std::string name; //! Name of the Staff that wasn't found
 public:
+    /// \brief Class constructor for throwing exception when too many Staff Members were found.
+    /// \param name Name of the Staff that wasn't found
     TooManyStaffFound(std::string name): name(name) {}
+    /// \brief Get Method
+    /// \return Name of the Staff that wasn't found
     std::string getName() const{
         return name;
     }
