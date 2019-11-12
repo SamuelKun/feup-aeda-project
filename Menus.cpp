@@ -552,16 +552,19 @@ int menu_tournament_games(Competition * comp){
 
         case '4':
             try {
-
-                ///fazer isto melhor
-                for(size_t i = 0; i < comp->getGames().size(); i++)
-                {
-                    cout << i << "  ->" << comp->getGames()[i]->getStadium() << endl;
+                for(size_t i = 0; i < comp->getGames().size(); i++){
+                    cout <<" Index: " << i << "  ->" <<endl;
+                    comp->getGames()[i]->info();
                 }
                 int idx;
                 cout << "Index:" << endl;
                 cin >> idx;
-                /// FAZER ISTO MELHOR - temporario
+
+                while(idx >= comp->getGames().size() || idx < 0){
+                    cout << "Index too high!!" << endl;
+                    cout << "Index:" << endl;
+                    cin >> idx;
+                }
 
                 string checker;
                 int goalS, goalsC, shots, ballP, yellowC, redC, injured, freeKicks, cornerKicks;
@@ -715,12 +718,14 @@ int menu_tournaments()
                 string name;
 
                 cout << "Choose the name of the Competition you wish to view: " << endl;
+                for(size_t i = 0; i<national_team->getCompetition().size(); i++)
+                    cout << "Competition number " << i << ": " <<national_team->getCompetition()[i]->getCompetitionName() << endl;
                 getline(cin,name);
                 vector<Competition *> comp = national_team->findCompetition(name);
                 if(comp.size() > 1){
                     for(size_t i = 0; i < comp.size(); i++)
                         cout << *comp[i] << endl;
-                    cout << " More than 1 Competition named " << name << " was found!!" << endl;
+                    cout << "More than one competition named " << name << " was found!!" << endl;
                     cout << "Please try again! "<< endl;
                 }
                 else

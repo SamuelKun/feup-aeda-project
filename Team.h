@@ -68,7 +68,6 @@ public:
 
     std::vector<Competition *> findCompetition(std::string name);
     std::vector<Competition *> findCompetitionDate(Date start, Date end);
-
 };
 
 #endif
