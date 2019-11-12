@@ -23,6 +23,7 @@ public:
     /// \param called Competition's called players
     /// \param start Competition's starting date
     /// \param end Competition's ending date
+    /// \param moneyAccomodation Competition's money accommodation
     Competition(std::string name, std::vector<Player *> called, Date start, Date end, double moneyAccomodation);
     /// \brief Competition Constructor without games.
     /// \param name Competition's name
