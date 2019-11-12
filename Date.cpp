@@ -92,9 +92,11 @@ istream& operator>>(istream& in, Date &date)
     in.ignore(1000,'\n');
     while (in.fail() || this_year < 0 || this_year > 9999)
     {
-        in.clear();
-        in.ignore();
-        in.ignore(1000, '\n');
+        if (in.fail()){
+            in.clear();
+            in.ignore();
+            in.ignore(1000, '\n');
+        }
         cout << "Not a valid number or year. Please reenter: ";
         in >> this_year;
     }
@@ -103,9 +105,11 @@ istream& operator>>(istream& in, Date &date)
     in.ignore(1000,'\n');
     while (cin.fail() || this_month < 1 || this_month > 12)
     {
-        in.clear();
-        in.ignore();
-        in.ignore(1000, '\n');
+        if (in.fail()){
+            in.clear();
+            in.ignore();
+            in.ignore(1000, '\n');
+        }
         cout << "Not a valid number or month. Please reenter: ";
         in >> this_month;
     }
@@ -114,9 +118,11 @@ istream& operator>>(istream& in, Date &date)
     in.ignore(1000,'\n');
     while (in.fail() || this_day < 1 || this_day > monthDays[this_month-1])
     {
-        in.clear();
-        in.ignore();
-        in.ignore(1000, '\n');
+        if (in.fail()){
+            in.clear();
+            in.ignore();
+            in.ignore(1000, '\n');
+        }
         cout << "Not a valid number. Please reenter: ";
         in >> this_day;
     }
