@@ -9,12 +9,11 @@
 
 using namespace std;
 
-/// \brief Constructor
+
 Team::Team() {
 }
 
-/// \brief Constructor
-/// \param file_name file containing team
+
 Team::Team(string file_name) {
     //Read Agency File
     ifstream info(file_name);
@@ -29,23 +28,19 @@ Team::Team(string file_name) {
     this->team_competitions = read_competion(file_info[3], this);
 }
 
-/// \brief Get Method
-/// \return Team's name
+
 string Team::getTeamName() const {
     return teamName;
 }
-/// \brief Get Method
-/// \return Team's vector with teams players
+
 vector<Player *> Team::getPlayers() const {
     return team_players;
 }
-/// \brief Get Method
-/// \return Team's vector with staff members
+
 vector<Staff *> Team::getStaff() const {
     return team_staff;
 }
-/// \brief Get Method
-/// \return Team's vector with Competitions
+
 vector<Competition *> Team::getCompetition() const {
     return team_competitions;
 }
