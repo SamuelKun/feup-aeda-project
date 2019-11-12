@@ -473,7 +473,6 @@ int menu_games(){
             cin.ignore(1000, '\n');
             return 0;
     }
-
 }
 int menu_tournament_games(Competition * comp){
     char menu;
