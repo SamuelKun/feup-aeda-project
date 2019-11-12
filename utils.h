@@ -12,6 +12,9 @@
 #include "Player.h"
 #include "Statistics.h"
 
+/// \brief Reads a player from a .txt file.
+/// \param info .txt file containing a Team of Players
+/// \return Vector of Players belonging to a team
 std::vector<Player *> read_player(std::string info){
     std::ifstream players_info(info);
     std::vector<Player *> players;
@@ -28,7 +31,9 @@ std::vector<Player *> read_player(std::string info){
     }
     return players;
 }
-
+/// \brief Reads a Staff Member from a .txt file.
+/// \param info .txt file containing Staff Members
+/// \return Vector of Staff Members belonging to a team
 std::vector<Staff *> read_staff(std::string info){
     std::ifstream staff_info(info);
     std::vector<Staff *> staff;
@@ -46,7 +51,10 @@ std::vector<Staff *> read_staff(std::string info){
     }
     return staff;
 }
-
+/// \brief Reads a Game from a .txt file.
+/// \param info .txt file containing Games
+/// \param called_players Vector of Players called for these Games
+/// \return Vector of Games stored in the file
 std::vector<Game *> read_games(std::string info, std::vector<Player *> called_players){
     std::ifstream game_info(info);
     std::vector<Game *> games;
@@ -65,7 +73,10 @@ std::vector<Game *> read_games(std::string info, std::vector<Player *> called_pl
     }
     return games;
 }
-
+/// \brief Reads a Competition from a .txt file.
+/// \param info .txt file containing the Competition
+/// \param t Team Whose Competition is being read
+/// \return Vector of Competition stored in the file
 std::vector<Competition *> read_competion(std::string info, Team * t){
     std::ifstream competion_info(info);
     std::vector<Competition *> competion;

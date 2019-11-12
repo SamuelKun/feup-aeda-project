@@ -59,14 +59,20 @@ public:
 };
 /// \brief Class for throwing exception when no such Game is found.
 class GameNotFound{
-    std::string opponent;
-    Date d;
+    std::string opponent; //! opponent of the Game that wasn't found
+    Date d;               //! date of the Game that wasn't found
 
 public:
+    /// Class constructor for throwing exception when no such Game is found.
+    /// \param opponent opponent of the Game that wasn't found
+    /// \param date date of the Game that wasn't found
     GameNotFound(std::string opponent, Date date) :
             opponent(opponent), d(date){}
-
+    /// \brief Get Method.
+    /// \return opponent of the Game that wasn't found
     std::string getOpponent() const {return opponent;}
+    /// \brief Get Method.
+    /// \return date of the Game that wasn't found
     Date getDate() const {return d;}
 
 };
