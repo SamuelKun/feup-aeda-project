@@ -70,6 +70,7 @@ public:
     /// \brief Adds a Game to the Competition.
     /// \param g Game pointer to be added
     void addGame(Game * g);
+    void removeGame( std::string opponent, Date date);
     /// \brief Finds a Game in the Competition using the opponent and the Date.
     /// \param opponent opponent Played in that day of the Competition
     /// \param date Date of the Game

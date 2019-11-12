@@ -485,7 +485,8 @@ int menu_tournament_games(Competition * comp){
     cout << "1. Show all games from this competition" << endl;
     cout << "2. Search a Game" << endl;
     cout << "3. Add a Game" << endl;
-    cout << "4. Add Game Statistics" << endl;
+    cout << "4. Remove a Game " << endl;
+    cout << "5. Add Game Statistics" << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -521,9 +522,10 @@ int menu_tournament_games(Competition * comp){
             return 0;
         case '3':
             try{
-                string country,city,stadium,opponent;
+                string country,city,stadium,opponent,checker;
                 Date d;
                 Statistics stats;
+
                 cout << "Write the Game's opponent " << endl;
                 getline(cin,opponent);
                 cout << "Write the Game's country " << endl;
@@ -534,9 +536,21 @@ int menu_tournament_games(Competition * comp){
                 getline(cin,stadium);
                 cout << "Write the Game's date " << endl;
                 cin >> d;
+                Game *game = new Game(opponent,country,city,stadium, d, comp->getCalled(), stats);
+                game->info();
 
-                Game *g = new Game(opponent,country,city,stadium, d, comp->getCalled(), stats);
-                comp->addGame(g);
+                cout << "Do you wish to add this game? " << endl;
+                cout << "1. Add Game " << endl;
+                cout << "Any other key. Cancel adding Game " << endl;
+                getline(cin,checker);
+                if (checker != "1"){
+                    cout << "Game was not added!" << endl;
+                }
+                else{
+
+                    comp->addGame(game);
+                    cout << "Game successfully added!!" << endl;
+                }
             }
             catch(GameAlreadyExists &er){
                 cout << endl;
@@ -548,9 +562,45 @@ int menu_tournament_games(Competition * comp){
                 cout << "Date: " << er.getDate() << endl;
                 cout << "This Game already exists!!" << endl;
             }
+            waitInput();
             return 0;
-
         case '4':
+            try{
+                string opponent,checker;
+                Date d;
+                Statistics stats;
+                Game * game;
+
+                cout << "Write the Game's opponent " << endl;
+                getline(cin,opponent);
+                cout << "Write the Game's date " << endl;
+                cin >> d;
+
+                game = comp->findGame(opponent,d);
+                game->info();
+
+                cout << "Do you wish to remove this game? " << endl;
+                cout << "1. Remove Game " << endl;
+                cout << "Any other key. Cancel removing Game " << endl;
+                getline(cin,checker);
+                if (checker != "1"){
+                    cout << "Game was not removed!" << endl;
+                }
+                else{
+                    comp->removeGame(opponent,d);
+                    cout << "Game successfully removed!!" << endl;
+                }
+            }
+            catch(GameNotFound &er){
+                cout << endl;
+                cout << "Game:" << endl;
+                cout << "Opponent: " << er.getOpponent() << endl;
+                cout << "Date: " << er.getDate() << endl;
+                cout << "This Game wasn't found!!" << endl;
+            }
+            waitInput();
+            return 0;
+        case '5':
             try {
                 for(size_t i = 0; i < comp->getGames().size(); i++){
                     cout <<" Index: " << i << "  ->" <<endl;

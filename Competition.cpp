@@ -98,7 +98,7 @@ void Competition::addGame(Game * g) {
 }
 
 Game * Competition::findGame(string opponent, Date date) const {
-    vector<Game *> v_games;
+
     for(size_t i = 0 ; i < team_games.size(); i++){
         if( team_games[i]->getOpponent().find(opponent) != string::npos &&
             team_games[i]->getDate().isEqualTo(date)){
@@ -110,6 +110,20 @@ Game * Competition::findGame(string opponent, Date date) const {
 
 Competition::Competition(string name, vector<Player *> called, Date start, Date end):
 name(name),called(called),start(start),end(end){}
+
+void Competition::removeGame(string opponent, Date date) {
+    bool found = false;
+    for(size_t i = 0 ; i < team_games.size(); i++){
+        if( team_games[i]->getOpponent().find(opponent) != string::npos &&
+            team_games[i]->getDate().isEqualTo(date)){
+            team_games.erase(team_games.begin() + i);
+            found = true;
+        }
+    }
+    if(!found){
+        throw GameNotFound(opponent,date);
+    }
+}
 
 
 
