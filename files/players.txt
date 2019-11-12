@@ -116,7 +116,7 @@ Forward
 0
 -----
 Joao Mario
-19/01/1993
+19/1/1993
 Portugal
 Midfielder
 72
@@ -143,7 +143,7 @@ Defender
 0
 -----
 Mario Rui
-27/05/1991
+27/5/1991
 Portugal
 Defender
 67
@@ -152,7 +152,7 @@ Defender
 0
 -----
 Ruben Neves
-13/03/1997
+13/3/1997
 Portugal
 Midfielder
 80
@@ -161,7 +161,7 @@ Midfielder
 0
 -----
 Pizzi
-06/10/1989
+6/10/1989
 Portugal
 Midfielder
 66
@@ -170,7 +170,7 @@ Midfielder
 0
 -----
 Jose Sa
-17/01/1993
+17/1/1993
 Portugal
 Goalkeeper
 84

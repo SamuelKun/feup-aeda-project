@@ -781,7 +781,7 @@ int menu_tournaments()
                 getline(cin,checker);
                 if(checker == "0") return 0;
                 else{
-                    Competition * comp = new Competition(name, v_players, start, end);
+                    Competition * comp = new Competition(name, v_players, start, end, 0);
                     national_team->addCompetition(comp);
                 }
             }

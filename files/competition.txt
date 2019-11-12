@@ -4,6 +4,7 @@ games0.txt
 30/9/2019
 28/7/2020
 1000.98
+0
 -----
 Worlds Championship
 called1.txt
@@ -11,11 +12,13 @@ games1.txt
 30/9/2019
 28/7/2020
 1000.98
+0
 -----
 Tutz
 called2.txt
 games2.txt
 123/123/321
 123/123/123
-1.70586e+272
+1700.3
+0
 -----
