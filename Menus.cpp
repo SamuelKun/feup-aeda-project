@@ -933,10 +933,9 @@ int initMenu(){
     switch(menu){
         case '1': //Select the Team File to read
             while(!fileMenu());
-            break;
+            return 0;
         case '2': //Create a new Team File
             return 0;
-            break;
         case '0': //Exits program
             return 1;
         default:  //
