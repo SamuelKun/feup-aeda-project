@@ -5,7 +5,7 @@ Goalkeeper
 84
 190
 10000
-0
+33100
 -----
 Ruben Dias
 14/5/1997
@@ -14,7 +14,7 @@ Defender
 70
 186
 10000
-0
+33100
 -----
 Pepe
 26/2/1983
@@ -23,7 +23,7 @@ Defender
 81
 188
 10000
-0
+33100
 -----
 Nelson Semedo
 16/11/1993
@@ -32,7 +32,7 @@ Defender
 69
 177
 10000
-0
+33100
 -----
 Raphael Guerreiro
 22/12/1993
@@ -41,7 +41,7 @@ Defender
 63
 170
 10000
-0
+33100
 -----
 Danilo Pereira
 9/9/1991
@@ -50,7 +50,7 @@ Midfielder
 83
 188
 10000
-0
+33100
 -----
 William Carvalho
 7/4/1992
@@ -59,7 +59,7 @@ Midfielder
 89
 187
 10000
-0
+60200
 -----
 Bruno Fernandes
 8/9/1994
@@ -68,7 +68,7 @@ Midfielder
 69
 179
 10000
-0
+60200
 -----
 Rafa Silva
 17/5/1993
@@ -77,7 +77,7 @@ Forward
 66
 170
 10000
-0
+60200
 -----
 Bernardo Silva
 10/8/1994
@@ -86,7 +86,7 @@ Forward
 64
 173
 10000
-0
+60200
 -----
 Cristiano Ronaldo
 5/2/1985
@@ -95,16 +95,7 @@ Forward
 84
 187
 10000
-0
------
-Pauocas Ribeirinho
-16/10/2000
-Portugal
-Forward
-84
-187
--50
-0
+60200
 -----
 Joao Felige
 10/11/1999
