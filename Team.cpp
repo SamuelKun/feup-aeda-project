@@ -79,9 +79,11 @@ int Team::missingPay() {
 
 void Team::showPlayersTable() const {
     cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
-    cout << setw(12) << "Club" << " | " << setw(10) << "Position" << " | " << setw(6) << "Weight" << " | " << setw(8) << "Height" << " | " << setw(7) << "Value" << " | " << setw(9) <<  "Earnings" << " |" << endl;
+    cout << setw(12) << "Club" << " | " << setw(10) << "Position" << " | " << setw(6) << "Weight" << " | " << setw(8)
+    << "Height" << " | " << setw(7) << "Value" << " | " << setw(9) <<  "Earnings" << " |" <<setw(6) <<  "Index" << " |" << endl;
     for(int i = 0; i < team_players.size(); i++){
         team_players[i]->infoTable();
+        cout << setw(6) <<  i << " |" << endl;
     }
 }
 

@@ -123,7 +123,7 @@ istream& operator>>(istream& in, Date &date)
             in.ignore();
             in.ignore(1000, '\n');
         }
-        cout << "Not a valid number. Please reenter: ";
+        cout << "Not a valid number or number. This month only have" << monthDays[this_month-1] << " days. Please reenter: ";
         in >> this_day;
     }
 
