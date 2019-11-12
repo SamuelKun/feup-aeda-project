@@ -52,3 +52,7 @@ void Game::setStats(Statistics stats) {
     this->game_stats = stats;
 }
 
+Statistics Game::getStatistics() const {
+    return this->game_stats;
+}
+

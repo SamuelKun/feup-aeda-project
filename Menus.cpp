@@ -859,7 +859,7 @@ int mainMenu() {
     cout << "4. View Team Stats" << endl;
     cout << "5. App Info" << endl;
     cout << "0. Exit" << endl << endl;
-
+    national_team->updateFile();
     cin.clear();
     cin >> menu;
     cin.ignore(1000,'\n');

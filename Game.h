@@ -44,6 +44,9 @@ public:
     /// \brief Get Method.
     /// \return Game's date
     Date getDate() const;
+
+    Statistics getStatistics() const;
+
     /// \brief Set Method.
     /// \param stats Game's statistics
     void setStats(Statistics stats);

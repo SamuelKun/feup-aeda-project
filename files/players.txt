@@ -1,5 +1,5 @@
 Rui Patricio
-15/02/1988
+15/2/1988
 Portugal
 Goalkeeper
 84
@@ -8,7 +8,7 @@ Goalkeeper
 0
 -----
 Ruben Dias
-14/05/1997
+14/5/1997
 Portugal
 Defender
 70
@@ -17,7 +17,7 @@ Defender
 0
 -----
 Pepe
-26/02/1983
+26/2/1983
 Portugal
 Defender
 81
@@ -53,7 +53,7 @@ Midfielder
 0
 -----
 William Carvalho
-7/04/1992
+7/4/1992
 Portugal
 Midfielder
 89
@@ -62,7 +62,7 @@ Midfielder
 0
 -----
 Bruno Fernandes
-8/09/1994
+8/9/1994
 Portugal
 Midfielder
 69
@@ -71,7 +71,7 @@ Midfielder
 0
 -----
 Rafa Silva
-17/05/1993
+17/5/1993
 Portugal
 Forward
 66
@@ -80,7 +80,7 @@ Forward
 0
 -----
 Bernardo Silva
-10/08/1994
+10/8/1994
 Portugal
 Forward
 64
@@ -89,7 +89,7 @@ Forward
 0
 -----
 Cristiano Ronaldo
-5/02/1985
+5/2/1985
 Portugal
 Forward
 84

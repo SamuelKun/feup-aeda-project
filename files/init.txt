@@ -1,4 +1,4 @@
 Portugal
 players.txt
 staff.txt
-competion.txt
+competition.txt
