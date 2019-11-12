@@ -4,6 +4,7 @@
 #include <string>
 #include "Person.h"
 
+/// \brief Class for a Staff.
 class Staff : public Person
 {
 private:

@@ -8,6 +8,7 @@
 #include "Game.h"
 #include "Competition.h"
 
+/// \brief Class for a Team.
 class Team {
 private:
     std::string teamName;  /// \brief Team file

@@ -8,7 +8,7 @@
 class Person {
 private:
     std::string name; /*!< Person's name */
-	Date birth;  /*!< Person's date of birth */
+	Date birth;       /*!< Person's date of birth */
 public:
     /// \brief An empty constructor for a Person.
     Person();
@@ -44,7 +44,7 @@ public:
         return name;
     }
 };
-/// \brief Class for throwing exceptions when too many People are found
+/// \brief Class for throwing exceptions when too many Person are found
 class TooManyPeopleFound{
 private:
     std::string name;
