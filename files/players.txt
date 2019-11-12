@@ -1,29 +1,29 @@
 Rui Patricio
-15/02/1988
+15/2/1988
 Portugal
 Goalkeeper
 84
 190
 10000
-0
+33100
 -----
 Ruben Dias
-14/05/1997
+14/5/1997
 Portugal
 Defender
 70
 186
 10000
-0
+33100
 -----
 Pepe
-26/02/1983
+26/2/1983
 Portugal
 Defender
 81
 188
 10000
-0
+33100
 -----
 Nelson Semedo
 16/11/1993
@@ -32,7 +32,7 @@ Defender
 69
 177
 10000
-0
+33100
 -----
 Raphael Guerreiro
 22/12/1993
@@ -41,7 +41,7 @@ Defender
 63
 170
 10000
-0
+33100
 -----
 Danilo Pereira
 9/9/1991
@@ -50,61 +50,52 @@ Midfielder
 83
 188
 10000
-0
+33100
 -----
 William Carvalho
-7/04/1992
+7/4/1992
 Portugal
 Midfielder
 89
 187
 10000
-0
+60200
 -----
 Bruno Fernandes
-8/09/1994
+8/9/1994
 Portugal
 Midfielder
 69
 179
 10000
-0
+60200
 -----
 Rafa Silva
-17/05/1993
+17/5/1993
 Portugal
 Forward
 66
 170
 10000
-0
+60200
 -----
 Bernardo Silva
-10/08/1994
+10/8/1994
 Portugal
 Forward
 64
 173
 10000
-0
+60200
 -----
 Cristiano Ronaldo
-5/02/1985
+5/2/1985
 Portugal
 Forward
 84
 187
 10000
-0
------
-Pauocas Ribeirinho
-16/10/2000
-Portugal
-Forward
-84
-187
--50
-0
+60200
 -----
 Joao Felige
 10/11/1999
@@ -116,7 +107,7 @@ Forward
 0
 -----
 Joao Mario
-19/01/1993
+19/1/1993
 Portugal
 Midfielder
 72
@@ -143,7 +134,7 @@ Defender
 0
 -----
 Mario Rui
-27/05/1991
+27/5/1991
 Portugal
 Defender
 67
@@ -152,7 +143,7 @@ Defender
 0
 -----
 Ruben Neves
-13/03/1997
+13/3/1997
 Portugal
 Midfielder
 80
@@ -161,7 +152,7 @@ Midfielder
 0
 -----
 Pizzi
-06/10/1989
+6/10/1989
 Portugal
 Midfielder
 66
@@ -170,7 +161,7 @@ Midfielder
 0
 -----
 Jose Sa
-17/01/1993
+17/1/1993
 Portugal
 Goalkeeper
 84

@@ -5,7 +5,7 @@ using namespace std;
 
 Team *national_team;
 
-int main() {
+int main(){
     while(!initMenu());
     return 0;
 }

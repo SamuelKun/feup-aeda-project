@@ -1,0 +1,24 @@
+European Championship
+called0.txt
+games0.txt
+30/9/2019
+28/7/2020
+1000.98
+1
+-----
+Worlds Championship
+called1.txt
+games1.txt
+30/9/2019
+28/7/2020
+1000.98
+1
+-----
+Tutz
+called2.txt
+games2.txt
+28/6/2020
+27/8/2020
+1700.3
+1
+-----

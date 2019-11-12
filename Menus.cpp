@@ -831,7 +831,7 @@ int menu_tournaments()
                 getline(cin,checker);
                 if(checker == "0") return 0;
                 else{
-                    Competition * comp = new Competition(name, v_players, start, end);
+                    Competition * comp = new Competition(name, v_players, start, end, 0);
                     national_team->addCompetition(comp);
                 }
             }
@@ -909,7 +909,7 @@ int mainMenu() {
     cout << "4. View Team Stats" << endl;
     cout << "5. App Info" << endl;
     cout << "0. Exit" << endl << endl;
-
+    national_team->updateFile();
     cin.clear();
     cin >> menu;
     cin.ignore(1000,'\n');

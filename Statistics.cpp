@@ -100,3 +100,17 @@ void Statistics::info() const {
     cout << "Corner Kicks: " << corner_kicks << endl;
 
 }
+
+std::ostream &operator<<(std::ostream &os, const Statistics &statistics) {
+    os << statistics.goals_scored << endl;
+    os << statistics.goals_conceded << endl;
+    os << statistics.shots << endl;
+    os << statistics.ball_possession << endl;
+    os << statistics.yellow_cards << endl;
+    os << statistics.red_cards << endl;
+    os << statistics.injured << endl;
+    os << statistics.free_kicks << endl;
+    os << statistics.corner_kicks;
+
+    return os;
+}

@@ -42,6 +42,9 @@ public:
 
     void setGoalsConceded(int goalsConceded);
 
+    friend std::ostream& operator<<(std::ostream& os, const Statistics & statistics);
 };
+
+
 
 #endif

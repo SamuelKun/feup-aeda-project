@@ -3,10 +3,8 @@
 using namespace std;
 
 
-Competition::Competition(string name, vector<Player *> called, vector<Game *> team_games, Date start, Date end, double moneyAccommodation): name(name), called(called), team_games(team_games),
-                                                                                                                 start(start), end(end), moneyAccommodation(moneyAccommodation) {
-    this->paid = false;
-
+Competition::Competition(string name, vector<Player *> called, vector<Game *> team_games, Date start, Date end, double moneyAccommodation, bool paid): name(name), called(called), team_games(team_games),
+                                                                                                                 start(start), end(end), moneyAccommodation(moneyAccommodation), paid(paid) {
 }
 
 string Competition::getCompetitionName() const {
@@ -108,8 +106,10 @@ Game * Competition::findGame(string opponent, Date date) const {
     throw GameNotFound(opponent,date);
 }
 
-Competition::Competition(string name, vector<Player *> called, Date start, Date end):
-name(name),called(called),start(start),end(end){}
+Competition::Competition(string name, vector<Player *> called, Date start, Date end, double moneyAccomodation):
+name(name),called(called),start(start),end(end), moneyAccommodation(moneyAccomodation) {
+    this->paid = 0;
+}
 
 void Competition::removeGame(string opponent, Date date) {
     bool found = false;
