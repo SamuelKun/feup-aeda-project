@@ -9,13 +9,13 @@
 /// \brief Class for a COmpetition
 class Competition{
 private:
-    std::string name;              //!*< Competition's name
-    std::vector<Player *> called;  //!*< Competition's called players
-    std::vector<Game *> team_games;//!*< Competition's Games
-    Date start;                    //!*< Competition's starting Date
-    Date end;                      //!*< Competition's ending Date
-    double moneyAccommodation;     //!*< Competition's money accommodation
-    bool paid;                     //!*< Competition's paid status
+    std::string name;              //! Competition's name
+    std::vector<Player *> called;  //! Competition's called players
+    std::vector<Game *> team_games;//! Competition's Games
+    Date start;                    //! Competition's starting Date
+    Date end;                      //! Competition's ending Date
+    double moneyAccommodation;     //! Competition's money accommodation
+    bool paid;                     //! Competition's paid status
 
 public:
     /// \brief Competition Constructor without games.

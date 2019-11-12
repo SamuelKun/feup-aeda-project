@@ -8,13 +8,13 @@
 class Player : public Person
 {
 private:
-    std::string club;     //!*< Player's club.
-    std::string position; //!*< Player's position.
-	int weight;           //!*< Player's weight in kg.
-	int height;           //!*< Player's height in cm.
-	int value;            //!*< Player's value in euros.
-    double earnings;      //!*< Player's earnings.
-    double insurance;     //!*< Player's insurance.
+    std::string club;     //! Player's club.
+    std::string position; //! Player's position.
+	int weight;           //! Player's weight in kg.
+	int height;           //! Player's height in cm.
+	int value;            //! Player's value in euros.
+    double earnings;      //! Player's earnings.
+    double insurance;     //! Player's insurance.
 
 
 public:
