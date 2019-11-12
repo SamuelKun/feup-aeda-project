@@ -4,12 +4,7 @@
 
 using namespace std;
 
-/// \brief Date empty constructor
-Date::Date()
-{
-}
-/// \brief Date constructor
-/// \param date Date string in the format DD // MM // YYYY
+Date::Date(){}
 Date::Date(string date)
 {
 
@@ -27,30 +22,19 @@ Date::Date(string date)
 
 }
 
-/// \brief Date constructor using ints
-/// \param day Date's day
-/// \param month Date's month
-/// \param year Date's year
 Date::Date(unsigned short day, unsigned short month, unsigned year):day(day), month(month), year(year){}
 
-/*********************************
- * GET Methods
- ********************************/
- /// \brief Get Method
- /// \return Date's day
 unsigned short Date::getDay() const
 {
     return day;
 }
 
-/// \brief Get Method
-/// \return Date's month
+
 unsigned short Date::getMonth() const
 {
     return month;
 }
-/// \brief Get Method
-/// \return Date's year
+
 unsigned Date::getYear() const
 {
     return year;
@@ -61,46 +45,30 @@ string Date::getDate() const {
 }
 
 
-/*********************************
- * SET Methods
- ********************************/
-/// \brief Set Method
-/// \param day Date's day
 void Date::setDay(unsigned short day)
 {
     this->day = day;
 }
-/// \brief Set Method
-/// \param month Date's month
 void Date::setMonth(unsigned short month)
 {
     this->month = month;
 }
-/// \brief Set Method
-/// \param year Date's year
 void Date::setYear(unsigned year)
 {
     this->year = year;
 }
-/// \brief Checks if Date is equal to the one given by parameter
-/// \param date Date to compare
-/// \return true if dates are equal, false otherwise
 bool Date::isEqualTo(const Date & date)
 {
     return date.getYear() == year && date.getMonth() == month && date.getDay() == day;
 }
-/// \brief Checks if Date is after the one given by parameter
-/// \param date Date to compare
-/// \return true if Date is after is given by parameter, false otherwise
+
 bool Date::isAfter(const Date &date)
 {
     if (year > date.year) return true;
     if (year == date.year && month > date.month) return true;
     return year == date.year && month == date.month && day > date.day;
 }
-/// \brief Checks if Date is before the one given by parameter
-/// \param date Date to compare
-/// \return true if Date is before the one given by parameter, false otherwise
+
 bool Date::isBefore(const Date &date)
 {
     if (year < date.year) return true;
@@ -108,22 +76,13 @@ bool Date::isBefore(const Date &date)
     return year == date.year && month == date.month && day < date.day;
 }
 
-/*********************************
- * ostream
- ********************************/
-/// \brief Overloads operator "<<" to show the Date
-/// \param out ostream similar to "cout"
-/// \param date Date shown
-/// \return Ostream
+
 ostream& operator<<(ostream& out, const Date &date)
 {
     out << date.getDay() << '/' << date.getMonth() << '/' << date.getYear();
     return out;
 }
-/// \brief Overloads ">>" operator to get a Date from user input
-/// \param in istream similar to "cin"
-/// \param date Date where the input is stored
-/// \return istream
+
 istream& operator>>(istream& in, Date &date)
 {
     int this_year, this_month, this_day;
