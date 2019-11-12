@@ -71,9 +71,9 @@ public:
     friend std::istream& operator>>(std::istream& in, Date & date);
 
 private:
-    unsigned day;  //!*< Date's day
-    unsigned month;//!*< Player's month.
-    unsigned year; //!*< Player's year.
+    unsigned day;  //! Date's day
+    unsigned month;//! Player's month.
+    unsigned year; //! Player's year.
 };
 
 

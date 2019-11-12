@@ -106,3 +106,75 @@ Forward
 -50
 0
 -----
+Joao Felige
+10/11/1999
+Portugal
+Forward
+70
+181
+120000000
+0
+-----
+Joao Mario
+19/01/1993
+Portugal
+Midfielder
+72
+179
+10000
+0
+-----
+Nelson Semedo
+16/11/1993
+Portugal
+Defender
+69
+177
+10000
+0
+-----
+Jose Fonte
+22/12/1983
+Portugal
+Defender
+81
+191
+10000
+0
+-----
+Mario Rui
+27/05/1991
+Portugal
+Defender
+67
+168
+10000
+0
+-----
+Ruben Neves
+13/03/1997
+Portugal
+Midfielder
+80
+183
+10000
+0
+-----
+Pizzi
+06/10/1989
+Portugal
+Midfielder
+66
+177
+10000
+0
+-----
+Jose Sa
+17/01/1993
+Portugal
+Goalkeeper
+84
+192
+10000
+0
+-----
