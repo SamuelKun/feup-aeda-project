@@ -85,33 +85,34 @@ ostream& operator<<(ostream& out, const Date &date)
 
 istream& operator>>(istream& in, Date &date)
 {
+    int monthDays[12] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     int this_year, this_month, this_day;
     cout << "Year:";
     in >> this_year;
     in.ignore(1000,'\n');
-    while (in.fail())
+    while (in.fail() || this_year < 0 || this_year > 9999)
     {
         in.clear();
         in.ignore();
         in.ignore(1000, '\n');
-        cout << "Not a valid number. Please reenter: ";
+        cout << "Not a valid number or year. Please reenter: ";
         in >> this_year;
     }
     cout << "Month:";
     in >> this_month;
     in.ignore(1000,'\n');
-    while (cin.fail())
+    while (cin.fail() || this_month < 1 || this_month > 12)
     {
         in.clear();
         in.ignore();
         in.ignore(1000, '\n');
-        cout << "Not a valid number. Please reenter: ";
+        cout << "Not a valid number or month. Please reenter: ";
         in >> this_month;
     }
     cout << "Day:";
     in >> this_day;
     in.ignore(1000,'\n');
-    while (in.fail())
+    while (in.fail() || this_day < 1 || this_day > monthDays[this_month-1])
     {
         in.clear();
         in.ignore();
@@ -128,7 +129,7 @@ istream& operator>>(istream& in, Date &date)
 }
 
 int Date::daysUntil(const Date &date) const {
-    int monthDays[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int monthDays[12] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     long int n1 = year*365 + day;
 
