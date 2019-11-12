@@ -11,10 +11,10 @@
 /// \brief Class for a Team.
 class Team {
 private:
-    std::string teamName;  //!*< Team file
-    std::vector<Player *> team_players; //!*< Vector with Team's players
-    std::vector<Staff *> team_staff; //!*< Vector with Team's staff
-    std::vector<Competition *> team_competitions; //!*< Vector with Team's competitions
+    std::string teamName;  //! Team file
+    std::vector<Player *> team_players; //! Vector with Team's players
+    std::vector<Staff *> team_staff; //! Vector with Team's staff
+    std::vector<Competition *> team_competitions; //! Vector with Team's competitions
 
 public:
     /// \brief Class Team empty constructor.
@@ -23,6 +23,7 @@ public:
     /// \param file_name label of the .txt file containing a Team
     Team(std::string file_name);
 
+    /// \brief Updates the .txt file with team info
     void updateFile();
 
     /// \brief Get Method.
@@ -64,6 +65,10 @@ public:
     /// \brief Removes a Staff Member pointer from the vector of Team's Staff Members pointers.
     /// \param s Staff Member pointer to be removed
     void removeStaff(Staff * s);
+
+    /// \brief Removes a Competition from the vector of Team's Competitions
+    /// \param c
+    void removeCompetition(Competition * c);
 
     /// \brief Get Method.
     /// \return The earnings from all Team's Players

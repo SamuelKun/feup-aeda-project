@@ -728,6 +728,7 @@ int menu_tournaments()
     cout << "3. Pay competitions fees" << endl;
     cout << "4. Detailed information about one competition" << endl;
     cout << "5. Create a new Competition " << endl;
+    cout << "6. Remove a Competition " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -836,6 +837,44 @@ int menu_tournaments()
             }
             catch(CompetitionAlreadyExists &er){
                 cout << "Competition " << er.getName() << " already exists!!" << endl;
+            }
+            waitInput();
+            return 0;
+        case '6':
+            try {
+                string name, players, checker;
+                Date start, end;
+                vector<Competition *> competitions;
+
+                cout << "Write the Competition's name: " << endl;
+                getline(cin, name);
+
+                competitions = national_team->findCompetition(name);
+
+                if(competitions.size() > 1){
+                    for (size_t i = 0; i < competitions.size(); i++){
+                        cout << competitions[i]->getCompetitionName() << endl;
+                    }
+                    cout << "More than 1 Competitions were found!! " << endl;
+                    cout << "Try a different name next time!!" << endl;
+                }
+                else{
+                    cout << "Competition: " << name << " was found!" << endl;
+                    cout << "Are you sure you want to remove this competition?" << endl;
+                    cout << "1. Remove " << name << "?" << endl;
+                    cout << "Any other key. Go back without removing " << name << endl;
+                    getline(cin,checker);
+                    if(checker != "1"){
+                        cout << name << " was not removed!!" << endl;
+                    }
+                    else{
+                        national_team->removeCompetition(competitions[0]);
+                        cout << name << " was successfully removed!!" << endl;
+                    }
+                }
+            }
+            catch(CompetitionNotFound &er){
+                cout << "Competition " << er.getName() << " was not found!" << endl;
             }
             waitInput();
             return 0;

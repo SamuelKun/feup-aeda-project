@@ -345,5 +345,18 @@ void Team::updateFile() {
     }
 }
 
+void Team::removeCompetition(Competition *c) {
+    bool found = false;
+    for (size_t i = 0; i < team_competitions.size(); i++){
+        if(team_competitions[i] == c){
+            team_competitions.erase(team_competitions.begin() + i);
+            found = true;
+        }
+    }
+    if(!found){
+        throw CompetitionNotFound(c->getCompetitionName());
+    }
+}
+
 
 
