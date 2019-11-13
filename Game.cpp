@@ -38,6 +38,7 @@ void Game::info() const {
     cout << "--------------------------------------------- Called Players -------------------------------------------" <<endl;
     for (auto it = called_players.begin(); it != called_players.end(); it++){
         (*it)->infoTable();
+        cout << endl;
     }
     cout << "--------------------------------------------- Game Statistics -------------------------------------------" <<endl;
     game_stats.info();

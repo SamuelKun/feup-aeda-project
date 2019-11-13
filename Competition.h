@@ -80,6 +80,7 @@ public:
     /// \param opponent opponent Played in that day of the Competition
     /// \param date Date of the Game
     /// \return Pointer to the found Game, throws exception otherwise
+    void removeGame(Game * g);
     Game * findGame(std::string opponent, Date date) const;
 };
 /// \brief Class for throwing exception when the Competition is already paid.

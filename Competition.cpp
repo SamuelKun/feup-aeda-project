@@ -125,5 +125,14 @@ void Competition::removeGame(string opponent, Date date) {
     }
 }
 
+void Competition::removeGame(Game *g) {
+    for(size_t i = 0 ; i < team_games.size(); i++) {
+        if (team_games[i]->getOpponent() == g->getOpponent() &&
+            team_games[i]->getDate().isEqualTo(g->getDate())) {
+            team_games.erase(team_games.begin() + i);
+        }
+    }
+}
+
 
 

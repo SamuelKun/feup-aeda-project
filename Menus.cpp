@@ -94,6 +94,8 @@ int menu_searchPlayers() {
 int menu_players()
 {
     char menu;
+    unsigned int index;
+    vector<Player*> v_players;
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
     cout << "========================================= " << endl;
@@ -174,45 +176,34 @@ int menu_players()
             waitInput();
             return 0;
         case '4':
-            try {
-                cout << "Write the name of the player you wish to remove: " << endl;
-                string name;
-                getline(cin,name);
+            national_team->showPlayersTable();
 
-                vector<Player *> to_print = national_team->findPlayerName(name);
-                for (size_t i = 0; i < to_print.size(); i++) {
-                    to_print[i]->info();
-                    cout << endl;
+            cout << "Write the index of the player you wish to remove " << endl;
+            cout << "Press any char that is not a number to stop adding " << endl;
+            cout << "Example: Press [a] to exit" << endl;
+
+            while(cin >> index && !cin.eof()){
+                v_players = national_team->getPlayers();
+                if (index >= v_players.size()) {
+                    cout << "Index too high!!" << endl;
+                    continue;
                 }
-                if(to_print.size() > 1){ throw TooManyPeopleFound(name);}
-                else{
-                    string checker;
-                    cout << "Do you wish to remove " << to_print[0]->getName() << endl;
-                    cout << "1. Remove Player " << endl;
-                    cout << "Any other key. Cancel removing Player " << endl;
-                    getline(cin,checker);
-                    if (checker != "1"){
-                        cout << "Player was not removed!!" << endl;
-                    }
-                    else{
-                        national_team->removePlayer(to_print[0]);
-                        cout << "Player successfully removed" << endl;
-                    }
+                else {
+                    string name = v_players[index]->getName();
+                    national_team->removePlayer(v_players[index]);
+                    national_team->showPlayersTable();
+                    cout << name << " was successfully removed!!" << endl;
+                    cout << "Example: Press [a] to exit" << endl;
                 }
             }
-            catch (PersonNotFound &er) {
-                cout << "Player " << er.getName() << " not found" << endl;
-            }
-            catch (TooManyPeopleFound &er){
-                cout << "Can't remove: " << endl;
-                cout << "More than 1 Player named " << er.getName() << " was found!!" << endl;
-            }
+            cout << "Stopped removing Players!!" << endl;
+            cin.clear();
+            cin.ignore(1000,'\n');
             waitInput();
             return 0;
         case '0':
             return 1;
         default:     //Invalid input
-            cin.ignore(1000,'\n');
             return 0;
     }
 }
@@ -274,7 +265,6 @@ int menu_searchStaffMembers(){
         case '0':
             return 1;
         default:
-            cin.ignore(1000,'\n');
             return 0;
     }
 }
@@ -298,6 +288,8 @@ int menu_allStaff() {
 
 int menu_staff() {
     char menu;
+    unsigned int index;
+    vector<Staff*> v_staff;
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
@@ -364,51 +356,36 @@ int menu_staff() {
             waitInput();
             return 0;
         case '4':
-            try{
-                string name;
-                vector <Staff *> v_staff;
+            national_team->showStaffTable();
 
-                cout << "Write the name of the Staff member you wish to remove: " << endl;
-                getline(cin,name);
-                v_staff = national_team->findStaffName(name);
+            cout << "Write the index of the Staff Member you wish to remove " << endl;
+            cout << "Press any char that is not a number to stop adding " << endl;
+            cout << "Example: Press [a] to exit" << endl;
 
-                for (size_t i = 0; i < v_staff.size(); i++) {
-                    v_staff[i]->info();
-                    cout << endl;
+            while(cin >> index && !cin.eof()){
+                v_staff = national_team->getStaff();
+                if (index >= v_staff.size()) {
+                    cout << "Index too high!!" << endl;
+                    continue;
                 }
-                if(v_staff.size() > 1){ throw TooManyStaffFound(name);}
-
-                else{
-                    string checker;
-                    cout << "Do you wish to remove " << v_staff[0]->getName() << "?" << endl;
-                    cout << "1. Remove Staff Member " << endl;
-                    cout << "Any other key. Cancel removing Staff Member " << endl;
-                    getline(cin,checker);
-                    if (checker != "1"){
-                        cout << "Staff Member was not removed!!" << endl;
-                    }
-                    else{
-                        national_team->removeStaff(v_staff[0]);
-                        cout << "Staff Member successfully removed" << endl;
-                    }
+                else {
+                    string name = v_staff[index]->getName();
+                    national_team->removeStaff(v_staff[index]);
+                    national_team->showStaffTable();
+                    cout << name << " was successfully removed!!" << endl;
+                    cout << "Example: Press [a] to exit" << endl;
                 }
             }
-            catch (StaffMemberNotFound &er) {
-                cout << "Staff Member " << er.getName() << " not found" << endl;
-            }
-            catch (TooManyStaffFound &er){
-                cout << "Can't remove: " << endl;
-                cout << "More than 1 Staff Member named " << er.getName() << " was found!!" << endl;
-            }
+            cout << "Stopped removing Staff Members!!" << endl;
+            cin.clear();
+            cin.ignore(1000,'\n');
             waitInput();
             return 0;
         case '0':    //Exit function
             return 1;
         default:     //Invalid input
-            cin.ignore(1000,'\n');
             return 0;
     }
-    return 1;
 }
 
 int menu_games(){
@@ -471,12 +448,13 @@ int menu_games(){
         case '0':
             return 1;
         default:     //Invalid input
-            cin.ignore(1000, '\n');
             return 0;
     }
 }
 int menu_tournament_games(Competition * comp){
     char menu;
+    unsigned int index;
+    vector<Game *> games;
 
     cout << "========================================= " << endl;
     cout << "             Games Menu                   " << endl;
@@ -565,39 +543,30 @@ int menu_tournament_games(Competition * comp){
             waitInput();
             return 0;
         case '4':
-            try{
-                string opponent,checker;
-                Date d;
-                Statistics stats;
-                Game * game;
+            //É preciso meter os jogos numa tabela com Oponentes , Date e indexs
+            //comp->showGamesTable();
 
-                cout << "Write the Game's opponent " << endl;
-                getline(cin,opponent);
-                cout << "Write the Game's date " << endl;
-                cin >> d;
+            cout << "Write the index of the player you wish to remove " << endl;
+            cout << "Press any char that is not a number to stop adding " << endl;
+            cout << "Example: Press [a] to exit" << endl;
 
-                game = comp->findGame(opponent,d);
-                game->info();
-
-                cout << "Do you wish to remove this game? " << endl;
-                cout << "1. Remove Game " << endl;
-                cout << "Any other key. Cancel removing Game " << endl;
-                getline(cin,checker);
-                if (checker != "1"){
-                    cout << "Game was not removed!" << endl;
+            while(cin >> index && !cin.eof()){
+                games = comp->getGames();
+                if (index >= games.size()) {
+                    cout << "Index too high!!" << endl;
+                    continue;
                 }
-                else{
-                    comp->removeGame(opponent,d);
-                    cout << "Game successfully removed!!" << endl;
+                else {
+                    string opponent = games[index]->getOpponent();
+                    comp->removeGame(games[index]);
+                    //comp->showGamesTable();
+                    cout << "Game vs " << opponent << " was successfully removed!!" << endl;
+                    cout << "Example: Press [a] to exit" << endl;
                 }
             }
-            catch(GameNotFound &er){
-                cout << endl;
-                cout << "Game:" << endl;
-                cout << "Opponent: " << er.getOpponent() << endl;
-                cout << "Date: " << er.getDate() << endl;
-                cout << "This Game wasn't found!!" << endl;
-            }
+            cout << "Stopped removing Games!!" << endl;
+            cin.clear();
+            cin.ignore(1000,'\n');
             waitInput();
             return 0;
         case '5':
@@ -668,7 +637,6 @@ int menu_tournament_games(Competition * comp){
         case '0':
             return 1;
         default:     //Invalid input
-            cin.ignore(1000, '\n');
             return 0;
     }
 
@@ -685,7 +653,7 @@ int menu_singleCompetition(Competition* comp){
     cout << "1. Competition Games" << endl;
     cout << "2. View called Players" << endl;
     cout << "3. Money spent in this competition (Excluding Staff Members Salary)" << endl;
-    cout << "0. Return to Main Menu " << endl << endl;
+    cout << "0. Return to the previous Competition Menu " << endl << endl;
 
     cin.clear();
     cin >> menu;
@@ -711,7 +679,6 @@ int menu_singleCompetition(Competition* comp){
         case '0':    //Exit function
             return 1;
         default:     //Invalid input
-            cin.ignore(1000,'\n');
             return 0;
     }
 }
@@ -719,6 +686,9 @@ int menu_singleCompetition(Competition* comp){
 int menu_tournaments()
 {
     char menu;
+    string name;
+    unsigned int number;
+    vector<Competition*> comp = national_team->getCompetition();
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
@@ -767,26 +737,19 @@ int menu_tournaments()
             waitInput();
             return 0;
         case '4':
-            try{
-                string name;
-
-                cout << "Choose the name of the Competition you wish to view: " << endl;
-                for(size_t i = 0; i<national_team->getCompetition().size(); i++)
-                    cout << "Competition number " << i << ": " <<national_team->getCompetition()[i]->getCompetitionName() << endl;
-                getline(cin,name);
-                vector<Competition *> comp = national_team->findCompetition(name);
-                if(comp.size() > 1){
-                    for(size_t i = 0; i < comp.size(); i++)
-                        cout << *comp[i] << endl;
-                    cout << "More than one competition named " << name << " was found!!" << endl;
-                    cout << "Please try again! "<< endl;
+            cout << "Write the number of the Competition you wish to view" << endl;
+            cout << "Press any char that is not a number to go back" << endl;
+            cout << "Example: Press [a] to exit" << endl;
+            for(size_t i = 0; i < comp.size(); i++)
+                cout << "Competition number " << i << ": " <<comp[i]->getCompetitionName() << endl;
+            while(cin >> number && !cin.eof()){
+                if( number >= comp.size()){
+                    cout << "Index too high!!" << endl;
                 }
-                else
-                    while(!menu_singleCompetition(comp[0]));
-            }
-            catch(CompetitionNotFound &er){
-                cout << "No competition named " << er.getName() << endl;
-                waitInput();
+                else{
+                    while(!menu_singleCompetition(comp[number]));
+                    return 0;
+                }
             }
             return 0;
         case '5':
@@ -844,55 +807,45 @@ int menu_tournaments()
             waitInput();
             return 0;
         case '6':
-            try {
-                string name, players, checker;
-                Date start, end;
-                vector<Competition *> competitions;
+            //É preciso meter os jogos numa tabela com Oponentes , Date e indexs
+            //comp->showGamesTable();
+            for (size_t i = 0; i < comp.size(); i++){
+                cout << "Competition number: " << i << " " << comp[i]->getCompetitionName() << endl;
+            }
+            cout << "Write the index of the Competition you wish to remove " << endl;
+            cout << "Press any char that is not a number to stop adding " << endl;
+            cout << "Example: Press [a] to exit" << endl;
 
-                cout << "Write the Competition's name: " << endl;
-                getline(cin, name);
-
-                competitions = national_team->findCompetition(name);
-
-                if(competitions.size() > 1){
-                    for (size_t i = 0; i < competitions.size(); i++){
-                        cout << competitions[i]->getCompetitionName() << endl;
-                    }
-                    cout << "More than 1 Competitions were found!! " << endl;
-                    cout << "Try a different name next time!!" << endl;
+            while(cin >> index && !cin.eof()){
+                comp = national_team->getCompetition();
+                if (index >= comp.size()) {
+                    cout << "Index too high!!" << endl;
+                    continue;
                 }
-                else{
-                    cout << "Competition: " << name << " was found!" << endl;
-                    cout << "Are you sure you want to remove this competition?" << endl;
-                    cout << "1. Remove " << name << "?" << endl;
-                    cout << "Any other key. Go back without removing " << name << endl;
-                    getline(cin,checker);
-                    if(checker != "1"){
-                        cout << name << " was not removed!!" << endl;
+                else {
+                    name = comp[index]->getCompetitionName();
+                    national_team->removeCompetition(comp[index]);
+                    for (size_t i = 0; i < comp.size(); i++){
+                        cout << "Competition number: " << i << " " << comp[i]->getCompetitionName(); << endl;
                     }
-                    else{
-                        national_team->removeCompetition(competitions[0]);
-                        cout << name << " was successfully removed!!" << endl;
-                    }
+                    cout << name << " was successfully removed!!" << endl;
+                    cout << "Example: Press [a] to exit" << endl;
                 }
             }
-            catch(CompetitionNotFound &er){
-                cout << "Competition " << er.getName() << " was not found!" << endl;
-            }
+            cout << "Stopped removing Competitions!!" << endl;
+            cin.clear();
+            cin.ignore(1000,'\n');
             waitInput();
             return 0;
         case '0':    //Exit function
             return 1;
         default:     //Invalid input
-            cin.ignore(1000,'\n');
             return 0;
     }
 }
 
 int menu_info()
 {
-    char menu;
-
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
     cout << "========================================= " << endl;
@@ -912,7 +865,6 @@ int menu_info()
 }
 
 int menu_credits() {
-    char menu;
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
@@ -979,7 +931,6 @@ int mainMenu(string &file_name) {
             }
             return 0;
         default:     //Invalid input
-            cin.ignore(1000,'\n');
             return 0;
     }
 }
@@ -1052,8 +1003,7 @@ int initMenu(){
             return 0;
         case '0': //Exits program
             return 1;
-        default:  //
-            cin.ignore(1000,'\n');
+        default:  //Goes back
             return 0;
     }
 }
