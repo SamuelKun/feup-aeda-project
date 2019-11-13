@@ -809,15 +809,15 @@ int menu_tournaments()
         case '6':
             //É preciso meter os jogos numa tabela com Oponentes , Date e indexs
             //comp->showGamesTable();
-            for (size_t i = 0; i < comp.size(); i++){
-                cout << "Competition number: " << i << " " << comp[i]->getCompetitionName() << endl;
-            }
+
             cout << "Write the index of the Competition you wish to remove " << endl;
             cout << "Press any char that is not a number to stop adding " << endl;
             cout << "Example: Press [a] to exit" << endl;
+            for (size_t i = 0; i < comp.size(); i++){
+                cout << "Competition number: " << i << " " << comp[i]->getCompetitionName() << endl;
+            }
 
             while(cin >> index && !cin.eof()){
-                comp = national_team->getCompetition();
                 if (index >= comp.size()) {
                     cout << "Index too high!!" << endl;
                     continue;
@@ -825,6 +825,7 @@ int menu_tournaments()
                 else {
                     name = comp[index]->getCompetitionName();
                     national_team->removeCompetition(comp[index]);
+                    comp = national_team->getCompetition();
                     for (size_t i = 0; i < comp.size(); i++){
                         cout << "Competition number: " << i << " " << comp[i]->getCompetitionName() << endl;
                     }
