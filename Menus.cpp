@@ -826,7 +826,7 @@ int menu_tournaments()
                     name = comp[index]->getCompetitionName();
                     national_team->removeCompetition(comp[index]);
                     for (size_t i = 0; i < comp.size(); i++){
-                        cout << "Competition number: " << i << " " << comp[i]->getCompetitionName(); << endl;
+                        cout << "Competition number: " << i << " " << comp[i]->getCompetitionName() << endl;
                     }
                     cout << name << " was successfully removed!!" << endl;
                     cout << "Example: Press [a] to exit" << endl;
