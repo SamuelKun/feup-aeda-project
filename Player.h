@@ -14,8 +14,8 @@ private:
 	int weight;           //! Player's weight in kg.
 	int height;           //! Player's height in cm.
 	int value;            //! Player's value in euros.
-    double earnings;      //! Player's earnings.
-    double insurance;     //! Player's insurance.
+    double earnings;      //! Player's earnings in euros.
+    double insurance;     //! Player's insurance in euros.
     PlayerStatistics *player_stats; //! Player's statistics.
 
 

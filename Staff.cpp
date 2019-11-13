@@ -33,3 +33,11 @@ std::ostream &operator<<(std::ostream &out, const Staff &s) {
 
     return out;
 }
+
+void Staff::setSalary(double salary) {
+    this->salary = salary;
+}
+
+void Staff::setFunction(std::string function){
+    this->function = function;
+}

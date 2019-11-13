@@ -27,7 +27,8 @@ public:
     /// \param file_name label of the .txt file containing a Team
     void updateFile(std::string file_name);
 
-
+    /// \brief Set Method.
+    /// \param team_name Team file
     void setTeamName(std::string team_name);
     /// \brief Get Method.
     /// \return Team's name

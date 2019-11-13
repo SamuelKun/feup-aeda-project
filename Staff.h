@@ -23,6 +23,8 @@ public:
     /// \brief Get Method.
     /// \return Staff's function
     std::string getFunction() const;
+    void setSalary(double salary);
+    void setFunction(std::string function);
     /// \brief Shows Staff's info as a table.
     void infoTable() const;
     /// \brief Shows Staff's info.
