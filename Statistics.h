@@ -7,7 +7,7 @@ public:
     /// \brief Purely virtual method for showing Player Statistics.
     virtual void info() const = 0;
     /// \brief Purely virtual method for reading Statistics.
-    /// \param os
+    /// \param os Ostream
     virtual void writeStats(std::ostream& os) const = 0;
     /// \brief Overload of operator ">>" to enable reading Statistics.
     /// \param os Ostream
