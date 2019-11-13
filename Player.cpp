@@ -83,6 +83,9 @@ void Player::info() const {
     cout << "Height: " << getHeight() << endl;
     cout << "Value: " << getValue() << endl;
     cout << "Total Earnings: " << getEarnings() << endl;
+    cout << "Player Statistics: " << endl;
+
+    p->info();
 }
 
 ostream &operator<<(ostream &out, const Player &p) {
@@ -95,6 +98,13 @@ ostream &operator<<(ostream &out, const Player &p) {
     out  << p.value << endl;
     out  << p.earnings;
     return out;
+}
+
+Player::Player(std::string name, Date birth, std::string club, std::string position, int weight, int height, int value,
+               double earnings, PlayerStatistics *p) : Person(name, birth), club(club), position(position),
+                                                        weight(weight), height(height), value(value),
+                                                        earnings(earnings), p(p) {
+
 }
 
 

@@ -114,3 +114,31 @@ std::ostream &operator<<(std::ostream &os, const Statistics &statistics) {
 
     return os;
 }
+
+void GoalkeeperStatistics::info() const {
+    cout << "Saves: " << saves << endl;
+    cout << "Clearances: " << clearances << endl;
+    cout << "Yellow Cards: " <<yellow_cards << endl;
+    cout << "Red Cards: " << red_cards << endl;
+}
+
+void DefenderStatistics::info() const {
+    cout << "Passing Accuracy" << passing_accuracy << endl;
+    cout << "Disarms" << disarm << endl;
+    cout << "Yellow Cards: " <<yellow_cards << endl;
+    cout << "Red Cards: " << red_cards << endl;
+}
+
+void MidfielderStatistics::info() const {
+    cout << "Passing Accuracy" << passing_accuracy << endl;
+    cout << "Shots" << shots << endl;
+    cout << "Yellow Cards: " <<yellow_cards << endl;
+    cout << "Red Cards: " << red_cards << endl;
+}
+
+void ForwardStatistics::info() const {
+    cout << "Goals: " << total_goals << endl;
+    cout << "Shots: " << shots << endl;
+    cout << "Yellow Cards: " <<yellow_cards << endl;
+    cout << "Red Cards: " << red_cards << endl;
+}
