@@ -16,7 +16,7 @@ private:
 	int value;            //! Player's value in euros.
     double earnings;      //! Player's earnings.
     double insurance;     //! Player's insurance.
-    PlayerStatistics *player_stats;
+    PlayerStatistics *player_stats; //! Player's statistics.
 
 
 public:
@@ -76,7 +76,10 @@ public:
     void infoTable() const;
     /// \brief Shows Player's attributes.
     void info() const;
-
+    /// \brief Operator "<<" overload for showing Player's info.
+    /// \param out Ostream
+    /// \param p Player that is shown
+    /// \return Ostream for PLayer info
     friend std::ostream& operator<<(std::ostream& out, const Player &p);
 
 };

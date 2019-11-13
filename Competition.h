@@ -92,9 +92,12 @@ public:
 /// \brief Class for throwing exception when the Competition wasn't found.
 class CompetitionNotFound{
 private:
-    std::string name;
+    std::string name; //! name of the Competition that wasn't found
 public:
+    /// \brief Constructor for throwing exception when the Competition wasn't found.
     CompetitionNotFound(std::string name): name(name) {}
+    /// \brief Get Method.
+    /// \return name of the Competition that wasn't found
     std::string getName() const{
         return name;
     }
@@ -102,8 +105,8 @@ public:
 /// \brief Class for throwing exception when no Competitions were found.
 class NoCompetitionsIn{
 private:
-    Date start;
-    Date end;
+    Date start; //! Competition's starting Date
+    Date end;   //! Competition's ending Date
 public:
     /// \brief Class constructor for throwing exception when no Competitions were found.
     /// \param start Starting Date
