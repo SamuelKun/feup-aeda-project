@@ -969,7 +969,15 @@ int mainMenu(string &file_name) {
             while(!menu_credits());
             return 0;
         case '0':    //Exit function
-            exit(0);
+            char confirmation;
+            cout << "Are you sure you want to exit? [y/N] \nDon't forget to save your work before you leave." << endl;
+            cin.clear();
+            cin >> confirmation;
+            cin.ignore(1000,'\n');
+            if (confirmation == 'y') {
+                exit(0);
+            }
+            return 0;
         default:     //Invalid input
             cin.ignore(1000,'\n');
             return 0;
