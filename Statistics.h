@@ -1,6 +1,70 @@
 #ifndef AEDA_STATISTICS_H
 #define AEDA_STATISTICS_H
 
+class PlayerStatistics{
+public:
+    virtual void info() const = 0;
+    virtual void writeStats(std::ostream& os) const = 0;
+    friend std::ostream& operator<< (std::ostream& os, const PlayerStatistics& p);
+};
+
+
+class GoalkeeperStatistics : public PlayerStatistics {
+private:
+    int saves;
+    int clearances;
+    int yellow_cards;
+    int red_cards;
+
+public:
+    GoalkeeperStatistics(): saves(saves), clearances(clearances), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    GoalkeeperStatistics(int saves, int clearances, int yellow_cards, int red_cards): saves(saves), clearances(clearances), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    void info() const;
+    void writeStats(std::ostream& os) const;
+};
+
+class DefenderStatistics : public PlayerStatistics {
+private:
+    int disarm;
+    int passing_accuracy;
+    int yellow_cards;
+    int red_cards;
+
+public:
+    DefenderStatistics(): disarm(0), passing_accuracy(0), yellow_cards(0), red_cards(0) {}
+    DefenderStatistics(int disarm, int passing_accuracy ,int yellow_cards, int red_cards): disarm(disarm), passing_accuracy(passing_accuracy), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    void info() const;
+    void writeStats(std::ostream& os) const;
+};
+
+class MidfielderStatistics : public PlayerStatistics {
+private:
+    int passing_accuracy;
+    int shots;
+    int yellow_cards;
+    int red_cards;
+
+public:
+    MidfielderStatistics(): passing_accuracy(0), shots(0), yellow_cards(0), red_cards(0) {}
+    MidfielderStatistics(int passing_accuracy, int shots, int yellow_cards, int red_cards): passing_accuracy(passing_accuracy), shots(shots), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    void info() const;
+    void writeStats(std::ostream& os) const;
+};
+
+class ForwardStatistics : public PlayerStatistics{
+private:
+    int total_goals;
+    int shots;
+    int yellow_cards;
+    int red_cards;
+
+public:
+    ForwardStatistics(): total_goals(0), shots(0), yellow_cards(0), red_cards(0) {}
+    ForwardStatistics(int total_goals, int shots, int yellow_cards, int red_cards): total_goals(total_goals), shots(shots), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    void info() const;
+    void writeStats(std::ostream& os) const;
+};
+
 /// \brief This class refers to the individual statistics of a player during a match
 class Statistics {
 private:

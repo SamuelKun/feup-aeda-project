@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Person.h"
+#include "Statistics.h"
 
 /// \brief Class for a Player.
 class Player : public Person
@@ -15,6 +16,7 @@ private:
 	int value;            //! Player's value in euros.
     double earnings;      //! Player's earnings.
     double insurance;     //! Player's insurance.
+    PlayerStatistics *player_stats;
 
 
 public:
@@ -30,6 +32,7 @@ public:
     /// \param value Player's value in euros.
     /// \param earnings Player's in euros.
 	Player(std::string name, Date birth, std::string club, std::string position, int weight, int height, int value, double earnings);
+    Player(std::string name, Date birth, std::string club, std::string position, int weight, int height, int value, double earnings, PlayerStatistics *player_stats);
 	/// \brief GetMethod.
 	/// \return Player's club
 	std::string getClub() const;
@@ -73,6 +76,8 @@ public:
     void infoTable() const;
     /// \brief Shows Player's attributes.
     void info() const;
+
+    friend std::ostream& operator<<(std::ostream& out, const Player &p);
 
 };
 /// \brief Class for throwing exceptions when no position is found.

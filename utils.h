@@ -24,7 +24,27 @@ std::vector<Player *> read_player(std::string info){
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
             Date tempBirth(tempVec[1]);
-            Player *p = new Player(tempVec[0], tempBirth, tempVec[2], tempVec[3], stoi(tempVec[4]), stoi(tempVec[5]), stoi(tempVec[6]), stoi(tempVec[7]));
+
+            PlayerStatistics *stats_virtual;
+            if (tempVec[3] == "Goalkeeper") {
+
+                GoalkeeperStatistics *s = new GoalkeeperStatistics(stoi(tempVec[8]), stoi(tempVec[9]), stoi(tempVec[10]), stoi(tempVec[11]));
+                stats_virtual= s;
+            }
+            if (tempVec[3] == "Defender") {
+                DefenderStatistics *s = new DefenderStatistics(stoi(tempVec[8]), stoi(tempVec[9]), stoi(tempVec[10]), stoi(tempVec[11]));
+                stats_virtual = s;
+            }
+            if (tempVec[3] == "Midfielder") {
+                MidfielderStatistics *s = new MidfielderStatistics(stoi(tempVec[8]), stoi(tempVec[9]), stoi(tempVec[10]), stoi(tempVec[11]));
+                stats_virtual = s;
+            }
+            if (tempVec[3] == "Forward") {
+                ForwardStatistics *s = new ForwardStatistics(stoi(tempVec[8]), stoi(tempVec[9]), stoi(tempVec[10]), stoi(tempVec[11]));
+                stats_virtual = s;
+            }
+
+            Player *p = new Player(tempVec[0], tempBirth, tempVec[2], tempVec[3], stoi(tempVec[4]), stoi(tempVec[5]), stoi(tempVec[6]), stoi(tempVec[7]), stats_virtual);
             players.push_back(p);
             tempVec.clear();
         }
@@ -63,7 +83,6 @@ std::vector<Game *> read_games(std::string info, std::vector<Player *> called_pl
     while (getline(game_info, str_temp)){
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
-            std::cout << tempVec[0];
             Date game_day(tempVec[4]);
             Statistics game_stats(stoi(tempVec[5]),stoi(tempVec[6]),stoi(tempVec[7]),stoi(tempVec[8]),stoi(tempVec[9]),stoi(tempVec[10]),stoi(tempVec[11]),stoi(tempVec[12]), stoi(tempVec[13]));
             Game *g = new Game(tempVec[0], tempVec[1], tempVec[2], tempVec[3], game_day, called_players, game_stats);

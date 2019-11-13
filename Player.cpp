@@ -12,6 +12,25 @@ Player::Player() {
 Player::Player(string name, Date birth, string club, string position, int weight, int height, int value, double earnings): Person(name, birth), club(club), position(position),
                                                                                                                         weight(weight), height(height), value(value),
                                                                                                                         earnings(earnings) {
+    PlayerStatistics *stats_virtual;
+    if (position == "Goalkeeper") {
+
+        GoalkeeperStatistics *s = new GoalkeeperStatistics();
+        stats_virtual= s;
+    }
+    if (position == "Defender") {
+        DefenderStatistics *s = new DefenderStatistics();
+        stats_virtual = s;
+    }
+    if (position == "Midfielder") {
+        MidfielderStatistics *s = new MidfielderStatistics();
+        stats_virtual = s;
+    }
+    if (position == "Forward") {
+        ForwardStatistics *s = new ForwardStatistics();
+        stats_virtual = s;
+    }
+    this->player_stats = stats_virtual;
     this->insurance = value * 0.005;
 }
 
@@ -72,7 +91,7 @@ void Player::infoTable() const
 {
     Person::infoTable();
     cout << setw(12) << getClub() << " | " << setw(10) << getPosition() << " | " << setw(6) << getWeight() << " | "
-    << setw(8) << getHeight() << " | " << setw(7) << getValue() << " | " << setw(9) <<  getEarnings() << " |" << endl;
+    << setw(8) << getHeight() << " | " << setw(7) << getValue() << " | " << setw(9) <<  getEarnings() << " |";
 }
 
 void Player::info() const {
@@ -83,6 +102,28 @@ void Player::info() const {
     cout << "Height: " << getHeight() << endl;
     cout << "Value: " << getValue() << endl;
     cout << "Total Earnings: " << getEarnings() << endl;
+    cout << "Player Statistics: " << endl;
+    player_stats->info();
+}
+
+ostream &operator<<(ostream &out, const Player &p) {
+    out << p.getName() << endl;
+    out  << p.getBirthday() << endl;
+    out  << p.club << endl;
+    out  << p.position << endl;
+    out << p.weight << endl;
+    out  << p.height << endl;
+    out  << p.value << endl;
+    out  << p.earnings << endl;
+    out << (*p.player_stats);
+    return out;
+}
+
+Player::Player(std::string name, Date birth, std::string club, std::string position, int weight, int height, int value,
+               double earnings, PlayerStatistics *player_stats) : Person(name, birth), club(club), position(position),
+                                                        weight(weight), height(height), value(value),
+                                                        earnings(earnings), player_stats(player_stats) {
+
 }
 
 

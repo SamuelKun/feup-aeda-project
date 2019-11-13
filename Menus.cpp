@@ -5,6 +5,7 @@
 #include <algorithm>
 
 #include "Menus.h"
+#include "Team.h"
 #include "input_utils.h"
 
 using namespace std;
@@ -695,13 +696,15 @@ int menu_singleCompetition(Competition* comp){
             while(!menu_tournament_games(comp));
             return 0;
         case '2':
+            cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
+            cout << setw(12) << "Club" << " | " << setw(10) << "Position" << " | " << setw(6) << "Weight" << " | " << setw(8) << "Height" << " | " << setw(7) << "Value" << " | " << setw(9) <<  "Earnings" << " |" << endl;
             for(size_t i = 0; i < comp->getCalled().size(); i++)
                 comp->getCalled()[i]->infoTable();
             waitInput();
             return 0;
         case '3':
             cout << "Accommodation:  " << comp->getMoneyAccommodation() << endl;
-            cout << "Paid to players as Insurances:  " << comp->getMoneyInsurance() << endl;
+            cout << "Paid to players as Insurances: " << comp->getMoneyInsurance() << endl;
             cout << endl;
             waitInput();
             return 0;
@@ -739,7 +742,7 @@ int menu_tournaments()
     {
         case '1':    //View player info
             for(int i = 0; i < (national_team->getCompetition()).size(); i++){
-                cout << (*(national_team->getCompetition()[i]));
+                cout << (*(national_team->getCompetition()[i])) << endl;
             }
             waitInput();
             return 0;
@@ -812,7 +815,7 @@ int menu_tournaments()
                         cout << "Index too high!!" << endl;
                         continue;
                     } else if (find(v_index.begin(), v_index.end(), index) != v_index.end()) {
-                        cout << team_players[index] << " was already added!!" << endl;
+                        cout << team_players[index]->getName() << " was already added!!" << endl;
                         continue;
                     } else {
                         v_players.push_back(team_players[index]);
@@ -822,11 +825,11 @@ int menu_tournaments()
                 }
                 cin.clear();
                 cin.ignore(1000,'\n');
-                cout << "This Competition currently has no games" << endl;
+                cout << "This Competition currently has no games." << endl;
                 cout << "Use the menu system do add games if needed!" << endl;
                 cout << "Are you sure you want to add this competition?" << endl;
-                cout << "1. Add games to this competition" << name << endl;
-                cout << "0. Go back without adding games " << name << endl;
+                cout << "1. Add the competition: " << name << endl;
+                cout << "0. Go back without adding the competition: " << name << endl;
 
                 getline(cin,checker);
                 if(checker == "0") return 0;
@@ -903,12 +906,8 @@ int menu_info()
     cout << "Money spent with accommodation: " << national_team->getMoneyAccommodation() << endl;
     cout << "Money spent with players in competitions: " << national_team->getMoneyPlayers() << endl;
     cout << "Money spent with staff per month: " << national_team->getMoneyStaff() << endl;
-    cout << "0. Return to Main Menu " << endl << endl;
 
-    cin.clear();
-    cin >> menu;
-    cin.ignore(1000,'\n');
-
+    waitInput();
     return 1;
 }
 
@@ -922,17 +921,11 @@ int menu_credits() {
     cout << "Hugo Guimaraes" << endl;
     cout << "Joao Pires" << endl << endl;
 
-    cout << "Press [1] to go back to the main menu" << endl;
-    cin.clear();
-    cin >> menu;
-    if (menu == '1') {cin.ignore(1000,'\n'); return 1;}
-    else {
-        cin.ignore(1000,'\n');
-        return 0;
-    }
+    waitInput();
+    return 1;
 }
 
-int mainMenu() {
+int mainMenu(string &file_name) {
     char menu;
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
@@ -945,9 +938,10 @@ int mainMenu() {
     cout << "2. Staff Menu" << endl;
     cout << "3. Competitions Menu" << endl;
     cout << "4. View Team Stats" << endl;
-    cout << "5. App Info" << endl;
+    cout << "5. Save Information" << endl;
+    cout << "6. App Info" << endl;
     cout << "0. Exit" << endl << endl;
-    national_team->updateFile();
+
     cin.clear();
     cin >> menu;
     cin.ignore(1000,'\n');
@@ -966,11 +960,24 @@ int mainMenu() {
         case '4':    //View app info
             while(!menu_info());
             return 0;
-        case '5':    //View app info
+        case '5':
+            national_team->updateFile(file_name);
+            cout << endl << "Information saved successfully in file: " << file_name << endl;
+            waitInput();
+            return 0;
+        case '6':    //View app info
             while(!menu_credits());
             return 0;
         case '0':    //Exit function
-            exit(0);
+            char confirmation;
+            cout << "Are you sure you want to exit? [y/N] \nDon't forget to save your work before you leave." << endl;
+            cin.clear();
+            cin >> confirmation;
+            cin.ignore(1000,'\n');
+            if (confirmation == 'y') {
+                exit(0);
+            }
+            return 0;
         default:     //Invalid input
             cin.ignore(1000,'\n');
             return 0;
@@ -1000,7 +1007,25 @@ int fileMenu(){
         if(filename == "0") return 1;
     }
     national_team = new Team(filename);
-    while(!mainMenu());
+    while(!mainMenu(filename));
+    return 1;
+}
+
+int createNewTeamMenu(){
+    string teamname;
+
+    cout << "Write the name of your Team" << endl;
+    cout << "0. Go back to the previous menu" << endl;
+    cin.clear();
+    cin >> teamname;
+    cin.ignore(1000,'\n');
+
+    if(teamname == "0") return 1;
+
+    national_team = new Team();
+    national_team->setTeamName(teamname);
+    string file_name = teamname + ".txt";
+    while(!mainMenu(file_name));
     return 1;
 }
 
@@ -1023,6 +1048,7 @@ int initMenu(){
             while(!fileMenu());
             return 0;
         case '2': //Create a new Team File
+            while(!createNewTeamMenu());
             return 0;
         case '0': //Exits program
             return 1;

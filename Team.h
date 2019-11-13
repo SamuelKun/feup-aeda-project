@@ -24,8 +24,11 @@ public:
     Team(std::string file_name);
 
     /// \brief Updates the .txt file with team info
-    void updateFile();
+    /// \param file_name label of the .txt file containing a Team
+    void updateFile(std::string file_name);
 
+
+    void setTeamName(std::string team_name);
     /// \brief Get Method.
     /// \return Team's name
     std::string getTeamName() const;
