@@ -2,4 +2,3 @@ Portugal
 players.txt
 staff.txt
 competition.txt
-friendly.txt

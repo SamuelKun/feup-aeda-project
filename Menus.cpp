@@ -1016,7 +1016,8 @@ int createNewTeamMenu(){
 
     national_team = new Team();
     national_team->setTeamName(teamname);
-    while(!mainMenu(teamname));
+    string file_name = teamname + ".txt";
+    while(!mainMenu(file_name));
     return 1;
 }
 

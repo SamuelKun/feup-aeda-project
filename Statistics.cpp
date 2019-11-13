@@ -122,6 +122,13 @@ void GoalkeeperStatistics::info() const {
     cout << "Red Cards: " << red_cards << endl;
 }
 
+void GoalkeeperStatistics::writeStats(std::ostream &os) const {
+    os << saves << endl;
+    os << clearances << endl;
+    os  <<yellow_cards << endl;
+    os  << red_cards;
+}
+
 void DefenderStatistics::info() const {
     cout << "Passing Accuracy" << passing_accuracy << endl;
     cout << "Disarms" << disarm << endl;
@@ -129,11 +136,25 @@ void DefenderStatistics::info() const {
     cout << "Red Cards: " << red_cards << endl;
 }
 
+void DefenderStatistics::writeStats(std::ostream &os) const {
+    os << disarm << endl;
+    os << passing_accuracy << endl;
+    os << yellow_cards << endl;
+    os << red_cards;
+}
+
 void MidfielderStatistics::info() const {
     cout << "Passing Accuracy" << passing_accuracy << endl;
     cout << "Shots" << shots << endl;
     cout << "Yellow Cards: " <<yellow_cards << endl;
-    cout << "Red Cards: " << red_cards << endl;
+    cout << "Red Cards: " << red_cards;
+}
+
+void MidfielderStatistics::writeStats(std::ostream &os) const {
+    os << passing_accuracy << endl;
+    os << shots << endl;
+    os << yellow_cards << endl;
+    os << red_cards;
 }
 
 void ForwardStatistics::info() const {
@@ -141,4 +162,16 @@ void ForwardStatistics::info() const {
     cout << "Shots: " << shots << endl;
     cout << "Yellow Cards: " <<yellow_cards << endl;
     cout << "Red Cards: " << red_cards << endl;
+}
+
+void ForwardStatistics::writeStats(std::ostream &os) const {
+    os << total_goals << endl;
+    os << shots << endl;
+    os <<yellow_cards << endl;
+    os << red_cards;
+}
+
+std::ostream &operator<<(std::ostream &os, const PlayerStatistics &p) {
+    p.writeStats(os);
+    return os;
 }
