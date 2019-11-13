@@ -454,7 +454,7 @@ int menu_games(){
 int menu_tournament_games(Competition * comp){
     char menu;
     unsigned int index;
-    vector<Game *> games;
+    vector<Game *> games = comp->getGames();
 
     cout << "========================================= " << endl;
     cout << "             Games Menu                   " << endl;
@@ -545,13 +545,18 @@ int menu_tournament_games(Competition * comp){
         case '4':
             //É preciso meter os jogos numa tabela com Oponentes , Date e indexs
             //comp->showGamesTable();
+            for(size_t i = 0; i < games.size(); i++){
+                cout << "Game number: " << i << endl;
+                cout << "Opponent " << games[i]->getOpponent() << endl;
+                cout << "Date: " << games[i]->getDate() << endl << endl;
+            }
 
-            cout << "Write the index of the player you wish to remove " << endl;
+            cout << "Write the index of the Game you wish to remove " << endl;
             cout << "Press any char that is not a number to stop adding " << endl;
             cout << "Example: Press [a] to exit" << endl;
 
             while(cin >> index && !cin.eof()){
-                games = comp->getGames();
+
                 if (index >= games.size()) {
                     cout << "Index too high!!" << endl;
                     continue;
@@ -559,7 +564,13 @@ int menu_tournament_games(Competition * comp){
                 else {
                     string opponent = games[index]->getOpponent();
                     comp->removeGame(games[index]);
+                    games = comp->getGames();
                     //comp->showGamesTable();
+                    for(size_t i = 0; i < games.size(); i++){
+                        cout << "Game number: " << i << endl;
+                        cout << "Opponent " << games[i]->getOpponent() << endl;
+                        cout << "Date: " << games[i]->getDate() << endl << endl;
+                    }
                     cout << "Game vs " << opponent << " was successfully removed!!" << endl;
                     cout << "Example: Press [a] to exit" << endl;
                 }
@@ -807,8 +818,6 @@ int menu_tournaments()
             waitInput();
             return 0;
         case '6':
-            //É preciso meter os jogos numa tabela com Oponentes , Date e indexs
-            //comp->showGamesTable();
 
             cout << "Write the index of the Competition you wish to remove " << endl;
             cout << "Press any char that is not a number to stop adding " << endl;
