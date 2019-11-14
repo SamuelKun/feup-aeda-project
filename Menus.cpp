@@ -971,19 +971,17 @@ int menu_tournaments()
             try{
                 string name, players, checker;
                 Date start,end;
-
-
-
                 vector<Player*> v_players;
                 vector<Player*> team_players = national_team->getPlayers();
                 vector<int> v_index;
                 size_t n = team_players.size();
 
-                Competition * comp;
-                cin >> *comp;
-
-                v_players = addCalled(national_team);
-                /*
+                cout << "Write the Competition's name: " << endl;
+                getline(cin,name);
+                cout << "Write " << name << "'s beginning date: " << endl;
+                cin >> start;
+                cout << "Write " << name << "'s ending date: " << endl;
+                cin >> end; cout << endl;
 
                 national_team->showPlayersTable(); cout << endl;
 
@@ -1005,7 +1003,6 @@ int menu_tournaments()
                 }
                 cin.clear();
                 cin.ignore(1000,'\n');
-                 */
                 cout << "This Competition currently has no games." << endl;
                 cout << "Use the menu system do add games if needed!" << endl;
                 cout << "Are you sure you want to add this competition?" << endl;
@@ -1015,7 +1012,6 @@ int menu_tournaments()
                 getline(cin,checker);
                 if(checker == "0") return 0;
                 else{
-                    //comp->setCalled(v_players);
                     Competition * comp = new Competition(name, v_players, start, end, 0);
                     national_team->addCompetition(comp);
                 }
