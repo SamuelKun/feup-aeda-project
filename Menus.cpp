@@ -207,8 +207,8 @@ int menu_players()
             try {
                 national_team->showPlayersTable();
 
-                cout << "Write the index of the Player you wish to update " << endl;
-                cout << "Press any char that is not a number to exit " << endl;
+                cout << "Write the index of the Player you wish to update." << endl;
+                cout << "Type a character that is not a number to exit." << endl;
                 cout << "Example: Press [a] to exit" << endl;
 
                 while (cin >> index && !cin.eof()) {

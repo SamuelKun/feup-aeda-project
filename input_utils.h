@@ -5,7 +5,7 @@
 #include <string>
 
 template <class form>
-void failInput(form input)
+void failInput(form &input)
 {
     while (std::cin.fail())
     {

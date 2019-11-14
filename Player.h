@@ -97,6 +97,7 @@ public:
         return position;
     }
 };
+
 /// \brief Class for throwing exceptions a Player already exists.
 class PlayerAlreadyExists{
 private:
@@ -111,6 +112,7 @@ public:
         return name;
     }
 };
+
 /// \brief Class for throwing exceptions an incorrect Player name is used.
 class CantUseThatName{
 private:
