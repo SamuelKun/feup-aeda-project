@@ -134,5 +134,21 @@ void Competition::removeGame(Game *g) {
     }
 }
 
+std::istream &operator>>(std::istream &in, Competition &comp) {
+    cout << "Write the Competition's name: " << endl;
+    getline(in,comp.name);
+    cout << "Write " << comp.name << "'s beginning date: " << endl;
+    in >> comp.start;
+    cout << "Write " << comp.name << "'s ending date: " << endl;
+    in >> comp.end; cout << endl;
+    cout << "Write " << comp.name << "'s money accommodation: " << endl;
+    in >> comp.moneyAccommodation;
+    return in;
+}
+
+void Competition::setCalled(vector<Player *> called) {
+    this->called = called;
+}
+
 
 

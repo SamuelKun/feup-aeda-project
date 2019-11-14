@@ -65,6 +65,7 @@ public:
     /// \param comp Competition object that will be shown
     /// \return the overload of the operator (Shows comp's info)
     friend std::ostream & operator<<(std::ostream &out, const Competition &comp);
+    friend std::istream& operator>>(std::istream& in, Competition &comp);
     /// \brief Shows all PLayers from the Competition.
     void showPlayers() const;
     /// \brief Show all Games from the Competition.
@@ -82,6 +83,8 @@ public:
     /// \return Pointer to the found Game, throws exception otherwise
     void removeGame(Game * g);
     Game * findGame(std::string opponent, Date date) const;
+
+    void setCalled( std::vector<Player *> called);
 };
 /// \brief Class for throwing exception when the Competition is already paid.
 class AlreadyPaid{

@@ -39,5 +39,6 @@ void Staff::setSalary(double salary) {
 }
 
 void Staff::setFunction(std::string function){
+
     this->function = function;
 }

@@ -971,17 +971,19 @@ int menu_tournaments()
             try{
                 string name, players, checker;
                 Date start,end;
+
+
+
                 vector<Player*> v_players;
                 vector<Player*> team_players = national_team->getPlayers();
                 vector<int> v_index;
                 size_t n = team_players.size();
 
-                cout << "Write the Competition's name: " << endl;
-                getline(cin,name);
-                cout << "Write " << name << "'s beginning date: " << endl;
-                cin >> start;
-                cout << "Write " << name << "'s ending date: " << endl;
-                cin >> end; cout << endl;
+                Competition * comp;
+                cin >> *comp;
+
+                v_players = addCalled(national_team);
+                /*
 
                 national_team->showPlayersTable(); cout << endl;
 
@@ -1003,6 +1005,7 @@ int menu_tournaments()
                 }
                 cin.clear();
                 cin.ignore(1000,'\n');
+                 */
                 cout << "This Competition currently has no games." << endl;
                 cout << "Use the menu system do add games if needed!" << endl;
                 cout << "Are you sure you want to add this competition?" << endl;
@@ -1012,6 +1015,7 @@ int menu_tournaments()
                 getline(cin,checker);
                 if(checker == "0") return 0;
                 else{
+                    //comp->setCalled(v_players);
                     Competition * comp = new Competition(name, v_players, start, end, 0);
                     national_team->addCompetition(comp);
                 }
@@ -1073,16 +1077,9 @@ int menu_tournaments()
                         vector<int> v_index;
                         size_t n = team_players.size();
 
+                        Competition* co = comp[index];
                         cin.ignore(1000,'\n');
-                        cout << "Write the Competition's name: " << endl;
-                        getline(cin,name);
-                        for(auto it = comp.begin(); it != comp.end(); it ++){
-                            if((*it)->getCompetitionName() == name) throw CompetitionAlreadyExists(name);
-                        }
-                        cout << "Write " << name << "'s beginning date: " << endl;
-                        cin >> start;
-                        cout << "Write " << name << "'s ending date: " << endl;
-                        cin >> end; cout << endl;
+                        cin >> *co;
 
                         national_team->showPlayersTable(); cout << endl;
 
@@ -1118,10 +1115,14 @@ int menu_tournaments()
                     }
                 }
                 cout << "Stopped updating Competitions!!" << endl;
+                cin.clear();
             }
             catch(CompetitionAlreadyExists &er){
                 cout << "Competition named " << er.getName() << "already exists!!" << endl;
             }
+            cin.ignore(1000,'\n');
+            waitInput();
+            return 0;
         case '0':    //Exit function
             return 1;
         default:     //Invalid input
