@@ -62,6 +62,10 @@ double Player::getInsurance() const {
     return insurance;
 }
 
+PlayerStatistics * Player::getStatistics() const {
+    return this->player_stats;
+}
+
 void Player::setClub(string club) {
     this -> club = club;
 }

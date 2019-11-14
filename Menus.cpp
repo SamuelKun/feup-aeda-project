@@ -91,6 +91,120 @@ int menu_searchPlayers() {
     }
 }
 
+int menu_updatePlayers(unsigned int &index, vector<Player *> v_players){
+    national_team->showPlayersTable();
+    cout << "Write the index of the Player you wish to update." << endl;
+    cout << "Type a character that is not a number to exit." << endl;
+    cout << "Example: Press [a] to exit" << endl;
+
+    while (cin >> index && !cin.eof()) {
+        v_players = national_team->getPlayers();
+        if (index >= v_players.size()) {
+            cout << "Invalid index." << endl;
+            continue;
+        }
+        else {
+            Player * player = v_players[index];
+            string name = player->getName();
+            string new_name;
+            string club, position;
+            Date birthday;
+            int weight, height, value;
+            double earnings;
+            PlayerStatistics *stats = player->getStatistics();
+            char n;
+            cout << "Which field you want to change in player " << name << endl;
+            cout << "Select the correspondent index: " << endl;
+            cout << "1 -> Change name" << endl;
+            cout << "2 -> Change birthday" << endl;
+            cout << "3 -> Change club" << endl;
+            cout << "4 -> Change position" << endl;
+            cout << "5 -> Change weight" << endl;
+            cout << "6 -> Change height" << endl;
+            cout << "7 -> Change value" << endl;
+            cout << "8 -> Change earnings" << endl;
+            cout << "9 -> Change statistics // To be done" << endl;
+
+            cin >> n;
+
+            switch(n){
+                case '1':
+                    cin.ignore(1000, '\n');
+                    cout << name << "'s new Name: " << endl;
+                    getline(cin, new_name);
+                    for (size_t i = 0; i < v_players.size(); i++)
+                        if (v_players[i]->getName() == new_name) throw PlayerAlreadyExists(new_name);
+
+                    player->setName(new_name);
+                    break;
+                case '2':
+                    cout << name << "'s new birthday " << endl;
+                    cin >> birthday;
+                    player->setBirthday(birthday);
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    break;
+                case '3':
+                    cout << name << "'s new club " << endl;
+                    getline(cin, club);
+                    player->setClub(club);
+                    break;
+                case '4':
+                    cout << name << "'s new position " << endl;
+                    cin >> position;
+                    checkPosition(position);
+                    player->setPosition(position);
+                    break;
+                case '5':
+                    cout << name << "'s new weight " << endl;
+                    cin >> weight;
+                    failInput(weight);
+                    player->setWeight(weight);
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    break;
+                case '6':
+                    cout << name << "'s new height " << endl;
+                    cin >> height;
+                    failInput(height);
+                    player->setHeight(height);
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    break;
+                case '7':
+                    cout << name << "'s new value " << endl;
+                    cin >> value;
+                    failInput(value);
+                    player->setValue(value);
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    break;
+                case '8':
+                    cout << name << "'s new earnings " << endl;
+                    cin >> earnings;
+                    failInput(earnings);
+                    player->setEarnings(earnings);
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    break;
+                case '9':
+                    cout << "To be done..." << endl;
+                    break;
+                default:
+                    cout << "Invalid index" << endl;
+                    break;
+            }
+            cout << "Write the index of another Player you wish to update." << endl;
+            cout << "Type a character that is not a number to exit." << endl;
+            cout << "Example: Press [a] to exit" << endl;
+        }
+    }
+    cout << "Stopped updating Players!" << endl;
+    cin.clear();
+    cin.ignore(1000, '\n');
+    return 1;
+}
+
 int menu_players()
 {
     char menu;
@@ -205,72 +319,11 @@ int menu_players()
             return 0;
         case '5':
             try {
-                national_team->showPlayersTable();
-
-                cout << "Write the index of the Player you wish to update." << endl;
-                cout << "Type a character that is not a number to exit." << endl;
-                cout << "Example: Press [a] to exit" << endl;
-
-                while (cin >> index && !cin.eof()) {
-                    v_players = national_team->getPlayers();
-                    if (index >= v_players.size()) {
-                        cout << "Index too high!!" << endl;
-                        continue;
-                    } else {
-                        Player *player = v_players[index];
-                        string name = player->getName();
-                        string club, position;
-                        Date birthday;
-                        int weight, height, value;
-                        double earnings;
-
-                        cin.ignore(1000, '\n');
-                        cout << name << "'s new Name: " << endl;
-                        for (size_t i = 0; i < v_players.size(); i++) {
-                            if (v_players[i]->getName() == name) throw PlayerAlreadyExists(name);
-                        }
-                        getline(cin, name);
-                        cout << name << "'s new birthday " << endl;
-                        cin >> birthday;
-                        cout << name << "'s new club " << endl;
-                        getline(cin, club);
-                        cout << name << "'s new position " << endl;
-                        cin >> position;
-                        checkPosition(position);
-                        cout << name << "'s new weight " << endl;
-                        cin >> weight;
-                        failInput(weight);
-                        cout << name << "'s new height " << endl;
-                        cin >> height;
-                        failInput(height);
-                        cout << name << "'s new value " << endl;
-                        cin >> value;
-                        failInput(value);
-                        cout << name << "'s new earnings " << endl;
-                        cin >> earnings;
-                        failInput(earnings);
-
-                        player->setName(name);
-                        player->setBirthday(birthday);
-                        player->setClub(club);
-                        player->setPosition(position);
-                        player->setWeight(weight);
-                        player->setHeight(height);
-                        player->setValue(value);
-
-                        national_team->showPlayersTable();
-                        cout << "Write the index of the Player you wish to update " << endl;
-                        cout << "Press any char that is not a number to exit " << endl;
-                        cout << "Example: Press [a] to exit" << endl;
-                    }
+                while(!menu_updatePlayers(index, v_players));
                 }
-                cout << "Stopped updating Players!!" << endl;
-                cin.clear();
-                cin.ignore(1000, '\n');
-            }
-            catch (PlayerAlreadyExists &er){
-                cout << "Player named " << er.getName() << " already exists!!" << endl;
-            }
+            catch (PlayerAlreadyExists &er) {
+                cout << "Player named " << er.getName() << " already exists!" << endl;
+                }
             waitInput();
             return 0;
         case '0':

@@ -54,6 +54,8 @@ public:
 	/// \brief Get Method.
 	/// \return Player's insurance in euros
     double getInsurance() const;
+
+    PlayerStatistics * getStatistics() const;
     /// \brief Set Method.
     /// \param club Player's club
 	void setClub(std::string club);

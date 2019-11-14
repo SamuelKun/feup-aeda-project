@@ -74,6 +74,7 @@ private:
 public:
     /// \brief Empty constructor for Midfielder Statistics.
     MidfielderStatistics(): passing_accuracy(0), shots(0), yellow_cards(0), red_cards(0) {}
+
     /// \brief Constructor for Midfielder Statistics.
     /// \param passing_accuracy Midfielder's passing accuracy, in percentage
     /// \param shots Number of shots by a Midfielder
