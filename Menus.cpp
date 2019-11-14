@@ -58,7 +58,11 @@ int menu_searchPlayers() {
                 vector<Player *> to_print = national_team->findPlayerName(name);
                 for (size_t i = 0; i < to_print.size(); i++) {
                     to_print[i]->info();
-                    cout << endl;
+                    cout <<endl<< "Competitions Participated: " << endl;
+                    vector<Competition *> v = national_team->getCompetition();
+                    for (size_t j = 0; j < v.size(); j++)
+                        cout << v[j]->getCompetitionName() << endl;
+                    cout << endl << "-----------------------------------" << endl << endl;
                 }
             }
             catch (PersonNotFound &er) {
@@ -76,7 +80,11 @@ int menu_searchPlayers() {
                 vector<Player *> to_print = national_team->findPlayerPos(position);
                 for (size_t i = 0; i < to_print.size(); i++) {
                     to_print[i]->info();
-                    cout << endl;
+                    cout << endl <<"Competitions Participated: " << endl;
+                    vector<Competition *> v = national_team->getCompetition();
+                    for (size_t j = 0; j < v.size(); j++)
+                        cout << v[j]->getCompetitionName() << endl;
+                    cout << endl << "-----------------------------------" << endl;
                 }
             }
             catch (PositionNotFound &er) {

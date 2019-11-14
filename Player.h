@@ -16,7 +16,6 @@ private:
 	int value;            //! Player's value in million euros.
     double earnings;      //! Player's earnings in euros.
     double insurance;     //! Player's insurance in euros. Its equal to value * 2
-    bool injured;
     PlayerStatistics *player_stats; //! Player's statistics.
 
 

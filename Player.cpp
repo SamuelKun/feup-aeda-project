@@ -130,7 +130,7 @@ void Player::info() const {
     cout << "Weight: " << getWeight() << endl;
     cout << "Height: " << getHeight() << endl;
     cout << "Value: " << getValue() << endl;
-    cout << "Total Earnings: " << getEarnings() << endl;
+    cout << "Total Earnings: " << getEarnings() << endl << endl;
     cout << "Player Statistics: " << endl;
     player_stats->info();
 }
