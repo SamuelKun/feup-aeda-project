@@ -9,11 +9,15 @@ public:
     /// \brief Purely virtual method for reading Statistics.
     /// \param os Ostream
     virtual void writeStats(std::ostream& os) const = 0;
+
+    virtual void updateStats(std::istream& in) = 0;
     /// \brief Overload of operator ">>" to enable reading Statistics.
     /// \param os Ostream
     /// \param p Player Statistics object where read Statistics will be stored
     /// \return Stream of statistics
     friend std::ostream& operator<< (std::ostream& os, const PlayerStatistics& p);
+
+    friend std::istream & operator>>(std::istream &in,  PlayerStatistics *p);
 };
 
 /// \brief class about Goalkeeper Statistics, derived from Player Statistics.
@@ -38,6 +42,7 @@ public:
     /// \brief Method for reading Goalkeeper's Statistics.
     /// \param os Ostream
     void writeStats(std::ostream& os) const;
+    void updateStats(std::istream& in);
 };
 /// \brief class about Defender Statistics, derived from Player Statistics.
 class DefenderStatistics : public PlayerStatistics {
@@ -61,6 +66,7 @@ public:
     /// \brief Method for reading Defender's Statistics.
     /// \param os Ostream
     void writeStats(std::ostream& os) const;
+    void updateStats(std::istream& in);
 };
 
 /// \brief class about Midfielder Statistics, derived from Player Statistics.
@@ -86,6 +92,7 @@ public:
     /// \brief Method for reading Midfielder's Statistics.
     /// \param os
     void writeStats(std::ostream& os) const;
+    void updateStats(std::istream& in);
 };
 
 /// \brief class about Forward Statistics, derived from Player Statistics.
@@ -110,6 +117,7 @@ public:
     /// \brief Method for reading Forward's Statistics.
     /// \param os
     void writeStats(std::ostream& os) const;
+    void updateStats(std::istream& in);
 };
 
 /// \brief This class refers to the Team Statistics of a Team during a Game

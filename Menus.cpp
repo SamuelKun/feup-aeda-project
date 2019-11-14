@@ -188,6 +188,7 @@ int menu_updatePlayers(unsigned int &index, vector<Player *> v_players){
                     cin.ignore(1000, '\n');
                     break;
                 case '9':
+                    cin >> stats;
                     cout << "To be done..." << endl;
                     break;
                 default:
@@ -489,7 +490,7 @@ int menu_staff() {
             while(cin >> index && !cin.eof()){
                 v_staff = national_team->getStaff();
                 if (index >= v_staff.size()) {
-                    cout << "Index too high!!" << endl;
+                    cout << "Invalid index" << endl;
                     continue;
                 }
                 else {
@@ -522,15 +523,16 @@ int menu_staff() {
                     } else {
                         Staff *staff = v_staff[index];
                         string name = staff->getName();
+                        string new_name;
                         string function;
                         Date birthday;
                         double salary;
 
                         cin.ignore(1000, '\n');
                         cout << name << "'s new Name: " << endl;
-                        getline(cin, name);
+                        getline(cin, new_name);
                         for(auto it = v_staff.begin(); it != v_staff.end(); it++){
-                            if((*it)->getName() == name) throw StaffMemberAlreadyExists(name);
+                            if((*it)->getName() == new_name) throw StaffMemberAlreadyExists(new_name);
                         }
                         cout << name << "'s new birthday " << endl;
                         cin >> birthday;
@@ -540,7 +542,7 @@ int menu_staff() {
                         cin >> salary;
                         failInput(salary);
 
-                        staff->setName(name);
+                        staff->setName(new_name);
                         staff->setBirthday(birthday);
                         staff->setFunction(function);
                         staff->setSalary(salary);
