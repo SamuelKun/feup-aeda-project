@@ -12,13 +12,13 @@
 class Game
 {
 private:
-    std::string opponent;
-    std::string country; /*!< Game's country */
-    std::string city;    /*!< Game's city    */
-    std::string stadium; /*!< Game's stadium */
-    Date gameDate;  /*!< Game's Date    */
-    std::vector<Player *> called_players; /*!< Vector with Game's called players */
-    Statistics game_stats; /*!< Game's stats */
+    std::string opponent; //! Game's opponent
+    std::string country;  //! Game's country
+    std::string city;     //! Game's city
+    std::string stadium;  //! Game's stadium
+    Date gameDate;        //! Game's Date
+    std::vector<Player *> called_players; //! Vector with Game's called players
+    Statistics game_stats; //! Game's stats
 public:
     /// \brief Game Constructor.
     /// \param opponent Game's opponent
@@ -57,6 +57,27 @@ public:
     void info() const;
 
     friend std::ostream &operator<<(std::ostream &out, const Game &g);
+    /// \brief Set Method.
+    /// \param opponent Game's opponent
+    void setOpponent(const std::string &opponent);
+    /// \brief Set Method.
+    /// \param country Game's country
+    void setCountry(const std::string &country);
+    /// \brief Set Method.
+    /// \param city Game's city
+    void setCity(const std::string &city);
+    /// \brief Set Method.
+    /// \param stadium Game's stadium
+    void setStadium(const std::string &stadium);
+    /// \brief Set Method.
+    /// \param gameDate Game's date
+    void setGameDate(const Date &gameDate);
+    /// \brief Set Method.
+    /// \param calledPlayers Game's players
+    void setCalledPlayers(const std::vector<Player *> &calledPlayers);
+    /// \brief Set Method.
+    /// \param gameStats Game's stats
+    void setGameStats(const Statistics &gameStats);
 
 };
 /// \brief Class for throwing exception when no such Game is found.

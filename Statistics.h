@@ -1,71 +1,126 @@
 #ifndef AEDA_STATISTICS_H
 #define AEDA_STATISTICS_H
 
+/// \brief Abstract class for Player Statistics.
 class PlayerStatistics{
 public:
+    /// \brief Purely virtual method for showing Player Statistics.
     virtual void info() const = 0;
+    /// \brief Purely virtual method for reading Statistics.
+    /// \param os Ostream
     virtual void writeStats(std::ostream& os) const = 0;
+
+    virtual void updateStats(std::istream& in) = 0;
+    /// \brief Overload of operator ">>" to enable reading Statistics.
+    /// \param os Ostream
+    /// \param p Player Statistics object where read Statistics will be stored
+    /// \return Stream of statistics
     friend std::ostream& operator<< (std::ostream& os, const PlayerStatistics& p);
+
+    friend std::istream & operator>>(std::istream &in,  PlayerStatistics *p);
 };
 
-
+/// \brief class about Goalkeeper Statistics, derived from Player Statistics.
 class GoalkeeperStatistics : public PlayerStatistics {
 private:
-    int saves;
-    int clearances;
-    int yellow_cards;
-    int red_cards;
+    int saves;       //! Number of saves by a Goalkeeper
+    int clearances;  //! Number of clearances by a Goalkeeper
+    int yellow_cards;//! Number of yellow cards by a Goalkeeper
+    int red_cards;   //! Number of red cards by a Goalkeeper
 
 public:
+    /// \brief Empty constructor for Goalkeeper Statistics.
     GoalkeeperStatistics(): saves(saves), clearances(clearances), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    /// \brief Constructor for Goalkeeper Statistics.
+    /// \param saves Number of saves by a Goalkeeper
+    /// \param clearances Number of clearances by a Goalkeeper
+    /// \param yellow_cards Number of yellow cards by a Goalkeeper
+    /// \param red_cards Number of red cards by a Goalkeeper
     GoalkeeperStatistics(int saves, int clearances, int yellow_cards, int red_cards): saves(saves), clearances(clearances), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    /// \brief Void Method for showing Goalkeeper's Statistics.
     void info() const;
+    /// \brief Method for reading Goalkeeper's Statistics.
+    /// \param os Ostream
     void writeStats(std::ostream& os) const;
+    void updateStats(std::istream& in);
 };
-
+/// \brief class about Defender Statistics, derived from Player Statistics.
 class DefenderStatistics : public PlayerStatistics {
 private:
-    int disarm;
-    int passing_accuracy;
-    int yellow_cards;
-    int red_cards;
+    int disarm;          //! Number of disarms by a Defender
+    int passing_accuracy;//! Defender's passing accuracy, in percentage
+    int yellow_cards;    //! Number of yellow cards by a Defender
+    int red_cards;       //! Number of red cards by a Defender
 
 public:
+    /// \brief Empty constructor for Defender Statistics.
     DefenderStatistics(): disarm(0), passing_accuracy(0), yellow_cards(0), red_cards(0) {}
+    /// \brief Constructor for Defender Statistics.
+    /// \param disarm Number of disarms by a Defender
+    /// \param passing_accuracy Defender's passing accuracy, in percentage
+    /// \param yellow_cards Number of yellow cards by a Defender
+    /// \param red_cards Number of red cards by a Defender
     DefenderStatistics(int disarm, int passing_accuracy ,int yellow_cards, int red_cards): disarm(disarm), passing_accuracy(passing_accuracy), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    /// \brief Void Method for showing Defender's Statistics.
     void info() const;
+    /// \brief Method for reading Defender's Statistics.
+    /// \param os Ostream
     void writeStats(std::ostream& os) const;
+    void updateStats(std::istream& in);
 };
 
+/// \brief class about Midfielder Statistics, derived from Player Statistics.
 class MidfielderStatistics : public PlayerStatistics {
 private:
-    int passing_accuracy;
-    int shots;
-    int yellow_cards;
-    int red_cards;
+    int passing_accuracy;//! Midfielder's passing accuracy, in percentage
+    int shots;           //! Number of shots by a Midfielder
+    int yellow_cards;    //! Number of yellow cards by a Midfielder
+    int red_cards;       //! Number of red cards by a Midfielder
 
 public:
+    /// \brief Empty constructor for Midfielder Statistics.
     MidfielderStatistics(): passing_accuracy(0), shots(0), yellow_cards(0), red_cards(0) {}
+
+    /// \brief Constructor for Midfielder Statistics.
+    /// \param passing_accuracy Midfielder's passing accuracy, in percentage
+    /// \param shots Number of shots by a Midfielder
+    /// \param yellow_cards Number of yellow cards by a Midfielder
+    /// \param red_cards Number of red cards by a Midfielder
     MidfielderStatistics(int passing_accuracy, int shots, int yellow_cards, int red_cards): passing_accuracy(passing_accuracy), shots(shots), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    /// \brief Void Method for showing Midfielder's Statistics.
     void info() const;
+    /// \brief Method for reading Midfielder's Statistics.
+    /// \param os
     void writeStats(std::ostream& os) const;
+    void updateStats(std::istream& in);
 };
 
+/// \brief class about Forward Statistics, derived from Player Statistics.
 class ForwardStatistics : public PlayerStatistics{
 private:
-    int total_goals;
-    int shots;
-    int yellow_cards;
-    int red_cards;
+    int total_goals; //! Number of goals by a Forward
+    int shots;       //! Number of shots by a Forward
+    int yellow_cards;//! Number of yellow cards by a Forward
+    int red_cards;   //! Number of red cards by a Forward
 
 public:
+    /// \brief Empty constructor for Forward Statistics.
     ForwardStatistics(): total_goals(0), shots(0), yellow_cards(0), red_cards(0) {}
+    /// \brief Constructor for Forward Statistics.
+    /// \param total_goals Number of goals by a Forward
+    /// \param shots Number of shots by a Forward
+    /// \param yellow_cards Number of yellow cards by a Forward
+    /// \param red_cards  Number of red cards by a Forward
     ForwardStatistics(int total_goals, int shots, int yellow_cards, int red_cards): total_goals(total_goals), shots(shots), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    /// \brief Void Method for showing Forward's Statistics.
     void info() const;
+    /// \brief Method for reading Forward's Statistics.
+    /// \param os
     void writeStats(std::ostream& os) const;
+    void updateStats(std::istream& in);
 };
 
-/// \brief This class refers to the individual statistics of a player during a match
+/// \brief This class refers to the Team Statistics of a Team during a Game
 class Statistics {
 private:
     int goals_scored;   //!  Number of goals scored

@@ -48,20 +48,5 @@ public:
         return name;
     }
 };
-/// \brief Class for throwing exceptions when too many Person are found
-class TooManyPeopleFound{
-private:
-    std::string name; //! Name that caused too many People to be found
-public:
-    /// \brief Class constructor for throwing exceptions when too many Person are found
-    /// \param name Name that caused too many People to be found
-    TooManyPeopleFound(std::string name): name(name) {}
-    /// \brief Get Method.
-    /// \return Name that caused too many People to be found
-    std::string getName() const{
-        return name;
-    }
-};
-
 
 #endif

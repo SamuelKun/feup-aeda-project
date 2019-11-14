@@ -65,6 +65,7 @@ public:
     /// \param comp Competition object that will be shown
     /// \return the overload of the operator (Shows comp's info)
     friend std::ostream & operator<<(std::ostream &out, const Competition &comp);
+    friend std::istream& operator>>(std::istream& in, Competition &comp);
     /// \brief Shows all PLayers from the Competition.
     void showPlayers() const;
     /// \brief Show all Games from the Competition.
@@ -80,7 +81,10 @@ public:
     /// \param opponent opponent Played in that day of the Competition
     /// \param date Date of the Game
     /// \return Pointer to the found Game, throws exception otherwise
+    void removeGame(Game * g);
     Game * findGame(std::string opponent, Date date) const;
+
+    void setCalled( std::vector<Player *> called);
 };
 /// \brief Class for throwing exception when the Competition is already paid.
 class AlreadyPaid{
@@ -92,9 +96,12 @@ public:
 /// \brief Class for throwing exception when the Competition wasn't found.
 class CompetitionNotFound{
 private:
-    std::string name;
+    std::string name; //! name of the Competition that wasn't found
 public:
+    /// \brief Constructor for throwing exception when the Competition wasn't found.
     CompetitionNotFound(std::string name): name(name) {}
+    /// \brief Get Method.
+    /// \return name of the Competition that wasn't found
     std::string getName() const{
         return name;
     }
@@ -102,8 +109,8 @@ public:
 /// \brief Class for throwing exception when no Competitions were found.
 class NoCompetitionsIn{
 private:
-    Date start;
-    Date end;
+    Date start; //! Competition's starting Date
+    Date end;   //! Competition's ending Date
 public:
     /// \brief Class constructor for throwing exception when no Competitions were found.
     /// \param start Starting Date

@@ -27,16 +27,16 @@ int menu_info();
 /// \brief This menu shows the app creators.
 /// \return if 0, menu_credits(), mainMenu() otherwise
 int menu_credits();
- /// \brief This menu allows you to move between sub menus in order to use the app properly
+ /// \brief This menu allows you to move between sub menus in order to use the app properly.
  /// \return chooses between different menus or exiting the app
 int mainMenu(std::string &file_name);
-/// \brief Allows the user to open a .txt file referring to a team
+/// \brief Allows the user to open a .txt file referring to a team.
 /// \return Player/Staff/Tournaments Menus or App's info
 int fileMenu();
-///
-///
+/// \brief Allows the user to create a new Team.
+/// \return Goes back to initMenu
 int createNewTeamMenu();
-/// \brief Menu that either allows the user to open a file or create a new one
+/// \brief Menu that either allows the user to open a file or create a new one.
 /// \return if 0, InitMenu(), returns program otherwise
 int initMenu();
 

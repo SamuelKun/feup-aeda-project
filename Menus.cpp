@@ -91,9 +91,127 @@ int menu_searchPlayers() {
     }
 }
 
+int menu_updatePlayers(unsigned int &index, vector<Player *> v_players){
+    national_team->showPlayersTable();
+    cout << "Write the index of the Player you wish to update." << endl;
+    cout << "Type a character that is not a number to exit." << endl;
+    cout << "Example: Press [a] to exit" << endl;
+
+    while (cin >> index && !cin.eof()) {
+        v_players = national_team->getPlayers();
+        if (index >= v_players.size()) {
+            cout << "Invalid index." << endl;
+            continue;
+        }
+        else {
+            Player * player = v_players[index];
+            string name = player->getName();
+            string new_name;
+            string club, position;
+            Date birthday;
+            int weight, height, value;
+            double earnings;
+            PlayerStatistics *stats = player->getStatistics();
+            char n;
+            cout << "Which field you want to change in player " << name << endl;
+            cout << "Select the correspondent index: " << endl;
+            cout << "1 -> Change name" << endl;
+            cout << "2 -> Change birthday" << endl;
+            cout << "3 -> Change club" << endl;
+            cout << "4 -> Change position" << endl;
+            cout << "5 -> Change weight" << endl;
+            cout << "6 -> Change height" << endl;
+            cout << "7 -> Change value" << endl;
+            cout << "8 -> Change earnings" << endl;
+            cout << "9 -> Change statistics // To be done" << endl;
+
+            cin >> n;
+
+            switch(n){
+                case '1':
+                    cin.ignore(1000, '\n');
+                    cout << name << "'s new Name: " << endl;
+                    getline(cin, new_name);
+                    for (size_t i = 0; i < v_players.size(); i++)
+                        if (v_players[i]->getName() == new_name) throw PlayerAlreadyExists(new_name);
+
+                    player->setName(new_name);
+                    break;
+                case '2':
+                    cout << name << "'s new birthday " << endl;
+                    cin >> birthday;
+                    player->setBirthday(birthday);
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    break;
+                case '3':
+                    cout << name << "'s new club " << endl;
+                    getline(cin, club);
+                    player->setClub(club);
+                    break;
+                case '4':
+                    cout << name << "'s new position " << endl;
+                    cin >> position;
+                    checkPosition(position);
+                    player->setPosition(position);
+                    break;
+                case '5':
+                    cout << name << "'s new weight " << endl;
+                    cin >> weight;
+                    failInput(weight);
+                    player->setWeight(weight);
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    break;
+                case '6':
+                    cout << name << "'s new height " << endl;
+                    cin >> height;
+                    failInput(height);
+                    player->setHeight(height);
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    break;
+                case '7':
+                    cout << name << "'s new value " << endl;
+                    cin >> value;
+                    failInput(value);
+                    player->setValue(value);
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    break;
+                case '8':
+                    cout << name << "'s new earnings " << endl;
+                    cin >> earnings;
+                    failInput(earnings);
+                    player->setEarnings(earnings);
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    break;
+                case '9':
+                    cin >> stats;
+                    cout << "To be done..." << endl;
+                    break;
+                default:
+                    cout << "Invalid index" << endl;
+                    break;
+            }
+            cout << "Write the index of another Player you wish to update." << endl;
+            cout << "Type a character that is not a number to exit." << endl;
+            cout << "Example: Press [a] to exit" << endl;
+        }
+    }
+    cout << "Stopped updating Players!" << endl;
+    cin.clear();
+    cin.ignore(1000, '\n');
+    return 1;
+}
+
 int menu_players()
 {
     char menu;
+    unsigned int index;
+    vector<Player*> v_players;
+
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
     cout << "========================================= " << endl;
@@ -104,6 +222,7 @@ int menu_players()
     cout << "2. Search Players " << endl;
     cout << "3. Add Player " << endl;
     cout << "4. Remove Player " << endl;
+    cout << "5. Update Player " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -174,45 +293,43 @@ int menu_players()
             waitInput();
             return 0;
         case '4':
-            try {
-                cout << "Write the name of the player you wish to remove: " << endl;
-                string name;
-                getline(cin,name);
+            national_team->showPlayersTable();
 
-                vector<Player *> to_print = national_team->findPlayerName(name);
-                for (size_t i = 0; i < to_print.size(); i++) {
-                    to_print[i]->info();
-                    cout << endl;
+            cout << "Write the index of the Player you wish to remove " << endl;
+            cout << "Press any char that is not a number to stop adding " << endl;
+            cout << "Example: Press [a] to exit" << endl;
+
+            while(cin >> index && !cin.eof()){
+                v_players = national_team->getPlayers();
+                if (index >= v_players.size()) {
+                    cout << "Index too high!!" << endl;
+                    continue;
                 }
-                if(to_print.size() > 1){ throw TooManyPeopleFound(name);}
-                else{
-                    string checker;
-                    cout << "Do you wish to remove " << to_print[0]->getName() << endl;
-                    cout << "1. Remove Player " << endl;
-                    cout << "Any other key. Cancel removing Player " << endl;
-                    getline(cin,checker);
-                    if (checker != "1"){
-                        cout << "Player was not removed!!" << endl;
-                    }
-                    else{
-                        national_team->removePlayer(to_print[0]);
-                        cout << "Player successfully removed" << endl;
-                    }
+                else {
+                    string name = v_players[index]->getName();
+                    national_team->removePlayer(v_players[index]);
+                    national_team->showPlayersTable();
+                    cout << name << " was successfully removed!!" << endl;
+                    cout << "Example: Press [a] to exit" << endl;
                 }
             }
-            catch (PersonNotFound &er) {
-                cout << "Player " << er.getName() << " not found" << endl;
-            }
-            catch (TooManyPeopleFound &er){
-                cout << "Can't remove: " << endl;
-                cout << "More than 1 Player named " << er.getName() << " was found!!" << endl;
-            }
+            cout << "Stopped removing Players!!" << endl;
+            cin.clear();
+            cin.ignore(1000,'\n');
+            waitInput();
+            return 0;
+        case '5':
+            try {
+                while(!menu_updatePlayers(index, v_players));
+                }
+            catch (PlayerAlreadyExists &er) {
+                cout << "Player named " << er.getName() << " already exists!" << endl;
+                }
             waitInput();
             return 0;
         case '0':
             return 1;
         default:     //Invalid input
-            cin.ignore(1000,'\n');
             return 0;
     }
 }
@@ -238,7 +355,6 @@ int menu_searchStaffMembers(){
 
             try {
                 string name;
-                cin.ignore(1000, '\n');
                 getline(cin, name);
                 if(name == "0") return 0;
                 vector<Staff *> to_print = national_team->findStaffName(name);
@@ -257,7 +373,6 @@ int menu_searchStaffMembers(){
             cout << "0. Return to Staff Menu" << endl;
             try {
                 string function;
-                cin.ignore(1000, '\n');
                 getline(cin, function);
                 if(function == "0") return 0;
                 vector<Staff *> to_print = national_team->findStaffFunction(function);
@@ -274,7 +389,6 @@ int menu_searchStaffMembers(){
         case '0':
             return 1;
         default:
-            cin.ignore(1000,'\n');
             return 0;
     }
 }
@@ -298,6 +412,8 @@ int menu_allStaff() {
 
 int menu_staff() {
     char menu;
+    unsigned int index;
+    vector<Staff*> v_staff;
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
@@ -309,6 +425,7 @@ int menu_staff() {
     cout << "2. Search Staff Members " << endl;
     cout << "3. Add Staff Members " << endl;
     cout << "4. Remove Staff Members " << endl;
+    cout << "5. Update Staff Members " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -356,7 +473,7 @@ int menu_staff() {
                 }
             }
             catch(StaffMemberAlreadyExists &er){
-                cout << "The Staff Member " << er.getName() << " already exists!!" << endl;
+                cout << "Staff Member named " << er.getName() << " already exists!!" << endl;
             }
             catch(CantUseThatName &er){
                 cout << "Can't use " << er.getName() << " has a name!!" << endl;
@@ -364,51 +481,93 @@ int menu_staff() {
             waitInput();
             return 0;
         case '4':
-            try{
-                string name;
-                vector <Staff *> v_staff;
+            national_team->showStaffTable();
 
-                cout << "Write the name of the Staff member you wish to remove: " << endl;
-                getline(cin,name);
-                v_staff = national_team->findStaffName(name);
+            cout << "Write the index of the Staff Member you wish to remove " << endl;
+            cout << "Press any char that is not a number to stop adding " << endl;
+            cout << "Example: Press [a] to exit" << endl;
 
-                for (size_t i = 0; i < v_staff.size(); i++) {
-                    v_staff[i]->info();
-                    cout << endl;
+            while(cin >> index && !cin.eof()){
+                v_staff = national_team->getStaff();
+                if (index >= v_staff.size()) {
+                    cout << "Invalid index" << endl;
+                    continue;
                 }
-                if(v_staff.size() > 1){ throw TooManyStaffFound(name);}
-
-                else{
-                    string checker;
-                    cout << "Do you wish to remove " << v_staff[0]->getName() << "?" << endl;
-                    cout << "1. Remove Staff Member " << endl;
-                    cout << "Any other key. Cancel removing Staff Member " << endl;
-                    getline(cin,checker);
-                    if (checker != "1"){
-                        cout << "Staff Member was not removed!!" << endl;
-                    }
-                    else{
-                        national_team->removeStaff(v_staff[0]);
-                        cout << "Staff Member successfully removed" << endl;
-                    }
+                else {
+                    string name = v_staff[index]->getName();
+                    national_team->removeStaff(v_staff[index]);
+                    national_team->showStaffTable();
+                    cout << name << " was successfully removed!!" << endl;
+                    cout << "Example: Press [a] to exit" << endl;
                 }
             }
-            catch (StaffMemberNotFound &er) {
-                cout << "Staff Member " << er.getName() << " not found" << endl;
+            cout << "Stopped removing Staff Members!!" << endl;
+            cin.clear();
+            cin.ignore(1000,'\n');
+            waitInput();
+            return 0;
+        case '5':
+            try {
+                national_team->showStaffTable();
+                vector<Staff*> v_staff = national_team->getStaff();
+
+                cout << "Write the index of the Staff Member you wish to update " << endl;
+                cout << "Press any char that is not a number to exit " << endl;
+                cout << "Example: Press [a] to exit" << endl;
+
+                while (cin >> index && !cin.eof()) {
+                    v_staff = national_team->getStaff();
+                    if (index >= v_staff.size()) {
+                        cout << "Index too high!!" << endl;
+                        continue;
+                    } else {
+                        Staff *staff = v_staff[index];
+                        string name = staff->getName();
+                        string new_name;
+                        string function;
+                        Date birthday;
+                        double salary;
+
+                        cin.ignore(1000, '\n');
+                        cout << name << "'s new Name: " << endl;
+                        getline(cin, new_name);
+                        for(auto it = v_staff.begin(); it != v_staff.end(); it++){
+                            if((*it)->getName() == new_name) throw StaffMemberAlreadyExists(new_name);
+                        }
+                        cout << name << "'s new birthday " << endl;
+                        cin >> birthday;
+                        cout << name << "'s new function " << endl;
+                        cin >> function;
+                        cout << name << "'s new salary " << endl;
+                        cin >> salary;
+                        failInput(salary);
+
+                        staff->setName(new_name);
+                        staff->setBirthday(birthday);
+                        staff->setFunction(function);
+                        staff->setSalary(salary);
+
+                        national_team->showStaffTable();
+                        cout << "Write the index of the Staff Member you wish to update " << endl;
+                        cout << "Press any char that is not a number to exit " << endl;
+                        cout << "Example: Press [a] to exit" << endl;
+                    }
+                }
+                cout << "Stopped updating Staff Members!!" << endl;
+                cin.clear();
+                cin.ignore(1000,'\n');
             }
-            catch (TooManyStaffFound &er){
-                cout << "Can't remove: " << endl;
-                cout << "More than 1 Staff Member named " << er.getName() << " was found!!" << endl;
+            catch (StaffMemberAlreadyExists &er){
+                cout << "There already is a Staff Member named " << er.getName() << endl;
             }
+
             waitInput();
             return 0;
         case '0':    //Exit function
             return 1;
         default:     //Invalid input
-            cin.ignore(1000,'\n');
             return 0;
     }
-    return 1;
 }
 
 int menu_games(){
@@ -471,12 +630,13 @@ int menu_games(){
         case '0':
             return 1;
         default:     //Invalid input
-            cin.ignore(1000, '\n');
             return 0;
     }
 }
 int menu_tournament_games(Competition * comp){
     char menu;
+    unsigned int index;
+    vector<Game *> games = comp->getGames();
 
     cout << "========================================= " << endl;
     cout << "             Games Menu                   " << endl;
@@ -486,7 +646,8 @@ int menu_tournament_games(Competition * comp){
     cout << "2. Search a Game" << endl;
     cout << "3. Add a Game" << endl;
     cout << "4. Remove a Game " << endl;
-    cout << "5. Add Game Statistics" << endl;
+    cout << "5. Update a Game " << endl;
+    cout << "6. Add Game Statistics" << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -565,42 +726,119 @@ int menu_tournament_games(Competition * comp){
             waitInput();
             return 0;
         case '4':
-            try{
-                string opponent,checker;
-                Date d;
-                Statistics stats;
-                Game * game;
+            //É preciso meter os jogos numa tabela com Oponentes , Date e indexs
+            //comp->showGamesTable();
+            for(size_t i = 0; i < games.size(); i++){
+                cout << "Game number: " << i << endl;
+                cout << "Opponent " << games[i]->getOpponent() << endl;
+                cout << "Date: " << games[i]->getDate() << endl << endl;
+            }
 
-                cout << "Write the Game's opponent " << endl;
-                getline(cin,opponent);
-                cout << "Write the Game's date " << endl;
-                cin >> d;
+            cout << "Write the index of the Game you wish to remove " << endl;
+            cout << "Press any char that is not a number to stop adding " << endl;
+            cout << "Example: Press [a] to exit" << endl;
 
-                game = comp->findGame(opponent,d);
-                game->info();
+            while(cin >> index && !cin.eof()){
 
-                cout << "Do you wish to remove this game? " << endl;
-                cout << "1. Remove Game " << endl;
-                cout << "Any other key. Cancel removing Game " << endl;
-                getline(cin,checker);
-                if (checker != "1"){
-                    cout << "Game was not removed!" << endl;
+                if (index >= games.size()) {
+                    cout << "Index too high!!" << endl;
+                    continue;
                 }
-                else{
-                    comp->removeGame(opponent,d);
-                    cout << "Game successfully removed!!" << endl;
+                else {
+                    string opponent = games[index]->getOpponent();
+                    comp->removeGame(games[index]);
+                    games = comp->getGames();
+                    //comp->showGamesTable();
+                    for(size_t i = 0; i < games.size(); i++){
+                        cout << "Game number: " << i << endl;
+                        cout << "Opponent " << games[i]->getOpponent() << endl;
+                        cout << "Date: " << games[i]->getDate() << endl << endl;
+                    }
+                    cout << "Game vs " << opponent << " was successfully removed!!" << endl;
+                    cout << "Example: Press [a] to exit" << endl;
                 }
             }
-            catch(GameNotFound &er){
-                cout << endl;
-                cout << "Game:" << endl;
-                cout << "Opponent: " << er.getOpponent() << endl;
-                cout << "Date: " << er.getDate() << endl;
-                cout << "This Game wasn't found!!" << endl;
-            }
+            cout << "Stopped removing Games!!" << endl;
+            cin.clear();
+            cin.ignore(1000,'\n');
             waitInput();
             return 0;
         case '5':
+            try{
+                for(size_t i = 0; i < games.size(); i++){
+                    cout << "Game number: " << i << endl;
+                    cout << "Opponent " << games[i]->getOpponent() << endl;
+                    cout << "Date: " << games[i]->getDate() << endl << endl;
+                }
+
+                cout << "Write the number of the Game you wish to update " << endl;
+                cout << "Press any char that is not a number to stop adding " << endl;
+                cout << "Example: Press [a] to exit" << endl;
+
+                while(cin >> index && !cin.eof()){
+
+                    if (index >= games.size()) {
+                        cout << "Index too high!!" << endl;
+                        continue;
+                    }
+                    else {
+                        v_games = comp->getGames();
+                        Game* game = v_games[index];
+
+                        string country,city,stadium,opponent,checker;
+                        Date d;
+                        Statistics stats;
+
+                        cin.ignore(1000,'\n');
+                        cout << "Write the Game's opponent " << endl;
+                        getline(cin,opponent);
+                        cout << "Write the Game's country " << endl;
+                        getline(cin,country);
+                        cout << "Write the Game's city " << endl;
+                        getline(cin,city);
+                        cout << "Write the Game's stadium " << endl;
+                        getline(cin,stadium);
+                        cout << "Write the Game's date " << endl;
+                        cin >> d;
+
+                        for (auto it = v_games.begin(); it != v_games.end();it++){
+                            if ( (*it)->getOpponent() == opponent && (*it)->getDate().isEqualTo(d)){
+                                throw GameAlreadyExists(opponent,country,city,stadium,d);
+                            }
+                        }
+                        game->setOpponent(opponent);
+                        game->setCountry(country);
+                        game->setCity(city);
+                        game->setStadium(stadium);
+                        game->setGameDate(d);
+
+                        //comp->showGamesTable();
+                        for(size_t i = 0; i < games.size(); i++){
+                            cout << "Game number: " << i << endl;
+                            cout << "Opponent " << games[i]->getOpponent() << endl;
+                            cout << "Date: " << games[i]->getDate() << endl << endl;
+                        }
+                        cout << "Game was successfully updated!!" << endl;
+                        cout << "Example: Press [a] to exit" << endl;
+                    }
+                }
+                cout << "Stopped updating Games!!" << endl;
+                cin.clear();
+                cin.ignore(1000,'\n');
+            }
+            catch(GameAlreadyExists &er){
+                cout << endl;
+                cout << "Game:" << endl;
+                cout << "Opponent: " << er.getOpponent() << endl;
+                cout << "Country: " << er.getCountry() << endl;
+                cout << "City: " << er.getCity() << endl;
+                cout << "Stadium: " << er.getStadium() << endl;
+                cout << "Date: " << er.getDate() << endl;
+                cout << "This Game already exists!!" << endl;
+            }
+            waitInput();
+            return 0;
+        case '6':
             try {
                 for(size_t i = 0; i < comp->getGames().size(); i++){
                     cout <<" Index: " << i << "  ->" <<endl;
@@ -668,7 +906,6 @@ int menu_tournament_games(Competition * comp){
         case '0':
             return 1;
         default:     //Invalid input
-            cin.ignore(1000, '\n');
             return 0;
     }
 
@@ -685,7 +922,7 @@ int menu_singleCompetition(Competition* comp){
     cout << "1. Competition Games" << endl;
     cout << "2. View called Players" << endl;
     cout << "3. Money spent in this competition (Excluding Staff Members Salary)" << endl;
-    cout << "0. Return to Main Menu " << endl << endl;
+    cout << "0. Return to the previous Competition Menu " << endl << endl;
 
     cin.clear();
     cin >> menu;
@@ -711,7 +948,6 @@ int menu_singleCompetition(Competition* comp){
         case '0':    //Exit function
             return 1;
         default:     //Invalid input
-            cin.ignore(1000,'\n');
             return 0;
     }
 }
@@ -719,6 +955,9 @@ int menu_singleCompetition(Competition* comp){
 int menu_tournaments()
 {
     char menu;
+    string name;
+    unsigned int number;
+    vector<Competition*> comp = national_team->getCompetition();
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
@@ -732,6 +971,7 @@ int menu_tournaments()
     cout << "4. Detailed information about one competition" << endl;
     cout << "5. Create a new Competition " << endl;
     cout << "6. Remove a Competition " << endl;
+    cout << "7. Update a Competition " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -767,26 +1007,19 @@ int menu_tournaments()
             waitInput();
             return 0;
         case '4':
-            try{
-                string name;
-
-                cout << "Choose the name of the Competition you wish to view: " << endl;
-                for(size_t i = 0; i<national_team->getCompetition().size(); i++)
-                    cout << "Competition number " << i << ": " <<national_team->getCompetition()[i]->getCompetitionName() << endl;
-                getline(cin,name);
-                vector<Competition *> comp = national_team->findCompetition(name);
-                if(comp.size() > 1){
-                    for(size_t i = 0; i < comp.size(); i++)
-                        cout << *comp[i] << endl;
-                    cout << "More than one competition named " << name << " was found!!" << endl;
-                    cout << "Please try again! "<< endl;
+            cout << "Write the number of the Competition you wish to view" << endl;
+            cout << "Press any char that is not a number to go back" << endl;
+            cout << "Example: Press [a] to exit" << endl;
+            for(size_t i = 0; i < comp.size(); i++)
+                cout << "Competition number " << i << ": " <<comp[i]->getCompetitionName() << endl;
+            while(cin >> number && !cin.eof()){
+                if( number >= comp.size()){
+                    cout << "Index too high!!" << endl;
                 }
-                else
-                    while(!menu_singleCompetition(comp[0]));
-            }
-            catch(CompetitionNotFound &er){
-                cout << "No competition named " << er.getName() << endl;
-                waitInput();
+                else{
+                    while(!menu_singleCompetition(comp[number]));
+                    return 0;
+                }
             }
             return 0;
         case '5':
@@ -844,55 +1077,112 @@ int menu_tournaments()
             waitInput();
             return 0;
         case '6':
-            try {
-                string name, players, checker;
-                Date start, end;
-                vector<Competition *> competitions;
 
-                cout << "Write the Competition's name: " << endl;
-                getline(cin, name);
+            cout << "Write the index of the Competition you wish to remove " << endl;
+            cout << "Press any char that is not a number to stop adding " << endl;
+            cout << "Example: Press [a] to exit" << endl;
+            for (size_t i = 0; i < comp.size(); i++){
+                cout << "Competition number: " << i << " " << comp[i]->getCompetitionName() << endl;
+            }
 
-                competitions = national_team->findCompetition(name);
-
-                if(competitions.size() > 1){
-                    for (size_t i = 0; i < competitions.size(); i++){
-                        cout << competitions[i]->getCompetitionName() << endl;
-                    }
-                    cout << "More than 1 Competitions were found!! " << endl;
-                    cout << "Try a different name next time!!" << endl;
+            while(cin >> index && !cin.eof()){
+                if (index >= comp.size()) {
+                    cout << "Index too high!!" << endl;
+                    continue;
                 }
-                else{
-                    cout << "Competition: " << name << " was found!" << endl;
-                    cout << "Are you sure you want to remove this competition?" << endl;
-                    cout << "1. Remove " << name << "?" << endl;
-                    cout << "Any other key. Go back without removing " << name << endl;
-                    getline(cin,checker);
-                    if(checker != "1"){
-                        cout << name << " was not removed!!" << endl;
+                else {
+                    name = comp[index]->getCompetitionName();
+                    national_team->removeCompetition(comp[index]);
+                    comp = national_team->getCompetition();
+                    for (size_t i = 0; i < comp.size(); i++){
+                        cout << "Competition number: " << i << " " << comp[i]->getCompetitionName() << endl;
                     }
-                    else{
-                        national_team->removeCompetition(competitions[0]);
-                        cout << name << " was successfully removed!!" << endl;
-                    }
+                    cout << name << " was successfully removed!!" << endl;
+                    cout << "Example: Press [a] to exit" << endl;
                 }
             }
-            catch(CompetitionNotFound &er){
-                cout << "Competition " << er.getName() << " was not found!" << endl;
+            cout << "Stopped removing Competitions!!" << endl;
+            cin.clear();
+            cin.ignore(1000,'\n');
+            waitInput();
+            return 0;
+        case '7':
+            try{
+                cout << "Write the number of the Competition you wish to update " << endl;
+                cout << "Press any char that is not a number to exit " << endl;
+                cout << "Example: Press [a] to exit" << endl;
+                for (size_t i = 0; i < comp.size(); i++){
+                    cout << "Competition number: " << i << " " << comp[i]->getCompetitionName() << endl;
+                }
+
+                while(cin >> index && !cin.eof()){
+                    if (index >= comp.size()) {
+                        cout << "Index too high!!" << endl;
+                        continue;
+                    }
+                    else {
+                        string name, players, checker;
+                        Date start,end;
+                        vector<Player*> v_players;
+                        vector<Player*> team_players = national_team->getPlayers();
+                        vector<int> v_index;
+                        size_t n = team_players.size();
+
+                        Competition* co = comp[index];
+                        cin.ignore(1000,'\n');
+                        cin >> *co;
+
+                        national_team->showPlayersTable(); cout << endl;
+
+                        cout << "Write the index of the player you wish to add" << endl;
+                        cout << "Press any char that is not a number to stop adding " << endl;
+                        cout << "Example: Press [a] to exit" << endl;
+                        while(cin >> index && !cin.eof()) {
+                            if (index >= n) {
+                                cout << "Index too high!!" << endl;
+                                continue;
+                            } else if (find(v_index.begin(), v_index.end(), index) != v_index.end()) {
+                                cout << team_players[index]->getName() << " was already added!!" << endl;
+                                continue;
+                            } else {
+                                v_players.push_back(team_players[index]);
+                                v_index.push_back(index);
+                                cout << team_players[index]->getName() << " was successfully added!!" << endl;
+                            }
+                        }
+                        cin.clear();
+                        cin.ignore(1000,'\n');
+
+                        Competition * competition = comp[index];
+
+                        //cin >> competition;
+
+                        comp = national_team->getCompetition();
+                        for (size_t i = 0; i < comp.size(); i++){
+                            cout << "Competition number: " << i << " " << comp[i]->getCompetitionName() << endl;
+                        }
+                        cout << competition->getCompetitionName()<< " was successfully updated!!" << endl;
+                        cout << "Example: Press [a] to exit" << endl;
+                    }
+                }
+                cout << "Stopped updating Competitions!!" << endl;
+                cin.clear();
             }
+            catch(CompetitionAlreadyExists &er){
+                cout << "Competition named " << er.getName() << "already exists!!" << endl;
+            }
+            cin.ignore(1000,'\n');
             waitInput();
             return 0;
         case '0':    //Exit function
             return 1;
         default:     //Invalid input
-            cin.ignore(1000,'\n');
             return 0;
     }
 }
 
 int menu_info()
 {
-    char menu;
-
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
     cout << "========================================= " << endl;
@@ -912,7 +1202,6 @@ int menu_info()
 }
 
 int menu_credits() {
-    char menu;
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
@@ -979,7 +1268,6 @@ int mainMenu(string &file_name) {
             }
             return 0;
         default:     //Invalid input
-            cin.ignore(1000,'\n');
             return 0;
     }
 }
@@ -1052,8 +1340,7 @@ int initMenu(){
             return 0;
         case '0': //Exits program
             return 1;
-        default:  //
-            cin.ignore(1000,'\n');
+        default:  //Goes back
             return 0;
     }
 }

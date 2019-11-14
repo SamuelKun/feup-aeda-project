@@ -62,6 +62,10 @@ double Player::getInsurance() const {
     return insurance;
 }
 
+PlayerStatistics * Player::getStatistics() const {
+    return this->player_stats;
+}
+
 void Player::setClub(string club) {
     this -> club = club;
 }
@@ -125,5 +129,6 @@ Player::Player(std::string name, Date birth, std::string club, std::string posit
                                                         earnings(earnings), player_stats(player_stats) {
 
 }
+
 
 

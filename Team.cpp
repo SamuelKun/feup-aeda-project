@@ -9,10 +9,8 @@
 
 using namespace std;
 
-
 Team::Team() {
 }
-
 
 Team::Team(string file_name) {
     //Read Agency File
@@ -26,6 +24,61 @@ Team::Team(string file_name) {
     this->team_players = read_player(file_info[1]);
     this->team_staff = read_staff(file_info[2]);
     this->team_competitions = read_competion(file_info[3], this);
+}
+
+void Team::updateFile(string file_name) {
+
+    ofstream init(file_name);
+    init << teamName << endl;
+    init << "players.txt" << endl;
+    init << "staff.txt" << endl;
+    init << "competition.txt" << endl;
+
+
+    ofstream p("players.txt");
+    for (size_t i = 0; i < team_players.size(); i++) {
+        p << (*team_players[i]) << endl;
+        p << "-----" << endl;
+    }
+    ofstream s("staff.txt");
+    for (size_t i = 0; i < team_staff.size(); i++) {
+        s << (*team_staff[i]) << endl;
+        s << "-----" << endl;
+    }
+
+
+    ofstream c("competition.txt");
+
+    int num = 0;
+    for (size_t i = 0; i < team_competitions.size(); i++) {
+        c << team_competitions[i]->getCompetitionName() << endl;
+
+        ofstream call("called" + to_string(num) + ".txt");
+        c << "called" + to_string(num) + ".txt" << endl;
+
+        vector<Player *> called_write = team_competitions[i]->getCalled();
+        for(size_t j = 0; j < team_competitions[i]->getCalled().size(); j++)
+            call << called_write[j]->getName() << endl;
+
+        ofstream gam("games" + to_string(num) + ".txt");
+        c << "games" + to_string(num) + ".txt" << endl;
+
+        vector<Game *> games_write = team_competitions[i]->getGames();
+        for(size_t j = 0; j < games_write.size(); j++) {
+            gam << (*games_write[j]) << endl;
+            gam << "-----" << endl;
+        }
+        num++;
+        c << team_competitions[i]->getStartDate() << endl;
+        c << team_competitions[i]->getEndDate() << endl;
+        c << team_competitions[i]->getMoneyAccommodation() << endl;
+        c << team_competitions[i]->getPaid() << endl;
+        c << "-----" << endl;
+    }
+}
+
+void Team::setTeamName(string team_name) {
+    this->teamName = team_name;
 }
 
 
@@ -89,9 +142,10 @@ void Team::showPlayersTable() const {
 
 void Team::showStaffTable() const {
     cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
-    cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " << endl;
+    cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
     for(int i = 0; i < team_staff.size(); i++){
         team_staff[i]->infoTable();
+        cout << setw(6) <<  i << " |" << endl;
     }
 }
 
@@ -287,57 +341,6 @@ void Team::addCompetition(Competition *comp) {
     team_competitions.push_back(comp);
 }
 
-void Team::updateFile(string file_name) {
-
-    ofstream init(file_name);
-    init << teamName << endl;
-    init << "players.txt" << endl;
-    init << "staff.txt" << endl;
-    init << "competition.txt" << endl;
-
-
-    ofstream p("players.txt");
-    for (size_t i = 0; i < team_players.size(); i++) {
-        p << (*team_players[i]) << endl;
-        p << "-----" << endl;
-    }
-    ofstream s("staff.txt");
-    for (size_t i = 0; i < team_staff.size(); i++) {
-        s << (*team_staff[i]) << endl;
-        s << "-----" << endl;
-    }
-
-
-    ofstream c("competition.txt");
-
-    int num = 0;
-    for (size_t i = 0; i < team_competitions.size(); i++) {
-        c << team_competitions[i]->getCompetitionName() << endl;
-
-        ofstream call("called" + to_string(num) + ".txt");
-        c << "called" + to_string(num) + ".txt" << endl;
-
-        vector<Player *> called_write = team_competitions[i]->getCalled();
-        for(size_t j = 0; j < team_competitions[i]->getCalled().size(); j++)
-            call << called_write[j]->getName() << endl;
-
-        ofstream gam("games" + to_string(num) + ".txt");
-        c << "games" + to_string(num) + ".txt" << endl;
-
-        vector<Game *> games_write = team_competitions[i]->getGames();
-        for(size_t j = 0; j < games_write.size(); j++) {
-            gam << (*games_write[j]) << endl;
-            gam << "-----" << endl;
-        }
-        num++;
-        c << team_competitions[i]->getStartDate() << endl;
-        c << team_competitions[i]->getEndDate() << endl;
-        c << team_competitions[i]->getMoneyAccommodation() << endl;
-        c << team_competitions[i]->getPaid() << endl;
-        c << "-----" << endl;
-    }
-}
-
 void Team::removeCompetition(Competition *c) {
     bool found = false;
     for (size_t i = 0; i < team_competitions.size(); i++){
@@ -351,9 +354,6 @@ void Team::removeCompetition(Competition *c) {
     }
 }
 
-void Team::setTeamName(string team_name) {
-this->teamName = team_name;
-}
 
 
 

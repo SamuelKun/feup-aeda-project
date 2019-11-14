@@ -19,6 +19,7 @@ private:
 public:
     /// \brief Class Team empty constructor.
     Team();
+
     /// \brief Team constructor using .txt file
     /// \param file_name label of the .txt file containing a Team
     Team(std::string file_name);
@@ -27,8 +28,10 @@ public:
     /// \param file_name label of the .txt file containing a Team
     void updateFile(std::string file_name);
 
-
+    /// \brief Set Method.
+    /// \param team_name Team file
     void setTeamName(std::string team_name);
+
     /// \brief Get Method.
     /// \return Team's name
     std::string getTeamName() const;

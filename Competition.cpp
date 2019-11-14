@@ -125,5 +125,30 @@ void Competition::removeGame(string opponent, Date date) {
     }
 }
 
+void Competition::removeGame(Game *g) {
+    for(size_t i = 0 ; i < team_games.size(); i++) {
+        if (team_games[i]->getOpponent() == g->getOpponent() &&
+            team_games[i]->getDate().isEqualTo(g->getDate())) {
+            team_games.erase(team_games.begin() + i);
+        }
+    }
+}
+
+std::istream &operator>>(std::istream &in, Competition &comp) {
+    cout << "Write the Competition's name: " << endl;
+    getline(in,comp.name);
+    cout << "Write " << comp.name << "'s beginning date: " << endl;
+    in >> comp.start;
+    cout << "Write " << comp.name << "'s ending date: " << endl;
+    in >> comp.end; cout << endl;
+    cout << "Write " << comp.name << "'s money accommodation: " << endl;
+    in >> comp.moneyAccommodation;
+    return in;
+}
+
+void Competition::setCalled(vector<Player *> called) {
+    this->called = called;
+}
+
 
 

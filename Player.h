@@ -14,9 +14,9 @@ private:
 	int weight;           //! Player's weight in kg.
 	int height;           //! Player's height in cm.
 	int value;            //! Player's value in euros.
-    double earnings;      //! Player's earnings.
-    double insurance;     //! Player's insurance.
-    PlayerStatistics *player_stats;
+    double earnings;      //! Player's earnings in euros.
+    double insurance;     //! Player's insurance in euros.
+    PlayerStatistics *player_stats; //! Player's statistics.
 
 
 public:
@@ -54,6 +54,8 @@ public:
 	/// \brief Get Method.
 	/// \return Player's insurance in euros
     double getInsurance() const;
+
+    PlayerStatistics * getStatistics() const;
     /// \brief Set Method.
     /// \param club Player's club
 	void setClub(std::string club);
@@ -76,7 +78,10 @@ public:
     void infoTable() const;
     /// \brief Shows Player's attributes.
     void info() const;
-
+    /// \brief Operator "<<" overload for showing Player's info.
+    /// \param out Ostream
+    /// \param p Player that is shown
+    /// \return Ostream for PLayer info
     friend std::ostream& operator<<(std::ostream& out, const Player &p);
 
 };
@@ -94,6 +99,7 @@ public:
         return position;
     }
 };
+
 /// \brief Class for throwing exceptions a Player already exists.
 class PlayerAlreadyExists{
 private:
@@ -108,6 +114,7 @@ public:
         return name;
     }
 };
+
 /// \brief Class for throwing exceptions an incorrect Player name is used.
 class CantUseThatName{
 private:

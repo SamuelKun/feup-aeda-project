@@ -38,6 +38,7 @@ void Game::info() const {
     cout << "--------------------------------------------- Called Players -------------------------------------------" <<endl;
     for (auto it = called_players.begin(); it != called_players.end(); it++){
         (*it)->infoTable();
+        cout << endl;
     }
     cout << "--------------------------------------------- Game Statistics -------------------------------------------" <<endl;
     game_stats.info();
@@ -64,6 +65,34 @@ std::ostream &operator<<(std::ostream &out, const Game &g) {
     out << g.gameDate << endl;
     out << g.game_stats;
     return out;
+}
+
+void Game::setOpponent(const string &opponent) {
+    Game::opponent = opponent;
+}
+
+void Game::setCountry(const string &country) {
+    Game::country = country;
+}
+
+void Game::setCity(const string &city) {
+    Game::city = city;
+}
+
+void Game::setStadium(const string &stadium) {
+    Game::stadium = stadium;
+}
+
+void Game::setGameDate(const Date &gameDate) {
+    Game::gameDate = gameDate;
+}
+
+void Game::setCalledPlayers(const vector<Player *> &calledPlayers) {
+    called_players = calledPlayers;
+}
+
+void Game::setGameStats(const Statistics &gameStats) {
+    game_stats = gameStats;
 }
 
 
