@@ -1,15 +1,30 @@
-Joao Miguel
-28/6/2000
-1200
+Fernando Santos
+10/10/1954
+100
 Coach
 -----
-Rui Pedro
-28/6/2000
-1200
-Coach
+Ilidio Vale
+13/12/1957
+100
+Assistent
 -----
-Manuel Costa
-28/6/2000
-1200
-Doctor
+Ricardo Santos
+1/9/1981
+100
+Assistent
+-----
+Joao Costa
+23/6/1973
+100
+Assistent
+-----
+Fernando Justino
+14/10/1960
+100
+GKCoach
+-----
+Jorge Rosario
+18/7/1961
+100
+Obervator
 -----
