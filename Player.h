@@ -13,9 +13,10 @@ private:
     std::string position; //! Player's position.
 	int weight;           //! Player's weight in kg.
 	int height;           //! Player's height in cm.
-	int value;            //! Player's value in euros.
+	int value;            //! Player's value in million euros.
     double earnings;      //! Player's earnings in euros.
-    double insurance;     //! Player's insurance in euros.
+    double insurance;     //! Player's insurance in euros. Its equal to value * 2
+    bool injured;
     PlayerStatistics *player_stats; //! Player's statistics.
 
 
@@ -29,9 +30,8 @@ public:
     /// \param position Player's position Goalkeeper/Defender/Midfielder/Forward.
     /// \param weight Player's weight in Kg.
     /// \param height Player's height in cm.
-    /// \param value Player's value in euros.
+    /// \param value Player's value in million euros.
     /// \param earnings Player's in euros.
-	Player(std::string name, Date birth, std::string club, std::string position, int weight, int height, int value, double earnings);
     Player(std::string name, Date birth, std::string club, std::string position, int weight, int height, int value, double earnings, PlayerStatistics *player_stats);
 	/// \brief GetMethod.
 	/// \return Player's club

@@ -265,7 +265,26 @@ int menu_players()
                 cin >> earn;
                 failInput(earn);
 
-                Player *play = new Player(n,d,c,pos,wei,hei,val,earn);
+                PlayerStatistics *stats_virtual;
+                if (pos == "Goalkeeper") {
+
+                    GoalkeeperStatistics *s = new GoalkeeperStatistics();
+                    stats_virtual= s;
+                }
+                else if (pos == "Defender") {
+                    DefenderStatistics *s = new DefenderStatistics();
+                    stats_virtual = s;
+                }
+                else if (pos == "Midfielder") {
+                    MidfielderStatistics *s = new MidfielderStatistics();
+                    stats_virtual = s;
+                }
+                else if (pos == "Forward") {
+                    ForwardStatistics *s = new ForwardStatistics();
+                    stats_virtual = s;
+                }
+
+                Player *play = new Player(n,d,c,pos,wei,hei,val,earn, stats_virtual);
 
                 cout << "Do you wish to add " << n << " as a Player?" << endl;
                 cout << "1. Add Player " << endl;

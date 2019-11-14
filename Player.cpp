@@ -8,31 +8,32 @@ using namespace std;
 Player::Player() {
 }
 
-
-Player::Player(string name, Date birth, string club, string position, int weight, int height, int value, double earnings): Person(name, birth), club(club), position(position),
-                                                                                                                        weight(weight), height(height), value(value),
-                                                                                                                        earnings(earnings) {
+Player::Player(std::string name, Date birth, std::string club, std::string position, int weight, int height, int value,
+               double earnings, PlayerStatistics *player_stats): Person(name, birth), club(club), position(position),
+                                                                  weight(weight), height(height), value(value),
+                                                                  earnings(earnings), player_stats(player_stats) {
     PlayerStatistics *stats_virtual;
     if (position == "Goalkeeper") {
 
         GoalkeeperStatistics *s = new GoalkeeperStatistics();
         stats_virtual= s;
     }
-    if (position == "Defender") {
+    else if (position == "Defender") {
         DefenderStatistics *s = new DefenderStatistics();
         stats_virtual = s;
     }
-    if (position == "Midfielder") {
+    else if (position == "Midfielder") {
         MidfielderStatistics *s = new MidfielderStatistics();
         stats_virtual = s;
     }
-    if (position == "Forward") {
+    else if (position == "Forward") {
         ForwardStatistics *s = new ForwardStatistics();
         stats_virtual = s;
     }
 
     this->player_stats = stats_virtual;
-    this->insurance = value * 0.5;
+    this->insurance = value * 2;
+
 }
 
 string Player::getClub() const {
@@ -80,11 +81,12 @@ void Player::setHeight(int height) {
 }
 
 void Player::setValue(int value) {
-    this -> value = value;
+    this->value = value;
+    this->insurance = value * 2;
 }
 
 void Player::setEarnings(double value) {
-    this -> earnings += value;
+    this->earnings += value;
 }
 
 void Player::setPosition(string pos) {
@@ -146,12 +148,7 @@ ostream &operator<<(ostream &out, const Player &p) {
     return out;
 }
 
-Player::Player(std::string name, Date birth, std::string club, std::string position, int weight, int height, int value,
-               double earnings, PlayerStatistics *player_stats) : Person(name, birth), club(club), position(position),
-                                                        weight(weight), height(height), value(value),
-                                                        earnings(earnings), player_stats(player_stats) {
 
-}
 
 
 
