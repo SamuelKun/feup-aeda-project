@@ -246,16 +246,12 @@ int menu_players()
 
                 cout << "Write the name of the Player you wish to add: " << endl;
                 getline(cin,n);
-
                 cout << "Write " << n << "'s birthday " << endl;
                 cin >> d;
-
                 cout << "Write " << n << "'s club " << endl;
-                cin >> c;
-
+                getline(cin,c);
                 cout << "Write " << n << "'s position " << endl;
                 cin >> pos; checkPosition(pos);
-
                 cout << "Write " << n << "'s weight " << endl;
                 cin >> wei;
                 failInput(wei);
@@ -935,8 +931,10 @@ int menu_singleCompetition(Competition* comp){
         case '2':
             cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
             cout << setw(12) << "Club" << " | " << setw(10) << "Position" << " | " << setw(6) << "Weight" << " | " << setw(8) << "Height" << " | " << setw(7) << "Value" << " | " << setw(9) <<  "Earnings" << " |" << endl;
-            for(size_t i = 0; i < comp->getCalled().size(); i++)
+            for(size_t i = 0; i < comp->getCalled().size(); i++) {
                 comp->getCalled()[i]->infoTable();
+                cout << endl;
+            }
             waitInput();
             return 0;
         case '3':
