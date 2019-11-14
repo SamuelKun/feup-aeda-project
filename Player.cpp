@@ -88,6 +88,28 @@ void Player::setEarnings(double value) {
 }
 
 void Player::setPosition(string pos) {
+    int yellow = player_stats->getYellowCards();
+    int red = player_stats->getRedCards();
+    PlayerStatistics *stats_virtual;
+    if (pos == "Goalkeeper") {
+
+        GoalkeeperStatistics *s = new GoalkeeperStatistics(0,0,yellow,red);
+        stats_virtual= s;
+    }
+    else if (pos == "Defender") {
+        DefenderStatistics *s = new DefenderStatistics(0,0,yellow,red);
+        stats_virtual = s;
+    }
+    else if (pos == "Midfielder") {
+        MidfielderStatistics *s = new MidfielderStatistics(0,0,yellow,red);
+        stats_virtual = s;
+    }
+    else if (pos == "Forward") {
+        ForwardStatistics *s = new ForwardStatistics(0,0,yellow,red);
+        stats_virtual = s;
+    }
+
+    this->player_stats = stats_virtual;
     this->position = pos;
 }
 

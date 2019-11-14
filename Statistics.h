@@ -6,9 +6,14 @@ class PlayerStatistics{
 protected:
     int yellow_cards;//! Number of yellow cards
     int red_cards;   //! Number of red cards
+    bool injured;
     PlayerStatistics(int yellow_cards, int red_cards) : yellow_cards(yellow_cards), red_cards(red_cards) { } //protected constructor, can't create a instance of abstract class
 public:
     virtual ~PlayerStatistics() {}
+
+    int getYellowCards() const {return yellow_cards;}
+    int getRedCards() const {return red_cards;}
+
     /// \brief Purely virtual method for showing Player Statistics.
     virtual void info() const = 0;
     /// \brief Purely virtual method for reading Statistics.
