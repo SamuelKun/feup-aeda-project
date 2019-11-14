@@ -523,29 +523,49 @@ int menu_staff() {
                         string function;
                         Date birthday;
                         double salary;
+                        char n;
+                        cout << "Which field you want to change in staff member " << name << endl;
+                        cout << "Select the correspondent index: " << endl;
+                        cout << "1 -> Change name" << endl;
+                        cout << "2 -> Change birthday" << endl;
+                        cout << "3 -> Change function" << endl;
+                        cout << "4 -> Change salary" << endl;
 
-                        cin.ignore(1000, '\n');
-                        cout << name << "'s new Name: " << endl;
-                        getline(cin, new_name);
-                        for(auto it = v_staff.begin(); it != v_staff.end(); it++){
-                            if((*it)->getName() == new_name) throw StaffMemberAlreadyExists(new_name);
+                        cin >> n;
+
+                        switch(n) {
+                            case '1':
+                                cin.ignore(1000, '\n');
+                                cout << name << "'s new Name: " << endl;
+                                getline(cin, new_name);
+                                for (auto it = v_staff.begin(); it != v_staff.end(); it++) {
+                                    if ((*it)->getName() == new_name) throw StaffMemberAlreadyExists(new_name);
+                                }
+                                staff->setName(new_name);
+                                break;
+                            case '2':
+                                cout << name << "'s new birthday " << endl;
+                                cin >> birthday;
+                                staff->setBirthday(birthday);
+                                break;
+                            case '3':
+                                cout << name << "'s new function " << endl;
+                                cin >> function;
+                                staff->setFunction(function);
+                                break;
+                            case '4':
+                                cout << name << "'s new salary " << endl;
+                                cin >> salary;
+                                failInput(salary);
+                                staff->setSalary(salary);
+                                break;
+                            default:
+                                cout << "Invalid index" << endl;
+                                break;
                         }
-                        cout << name << "'s new birthday " << endl;
-                        cin >> birthday;
-                        cout << name << "'s new function " << endl;
-                        cin >> function;
-                        cout << name << "'s new salary " << endl;
-                        cin >> salary;
-                        failInput(salary);
-
-                        staff->setName(new_name);
-                        staff->setBirthday(birthday);
-                        staff->setFunction(function);
-                        staff->setSalary(salary);
-
                         national_team->showStaffTable();
-                        cout << "Write the index of the Staff Member you wish to update " << endl;
-                        cout << "Press any char that is not a number to exit " << endl;
+                        cout << "Write the index of another Player you wish to update." << endl;
+                        cout << "Type a character that is not a number to exit." << endl;
                         cout << "Example: Press [a] to exit" << endl;
                     }
                 }
@@ -643,7 +663,6 @@ int menu_tournament_games(Competition * comp){
     cout << "3. Add a Game" << endl;
     cout << "4. Remove a Game " << endl;
     cout << "5. Update a Game " << endl;
-    cout << "6. Add Game Statistics" << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -780,39 +799,91 @@ int menu_tournament_games(Competition * comp){
                     else {
                         v_games = comp->getGames();
                         Game* game = v_games[index];
-
-                        string country,city,stadium,opponent,checker;
+                        int goalS, goalsC, shots, ballP, yellowC, redC, injured, freeKicks, cornerKicks;
+                        string country,city,stadium,opponent, checker;
                         Date d;
                         Statistics stats;
 
-                        cin.ignore(1000,'\n');
-                        cout << "Write the Game's opponent " << endl;
-                        getline(cin,opponent);
-                        cout << "Write the Game's country " << endl;
-                        getline(cin,country);
-                        cout << "Write the Game's city " << endl;
-                        getline(cin,city);
-                        cout << "Write the Game's stadium " << endl;
-                        getline(cin,stadium);
-                        cout << "Write the Game's date " << endl;
-                        cin >> d;
+                        char n;
+                        cout << "Which field you want to change in this game? " << endl;
+                        cout << "Select the correspondent index: " << endl;
+                        cout << "1 -> Change opponent" << endl;
+                        cout << "2 -> Change country" << endl;
+                        cout << "3 -> Change city" << endl;
+                        cout << "4 -> Change stadium" << endl;
+                        cout << "5 -> Change date" << endl;
+                        cout << "6 -> Change Statistics" << endl;
 
-                        for (auto it = v_games.begin(); it != v_games.end();it++){
-                            if ( (*it)->getOpponent() == opponent && (*it)->getDate().isEqualTo(d)){
-                                throw GameAlreadyExists(opponent,country,city,stadium,d);
-                            }
-                        }
-                        game->setOpponent(opponent);
-                        game->setCountry(country);
-                        game->setCity(city);
-                        game->setStadium(stadium);
-                        game->setGameDate(d);
-
-                        //comp->showGamesTable();
-                        for(size_t i = 0; i < games.size(); i++){
-                            cout << "Game number: " << i << endl;
-                            cout << "Opponent " << games[i]->getOpponent() << endl;
-                            cout << "Date: " << games[i]->getDate() << endl << endl;
+                        cin >> n;
+                        switch(n) {
+                            case '1':
+                                cin.ignore(1000, '\n');
+                                cout << "Write the Game's opponent " << endl;
+                                getline(cin, opponent);
+                                game->setOpponent(opponent);
+                                break;
+                            case '2':
+                                cout << "Write the Game's country " << endl;
+                                getline(cin, country);
+                                game->setCountry(country);
+                                break;
+                            case '3':
+                                cout << "Write the Game's city " << endl;
+                                getline(cin, city);
+                                game->setCity(city);
+                                break;
+                            case '4':
+                                cout << "Write the Game's stadium " << endl;
+                                getline(cin, stadium);
+                                game->setStadium(stadium);
+                                break;
+                            case '5':
+                                cout << "Write the Game's date " << endl;
+                                cin >> d;
+                                game->setGameDate(d);
+                                break;
+                            case '6':
+                                cout << "Number of goals scored: " << endl;
+                                cin >> goalS;
+                                failInput(goalS);
+                                stats.setGoalsScored(goalS);
+                                cout << "Number of goals conceded: " <<  endl;
+                                cin >> goalsC;
+                                failInput(goalsC);
+                                stats.setGoalsConceded(goalsC);
+                                cout << "Number of shots: " <<endl;
+                                cin >> shots;
+                                failInput(shots);
+                                stats.setShots(shots);
+                                cout << "Percentage of ball possession: "  << endl;
+                                cin >> ballP;
+                                failInput(ballP);
+                                stats.setBallPossession(ballP);
+                                cout << "Number of yellow cards: "  << endl;
+                                cin >> yellowC;
+                                failInput(yellowC);
+                                stats.setYellowCards(yellowC);
+                                cout << "Number of red cards: "  << endl;
+                                cin >> redC;
+                                failInput(redC);
+                                stats.setRedCards(redC);
+                                cout << "Number of Injured players: " << endl;
+                                cin >> injured;
+                                failInput(injured);
+                                stats.setInjured(injured);
+                                cout << "Number of free kicks: "  << endl;
+                                cin >> freeKicks;
+                                failInput(freeKicks);
+                                stats.setFreeKicks(freeKicks);
+                                cout << "Number of corner kicks: " << endl;
+                                cin >> cornerKicks;
+                                failInput(cornerKicks);
+                                stats.setCornerKicks(cornerKicks);
+                                game->setStats(stats);
+                                break;
+                            default:
+                                cout << "Invalid index" << endl;
+                                break;
                         }
                         cout << "Game was successfully updated!!" << endl;
                         cout << "Example: Press [a] to exit" << endl;
@@ -833,71 +904,6 @@ int menu_tournament_games(Competition * comp){
                 cout << "This Game already exists!!" << endl;
             }
             waitInput();
-            return 0;
-        case '6':
-            try {
-                for(size_t i = 0; i < comp->getGames().size(); i++){
-                    cout <<" Index: " << i << "  ->" <<endl;
-                    comp->getGames()[i]->info();
-                }
-                int idx;
-                cout << "Index:" << endl;
-                cin >> idx;
-
-                while(idx >= comp->getGames().size() || idx < 0){
-                    cout << "Index too high!!" << endl;
-                    cout << "Index:" << endl;
-                    cin >> idx;
-                }
-
-                string checker;
-                int goalS, goalsC, shots, ballP, yellowC, redC, injured, freeKicks, cornerKicks;
-                cout << "Number of goals scored: " << endl;
-                cin >> goalS;
-                failInput(goalS);
-                cout << "Number of goals conceded: " <<  endl;
-                cin >> goalsC;
-                failInput(goalsC);
-                cout << "Number of shots: " <<endl;
-                cin >> shots;
-                failInput(shots);
-                cout << "Percentage of ball possession: "  << endl;
-                cin >> ballP;
-                failInput(ballP);
-                cout << "Number of yellow cards: "  << endl;
-                cin >> yellowC;
-                failInput(yellowC);
-                cout << "Number of red cards: "  << endl;
-                cin >> redC;
-                failInput(redC);
-                cout << "Number of Injured players: " << endl;
-                cin >> injured;
-                failInput(injured);
-                cout << "Number of free kicks: "  << endl;
-                cin >> freeKicks;
-                failInput(freeKicks);
-                cout << "Number of corner kicks: " << endl;
-                cin >> cornerKicks;
-                failInput(cornerKicks);
-
-                Statistics stats(goalS, goalsC, shots, ballP, yellowC, redC, injured, freeKicks, cornerKicks);
-
-                cout << "Do you want to update the statistics of this game?" << endl;
-                cout << "1. Update Statistics" << endl;
-                cout << "Any other key. Cancel this action" << endl;
-                cin.ignore(1000, '\n');
-                getline(cin, checker);
-                if (checker != "1") {
-                    cout << "Statistics not updated!" << endl;
-                } else {
-                    comp->getGames()[idx]->setStats(stats);
-                    cout << "Status updated!" << endl;
-                }
-
-            }
-            catch(...) {
-                cout << "Error occured";
-            }
             return 0;
         case '0':
             return 1;

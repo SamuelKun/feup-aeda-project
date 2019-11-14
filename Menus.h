@@ -3,6 +3,7 @@
 
 #include <string>
 
+int menu_allPlayers();
 /// \brief Menu for searching Players by Name or Position.
 /// \return if 0, menu_searchPlayers(), menu_Players() otherwise
 int menu_searchPlayers();
