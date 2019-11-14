@@ -6,10 +6,21 @@
 #include <string>
 #include <vector>
 
-/// \brief Class for a COmpetition
+/// \brief Class for a Competition
 class Competition{
 private:
-    std::string name;              //! Competition's name
+    std::string name;
+public:
+    void setName(const std::string &name);
+
+    void setStart(const Date &start);
+
+    void setEnd(const Date &end);
+
+    void setMoneyAccommodation(double moneyAccommodation);
+
+private:
+    //! Competition's name
     std::vector<Player *> called;  //! Competition's called players
     std::vector<Game *> team_games;//! Competition's Games
     Date start;                    //! Competition's starting Date

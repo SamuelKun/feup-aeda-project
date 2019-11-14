@@ -1115,29 +1115,64 @@ int menu_tournaments()
                 cout << "Write the number of the Competition you wish to update " << endl;
                 cout << "Press any char that is not a number to exit " << endl;
                 cout << "Example: Press [a] to exit" << endl;
+
                 for (size_t i = 0; i < comp.size(); i++){
                     cout << "Competition number: " << i << " " << comp[i]->getCompetitionName() << endl;
                 }
 
                 while(cin >> index && !cin.eof()){
                     if (index >= comp.size()) {
-                        cout << "Index too high!!" << endl;
+                        cout << "Invalid index" << endl;
                         continue;
                     }
                     else {
-                        string name, players, checker;
+                        string players, checker;
                         Date start,end;
                         vector<Player*> v_players;
                         vector<Player*> team_players = national_team->getPlayers();
                         vector<int> v_index;
-                        size_t n = team_players.size();
-
-                        Competition* co = comp[index];
+                        size_t num = team_players.size();
+                        Competition * co = comp[index];
+                        string name = co->getCompetitionName();
+                        string new_name;
+                        int money;
                         cin.ignore(1000,'\n');
-                        cin >> *co;
+                        char n;
+                        cout << "Which field you want to change in this competition " << name << endl;
+                        cout << "Select the correspondent index: " << endl;
+                        cout << "1 -> Change competition name" << endl;
+                        cout << "2 -> Change date" << endl;
+                        cout << "3 -> Change money" << endl;
+                        cout << "4 -> Change called players" << endl;
+                        cin >> n;
 
+                        switch(n) {
+                            case '1':
+                                cout << "Write the Competition's name: " << endl;
+                                cin.ignore(1000, '\n');
+                                getline(cin, new_name);
+                                co->setName(new_name);
+                                break;
+                            case '2':
+                                cout << "Write " << name << "'s beginning date: " << endl;
+                                cin >> start;
+                                cout << "Write " << name << "'s ending date: " << endl;
+                                cin >> end;
+                                co->setStart(start);
+                                co->setEnd(end);
+                                break;
+                            case '3':
+                                cout << "Write " << name << "'s money for accommodation: " << endl;
+                                cin >> money;
+                                failInput(money);
+                                co->setMoneyAccommodation(money);
+                                break;
+                            default:
+                                cout << "Invalid index" << endl;
+                                break;
+                        }
+                        /*
                         national_team->showPlayersTable(); cout << endl;
-
                         cout << "Write the index of the player you wish to add" << endl;
                         cout << "Press any char that is not a number to stop adding " << endl;
                         cout << "Example: Press [a] to exit" << endl;
@@ -1154,18 +1189,11 @@ int menu_tournaments()
                                 cout << team_players[index]->getName() << " was successfully added!!" << endl;
                             }
                         }
-                        cin.clear();
-                        cin.ignore(1000,'\n');
+                         */
 
-                        Competition * competition = comp[index];
-
-                        //cin >> competition;
-
-                        comp = national_team->getCompetition();
-                        for (size_t i = 0; i < comp.size(); i++){
-                            cout << "Competition number: " << i << " " << comp[i]->getCompetitionName() << endl;
-                        }
-                        cout << competition->getCompetitionName()<< " was successfully updated!!" << endl;
+                        cout << name << " was successfully updated!!" << endl;
+                        cout << "Write the number of the Competition you wish to update " << endl;
+                        cout << "Press any char that is not a number to exit " << endl;
                         cout << "Example: Press [a] to exit" << endl;
                     }
                 }

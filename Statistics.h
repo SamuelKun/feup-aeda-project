@@ -3,7 +3,12 @@
 
 /// \brief Abstract class for Player Statistics.
 class PlayerStatistics{
+protected:
+    int yellow_cards;//! Number of yellow cards
+    int red_cards;   //! Number of red cards
+    PlayerStatistics(int yellow_cards, int red_cards) : yellow_cards(yellow_cards), red_cards(red_cards) { } //protected constructor, can't create a instance of abstract class
 public:
+    virtual ~PlayerStatistics() {}
     /// \brief Purely virtual method for showing Player Statistics.
     virtual void info() const = 0;
     /// \brief Purely virtual method for reading Statistics.
@@ -25,18 +30,16 @@ class GoalkeeperStatistics : public PlayerStatistics {
 private:
     int saves;       //! Number of saves by a Goalkeeper
     int clearances;  //! Number of clearances by a Goalkeeper
-    int yellow_cards;//! Number of yellow cards by a Goalkeeper
-    int red_cards;   //! Number of red cards by a Goalkeeper
 
 public:
     /// \brief Empty constructor for Goalkeeper Statistics.
-    GoalkeeperStatistics(): saves(saves), clearances(clearances), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    GoalkeeperStatistics():  PlayerStatistics(0, 0),  saves(0), clearances(0) {}
     /// \brief Constructor for Goalkeeper Statistics.
     /// \param saves Number of saves by a Goalkeeper
     /// \param clearances Number of clearances by a Goalkeeper
     /// \param yellow_cards Number of yellow cards by a Goalkeeper
     /// \param red_cards Number of red cards by a Goalkeeper
-    GoalkeeperStatistics(int saves, int clearances, int yellow_cards, int red_cards): saves(saves), clearances(clearances), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    GoalkeeperStatistics(int saves, int clearances, int yellow_cards, int red_cards): PlayerStatistics(yellow_cards, red_cards), saves(saves), clearances(clearances) {}
     /// \brief Void Method for showing Goalkeeper's Statistics.
     void info() const;
     /// \brief Method for reading Goalkeeper's Statistics.
@@ -49,18 +52,16 @@ class DefenderStatistics : public PlayerStatistics {
 private:
     int disarm;          //! Number of disarms by a Defender
     int passing_accuracy;//! Defender's passing accuracy, in percentage
-    int yellow_cards;    //! Number of yellow cards by a Defender
-    int red_cards;       //! Number of red cards by a Defender
 
 public:
     /// \brief Empty constructor for Defender Statistics.
-    DefenderStatistics(): disarm(0), passing_accuracy(0), yellow_cards(0), red_cards(0) {}
+    DefenderStatistics(): PlayerStatistics(0, 0), disarm(0), passing_accuracy(0) {}
     /// \brief Constructor for Defender Statistics.
     /// \param disarm Number of disarms by a Defender
     /// \param passing_accuracy Defender's passing accuracy, in percentage
     /// \param yellow_cards Number of yellow cards by a Defender
     /// \param red_cards Number of red cards by a Defender
-    DefenderStatistics(int disarm, int passing_accuracy ,int yellow_cards, int red_cards): disarm(disarm), passing_accuracy(passing_accuracy), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    DefenderStatistics(int disarm, int passing_accuracy ,int yellow_cards, int red_cards): PlayerStatistics(yellow_cards, red_cards), disarm(disarm), passing_accuracy(passing_accuracy) {}
     /// \brief Void Method for showing Defender's Statistics.
     void info() const;
     /// \brief Method for reading Defender's Statistics.
@@ -74,19 +75,17 @@ class MidfielderStatistics : public PlayerStatistics {
 private:
     int passing_accuracy;//! Midfielder's passing accuracy, in percentage
     int shots;           //! Number of shots by a Midfielder
-    int yellow_cards;    //! Number of yellow cards by a Midfielder
-    int red_cards;       //! Number of red cards by a Midfielder
 
 public:
     /// \brief Empty constructor for Midfielder Statistics.
-    MidfielderStatistics(): passing_accuracy(0), shots(0), yellow_cards(0), red_cards(0) {}
+    MidfielderStatistics():PlayerStatistics(0, 0), passing_accuracy(0), shots(0) {}
 
     /// \brief Constructor for Midfielder Statistics.
     /// \param passing_accuracy Midfielder's passing accuracy, in percentage
     /// \param shots Number of shots by a Midfielder
     /// \param yellow_cards Number of yellow cards by a Midfielder
     /// \param red_cards Number of red cards by a Midfielder
-    MidfielderStatistics(int passing_accuracy, int shots, int yellow_cards, int red_cards): passing_accuracy(passing_accuracy), shots(shots), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    MidfielderStatistics(int passing_accuracy, int shots, int yellow_cards, int red_cards): PlayerStatistics(yellow_cards, red_cards), passing_accuracy(passing_accuracy), shots(shots) {}
     /// \brief Void Method for showing Midfielder's Statistics.
     void info() const;
     /// \brief Method for reading Midfielder's Statistics.
@@ -100,18 +99,16 @@ class ForwardStatistics : public PlayerStatistics{
 private:
     int total_goals; //! Number of goals by a Forward
     int shots;       //! Number of shots by a Forward
-    int yellow_cards;//! Number of yellow cards by a Forward
-    int red_cards;   //! Number of red cards by a Forward
 
 public:
     /// \brief Empty constructor for Forward Statistics.
-    ForwardStatistics(): total_goals(0), shots(0), yellow_cards(0), red_cards(0) {}
+    ForwardStatistics(): PlayerStatistics(0, 0), total_goals(0), shots(0) {}
     /// \brief Constructor for Forward Statistics.
     /// \param total_goals Number of goals by a Forward
     /// \param shots Number of shots by a Forward
     /// \param yellow_cards Number of yellow cards by a Forward
     /// \param red_cards  Number of red cards by a Forward
-    ForwardStatistics(int total_goals, int shots, int yellow_cards, int red_cards): total_goals(total_goals), shots(shots), yellow_cards(yellow_cards), red_cards(red_cards) {}
+    ForwardStatistics(int total_goals, int shots, int yellow_cards, int red_cards): PlayerStatistics(yellow_cards, red_cards), total_goals(total_goals), shots(shots) {}
     /// \brief Void Method for showing Forward's Statistics.
     void info() const;
     /// \brief Method for reading Forward's Statistics.

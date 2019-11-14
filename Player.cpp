@@ -30,8 +30,9 @@ Player::Player(string name, Date birth, string club, string position, int weight
         ForwardStatistics *s = new ForwardStatistics();
         stats_virtual = s;
     }
+
     this->player_stats = stats_virtual;
-    this->insurance = value * 0.005;
+    this->insurance = value * 0.5;
 }
 
 string Player::getClub() const {
