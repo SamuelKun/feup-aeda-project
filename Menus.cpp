@@ -1067,7 +1067,12 @@ int menu_tournaments()
                 cout << "Write " << name << "'s beginning date: " << endl;
                 cin >> start;
                 cout << "Write " << name << "'s ending date: " << endl;
-                cin >> end; cout << endl;
+                cin >> end;
+                while (start.isAfter(end)){
+                    cout << "Date of end is before of date of start! ";
+                    cin >> end;
+                }
+                cout << endl;
 
                 national_team->showPlayersTable(); cout << endl;
 
@@ -1185,6 +1190,10 @@ int menu_tournaments()
                                 cin >> start;
                                 cout << "Write " << name << "'s ending date: " << endl;
                                 cin >> end;
+                                while (start.isAfter(end)){
+                                    cout << "Date of end is before of date of start! ";
+                                    cin >> end;
+                                }
                                 co->setStart(start);
                                 co->setEnd(end);
                                 break;
