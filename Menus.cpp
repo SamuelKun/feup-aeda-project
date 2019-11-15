@@ -1166,6 +1166,7 @@ int menu_tournaments()
                         int money;
                         cin.ignore(1000,'\n');
                         int n;
+                        int n_switches;
                         cout << "Which field you want to change in this competition: " << name << endl;
                         cout << "Select the correspondent index: " << endl;
                         cout << "1 -> Change competition name" << endl;
@@ -1175,13 +1176,13 @@ int menu_tournaments()
                         cout << "Press any char that is not a number to exit " << endl;
                         cout << "Example: Press [a] to exit" << endl;
 
-                        while(cin >> n && !cin.eof()){
-                            if(n >= 5){
+                        while(cin >> n_switches && !cin.eof()){
+                            if(n_switches >= 5){
                                 cout << "Invalid index, please try again!!" << endl;
                             }
                             else{
                                 string message;
-                                switch(n) {
+                                switch(n_switches) {
                                     case 1:
                                         cout << "Write the Competition's name: " << endl;
                                         cin.ignore(1000, '\n');
@@ -1213,6 +1214,7 @@ int menu_tournaments()
                                         cout << "Select the index of ALL players this competition should call" << endl;
                                         cout << "Press any char that is not a number to exit " << endl;
                                         cout << "Example: Press [a] to exit" << endl;
+                                        n = team_players.size();
                                         while(cin >> index && !cin.eof()) {
                                             if (index >= n) {
                                                 cout << "Invalid index" << endl;
