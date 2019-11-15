@@ -9,13 +9,13 @@
 /// \brief Class for a Competition
 class Competition{
 private:
-    std::string name;              //! Competition's name
-    std::vector<Player *> called;  //! Competition's called players
-    std::vector<Game *> team_games;//! Competition's Games
-    Date start;                    //! Competition's starting Date
-    Date end;                      //! Competition's ending Date
-    double moneyAccommodation;     //! Competition's money accommodation
-    bool paid;                     //! Competition's paid status
+    std::string name;              ///< Competition's name
+    std::vector<Player *> called;  ///< Competition's called players
+    std::vector<Game *> team_games;///< Competition's Games
+    Date start;                    ///< Competition's starting Date
+    Date end;                      ///< Competition's ending Date
+    double moneyAccommodation;     ///< Competition's money accommodation
+    bool paid;                     ///< Competition's paid status
 
 public:
     /// \brief Competition Constructor without games.
@@ -113,7 +113,7 @@ public:
 /// \brief Class for throwing exception when the Competition wasn't found.
 class CompetitionNotFound{
 private:
-    std::string name; //! name of the Competition that wasn't found
+    std::string name; ///< name of the Competition that wasn't found
 public:
     /// \brief Constructor for throwing exception when the Competition wasn't found.
     CompetitionNotFound(std::string name): name(name) {}
@@ -126,8 +126,8 @@ public:
 /// \brief Class for throwing exception when no Competitions were found.
 class NoCompetitionsIn{
 private:
-    Date start; //! Competition's starting Date
-    Date end;   //! Competition's ending Date
+    Date start; ///< Competition's starting Date
+    Date end;   ///< Competition's ending Date
 public:
     /// \brief Class constructor for throwing exception when no Competitions were found.
     /// \param start Starting Date
@@ -147,7 +147,7 @@ public:
 /// \brief Class for throwing exception when the Competition already exists.
 class CompetitionAlreadyExists{
 private:
-    std::string name; //! Name of the Competition that already exists
+    std::string name; ///< Name of the Competition that already exists
 public:
     /// \brief Class constructor for throwing exception when the Competition already exists.
     /// \param name Name of the Competition that already exists
