@@ -59,7 +59,7 @@ void Team::updateFile(string file_name) {
 
         map<Player *, int> called_write = team_competitions[i]->getCalledInjured();
         for(auto i : called_write)
-            call << i.first << "!" << i.second << endl;
+            call << i.first->getName() << "!" << i.second << endl;
 
         ofstream gam("games" + to_string(num) + ".txt");
         c << "games" + to_string(num) + ".txt" << endl;
