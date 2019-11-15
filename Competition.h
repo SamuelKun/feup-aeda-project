@@ -5,12 +5,14 @@
 #include "Game.h"
 #include <string>
 #include <vector>
+#include <map>
 
 /// \brief Class for a Competition
 class Competition{
 private:
     std::string name;              ///< Competition's name
     std::vector<Player *> called;  ///< Competition's called players
+    std::map<Player *, int> called_injured;  ///< Competition's called players
     std::vector<Game *> team_games;///< Competition's Games
     Date start;                    ///< Competition's starting Date
     Date end;                      ///< Competition's ending Date
@@ -51,6 +53,10 @@ public:
     /// \brief Get Method.
     /// \return Competition's Called Players
     std::vector<Player *> getCalled() const;
+
+    std::map<Player *, int> getCalledInjured() const{
+        return called_injured;
+    }
     /// \brief Get Method.
     /// \return Competition's Games
     std::vector<Game *> getGames() const;
@@ -65,13 +71,17 @@ public:
     void setName(const std::string &name);
     /// \brief Set Method.
     /// \param called Competition's called players
-    void setCalled( std::vector<Player *> called);
+    void setCalled(std::vector<Player *> called);
     /// \brief Set Method.
     /// \param start Competition's starting date
     void setStart(const Date &start);
     /// \brief Set Method.
     /// \param end Competition's ending date
     void setEnd(const Date &end);
+
+    void setPlayerInjuries(const std::map<Player *, int> inj){
+        this->called_injured = inj;
+    }
     /// \brief Set Method.
     /// \param moneyAccommodation Competition's money accommodation
     void setMoneyAccommodation(double moneyAccommodation);

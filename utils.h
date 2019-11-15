@@ -5,6 +5,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <map>
 
 #include "Game.h"
 #include "Person.h"
@@ -108,11 +109,26 @@ std::vector<Competition *> read_competion(std::string info, Team * t){
             //Ler Convocados
             std::vector<Player *> comp_convocado;
             std::ifstream called(tempVec[1]);
+            std::map<Player *, int> map_injuries;
             std::vector<std::string> called_vec;
-            while (getline(called, str_temp)) called_vec.push_back(str_temp);
+            std::vector<int> days_injured;
+            while (getline(called, str_temp)){
+                std::stringstream tmp(str_temp);
+                getline(tmp, str_temp, '!');
+                called_vec.push_back(str_temp);
+                getline(tmp, str_temp, '!');
+                days_injured.push_back(stoi(str_temp));
+            }
 
-            for(auto it = called_vec.begin(); it != called_vec.end(); it++)
-                comp_convocado.push_back(t->findPlayer(*it));
+            for(size_t i = 0; i < called_vec.size(); i++) {
+                comp_convocado.push_back(t->findPlayer(called_vec[i]));
+                map_injuries.insert(std::pair<Player *, int>(t->findPlayer(called_vec[i]), days_injured[i]));
+            }
+
+            for (auto m : map_injuries){
+                std::cout << m.first->getName() << std::endl;
+                std::cout << m.second << std::endl;
+            }
 
             //Ler Jogos
             std::vector<Game *> competion_games = read_games(tempVec[2], comp_convocado);
@@ -120,6 +136,7 @@ std::vector<Competition *> read_competion(std::string info, Team * t){
             Date startcomp(tempVec[3]);
             Date endcomp(tempVec[4]);
             Competition *tempComp = new Competition(tempVec[0], comp_convocado, competion_games, startcomp, endcomp, stod(tempVec[5]), stoi(tempVec[6]));
+            tempComp->setPlayerInjuries(map_injuries);
             competion.push_back(tempComp);
             tempVec.clear();
         }

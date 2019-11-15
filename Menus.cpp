@@ -946,17 +946,19 @@ int menu_singleCompetition(Competition* comp){
     cin.clear();
     cin >> menu;
     cin.ignore(1000,'\n');
-
+    map<Player *, int> m = comp->getCalledInjured();
     switch(menu){
         case '1':
             while(!menu_tournament_games(comp));
             return 0;
         case '2':
             cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
-            cout << setw(12) << "Club" << " | " << setw(10) << "Position" << " | " << setw(6) << "Weight" << " | " << setw(8) << "Height" << " | " << setw(7) << "Value" << " | " << setw(9) <<  "Earnings" << " |" << endl;
-            for(size_t i = 0; i < comp->getCalled().size(); i++) {
-                comp->getCalled()[i]->infoTable();
-                cout << endl;
+            cout << setw(12) << "Club" << " | " << setw(10) << "Position" << " | " << setw(6) << "Weight" << " | ";
+            cout << setw(8) << "Height" << " | " << setw(7) << "Value" << " | " << setw(9) <<  "Earnings" << " | ";
+            cout << setw(12) << "Days Injured" << " |" << endl;
+            for(auto it : m) {
+                (it.first)->infoTable();
+                cout << setw(13) << (it.second) << " |" <<  endl;
             }
             waitInput();
             return 0;
@@ -1314,7 +1316,6 @@ int mainMenu(string &file_name) {
     char menu;
 
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
-
     cout << "========================================= " << endl;
     cout << "          National Football Team          " << endl;
     cout << "                Main Menu                 " << endl;

@@ -39,8 +39,8 @@ bool Competition::getPaid() const {
 double Competition::getMoneyInsurance() const {
     double value = 0;
     int numDays = start.daysUntil(end);
-    for (auto it = called.begin(); it != called.end(); it++) {
-        value += (*it)->getInsurance() * numDays;
+    for (auto i : called_injured) {
+        value += (i.first)->getInsurance() * (numDays - i.second) + (i.first)->getInsurance() * i.second * 3;
     }
     return value;
 }
@@ -49,9 +49,9 @@ double Competition::getMoneyInsurance() const {
 void Competition::payPlayers() {
     if(!paid) {
         int numDays = start.daysUntil(end);
-        for (auto it = called.begin(); it != called.end(); it++) {
-            double value = (*it)->getInsurance() * numDays;
-            (*it)->setEarnings(value);
+        for (auto i : called_injured) {
+            double value = (i.first)->getInsurance() * (numDays - i.second) + (i.first)->getInsurance() * i.second * 3;
+            (i.first)->setEarnings(value);
         }
         paid = true;
     }
