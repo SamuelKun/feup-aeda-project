@@ -124,18 +124,12 @@ std::vector<Competition *> read_competion(std::string info, Team * t){
                 comp_convocado.push_back(t->findPlayer(called_vec[i]));
                 map_injuries.insert(std::pair<Player *, int>(t->findPlayer(called_vec[i]), days_injured[i]));
             }
-
-            for (auto m : map_injuries){
-                std::cout << m.first->getName() << std::endl;
-                std::cout << m.second << std::endl;
-            }
-
             //Ler Jogos
             std::vector<Game *> competion_games = read_games(tempVec[2], comp_convocado);
             //Data de começo e fim
             Date startcomp(tempVec[3]);
             Date endcomp(tempVec[4]);
-            Competition *tempComp = new Competition(tempVec[0], competion_games, startcomp, endcomp, stod(tempVec[5]), stoi(tempVec[6]));
+            Competition *tempComp = new Competition(tempVec[0], map_injuries, competion_games, startcomp, endcomp, stod(tempVec[5]), stoi(tempVec[6]));
             tempComp->setPlayerInjuries(map_injuries);
             competion.push_back(tempComp);
             tempVec.clear();

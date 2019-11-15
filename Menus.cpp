@@ -1050,7 +1050,7 @@ int menu_tournaments()
             try{
                 string name, players, checker;
                 Date start,end;
-                vector<Player*> v_players;
+                map<Player*, int> m_players;
                 vector<Player*> team_players = national_team->getPlayers();
                 vector<int> v_index;
                 double acc;
@@ -1082,7 +1082,7 @@ int menu_tournaments()
                         cout << team_players[index]->getName() << " was already added!!" << endl;
                         continue;
                     } else {
-                        v_players.push_back(team_players[index]);
+                        m_players.insert(pair<Player *, int>(team_players[index], 0));
                         v_index.push_back(index);
                         cout << team_players[index]->getName() << " was successfully added!!" << endl;
                     }
@@ -1101,7 +1101,7 @@ int menu_tournaments()
                 }
                 else{
                     cout << name << " was successfully added as a Competition!!" << endl;
-                    Competition * comp = new Competition(name, v_players, start, end, acc);
+                    Competition * comp = new Competition(name, m_players, start, end, acc);
                     national_team->addCompetition(comp);
                 }
             }
@@ -1158,7 +1158,7 @@ int menu_tournaments()
                     else {
                         string players, checker;
                         Date start,end;
-                        vector<Player*> v_players;
+                        map<Player*, int> m_players;
                         vector<Player*> team_players = national_team->getPlayers();
                         vector<int> v_index;
                         size_t num = team_players.size();
@@ -1184,7 +1184,6 @@ int menu_tournaments()
                             }
                             else{
                                 string message;
-                                map<Player *, int> called_inj;
                                 switch(n_switches) {
                                     case 1:
                                         cout << "Write the Competition's name: " << endl;
@@ -1226,16 +1225,13 @@ int menu_tournaments()
                                                 cout << team_players[index]->getName() << " was already added!!" << endl;
                                                 continue;
                                             } else {
-                                                v_players.push_back(team_players[index]);
+                                                m_players.insert(pair<Player*, int>(team_players[index],0));
                                                 v_index.push_back(index);
                                                 cout << team_players[index]->getName() << " was successfully added!!" << endl;
                                             }
                                         }
 
-                                        for(size_t i = 0; i < v_players.size(); i++)
-                                            called_inj.insert(pair<Player *, int>(v_players[i], i));
-
-                                        co->setPlayerInjuries(called_inj);
+                                        co->setPlayerInjuries(m_players);
                                         cin.clear();
                                         cin.ignore(1000,'\n');
                                         message = "Called Players successfully changed";

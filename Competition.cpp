@@ -4,24 +4,23 @@
 using namespace std;
 
 
-Competition::Competition(string name, vector<Player *> called, Date start, Date end, double moneyAccomodation):
-        name(name),called(called),start(start),end(end), moneyAccommodation(moneyAccomodation) {
+Competition::Competition(string name, std::map<Player *, int> called_injured, Date start, Date end, double moneyAccomodation):
+        name(name), called_injured(called_injured),start(start),end(end), moneyAccommodation(moneyAccomodation) {
     this->paid = 0;
 }
 
-Competition::Competition(string name, vector<Game *> team_games, Date start, Date end, double moneyAccommodation, bool paid): name(name), team_games(team_games),
-                                                                                                                 start(start), end(end), moneyAccommodation(moneyAccommodation), paid(paid) {
+Competition::Competition(string name, std::map<Player *, int> called_injured, std::vector<Game *> team_games, Date start, Date end, double moneyAccommodation, bool paid):
+    name(name), called_injured(called_injured), team_games(team_games),
+    start(start), end(end), moneyAccommodation(moneyAccommodation), paid(paid) {
 }
 
 string Competition::getCompetitionName() const {
     return name;
 }
 
-
-vector<Player *> Competition::getCalled() const {
-    return called;
+std::map<Player *, int> Competition::getCalledInjured() const {
+    return called_injured;
 }
-
 
 vector<Game *> Competition::getGames() const {
     return team_games;
@@ -74,6 +73,13 @@ Date Competition::getEndDate() const{
 
 double Competition::getMoneyAccommodation() const {
     return moneyAccommodation;
+}
+
+vector<Player *> Competition::getCalled() const {
+    vector<Player *> called;
+    for(auto i : called_injured)
+        called.push_back(i.first);
+    return called;
 }
 
 void Competition::showPlayers() const {
@@ -153,10 +159,6 @@ void Competition::setEnd(const Date &end) {
 
 void Competition::setMoneyAccommodation(double moneyAccommodation) {
     Competition::moneyAccommodation = moneyAccommodation;
-}
-
-std::map<Player *, int> Competition::getCalledInjured() const {
-        return called_injured;
 }
 
 void Competition::setPlayerInjuries(const std::map<Player *, int> inj) {

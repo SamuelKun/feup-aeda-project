@@ -11,7 +11,6 @@
 class Competition{
 private:
     std::string name;              ///< Competition's name
-    std::vector<Player *> called;  ///< Competition's called players
     std::map<Player *, int> called_injured;  ///< Competition's called players
     std::vector<Game *> team_games;///< Competition's Games
     Date start;                    ///< Competition's starting Date
@@ -26,7 +25,7 @@ public:
     /// \param start Competition's starting date
     /// \param end Competition's ending date
     /// \param moneyAccomodation Competition's money accommodation
-    Competition(std::string name, std::vector<Player *> called, Date start, Date end, double moneyAccomodation);
+    Competition(std::string name, std::map<Player *, int> called_injured, Date start, Date end, double moneyAccomodation);
     /// \brief Competition Constructor without games.
     /// \param name Competition's name
     /// \param called Competition's called players as Player pointers
@@ -35,7 +34,7 @@ public:
     /// \param end Competition's ending date
     /// \param moneyAccommodation Competition's money accommodation
     /// \param paid Competition's money paid
-    Competition(std::string name, std::vector<Game *> team_games, Date start, Date end, double moneyAccommodation, bool paid);
+    Competition(std::string name, std::map<Player *, int> called_injured, std::vector<Game *> team_games, Date start, Date end, double moneyAccommodation, bool paid);
     /// \brief Get Method.
     /// \return Competition's name
     std::string getCompetitionName() const;
@@ -51,11 +50,8 @@ public:
     /// \return Competition's money accommodation
     double getMoneyAccommodation() const;
     /// \brief Get Method.
-    /// \return Competition's Called Players
-    std::vector<Player *> getCalled() const;
-
+    /// \return Competition's Players with their number of injured days in a map
     std::map<Player *, int> getCalledInjured() const;
-
     /// \brief Get Method.
     /// \return Competition's Games
     std::vector<Game *> getGames() const;
@@ -65,6 +61,9 @@ public:
     /// \brief Get Method.
     /// \return Competition's ending Date
     Date getEndDate() const;
+    /// \brief Get Method.
+    /// \return Competition's called players
+    std::vector<Player *> getCalled() const;
     /// \brief Set Method.
     /// \param name Competition's name.
     void setName(const std::string &name);
