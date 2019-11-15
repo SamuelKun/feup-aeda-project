@@ -92,10 +92,8 @@ public:
     /// \param opponent opponent from Game to be removed
     /// \param date Date from the Game to be removed
     void removeGame( std::string opponent, Date date);
-    /// \brief Finds a Game in the Competition using the opponent and the Date.
-    /// \param opponent opponent Played in that day of the Competition
-    /// \param date Date of the Game
-    /// \return Pointer to the found Game, throws exception otherwise
+    /// \brief Removes a Game in the Competition.
+    /// \param g Game to be removed
     void removeGame(Game * g);
     /// \brief Finds a Game with an opponent and a Date.
     /// \param opponent Game's opponent
@@ -105,9 +103,13 @@ public:
 };
 /// \brief Class for throwing exception when the Competition is already paid.
 class AlreadyPaid{
-    std::string name;
+    std::string name; ///< name of the Competition that is already paid
 public:
+    /// \brief Class constructor for throwing exception when the Competition is already paid.
+    /// \param namename of the Competition that is already paid
     AlreadyPaid(std::string name): name(name){}
+    /// \brief Get Method.
+    /// \return name of the Competition that is already paid
     std::string getName(){return name;}
 };
 /// \brief Class for throwing exception when the Competition wasn't found.

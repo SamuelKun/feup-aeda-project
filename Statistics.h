@@ -4,8 +4,8 @@
 /// \brief Abstract class for Player Statistics.
 class PlayerStatistics{
 protected:
-    int yellow_cards;//! Number of yellow cards
-    int red_cards;   //! Number of red cards
+    int yellow_cards;///< Number of yellow cards
+    int red_cards;   ///< Number of red cards
     /// \brief protected constructor, can't create a instance of abstract class.
     /// \param yellow_cards
     /// \param red_cards
@@ -43,8 +43,8 @@ public:
 /// \brief class about Goalkeeper Statistics, derived from Player Statistics.
 class GoalkeeperStatistics : public PlayerStatistics {
 private:
-    int saves;       //! Number of saves by a Goalkeeper
-    int clearances;  //! Number of clearances by a Goalkeeper
+    int saves;       ///< Number of saves by a Goalkeeper
+    int clearances;  ///< Number of clearances by a Goalkeeper
 
 public:
     /// \brief Empty constructor for Goalkeeper Statistics.
@@ -67,8 +67,8 @@ public:
 /// \brief class about Defender Statistics, derived from Player Statistics.
 class DefenderStatistics : public PlayerStatistics {
 private:
-    int disarm;          //! Number of disarms by a Defender
-    int passing_accuracy;//! Defender's passing accuracy, in percentage
+    int disarm;          ///< Number of disarms by a Defender
+    int passing_accuracy;///< Defender's passing accuracy, in percentage
 
 public:
     /// \brief Empty constructor for Defender Statistics.
@@ -92,8 +92,8 @@ public:
 /// \brief class about Midfielder Statistics, derived from Player Statistics.
 class MidfielderStatistics : public PlayerStatistics {
 private:
-    int passing_accuracy;//! Midfielder's passing accuracy, in percentage
-    int shots;           //! Number of shots by a Midfielder
+    int passing_accuracy;///< Midfielder's passing accuracy, in percentage
+    int shots;           ///< Number of shots by a Midfielder
 
 public:
     /// \brief Empty constructor for Midfielder Statistics.
@@ -118,8 +118,8 @@ public:
 /// \brief class about Forward Statistics, derived from Player Statistics.
 class ForwardStatistics : public PlayerStatistics{
 private:
-    int total_goals; //! Number of goals by a Forward
-    int shots;       //! Number of shots by a Forward
+    int total_goals; ///< Number of goals by a Forward
+    int shots;       ///< Number of shots by a Forward
 
 public:
     /// \brief Empty constructor for Forward Statistics.
@@ -143,15 +143,15 @@ public:
 /// \brief This class refers to the Team Statistics of a Team during a Game
 class Statistics {
 private:
-    int goals_scored;   //!  Number of goals scored
-    int goals_conceded; //!  Number of goals conceded
-    int shots;          //!  Number of shots on goal
-    int ball_possession;//!  Ball possession as percentage
-    int yellow_cards;   //!  Number of yellow cards received
-    int red_cards;      //!  Number of red cards received
-    int injured;        //!  1 if injured, 0 otherwise
-    int free_kicks;     //!  Number of free kicks
-    int corner_kicks;   //!  Number of corners
+    int goals_scored;   ///<  Number of goals scored
+    int goals_conceded; ///<  Number of goals conceded
+    int shots;          ///<  Number of shots on goal
+    int ball_possession;///<  Ball possession as percentage
+    int yellow_cards;   ///<  Number of yellow cards received
+    int red_cards;      ///<  Number of red cards received
+    int injured;        ///<  1 if injured, 0 otherwise
+    int free_kicks;     ///<  Number of free kicks
+    int corner_kicks;   ///<  Number of corners
 public:
     /// \brief Statistics empty constructor.
     Statistics();

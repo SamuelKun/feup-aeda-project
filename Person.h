@@ -7,8 +7,8 @@
 /// \brief Class for a Person
 class Person {
 private:
-    std::string name; //! Person's name
-	Date birth;       //! Person's date of birth
+    std::string name; ///< Person's name
+	Date birth;       ///< Person's date of birth
 public:
     /// \brief An empty constructor for a Person.
     Person();
@@ -37,7 +37,7 @@ public:
 /// \brief Class for throwing exceptions when a Person is not found
 class PersonNotFound{
 private:
-    std::string name; //! Name of the Person that wasn't found
+    std::string name; ///< Name of the Person that wasn't found
 public:
     /// \brief Class constructor for throwing exceptions when a Person is not found.
     /// \param name

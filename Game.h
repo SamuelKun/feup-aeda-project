@@ -12,13 +12,13 @@
 class Game
 {
 private:
-    std::string opponent; //! Game's opponent
-    std::string country;  //! Game's country
-    std::string city;     //! Game's city
-    std::string stadium;  //! Game's stadium
-    Date gameDate;        //! Game's Date
-    std::vector<Player *> called_players; //! Vector with Game's called players
-    Statistics game_stats; //! Game's stats
+    std::string opponent; ///< Game's opponent
+    std::string country;  ///< Game's country
+    std::string city;     ///< Game's city
+    std::string stadium;  ///< Game's stadium
+    Date gameDate;        ///< Game's Date
+    std::vector<Player *> called_players; ///< Vector with Game's called players
+    Statistics game_stats; ///< Game's stats
 public:
     /// \brief Game Constructor.
     /// \param opponent Game's opponent
@@ -85,8 +85,8 @@ public:
 };
 /// \brief Class for throwing exception when no such Game is found.
 class GameNotFound{
-    std::string opponent; //! opponent of the Game that wasn't found
-    Date d;               //! date of the Game that wasn't found
+    std::string opponent; ///< opponent of the Game that wasn't found
+    Date d;               ///< date of the Game that wasn't found
 
 public:
     /// Class constructor for throwing exception when no such Game is found.
@@ -104,11 +104,11 @@ public:
 };
 /// \brief Class for throwing exception when Game already exists.
 class GameAlreadyExists{
-    std::string country; //! country that already exists
-    std::string city;    //! city that already exists
-    std::string stadium; //! stadium that already exists
-    std::string opponent;//! opponent that already exists
-    Date d;              //! day that already exists
+    std::string country; ///< country that already exists
+    std::string city;    ///< city that already exists
+    std::string stadium; ///< stadium that already exists
+    std::string opponent;///< opponent that already exists
+    Date d;              ///< day that already exists
 
 public:
     /// \brief Class constructor for throwing exception when Game already exists.

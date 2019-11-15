@@ -9,14 +9,14 @@
 class Player : public Person
 {
 private:
-    std::string club;     //! Player's club.
-    std::string position; //! Player's position.
-	int weight;           //! Player's weight in kg.
-	int height;           //! Player's height in cm.
-	int value;            //! Player's value in million euros.
-    double earnings;      //! Player's earnings in euros.
-    double insurance;     //! Player's insurance in euros. Its equal to value * 2
-    PlayerStatistics *player_stats; //! Player's statistics.
+    std::string club;     ///< Player's club.
+    std::string position; ///< Player's position.
+	int weight;           ///< Player's weight in kg.
+	int height;           ///< Player's height in cm.
+	int value;            ///< Player's value in million euros.
+    double earnings;      ///< Player's earnings in euros.
+    double insurance;     ///< Player's insurance in euros. Its equal to value * 2
+    PlayerStatistics *player_stats; ///< Player's statistics.
 
 
 public:
@@ -88,7 +88,7 @@ public:
 /// \brief Class for throwing exceptions when no position is found.
 class PositionNotFound{
 private:
-    std::string position; //! Position that wasn't found
+    std::string position; ///< Position that wasn't found
 public:
     /// \brief Class constructor for throwing exceptions when no position was found.
     /// \param position Position that wasn't found
@@ -103,7 +103,7 @@ public:
 /// \brief Class for throwing exceptions a Player already exists.
 class PlayerAlreadyExists{
 private:
-    std::string name; //! Name of the Player that already exists
+    std::string name; ///< Name of the Player that already exists
 public:
     /// \brief Class constructor for throwing this exception.
     /// \param name Name of the Player that already exists
@@ -118,7 +118,7 @@ public:
 /// \brief Class for throwing exceptions an incorrect Player name is used.
 class CantUseThatName{
 private:
-    std::string name; //! Name that causes error
+    std::string name; ///< Name that causes error
 public:
     /// \brief Class constructor for throwing this exception.
     /// \param name Name that causes error

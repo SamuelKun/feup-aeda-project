@@ -11,10 +11,10 @@
 /// \brief Class for a Team.
 class Team {
 private:
-    std::string teamName;  //! Team file
-    std::vector<Player *> team_players; //! Vector with Team's players
-    std::vector<Staff *> team_staff; //! Vector with Team's staff
-    std::vector<Competition *> team_competitions; //! Vector with Team's competitions
+    std::string teamName;  ///< Team file
+    std::vector<Player *> team_players; ///< Vector with Team's players
+    std::vector<Staff *> team_staff; ///< Vector with Team's staff
+    std::vector<Competition *> team_competitions; ///< Vector with Team's competitions
 
 public:
     /// \brief Class Team empty constructor.

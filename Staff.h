@@ -8,8 +8,8 @@
 class Staff : public Person
 {
 private:
-    double salary;       //! Staff's salary
-    std::string function;//! Staff's function
+    double salary;       ///< Staff's salary
+    std::string function;///< Staff's function
 public:
     /// \brief Staff Constructor.
     /// \param name Staff's name
@@ -43,7 +43,7 @@ public:
 /// \brief Class for throwing exception when no Staff Member with such name was found.
 class StaffMemberNotFound{
 private:
-    std::string name; //! no Staff Member with such name was found
+    std::string name; ///< no Staff Member with such name was found
 public:
     /// \brief Constructor for throwing exception when no Staff Member with such name was found.
     /// \param name no Staff Member with such name was found
@@ -58,7 +58,7 @@ public:
 /// \brief Class for throwing exception when no Staff Member with such function was found.
 class FunctionNotFound{
 private:
-    std::string function; //! function that doesn't exist
+    std::string function; ///< function that doesn't exist
 public:
     /// \brief Class constructor for throwing exception when no Staff Member with such function was found.
     /// \param function function that doesn't exist
@@ -73,7 +73,7 @@ public:
 /// \brief Class for throwing exception when a Staff Member with this name already exists.
 class StaffMemberAlreadyExists{
 private:
-    std::string name; //! Name of the Staff that already exists
+    std::string name; ///< Name of the Staff that already exists
 public:
     /// \brief Class constructor for throwing exception when a Staff Member with this name already exists.
     /// \param name Name of the Staff that already exists
