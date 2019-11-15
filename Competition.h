@@ -74,7 +74,9 @@ public:
     /// \param end Competition's ending date
     void setEnd(const Date &end);
 
-    void setPlayerInjuries(const std::map<Player *, int> inj);
+    void setPlayerInjuries(std::map<Player *, int> inj);
+
+    void updatePlayerInjuries(Player * p, int i);
     /// \brief Set Method.
     /// \param moneyAccommodation Competition's money accommodation
     void setMoneyAccommodation(double moneyAccommodation);

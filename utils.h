@@ -130,7 +130,6 @@ std::vector<Competition *> read_competion(std::string info, Team * t){
             Date startcomp(tempVec[3]);
             Date endcomp(tempVec[4]);
             Competition *tempComp = new Competition(tempVec[0], map_injuries, competion_games, startcomp, endcomp, stod(tempVec[5]), stoi(tempVec[6]));
-            tempComp->setPlayerInjuries(map_injuries);
             competion.push_back(tempComp);
             tempVec.clear();
         }

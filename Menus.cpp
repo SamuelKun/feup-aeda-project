@@ -1175,14 +1175,18 @@ int menu_tournaments()
                         cout << "2 -> Change date" << endl;
                         cout << "3 -> Change money paid for accommodation" << endl;
                         cout << "4 -> Change called players" << endl;
+                        cout << "5 -> Update player injuries" << endl;
                         cout << "Press any char that is not a number to exit " << endl;
                         cout << "Example: Press [a] to exit" << endl;
 
                         while(cin >> n_switches && !cin.eof()){
-                            if(n_switches >= 5){
+                            map<Player *, int> m_player = co->getCalledInjured();
+                            vector<Player *> v_player = co->getCalled();
+                            if(n_switches >= 6){
                                 cout << "Invalid index, please try again!!" << endl;
                             }
                             else{
+                                cout << "Here" << endl;
                                 string message;
                                 switch(n_switches) {
                                     case 1:
@@ -1236,6 +1240,30 @@ int menu_tournaments()
                                         cin.ignore(1000,'\n');
                                         message = "Called Players successfully changed";
                                         break;
+                                    case 5:
+                                        cout << "Select the index of player you want to update the injured time" << endl;
+                                        cout << "Press any char that is not a number to exit " << endl;
+                                        cout << "Example: Press [a] to exit" << endl;
+
+                                        for (size_t i  = 0; i < v_player.size(); i++) {
+                                            cout << "Index " << i << ": " << v_player[i]->getName() << endl;
+                                        }
+
+                                        n = co->getCalled().size();
+                                        while(cin >> index && !cin.eof()) {
+                                            if (index >= n) {
+                                                cout << "Invalid index" << endl;
+                                                continue;
+                                            } else {
+                                                cout << "Number of days " << v_player[index]->getName() << " was injured in this competition: " << endl;
+                                                cin >> n;
+                                                co->updatePlayerInjuries(v_player[index], n);
+                                                cout << "Injured time of this player updated!";
+                                            }
+                                        }
+                                        cin.clear();
+                                        cin.ignore(1000,'\n');
+                                        break;
                                     default:
                                         break;
                                 }
@@ -1247,6 +1275,7 @@ int menu_tournaments()
                                 cout << "2 -> Change date" << endl;
                                 cout << "3 -> Change money paid for accommodation" << endl;
                                 cout << "4 -> Change called players" << endl;
+                                cout << "5 -> Update player injuries" << endl;
 
                                 cout << "Press any char that is not a number to exit " << endl;
                                 cout << "Example: Press [a] to exit" << endl;

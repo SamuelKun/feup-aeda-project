@@ -84,7 +84,7 @@ vector<Player *> Competition::getCalled() const {
 
 void Competition::showPlayers() const {
     for (auto i : called_injured)
-        i.first->info();
+       i.first->info();
 }
 
 void Competition::showGames() const {
@@ -161,8 +161,12 @@ void Competition::setMoneyAccommodation(double moneyAccommodation) {
     Competition::moneyAccommodation = moneyAccommodation;
 }
 
-void Competition::setPlayerInjuries(const std::map<Player *, int> inj) {
+void Competition::setPlayerInjuries(std::map<Player *, int> inj) {
     this->called_injured = inj;
+}
+
+void Competition::updatePlayerInjuries(Player * p, int i) {
+    this->called_injured[p] = i;
 }
 
 
