@@ -1,4 +1,5 @@
 #include <vector>
+#include <map>
 #include <string>
 #include <fstream>
 #include <iomanip>
@@ -56,9 +57,9 @@ void Team::updateFile(string file_name) {
         ofstream call("called" + to_string(num) + ".txt");
         c << "called" + to_string(num) + ".txt" << endl;
 
-        vector<Player *> called_write = team_competitions[i]->getCalled();
-        for(size_t j = 0; j < team_competitions[i]->getCalled().size(); j++)
-            call << called_write[j]->getName() << endl;
+        map<Player *, int> called_write = team_competitions[i]->getCalledInjured();
+        for(auto i : called_write)
+            call << i.first << "!" << i.second << endl;
 
         ofstream gam("games" + to_string(num) + ".txt");
         c << "games" + to_string(num) + ".txt" << endl;

@@ -1184,6 +1184,7 @@ int menu_tournaments()
                             }
                             else{
                                 string message;
+                                map<Player *, int> called_inj;
                                 switch(n_switches) {
                                     case 1:
                                         cout << "Write the Competition's name: " << endl;
@@ -1230,10 +1231,14 @@ int menu_tournaments()
                                                 cout << team_players[index]->getName() << " was successfully added!!" << endl;
                                             }
                                         }
-                                        co->setCalled(v_players);
+
+                                        for(size_t i = 0; i < v_players.size(); i++)
+                                            called_inj.insert(pair<Player *, int>(v_players[i], i));
+
+                                        co->setPlayerInjuries(called_inj);
                                         cin.clear();
                                         cin.ignore(1000,'\n');
-                                       message = "Called Players successfully changed";
+                                        message = "Called Players successfully changed";
                                         break;
                                     default:
                                         break;

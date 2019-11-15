@@ -2,7 +2,7 @@ European Championship
 called0.txt
 games0.txt
 10/6/2016
-10/7/2020
+10/7/2016
 5678
 0
 -----

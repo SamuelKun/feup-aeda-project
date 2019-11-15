@@ -35,7 +35,7 @@ public:
     /// \param end Competition's ending date
     /// \param moneyAccommodation Competition's money accommodation
     /// \param paid Competition's money paid
-    Competition(std::string name, std::vector<Player *> called, std::vector<Game *> team_games, Date start, Date end, double moneyAccommodation, bool paid);
+    Competition(std::string name, std::vector<Game *> team_games, Date start, Date end, double moneyAccommodation, bool paid);
     /// \brief Get Method.
     /// \return Competition's name
     std::string getCompetitionName() const;
@@ -54,9 +54,8 @@ public:
     /// \return Competition's Called Players
     std::vector<Player *> getCalled() const;
 
-    std::map<Player *, int> getCalledInjured() const{
-        return called_injured;
-    }
+    std::map<Player *, int> getCalledInjured() const;
+
     /// \brief Get Method.
     /// \return Competition's Games
     std::vector<Game *> getGames() const;
@@ -70,18 +69,13 @@ public:
     /// \param name Competition's name.
     void setName(const std::string &name);
     /// \brief Set Method.
-    /// \param called Competition's called players
-    void setCalled(std::vector<Player *> called);
-    /// \brief Set Method.
     /// \param start Competition's starting date
     void setStart(const Date &start);
     /// \brief Set Method.
     /// \param end Competition's ending date
     void setEnd(const Date &end);
 
-    void setPlayerInjuries(const std::map<Player *, int> inj){
-        this->called_injured = inj;
-    }
+    void setPlayerInjuries(const std::map<Player *, int> inj);
     /// \brief Set Method.
     /// \param moneyAccommodation Competition's money accommodation
     void setMoneyAccommodation(double moneyAccommodation);
