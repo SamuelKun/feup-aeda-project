@@ -773,7 +773,7 @@ int menu_tournament_games(Competition * comp){
             }
 
             cout << "Write the index of the Game you wish to remove " << endl;
-            cout << "Press any char that is not a number to stop adding " << endl;
+            cout << "Press any char that is not a number to exit " << endl;
             cout << "Example: Press [a] to exit" << endl;
 
             while(cin >> index && !cin.eof()){
@@ -810,7 +810,7 @@ int menu_tournament_games(Competition * comp){
                 }
 
                 cout << "Write the number of the Game you wish to update " << endl;
-                cout << "Press any char that is not a number to stop adding " << endl;
+                cout << "Press any char that is not a number to exit " << endl;
                 cout << "Example: Press [a] to exit" << endl;
 
                 while(cin >> index && !cin.eof()){
@@ -870,40 +870,31 @@ int menu_tournament_games(Competition * comp){
                                 break;
                             case '6':
                                 cout << "Number of goals scored: " << endl;
-                                cin >> goalS;
-                                failInput(goalS);
+                                cin >> goalS; failInput(goalS); cin.ignore(1000,'\n');
                                 stats.setGoalsScored(goalS);
                                 cout << "Number of goals conceded: " <<  endl;
-                                cin >> goalsC;
-                                failInput(goalsC);
+                                cin >> goalsC;failInput(goalsC); cin.ignore(1000,'\n');
                                 stats.setGoalsConceded(goalsC);
                                 cout << "Number of shots: " <<endl;
-                                cin >> shots;
-                                failInput(shots);
+                                cin >> shots;failInput(shots); cin.ignore(1000,'\n');
                                 stats.setShots(shots);
                                 cout << "Percentage of ball possession: "  << endl;
-                                cin >> ballP;
-                                failInput(ballP);
+                                cin >> ballP;failInput(ballP); cin.ignore(1000,'\n');
                                 stats.setBallPossession(ballP);
                                 cout << "Number of yellow cards: "  << endl;
-                                cin >> yellowC;
-                                failInput(yellowC);
+                                cin >> yellowC;failInput(yellowC); cin.ignore(1000,'\n');
                                 stats.setYellowCards(yellowC);
                                 cout << "Number of red cards: "  << endl;
-                                cin >> redC;
-                                failInput(redC);
+                                cin >> redC;failInput(redC); cin.ignore(1000,'\n');
                                 stats.setRedCards(redC);
                                 cout << "Number of Injured players: " << endl;
-                                cin >> injured;
-                                failInput(injured);
+                                cin >> injured;failInput(injured); cin.ignore(1000,'\n');
                                 stats.setInjured(injured);
                                 cout << "Number of free kicks: "  << endl;
-                                cin >> freeKicks;
-                                failInput(freeKicks);
+                                cin >> freeKicks;failInput(freeKicks); cin.ignore(1000,'\n');
                                 stats.setFreeKicks(freeKicks);
                                 cout << "Number of corner kicks: " << endl;
-                                cin >> cornerKicks;
-                                failInput(cornerKicks);
+                                cin >> cornerKicks;failInput(cornerKicks);  cin.ignore(1000,'\n');
                                 stats.setCornerKicks(cornerKicks);
                                 game->setStats(stats);
                                 break;
@@ -1075,8 +1066,7 @@ int menu_tournaments()
                 }
                 cout << endl;
                 cout << "Write the money for accommodation: " << endl;
-                cin >> acc;
-                failInput(acc);
+                cin >> acc; failInput(acc); cin.ignore(1000,'\n');
                 national_team->showPlayersTable(); cout << endl;
 
                 cout << "Write the index of the player you wish to add" << endl;
@@ -1101,11 +1091,14 @@ int menu_tournaments()
                 cout << "Use the menu system do add games if needed!" << endl;
                 cout << "Are you sure you want to add this competition?" << endl;
                 cout << "1. Add the competition: " << name << endl;
-                cout << "0. Go back without adding the competition: " << name << endl;
+                cout << "Any other key. Go back without adding the competition: " << name << endl;
 
                 getline(cin,checker);
-                if(checker == "0") return 0;
+                if(checker != "1"){
+                    cout << name << " was not added as a Competition!!" << endl;
+                }
                 else{
+                    cout << name << " was successfully added as a Competition!!" << endl;
                     Competition * comp = new Competition(name, v_players, start, end, acc);
                     national_team->addCompetition(comp);
                 }
@@ -1211,14 +1204,15 @@ int menu_tournaments()
                                         break;
                                     case 3:
                                         cout << "Write " << name << "'s money for accommodation: " << endl;
-                                        cin >> money;
-                                        failInput(money);
+                                        cin >> money; failInput(money); cin.ignore(1000,'\n');
                                         co->setMoneyAccommodation(money);
                                         message = "Money accommodation successfully changed";
                                         break;
                                     case 4:
-                                        cout << "Select ALL players this competition should call" << endl;
                                         national_team->showPlayersTable(); cout << endl;
+                                        cout << "Select the index of ALL players this competition should call" << endl;
+                                        cout << "Press any char that is not a number to exit " << endl;
+                                        cout << "Example: Press [a] to exit" << endl;
                                         while(cin >> index && !cin.eof()) {
                                             if (index >= n) {
                                                 cout << "Invalid index" << endl;
