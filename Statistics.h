@@ -32,7 +32,7 @@ public:
     /// \param os Ostream
     /// \param p Player Statistics object where read Statistics will be stored
     /// \return Stream of statistics
-    friend std::ostream& operator<< (std::ostream& os, const PlayerStatistics& p);
+    friend std::ostream& operator<< (std::ostream& os, const PlayerStatistics * p);
     /// \brief Overload of operator ">>" to enable input on Statistics.
     /// \param in istream
     /// \param p Player that will be changed

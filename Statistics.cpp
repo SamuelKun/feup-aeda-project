@@ -215,8 +215,8 @@ void ForwardStatistics::updateStats(std::istream &in) {
     cin >> red_cards;
 }
 
-std::ostream &operator<<(std::ostream &os, const PlayerStatistics &p) {
-    p.writeStats(os);
+std::ostream &operator<<(std::ostream &os, const PlayerStatistics * p) {
+    p->writeStats(os);
     return os;
 }
 

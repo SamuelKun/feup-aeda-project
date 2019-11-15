@@ -144,7 +144,7 @@ ostream &operator<<(ostream &out, const Player &p) {
     out  << p.height << endl;
     out  << p.value << endl;
     out  << p.earnings << endl;
-    out << (*p.player_stats);
+    out << p.player_stats;
     return out;
 }
 
