@@ -9,18 +9,7 @@
 /// \brief Class for a Competition
 class Competition{
 private:
-    std::string name;
-public:
-    void setName(const std::string &name);
-
-    void setStart(const Date &start);
-
-    void setEnd(const Date &end);
-
-    void setMoneyAccommodation(double moneyAccommodation);
-
-private:
-    //! Competition's name
+    std::string name;              //! Competition's name
     std::vector<Player *> called;  //! Competition's called players
     std::vector<Game *> team_games;//! Competition's Games
     Date start;                    //! Competition's starting Date
@@ -71,6 +60,21 @@ public:
     /// \brief Get Method.
     /// \return Competition's ending Date
     Date getEndDate() const;
+    /// \brief Set Method.
+    /// \param name Competition's name.
+    void setName(const std::string &name);
+    /// \brief Set Method.
+    /// \param called Competition's called players
+    void setCalled( std::vector<Player *> called);
+    /// \brief Set Method.
+    /// \param start Competition's starting date
+    void setStart(const Date &start);
+    /// \brief Set Method.
+    /// \param end Competition's ending date
+    void setEnd(const Date &end);
+    /// \brief Set Method.
+    /// \param moneyAccommodation Competition's money accommodation
+    void setMoneyAccommodation(double moneyAccommodation);
     /// \brief Overloads the "<<" operator to enable using the competition as an ostream.
     /// \param out ostream for the overload
     /// \param comp Competition object that will be shown
@@ -93,9 +97,11 @@ public:
     /// \param date Date of the Game
     /// \return Pointer to the found Game, throws exception otherwise
     void removeGame(Game * g);
+    /// \brief Finds a Game with an opponent and a Date.
+    /// \param opponent Game's opponent
+    /// \param date Game's date
+    /// \return Game found with these opponent and Date, throws an exception otherwise
     Game * findGame(std::string opponent, Date date) const;
-
-    void setCalled( std::vector<Player *> called);
 };
 /// \brief Class for throwing exception when the Competition is already paid.
 class AlreadyPaid{

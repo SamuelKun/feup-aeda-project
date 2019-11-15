@@ -55,8 +55,6 @@ public:
     std::vector<Player *> getCalledPlayers() const;
     /// \brief Shows Game's info.
     void info() const;
-
-    friend std::ostream &operator<<(std::ostream &out, const Game &g);
     /// \brief Set Method.
     /// \param opponent Game's opponent
     void setOpponent(const std::string &opponent);
@@ -78,6 +76,11 @@ public:
     /// \brief Set Method.
     /// \param gameStats Game's stats
     void setGameStats(const Statistics &gameStats);
+    /// \brief Overload of operator "<<" allowing showing Game data.
+    /// \param out Ostream
+    /// \param g Game that will be shown
+    /// \return Ostream showing Gam data
+    friend std::ostream &operator<<(std::ostream &out, const Game &g);
 
 };
 /// \brief Class for throwing exception when no such Game is found.

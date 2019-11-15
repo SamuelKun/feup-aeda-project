@@ -7,8 +7,8 @@
 /// \brief Class for a Person
 class Person {
 private:
-    std::string name; /*!< Person's name */
-	Date birth;       /*!< Person's date of birth */
+    std::string name; //! Person's name
+	Date birth;       //! Person's date of birth
 public:
     /// \brief An empty constructor for a Person.
     Person();

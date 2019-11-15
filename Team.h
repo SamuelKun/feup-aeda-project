@@ -28,10 +28,6 @@ public:
     /// \param file_name label of the .txt file containing a Team
     void updateFile(std::string file_name);
 
-    /// \brief Set Method.
-    /// \param team_name Team file
-    void setTeamName(std::string team_name);
-
     /// \brief Get Method.
     /// \return Team's name
     std::string getTeamName() const;
@@ -51,6 +47,10 @@ public:
     /// \brief Get Method.
     /// \return vector of Team's Competitions pointers
     std::vector<Competition *> getCompetition() const;
+
+    /// \brief Set Method.
+    /// \param team_name Team file
+    void setTeamName(std::string team_name);
 
     /// \brief Adds a Player pointer to the vector of Team's Players pointers.
     /// \param p Player pointer to add

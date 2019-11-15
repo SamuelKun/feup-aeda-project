@@ -53,7 +53,8 @@ public:
 	/// \brief Get Method.
 	/// \return Player's insurance in euros
     double getInsurance() const;
-
+    /// \brief Get Method.
+    /// \return Player's Statistics
     PlayerStatistics * getStatistics() const;
     /// \brief Set Method.
     /// \param club Player's club

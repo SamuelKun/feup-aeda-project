@@ -6,11 +6,18 @@ class PlayerStatistics{
 protected:
     int yellow_cards;//! Number of yellow cards
     int red_cards;   //! Number of red cards
-    PlayerStatistics(int yellow_cards, int red_cards) : yellow_cards(yellow_cards), red_cards(red_cards) { } //protected constructor, can't create a instance of abstract class
+    /// \brief protected constructor, can't create a instance of abstract class.
+    /// \param yellow_cards
+    /// \param red_cards
+    PlayerStatistics(int yellow_cards, int red_cards) : yellow_cards(yellow_cards), red_cards(red_cards) { }
 public:
+    /// \brief Class destructor.
     virtual ~PlayerStatistics() {}
-
+    /// \brief Get Method.
+    /// \return Number of yellow cards
     int getYellowCards() const {return yellow_cards;}
+    /// \brief Get Method.
+    /// \return Number of red cards
     int getRedCards() const {return red_cards;}
 
     /// \brief Purely virtual method for showing Player Statistics.
@@ -18,14 +25,18 @@ public:
     /// \brief Purely virtual method for reading Statistics.
     /// \param os Ostream
     virtual void writeStats(std::ostream& os) const = 0;
-
+    /// \brief Virtual function allowing Statistics update.
+    /// \param in Istream of statistics
     virtual void updateStats(std::istream& in) = 0;
     /// \brief Overload of operator ">>" to enable reading Statistics.
     /// \param os Ostream
     /// \param p Player Statistics object where read Statistics will be stored
     /// \return Stream of statistics
     friend std::ostream& operator<< (std::ostream& os, const PlayerStatistics& p);
-
+    /// \brief Overload of operator ">>" to enable input on Statistics.
+    /// \param in istream
+    /// \param p Player that will be changed
+    /// \return Stream of statistics
     friend std::istream & operator>>(std::istream &in,  PlayerStatistics *p);
 };
 
@@ -49,6 +60,8 @@ public:
     /// \brief Method for reading Goalkeeper's Statistics.
     /// \param os Ostream
     void writeStats(std::ostream& os) const;
+    /// \brief Function allowing Statistics update.
+    /// \param in Istream of statistics
     void updateStats(std::istream& in);
 };
 /// \brief class about Defender Statistics, derived from Player Statistics.
@@ -71,6 +84,8 @@ public:
     /// \brief Method for reading Defender's Statistics.
     /// \param os Ostream
     void writeStats(std::ostream& os) const;
+    /// \brief Function allowing Statistics update.
+    /// \param in Istream of statistics
     void updateStats(std::istream& in);
 };
 
@@ -95,6 +110,8 @@ public:
     /// \brief Method for reading Midfielder's Statistics.
     /// \param os
     void writeStats(std::ostream& os) const;
+    /// \brief Function allowing Statistics update.
+    /// \param in Istream of statistics
     void updateStats(std::istream& in);
 };
 
@@ -118,6 +135,8 @@ public:
     /// \brief Method for reading Forward's Statistics.
     /// \param os
     void writeStats(std::ostream& os) const;
+    /// \brief Function allowing Statistics update.
+    /// \param in Istream of statistics
     void updateStats(std::istream& in);
 };
 
@@ -207,10 +226,10 @@ public:
     /// \brief Shows Statistics
     void info() const;
 
-    /// \brief overload of operator "<<" allowing to write Statistics
+    /// \brief overload of operator "<<" allowing to write Statistics.
     /// \param os
     /// \param statistics
-    /// \return
+    /// \return Ostream for showing Statistics
     friend std::ostream& operator<<(std::ostream& os, const Statistics & statistics);
 };
 

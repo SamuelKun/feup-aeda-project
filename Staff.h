@@ -8,8 +8,8 @@
 class Staff : public Person
 {
 private:
-    double salary;       //!*< Staff's salary
-    std::string function;//!*< Staff's function
+    double salary;       //! Staff's salary
+    std::string function;//! Staff's function
 public:
     /// \brief Staff Constructor.
     /// \param name Staff's name
@@ -23,24 +23,33 @@ public:
     /// \brief Get Method.
     /// \return Staff's function
     std::string getFunction() const;
-
+    /// \brief Set Method.
+    /// \param salary Staff's salary
     void setSalary(double salary);
-
+    /// \brief Set Method.
+    /// \param function Staff's function
     void setFunction(std::string function);
     /// \brief Shows Staff's info as a table.
     void infoTable() const;
     /// \brief Shows Staff's info.
     void info() const;
-
+    /// \brief Overload of operator "<<" to allow showing a Staff Member.
+    /// \param out Ostream
+    /// \param s Staff Member that will be shown
+    /// \return Ostream to llow showing Staff Member's data
     friend std::ostream &operator<<(std::ostream &out, const Staff &s);
 };
 
 /// \brief Class for throwing exception when no Staff Member with such name was found.
 class StaffMemberNotFound{
 private:
-    std::string name;
+    std::string name; //! no Staff Member with such name was found
 public:
+    /// \brief Constructor for throwing exception when no Staff Member with such name was found.
+    /// \param name no Staff Member with such name was found
     StaffMemberNotFound(std::string name): name(name) {}
+    /// \brief Get Method.
+    /// \return Staff Member not found's name
     std::string getName() const{
         return name;
     }

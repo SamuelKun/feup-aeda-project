@@ -11,6 +11,12 @@
 
 /// \brief Class for a Date.
 class Date{
+
+private:
+    unsigned day;  //! Date's day
+    unsigned month;//! Player's month.
+    unsigned year; //! Player's year.
+
 public:
     /// \brief Date's empty constructor.
     Date();
@@ -70,10 +76,6 @@ public:
     /// \return creates a new date
     friend std::istream& operator>>(std::istream& in, Date & date);
 
-private:
-    unsigned day;  //! Date's day
-    unsigned month;//! Player's month.
-    unsigned year; //! Player's year.
 };
 
 
