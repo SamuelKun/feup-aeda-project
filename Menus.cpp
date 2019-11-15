@@ -1063,6 +1063,7 @@ int menu_tournaments()
                 vector<Player*> v_players;
                 vector<Player*> team_players = national_team->getPlayers();
                 vector<int> v_index;
+                double acc;
                 size_t n = team_players.size();
 
                 cout << "Write the Competition's name: " << endl;
@@ -1076,7 +1077,9 @@ int menu_tournaments()
                     cin >> end;
                 }
                 cout << endl;
-
+                cout << "Write the money for accommodation: " << endl;
+                cin >> acc;
+                failInput(acc);
                 national_team->showPlayersTable(); cout << endl;
 
                 cout << "Write the index of the player you wish to add" << endl;
@@ -1106,7 +1109,7 @@ int menu_tournaments()
                 getline(cin,checker);
                 if(checker == "0") return 0;
                 else{
-                    Competition * comp = new Competition(name, v_players, start, end, 0);
+                    Competition * comp = new Competition(name, v_players, start, end, acc);
                     national_team->addCompetition(comp);
                 }
             }
@@ -1177,7 +1180,7 @@ int menu_tournaments()
                         cout << "Select the correspondent index: " << endl;
                         cout << "1 -> Change competition name" << endl;
                         cout << "2 -> Change date" << endl;
-                        cout << "3 -> Change money" << endl;
+                        cout << "3 -> Change money paid for accommodation" << endl;
                         cout << "4 -> Change called players" << endl;
                         cin >> n;
 
@@ -1206,29 +1209,28 @@ int menu_tournaments()
                                 failInput(money);
                                 co->setMoneyAccommodation(money);
                                 break;
+                            case '4':
+                                cout << "Select ALL players this competition should call" << endl;
+                                national_team->showPlayersTable(); cout << endl;
+                                while(cin >> index && !cin.eof()) {
+                                    if (index >= n) {
+                                        cout << "Invalid index" << endl;
+                                        continue;
+                                    } else if (find(v_index.begin(), v_index.end(), index) != v_index.end()) {
+                                        cout << team_players[index]->getName() << " was already added!!" << endl;
+                                        continue;
+                                    } else {
+                                        v_players.push_back(team_players[index]);
+                                        v_index.push_back(index);
+                                        cout << team_players[index]->getName() << " was successfully added!!" << endl;
+                                    }
+                                }
+                                co->setCalled(v_players);
+                                break;
                             default:
                                 cout << "Invalid index" << endl;
                                 break;
                         }
-                        /*
-                        national_team->showPlayersTable(); cout << endl;
-                        cout << "Write the index of the player you wish to add" << endl;
-                        cout << "Press any char that is not a number to stop adding " << endl;
-                        cout << "Example: Press [a] to exit" << endl;
-                        while(cin >> index && !cin.eof()) {
-                            if (index >= n) {
-                                cout << "Index too high!!" << endl;
-                                continue;
-                            } else if (find(v_index.begin(), v_index.end(), index) != v_index.end()) {
-                                cout << team_players[index]->getName() << " was already added!!" << endl;
-                                continue;
-                            } else {
-                                v_players.push_back(team_players[index]);
-                                v_index.push_back(index);
-                                cout << team_players[index]->getName() << " was successfully added!!" << endl;
-                            }
-                        }
-                         */
 
                         cout << name << " was successfully updated!!" << endl;
                         cout << "Write the number of the Competition you wish to update " << endl;
