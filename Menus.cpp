@@ -258,19 +258,16 @@ int menu_players()
                 cout << "Write " << n << "'s club " << endl;
                 getline(cin,c);
                 cout << "Write " << n << "'s position " << endl;
-                cin >> pos; checkPosition(pos);
+                cin >> pos; checkPosition(pos); cin.ignore(1000,'\n');
                 cout << "Write " << n << "'s weight " << endl;
-                cin >> wei;
-                failInput(wei);
+                cin >> wei; failInput(wei); cin.ignore(1000,'\n');
                 cout << "Write " << n << "'s height " << endl;
-                cin >> hei;
-                failInput(hei);
+                cin >> hei; failInput(hei); cin.ignore(1000,'\n');
                 cout << "Write " << n << "'s value " << endl;
-                cin >> val;
-                failInput(val);
+                cin >> val; failInput(val); cin.ignore(1000,'\n');
                 cout << "Write " << n << "'s earnings " << endl;
-                cin >> earn;
-                failInput(earn);
+                cin >> earn; failInput(earn);
+
 
                 PlayerStatistics *stats_virtual;
                 if (pos == "Goalkeeper") {
@@ -473,8 +470,8 @@ int menu_staff() {
                 cout << "Write " << n << "'s birthday " << endl;
                 cin >> d;
                 cout << "Write " << n << "'s wage " << endl;
-                cin >> w;
-                failInput(w);
+                cin >> w; failInput(w); cin.ignore(1000,'\n');
+
                 cout << "Write " << n << "'s function " << endl;
                 cin >> f;
                 failInput(f);
@@ -1175,67 +1172,97 @@ int menu_tournaments()
                         string new_name;
                         int money;
                         cin.ignore(1000,'\n');
-                        char n;
-                        cout << "Which field you want to change in this competition " << name << endl;
+                        int n;
+                        cout << "Which field you want to change in this competition: " << name << endl;
                         cout << "Select the correspondent index: " << endl;
                         cout << "1 -> Change competition name" << endl;
                         cout << "2 -> Change date" << endl;
                         cout << "3 -> Change money paid for accommodation" << endl;
                         cout << "4 -> Change called players" << endl;
-                        cin >> n;
+                        cout << "Press any char that is not a number to exit " << endl;
+                        cout << "Example: Press [a] to exit" << endl;
 
-                        switch(n) {
-                            case '1':
-                                cout << "Write the Competition's name: " << endl;
-                                cin.ignore(1000, '\n');
-                                getline(cin, new_name);
-                                co->setName(new_name);
-                                break;
-                            case '2':
-                                cout << "Write " << name << "'s beginning date: " << endl;
-                                cin >> start;
-                                cout << "Write " << name << "'s ending date: " << endl;
-                                cin >> end;
-                                while (start.isAfter(end)){
-                                    cout << "Date of end is before of date of start! ";
-                                    cin >> end;
+                        while(cin >> n && !cin.eof()){
+                            if(n >= 5){
+                                cout << "Invalid index, please try again!!" << endl;
+                            }
+                            else{
+                                string message;
+                                switch(n) {
+                                    case 1:
+                                        cout << "Write the Competition's name: " << endl;
+                                        cin.ignore(1000, '\n');
+                                        getline(cin, new_name);
+                                        co->setName(new_name);
+                                        message = "Name successfully changed!!";
+                                        break;
+                                    case 2:
+                                        cout << "Write " << name << "'s beginning date: " << endl;
+                                        cin >> start;
+                                        cout << "Write " << name << "'s ending date: " << endl;
+                                        cin >> end;
+                                        while (start.isAfter(end)){
+                                            cout << "Date of end is before of date of start! ";
+                                            cin >> end;
+                                        }
+                                        co->setStart(start);
+                                        co->setEnd(end);
+                                        message = "Dates successfully changed";
+                                        break;
+                                    case 3:
+                                        cout << "Write " << name << "'s money for accommodation: " << endl;
+                                        cin >> money;
+                                        failInput(money);
+                                        co->setMoneyAccommodation(money);
+                                        message = "Money accommodation successfully changed";
+                                        break;
+                                    case 4:
+                                        cout << "Select ALL players this competition should call" << endl;
+                                        national_team->showPlayersTable(); cout << endl;
+                                        while(cin >> index && !cin.eof()) {
+                                            if (index >= n) {
+                                                cout << "Invalid index" << endl;
+                                                continue;
+                                            } else if (find(v_index.begin(), v_index.end(), index) != v_index.end()) {
+                                                cout << team_players[index]->getName() << " was already added!!" << endl;
+                                                continue;
+                                            } else {
+                                                v_players.push_back(team_players[index]);
+                                                v_index.push_back(index);
+                                                cout << team_players[index]->getName() << " was successfully added!!" << endl;
+                                            }
+                                        }
+                                        co->setCalled(v_players);
+                                        cin.clear();
+                                        cin.ignore(1000,'\n');
+                                       message = "Called Players successfully changed";
+                                        break;
+                                    default:
+                                        break;
                                 }
-                                co->setStart(start);
-                                co->setEnd(end);
-                                break;
-                            case '3':
-                                cout << "Write " << name << "'s money for accommodation: " << endl;
-                                cin >> money;
-                                failInput(money);
-                                co->setMoneyAccommodation(money);
-                                break;
-                            case '4':
-                                cout << "Select ALL players this competition should call" << endl;
-                                national_team->showPlayersTable(); cout << endl;
-                                while(cin >> index && !cin.eof()) {
-                                    if (index >= n) {
-                                        cout << "Invalid index" << endl;
-                                        continue;
-                                    } else if (find(v_index.begin(), v_index.end(), index) != v_index.end()) {
-                                        cout << team_players[index]->getName() << " was already added!!" << endl;
-                                        continue;
-                                    } else {
-                                        v_players.push_back(team_players[index]);
-                                        v_index.push_back(index);
-                                        cout << team_players[index]->getName() << " was successfully added!!" << endl;
-                                    }
-                                }
-                                co->setCalled(v_players);
-                                break;
-                            default:
-                                cout << "Invalid index" << endl;
-                                break;
+                                name = national_team->getCompetition()[index]->getCompetitionName();
+                                cout << message << endl;
+                                cout << "Which field you want to change in this competition " << name << endl;
+                                cout << "Select the correspondent index: " << endl;
+                                cout << "1 -> Change competition name" << endl;
+                                cout << "2 -> Change date" << endl;
+                                cout << "3 -> Change money paid for accommodation" << endl;
+                                cout << "4 -> Change called players" << endl;
+
+                                cout << "Press any char that is not a number to exit " << endl;
+                                cout << "Example: Press [a] to exit" << endl;
+                            }
                         }
+                        cin.clear();
+                        cin.ignore(1000,'\n');
 
-                        cout << name << " was successfully updated!!" << endl;
+                        cout << "Stopped updating " << name << endl;
                         cout << "Write the number of the Competition you wish to update " << endl;
                         cout << "Press any char that is not a number to exit " << endl;
                         cout << "Example: Press [a] to exit" << endl;
+                        for (size_t i = 0; i < comp.size(); i++){
+                            cout << "Competition number: " << i << " " << comp[i]->getCompetitionName() << endl;
+                        }
                     }
                 }
                 cout << "Stopped updating Competitions!!" << endl;
