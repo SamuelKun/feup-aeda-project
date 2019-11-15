@@ -1,3 +1,4 @@
+#include <iomanip>
 #include "Competition.h"
 
 using namespace std;
@@ -38,11 +39,7 @@ bool Competition::getPaid() const {
 double Competition::getMoneyInsurance() const {
     double value = 0;
     int numDays = start.daysUntil(end);
-    cout << "NumDays: " << numDays << endl;
     for (auto it = called.begin(); it != called.end(); it++) {
-        cout << "Player: " << (*it)->getName() << endl;
-        cout << "Value: " << (*it)->getValue() << endl;
-        cout << "Insurance: " << (*it)->getInsurance() << endl;
         value += (*it)->getInsurance() * numDays;
     }
     return value;

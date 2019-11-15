@@ -149,10 +149,9 @@ int menu_updatePlayers(unsigned int &index, vector<Player *> v_players){
                     cout << name << "'s new birthday " << endl;
                     cin >> birthday;
                     player->setBirthday(birthday);
-                    cin.clear();
-                    cin.ignore(1000, '\n');
                     break;
                 case '3':
+                    cin.ignore(1000, '\n');
                     cout << name << "'s new club " << endl;
                     getline(cin, club);
                     player->setClub(club);
@@ -850,16 +849,19 @@ int menu_tournament_games(Competition * comp){
                                 game->setOpponent(opponent);
                                 break;
                             case '2':
+                                cin.ignore(1000, '\n');
                                 cout << "Write the Game's country " << endl;
                                 getline(cin, country);
                                 game->setCountry(country);
                                 break;
                             case '3':
+                                cin.ignore(1000, '\n');
                                 cout << "Write the Game's city " << endl;
                                 getline(cin, city);
                                 game->setCity(city);
                                 break;
                             case '4':
+                                cin.ignore(1000, '\n');
                                 cout << "Write the Game's stadium " << endl;
                                 getline(cin, stadium);
                                 game->setStadium(stadium);
@@ -971,7 +973,8 @@ int menu_singleCompetition(Competition* comp){
             waitInput();
             return 0;
         case '3':
-            cout << "Accommodation:  " << comp->getMoneyAccommodation() << endl;
+            cout << "Number of days of this competition: " << comp->getStartDate().daysUntil(comp->getEndDate()) << endl;
+            cout << "Money spent in Accommodation:  " << comp->getMoneyAccommodation() << endl;
             cout << "Paid to players as Insurances: " << comp->getMoneyInsurance() << endl;
             cout << endl;
             waitInput();
