@@ -27,23 +27,18 @@ std::vector<Player *> read_player(std::string info){
             Date tempBirth(tempVec[1]);
 
             PlayerStatistics *stats_virtual;
-            if (tempVec[3] == "Goalkeeper") {
+            if (tempVec[3] == "Goalkeeper")
+                stats_virtual = new GoalkeeperStatistics(stoi(tempVec[8]), stoi(tempVec[9]), stoi(tempVec[10]), stoi(tempVec[11]));
 
-                GoalkeeperStatistics *s = new GoalkeeperStatistics(stoi(tempVec[8]), stoi(tempVec[9]), stoi(tempVec[10]), stoi(tempVec[11]));
-                stats_virtual= s;
-            }
-            if (tempVec[3] == "Defender") {
-                DefenderStatistics *s = new DefenderStatistics(stoi(tempVec[8]), stoi(tempVec[9]), stoi(tempVec[10]), stoi(tempVec[11]));
-                stats_virtual = s;
-            }
-            if (tempVec[3] == "Midfielder") {
-                MidfielderStatistics *s = new MidfielderStatistics(stoi(tempVec[8]), stoi(tempVec[9]), stoi(tempVec[10]), stoi(tempVec[11]));
-                stats_virtual = s;
-            }
-            if (tempVec[3] == "Forward") {
-                ForwardStatistics *s = new ForwardStatistics(stoi(tempVec[8]), stoi(tempVec[9]), stoi(tempVec[10]), stoi(tempVec[11]));
-                stats_virtual = s;
-            }
+            if (tempVec[3] == "Defender")
+                stats_virtual = new DefenderStatistics(stoi(tempVec[8]), stoi(tempVec[9]), stoi(tempVec[10]), stoi(tempVec[11]));
+
+            if (tempVec[3] == "Midfielder")
+                stats_virtual = new MidfielderStatistics(stoi(tempVec[8]), stoi(tempVec[9]), stoi(tempVec[10]), stoi(tempVec[11]));
+
+            if (tempVec[3] == "Forward")
+                stats_virtual = new ForwardStatistics(stoi(tempVec[8]), stoi(tempVec[9]), stoi(tempVec[10]), stoi(tempVec[11]));
+
 
             Player *p = new Player(tempVec[0], tempBirth, tempVec[2], tempVec[3], stoi(tempVec[4]), stoi(tempVec[5]), stoi(tempVec[6]), stoi(tempVec[7]), stats_virtual);
             players.push_back(p);

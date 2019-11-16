@@ -19,7 +19,6 @@ public:
     /// \brief Get Method.
     /// \return Number of red cards
     int getRedCards() const {return red_cards;}
-
     /// \brief Purely virtual method for showing Player Statistics.
     virtual void info() const = 0;
     /// \brief Purely virtual method for reading Statistics.

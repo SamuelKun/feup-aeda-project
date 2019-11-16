@@ -12,26 +12,6 @@ Player::Player(std::string name, Date birth, std::string club, std::string posit
                double earnings, PlayerStatistics *player_stats): Person(name, birth), club(club), position(position),
                                                                   weight(weight), height(height), value(value),
                                                                   earnings(earnings), player_stats(player_stats) {
-    PlayerStatistics *stats_virtual;
-    if (position == "Goalkeeper") {
-
-        GoalkeeperStatistics *s = new GoalkeeperStatistics();
-        stats_virtual= s;
-    }
-    else if (position == "Defender") {
-        DefenderStatistics *s = new DefenderStatistics();
-        stats_virtual = s;
-    }
-    else if (position == "Midfielder") {
-        MidfielderStatistics *s = new MidfielderStatistics();
-        stats_virtual = s;
-    }
-    else if (position == "Forward") {
-        ForwardStatistics *s = new ForwardStatistics();
-        stats_virtual = s;
-    }
-
-    this->player_stats = stats_virtual;
     this->insurance = value * 2;
 
 }
@@ -93,23 +73,18 @@ void Player::setPosition(string pos) {
     int yellow = player_stats->getYellowCards();
     int red = player_stats->getRedCards();
     PlayerStatistics *stats_virtual;
-    if (pos == "Goalkeeper") {
+    if (pos == "Goalkeeper")
+        stats_virtual = new GoalkeeperStatistics(0,0,yellow,red);
 
-        GoalkeeperStatistics *s = new GoalkeeperStatistics(0,0,yellow,red);
-        stats_virtual= s;
-    }
-    else if (pos == "Defender") {
-        DefenderStatistics *s = new DefenderStatistics(0,0,yellow,red);
-        stats_virtual = s;
-    }
-    else if (pos == "Midfielder") {
-        MidfielderStatistics *s = new MidfielderStatistics(0,0,yellow,red);
-        stats_virtual = s;
-    }
-    else if (pos == "Forward") {
-        ForwardStatistics *s = new ForwardStatistics(0,0,yellow,red);
-        stats_virtual = s;
-    }
+    else if (pos == "Defender")
+        stats_virtual = new DefenderStatistics(0,0,yellow,red);
+
+    else if (pos == "Midfielder")
+        stats_virtual = new MidfielderStatistics(0,0,yellow,red);
+
+    else if (pos == "Forward")
+        stats_virtual = new ForwardStatistics(0,0,yellow,red);
+
 
     this->player_stats = stats_virtual;
     this->position = pos;
