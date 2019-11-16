@@ -53,10 +53,11 @@ int menu_searchPlayers() {
         case '1':
             try {
                 string name;
-                vector<Player *> to_print = national_team->findPlayerName(name);
-
                 cout << "Write the name of the player you wish to find: " << endl;
+                cout << "0. Return to Player Menu" << endl;
                 getline(cin, name);
+
+                vector<Player *> to_print = national_team->findPlayerName(name);
                 if (name == "0") return 0;
                 for (size_t i = 0; i < to_print.size(); i++) {
                     to_print[i]->info();
@@ -76,9 +77,10 @@ int menu_searchPlayers() {
         case '2':
             try {
                 string position;
-                vector<Player *> to_print = national_team->findPlayerPos(position);
                 cout << "Write the position of the Player(s) you wish to find: " << endl;
+                cout << "0. Return to Player Menu" << endl;
                 getline(cin, position);
+                vector<Player *> to_print = national_team->findPlayerPos(position);
                 if (position == "0") return 0;
                 cout << endl;
                 for (size_t i = 0; i < to_print.size(); i++) {
