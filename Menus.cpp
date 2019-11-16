@@ -168,8 +168,7 @@ int menu_updatePlayers(){
 
     national_team->showPlayersTable();
     cout << "Write the index of the Player you wish to update." << endl;
-    cout << "Type a character that is not a number to exit." << endl;
-    cout << "Example: Press [a] to exit" << endl;
+    cout << "Press [a] or other letter to exit." << endl;
 
     while (cin >> index && !cin.eof()) {
         v_players = national_team->getPlayers();
@@ -267,8 +266,7 @@ int menu_updatePlayers(){
                     break;
             }
             cout << "Write the index of another player you wish to update." << endl;
-            cout << "Type a character that is not a number to exit." << endl;
-            cout << "Example: Press [a] to exit" << endl;
+            cout << "Press [a] or other letter to exit." << endl;
         }
     }
     cout << "Stopped updating Players!" << endl;
@@ -543,8 +541,7 @@ int menu_updateStaff(){
             }
             national_team->showStaffTable();
             cout << "Write the index of another Player you wish to update." << endl;
-            cout << "Type a character that is not a number to exit." << endl;
-            cout << "Example: Press [a] to exit" << endl;
+            cout << "Press [a] or other letter to exit." << endl;
         }
     }
     cout << "Stopped updating Staff Members!!" << endl;
@@ -704,6 +701,38 @@ int menu_games(){
             return 1;
         default:     //Invalid input
             return 0;
+    }
+}
+
+int menu_payCompetitions(){
+    try {
+        cout << "National Football Team Competitions" << endl;
+        for(int i = 0; i < (national_team->getCompetition()).size(); i++){
+            cout << i << ". " << national_team->getCompetition()[i]->getCompetitionName();
+            if (national_team->getCompetition()[i]->getPaid())
+                cout << " - Paid!" << endl;
+            else cout << " - Not paid!" << endl;
+        }
+        int index;
+        cout << "Choose one competition to pay" << endl;
+        cout << "Press [a] or other letter to exit." << endl;
+        while (cin >> index && !cin.eof()) {
+            if(index >= national_team->getCompetition().size()) {
+                cout << "Invalid index" << endl;
+                continue;
+            }
+            else {
+                national_team->getCompetition()[index]->payPlayers();
+                cout << "Competition successfully paid!" << endl;
+            }
+        }
+        cin.clear();
+        cin.ignore(1000, '\n');
+        return 1;
+    }
+    catch(AlreadyPaid &er) {
+        cout << "The " << er.getName() << " has already been paid to players." << endl;
+        return 1;
     }
 }
 
@@ -964,7 +993,23 @@ int menu_tournament_games(Competition * comp){
     }
 
 }
-int menu_singleCompetition(Competition* comp){
+
+int menu_calledCompetition(Competition* comp){
+    map<Player *, int> m = comp->getCalledInjured();
+    cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
+    cout << setw(12) << "Club" << " | " << setw(10) << "Position" << " | " << setw(6) << "Weight" << " | ";
+    cout << setw(8) << "Height" << " | " << setw(7) << "Value" << " | " << setw(9) <<  "Earnings" << " | ";
+    cout << setw(12) << "Days Injured" << " |" << endl;
+
+    for(auto it : m) {
+        (it.first)->infoTable();
+        cout << setw(13) << (it.second) << " |" <<  endl;
+    }
+    waitInput();
+    return 0;
+}
+
+int menu_detailedCompetition(Competition * comp){
     char menu;
 
     cout << "========================================= " << endl;
@@ -972,7 +1017,6 @@ int menu_singleCompetition(Competition* comp){
     cout << "========================================= " << endl;
     cout << "This menu is about the Competition:" << endl;
     cout << comp->getCompetitionName() << endl << endl;
-
     cout << "1. Competition Games" << endl;
     cout << "2. View called Players" << endl;
     cout << "3. Money spent in this competition (Excluding Staff Members Salary)" << endl;
@@ -981,21 +1025,12 @@ int menu_singleCompetition(Competition* comp){
     cin.clear();
     cin >> menu;
     cin.ignore(1000,'\n');
-    map<Player *, int> m = comp->getCalledInjured();
     switch(menu){
         case '1':
             while(!menu_tournament_games(comp));
             return 0;
         case '2':
-            cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
-            cout << setw(12) << "Club" << " | " << setw(10) << "Position" << " | " << setw(6) << "Weight" << " | ";
-            cout << setw(8) << "Height" << " | " << setw(7) << "Value" << " | " << setw(9) <<  "Earnings" << " | ";
-            cout << setw(12) << "Days Injured" << " |" << endl;
-            for(auto it : m) {
-                (it.first)->infoTable();
-                cout << setw(13) << (it.second) << " |" <<  endl;
-            }
-            waitInput();
+            while(!menu_calledCompetition(comp));
             return 0;
         case '3':
             cout << "Number of days of this competition: " << comp->getStartDate().daysUntil(comp->getEndDate()) << endl;
@@ -1011,13 +1046,34 @@ int menu_singleCompetition(Competition* comp){
     }
 }
 
+int menu_chooseCompetition() {
+    vector<Competition*> comp = national_team->getCompetition();
+    unsigned int index;
+    cout << "Write the number of the Competition you wish to view" << endl;
+    cout << "Press [a] or other letter to exit." << endl;
+
+    for(size_t i = 0; i < comp.size(); i++)
+        cout << i << ". " <<comp[i]->getCompetitionName() << endl;
+
+    while(cin >> index && !cin.eof()){
+        if(index >= comp.size())
+            cout << "Invalid index" << endl;
+        else{
+            while(!menu_detailedCompetition(comp[index]));
+            return 0;
+        }
+    }
+    cin.clear();
+    cin.ignore(1000, '\n');
+    return 1;
+}
+
 int menu_tournaments()
 {
     char menu;
     string name;
-    unsigned int number;
     vector<Competition*> comp = national_team->getCompetition();
-
+    int index;
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
 
     cout << "========================================= " << endl;
@@ -1042,44 +1098,16 @@ int menu_tournaments()
         case '1':    //Show all competitions
             for(int i = 0; i < (national_team->getCompetition()).size(); i++)
                 cout << (*(national_team->getCompetition()[i])) << endl;
-
             waitInput();
             return 0;
         case '2':
             while(!menu_games());
             return 0;
         case '3':
-            cout << "National Football Team Competitions - VERIFICAR ERRO DEPOIS" << endl;
-            for(int i = 0; i < (national_team->getCompetition()).size(); i++){
-                cout << i << ". " << national_team->getCompetition()[i]->getCompetitionName() << " - Paid: " << national_team->getCompetition()[i]->getPaid() << endl;
-            }
-            int index;
-            cin >> index;
-            cin.ignore(1000,'\n');
-            try {
-                national_team->getCompetition()[index]->payPlayers();
-                cout << "Competition successfully paid!" << endl;
-            }
-            catch(AlreadyPaid &er) {
-                cout << "The " << er.getName() << " has already been paid to players." << endl;
-            }
-            waitInput();
+            while(!menu_payCompetitions());
             return 0;
         case '4':
-            cout << "Write the number of the Competition you wish to view" << endl;
-            cout << "Press any char that is not a number to go back" << endl;
-            cout << "Example: Press [a] to exit" << endl;
-            for(size_t i = 0; i < comp.size(); i++)
-                cout << "Competition number " << i << ": " <<comp[i]->getCompetitionName() << endl;
-            while(cin >> number && !cin.eof()){
-                if( number >= comp.size()){
-                    cout << "Index too high!!" << endl;
-                }
-                else{
-                    while(!menu_singleCompetition(comp[number]));
-                    return 0;
-                }
-            }
+            while(!menu_chooseCompetition());
             return 0;
         case '5':
             try{
@@ -1090,7 +1118,6 @@ int menu_tournaments()
                 vector<int> v_index;
                 double acc;
                 size_t n = team_players.size();
-
                 cout << "Write the Competition's name: " << endl;
                 getline(cin,name);
                 cout << "Write " << name << "'s beginning date: " << endl;
