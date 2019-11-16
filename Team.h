@@ -61,7 +61,7 @@ public:
     void addStaff(Staff * s);
 
     /// \brief Adds a Competition pointer to the vector of Team's Competition pointers.
-    /// \param comp Competition pointer to add
+    /// \param c Competition pointer to add
     void addCompetition(Competition* c);
 
     /// \brief Removes a Player pointer from the vector of Team's Players pointers.

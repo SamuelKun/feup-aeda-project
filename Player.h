@@ -31,6 +31,7 @@ public:
     /// \param height Player's height in cm.
     /// \param value Player's value in million euros.
     /// \param earnings Player's in euros.
+    /// \param player_stats Player's individual statistics.
     Player(std::string name, Date birth, std::string club, std::string position, int weight, int height, int value, double earnings, PlayerStatistics *player_stats);
 	/// \brief GetMethod.
 	/// \return Player's club

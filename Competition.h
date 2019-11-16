@@ -73,9 +73,12 @@ public:
     /// \brief Set Method.
     /// \param end Competition's ending date
     void setEnd(const Date &end);
-
+    /// \brief Set Method.
+    /// \param inj Competition's injured players map
     void setPlayerInjuries(std::map<Player *, int> inj);
-
+    /// \brief Method for updating injuries.
+    /// \param p Player that will be updated
+    /// \param i number of days injured
     void updatePlayerInjuries(Player * p, int i);
     /// \brief Set Method.
     /// \param moneyAccommodation Competition's money accommodation
@@ -85,6 +88,10 @@ public:
     /// \param comp Competition object that will be shown
     /// \return the overload of the operator (Shows comp's info)
     friend std::ostream & operator<<(std::ostream &out, const Competition &comp);
+    /// \brief Overloads the operator ">>" to enable inputing data
+    /// \param in Istream
+    /// \param comp Competition where the data will be input
+    /// \return Istream with changed Competition
     friend std::istream& operator>>(std::istream& in, Competition &comp);
     /// \brief Shows all PLayers from the Competition.
     void showPlayers() const;
