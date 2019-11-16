@@ -30,38 +30,38 @@ void Team::updateFile(string file_name) {
 
     ofstream init(file_name);
     init << teamName << endl;
-    init << "players.txt" << endl;
-    init << "staff.txt" << endl;
-    init << "competition.txt" << endl;
+    init << teamName + "players.txt" << endl;
+    init << teamName + "staff.txt" << endl;
+    init << teamName + "competition.txt" << endl;
 
 
-    ofstream p("players.txt");
+    ofstream p(teamName + "players.txt");
     for (size_t i = 0; i < team_players.size(); i++) {
         p << (*team_players[i]) << endl;
         p << "-----" << endl;
     }
-    ofstream s("staff.txt");
+    ofstream s(teamName + "staff.txt");
     for (size_t i = 0; i < team_staff.size(); i++) {
         s << (*team_staff[i]) << endl;
         s << "-----" << endl;
     }
 
 
-    ofstream c("competition.txt");
+    ofstream c(teamName + "competition.txt");
 
     int num = 0;
     for (size_t i = 0; i < team_competitions.size(); i++) {
         c << team_competitions[i]->getCompetitionName() << endl;
 
-        ofstream call("called" + to_string(num) + ".txt");
-        c << "called" + to_string(num) + ".txt" << endl;
+        ofstream call(teamName + "called" + to_string(num) + ".txt");
+        c <<teamName + "called" + to_string(num) + ".txt" << endl;
 
         map<Player *, int> called_write = team_competitions[i]->getCalledInjured();
         for(auto i : called_write)
             call << i.first->getName() << "!" << i.second << endl;
 
-        ofstream gam("games" + to_string(num) + ".txt");
-        c << "games" + to_string(num) + ".txt" << endl;
+        ofstream gam(teamName + "games" + to_string(num) + ".txt");
+        c << teamName + "games" + to_string(num) + ".txt" << endl;
 
         vector<Game *> games_write = team_competitions[i]->getGames();
         for(size_t j = 0; j < games_write.size(); j++) {
