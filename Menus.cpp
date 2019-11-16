@@ -1370,7 +1370,7 @@ int menu_tournaments()
             return 0;
         case '6':
             try{
-                while(menu_updateCompetition());
+                while(!menu_updateCompetition());
             }
             catch(CompetitionAlreadyExists &er){
                 cout << "Competition " << er.getName() << " already exists" << endl;
