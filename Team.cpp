@@ -14,7 +14,6 @@ Team::Team() {
 }
 
 Team::Team(string file_name) {
-    //Read Agency File
     ifstream info(file_name);
     vector<string> file_info;
     string str_temp;
@@ -149,40 +148,6 @@ void Team::showStaffTable() const {
         cout << setw(6) <<  i << " |" << endl;
     }
 }
-
-
-bool cmpName(const Person * p1, const Person * p2){
-    return p1->getName() < p2->getName();
-}
-
-bool cmpPosition(const Player * p1, const Player * p2){
-    string pos[4] = {"Goalkeeper", "Defender", "Midfielder", "Forward"};
-    int p1v, p2v;
-    for(size_t i = 0; i < 4; i++)
-        if (pos[i] == p1->getPosition()) p1v = i;
-
-    for(size_t i = 0; i < 4; i++)
-        if (pos[i] == p2->getPosition()) p2v = i;
-
-    return p1v < p2v;
-}
-
-bool cmpFunction(const Staff * p1, const Staff * p2){
-    string pos[2] = {"Coach", "Doctor"};
-    int p1v, p2v;
-    for(size_t i = 0; i < 2; i++)
-        if (pos[i] == p1->getFunction()) p1v = i;
-
-    for(size_t i = 0; i < 2; i++)
-        if (pos[i] == p2->getFunction()) p2v = i;
-
-    return p1v < p2v;
-}
-
-bool cmpValue(const Player * p1, const Player * p2){
-    return p1->getValue() > p2->getValue();
-}
-
 
 void Team::sortPlayersName() {
     sort(team_players.begin(), team_players.end(), cmpName);

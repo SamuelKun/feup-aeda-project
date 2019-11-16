@@ -8,7 +8,7 @@
 #include "Player.h"
 #include "Statistics.h"
 
-/// \brief Class for a Game.
+/// \brief Class for a Single Game.
 class Game
 {
 private:
@@ -20,6 +20,7 @@ private:
     std::vector<Player *> called_players; ///< Vector with Game's called players
     Statistics game_stats; ///< Game's stats
 public:
+    Game() {}
     /// \brief Game Constructor.
     /// \param opponent Game's opponent
     /// \param country Game's country

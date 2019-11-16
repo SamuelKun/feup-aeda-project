@@ -137,5 +137,52 @@ std::vector<Competition *> read_competion(std::string info, Team * t){
     return competion;
 }
 
+/// \brief Compares the name of 2 Persons
+/// \param p1 Pointer to Person1
+/// \param p2 Pointer to Person2
+/// \return true if name of Person1 come first alphabetically
+bool cmpName(const Person * p1, const Person * p2){
+    return p1->getName() < p2->getName();
+}
+
+/// \brief Compares the position of 2 Players
+/// \param p1 Pointer to Player1
+/// \param p2 Pointer to Player2
+/// \return true if position of player 1 come first in this order: Goalkeeper > Defender > Midfielder > Forward
+bool cmpPosition(const Player * p1, const Player * p2){
+    std::string pos[4] = {"Goalkeeper", "Defender", "Midfielder", "Forward"};
+    int p1v, p2v;
+    for(size_t i = 0; i < 4; i++)
+        if (pos[i] == p1->getPosition()) p1v = i;
+
+    for(size_t i = 0; i < 4; i++)
+        if (pos[i] == p2->getPosition()) p2v = i;
+
+    return p1v < p2v;
+}
+
+/// \brief Compares the function of 2 Staff
+/// \param p1 Pointer to Staff1
+/// \param p2 Pointer to Staff2
+/// \return true if function of Staff1 come first alphabetically
+bool cmpFunction(const Staff * p1, const Staff * p2){
+    std::string pos[2] = {"Coach", "Doctor"};
+    int p1v, p2v;
+    for(size_t i = 0; i < 2; i++)
+        if (pos[i] == p1->getFunction()) p1v = i;
+
+    for(size_t i = 0; i < 2; i++)
+        if (pos[i] == p2->getFunction()) p2v = i;
+
+    return p1v < p2v;
+}
+
+/// \brief Compares the value of 2 Players
+/// \param p1 Pointer to Player1
+/// \param p2 Pointer to Player2
+/// \return true if the value of Player1 is higher than Player2
+bool cmpValue(const Player * p1, const Player * p2){
+    return p1->getValue() > p2->getValue();
+}
 
 #endif //AEDA_UTILS_H

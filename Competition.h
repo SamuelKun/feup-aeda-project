@@ -10,13 +10,13 @@
 /// \brief Class for a Competition
 class Competition{
 private:
-    std::string name;              ///< Competition's name
-    std::map<Player *, int> called_injured;  ///< Competition's called players
-    std::vector<Game *> team_games;///< Competition's Games
-    Date start;                    ///< Competition's starting Date
-    Date end;                      ///< Competition's ending Date
-    double moneyAccommodation;     ///< Competition's money accommodation
-    bool paid;                     ///< Competition's paid status
+    std::string name;                        ///< Competition's name
+    std::map<Player *, int> called_injured;  ///< Competition's called players associated in a map with number of days injured during competition
+    std::vector<Game *> team_games;          ///< Competition's Games
+    Date start;                              ///< Competition's starting Date
+    Date end;                                ///< Competition's ending Date
+    double moneyAccommodation;               ///< Competition's money accommodation
+    bool paid;                               ///< Competition's paid status
 
 public:
     /// \brief Competition Constructor without games.

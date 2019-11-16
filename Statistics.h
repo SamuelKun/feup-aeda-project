@@ -28,7 +28,7 @@ public:
     /// \brief Virtual function allowing Statistics update.
     /// \param in Istream of statistics
     virtual void updateStats(std::istream& in) = 0;
-    /// \brief Overload of operator ">>" to enable reading Statistics.
+    /// \brief Overload of operator "<<" to enable reading Statistics.
     /// \param os Ostream
     /// \param p Player Statistics object where read Statistics will be stored
     /// \return Stream of statistics
@@ -68,17 +68,17 @@ public:
 class DefenderStatistics : public PlayerStatistics {
 private:
     int disarm;          ///< Number of disarms by a Defender
-    int passing_accuracy;///< Defender's passing accuracy, in percentage
+    int fouls;            ///< Defender's fouls
 
 public:
     /// \brief Empty constructor for Defender Statistics.
-    DefenderStatistics(): PlayerStatistics(0, 0), disarm(0), passing_accuracy(0) {}
+    DefenderStatistics(): PlayerStatistics(0, 0), disarm(0), fouls(0) {}
     /// \brief Constructor for Defender Statistics.
     /// \param disarm Number of disarms by a Defender
     /// \param passing_accuracy Defender's passing accuracy, in percentage
     /// \param yellow_cards Number of yellow cards by a Defender
     /// \param red_cards Number of red cards by a Defender
-    DefenderStatistics(int disarm, int passing_accuracy ,int yellow_cards, int red_cards): PlayerStatistics(yellow_cards, red_cards), disarm(disarm), passing_accuracy(passing_accuracy) {}
+    DefenderStatistics(int disarm, int fouls ,int yellow_cards, int red_cards): PlayerStatistics(yellow_cards, red_cards), disarm(disarm), fouls(fouls) {}
     /// \brief Void Method for showing Defender's Statistics.
     void info() const;
     /// \brief Method for reading Defender's Statistics.

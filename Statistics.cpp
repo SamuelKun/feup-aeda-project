@@ -141,15 +141,15 @@ void GoalkeeperStatistics::updateStats(std::istream &in) {
 }
 
 void DefenderStatistics::info() const {
-    cout << "Passing Accuracy: " << passing_accuracy << endl;
     cout << "Disarms: " << disarm << endl;
+    cout << "Fouls: " << fouls << endl;
     cout << "Yellow Cards: " <<yellow_cards << endl;
     cout << "Red Cards: " << red_cards << endl;
 }
 
 void DefenderStatistics::writeStats(std::ostream &os) const {
     os << disarm << endl;
-    os << passing_accuracy << endl;
+    os << fouls << endl;
     os << yellow_cards << endl;
     os << red_cards;
 }
@@ -157,8 +157,8 @@ void DefenderStatistics::writeStats(std::ostream &os) const {
 void DefenderStatistics::updateStats(std::istream &in) {
     cout << "Disarm: " << endl;
     cin >> disarm;
-    cout << "Passing Accuracy: " << endl;
-    cin >> passing_accuracy;
+    cout << "Fouls: " << endl;
+    cin >> fouls;
     cout << "Yellow Cards: " <<  endl;
     cin >> yellow_cards;
     cout << "Red Cards: " << endl;

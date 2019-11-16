@@ -13,9 +13,9 @@
 class Date{
 
 private:
-    unsigned day;  ///< Date's day
-    unsigned month;///< Player's month.
-    unsigned year; ///< Player's year.
+    unsigned day;  ///< Day
+    unsigned month;///< Month.
+    unsigned year; ///< Year.
 
 public:
     /// \brief Date's empty constructor.
