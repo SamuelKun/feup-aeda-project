@@ -137,17 +137,6 @@ public:
     /// \param function Function of the Staff Members you wish to search
     /// \return Vector with pointers for Staff Members with this function
     std::vector<Staff *> findStaffFunction(std::string function);
-
-    /// \brief Finds all competition with this name.
-    /// \param name Competition's name
-    /// \return Vector with pointers for Competitions with this name
-    std::vector<Competition *> findCompetition(std::string name);
-
-    /// \brief Finds all competitions that occur between these 2 dates.
-    /// \param start Starting Date
-    /// \param end Ending Date
-    /// \return Vector with pointers for Competitions between start and end
-    std::vector<Competition *> findCompetitionDate(Date start, Date end);
 };
 
 #endif

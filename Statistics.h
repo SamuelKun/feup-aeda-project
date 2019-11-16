@@ -194,7 +194,6 @@ public:
     /// \brief Get Method.
     /// \return Number of corners
     int getCornerKicks() const;
-
     /// \brief Set Method.
     /// \param goalsScored Number of goals scored
     void setGoalsScored(int goalsScored);
@@ -222,10 +221,8 @@ public:
     /// \brief Set Method.
     /// \param cornerKicks Number of corners
     void setCornerKicks(int cornerKicks);
-
     /// \brief Shows Statistics
     void info() const;
-
     /// \brief overload of operator "<<" allowing to write Statistics.
     /// \param os
     /// \param statistics

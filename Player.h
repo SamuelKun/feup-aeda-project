@@ -100,34 +100,5 @@ public:
     }
 };
 
-/// \brief Class for throwing exceptions a Player already exists.
-class PlayerAlreadyExists{
-private:
-    std::string name; ///< Name of the Player that already exists
-public:
-    /// \brief Class constructor for throwing this exception.
-    /// \param name Name of the Player that already exists
-    PlayerAlreadyExists(std::string name): name(name) {}
-    /// \brief Get Method
-    /// \return Name of the Player that already exists
-    std::string getName() const{
-        return name;
-    }
-};
-
-/// \brief Class for throwing exceptions an incorrect Player name is used.
-class CantUseThatName{
-private:
-    std::string name; ///< Name that causes error
-public:
-    /// \brief Class constructor for throwing this exception.
-    /// \param name Name that causes error
-    CantUseThatName(std::string name): name(name) {}
-    /// \brief Get Method.
-    /// \return Name that causes error
-    std::string getName() const{
-        return name;
-    }
-};
 
 #endif //AEDA_UTILS_H

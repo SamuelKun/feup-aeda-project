@@ -40,21 +40,6 @@ public:
     friend std::ostream &operator<<(std::ostream &out, const Staff &s);
 };
 
-/// \brief Class for throwing exception when no Staff Member with such name was found.
-class StaffMemberNotFound{
-private:
-    std::string name; ///< no Staff Member with such name was found
-public:
-    /// \brief Constructor for throwing exception when no Staff Member with such name was found.
-    /// \param name no Staff Member with such name was found
-    StaffMemberNotFound(std::string name): name(name) {}
-    /// \brief Get Method.
-    /// \return Staff Member not found's name
-    std::string getName() const{
-        return name;
-    }
-};
-
 /// \brief Class for throwing exception when no Staff Member with such function was found.
 class FunctionNotFound{
 private:
@@ -67,21 +52,6 @@ public:
     /// \return function that doesn't exist
     std::string getFunction() const{
         return function;
-    }
-};
-
-/// \brief Class for throwing exception when a Staff Member with this name already exists.
-class StaffMemberAlreadyExists{
-private:
-    std::string name; ///< Name of the Staff that already exists
-public:
-    /// \brief Class constructor for throwing exception when a Staff Member with this name already exists.
-    /// \param name Name of the Staff that already exists
-    StaffMemberAlreadyExists(std::string name): name(name) {}
-    /// \brief Get Method.
-    /// \return Name of the Staff that already exists
-    std::string getName() const{
-        return name;
     }
 };
 

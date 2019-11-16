@@ -210,7 +210,7 @@ void Team::addPlayer(Player* p) {
 
     for(size_t i = 0; i < team_players.size();i++){
         if(team_players[i]->getName() == p->getName()){
-            throw PlayerAlreadyExists(p->getName());
+            throw PersonAlreadyExists(p->getName());
         }
     }
    team_players.push_back(p);
@@ -221,7 +221,7 @@ void Team::addStaff(Staff* s) {
 
     for(size_t i = 0; i < team_staff.size();i++){
         if(team_staff[i]->getName() == s->getName()){
-            throw StaffMemberAlreadyExists(s->getName());
+            throw PersonAlreadyExists(s->getName());
         }
     }
 
@@ -262,16 +262,6 @@ vector<Player *> Team::findPlayerPos(string position) {
     else return v_players;
 }
 
-vector<Competition *> Team::findCompetition(string name) {
-    vector<Competition *> comp;
-    for (size_t i = 0; i < team_competitions.size(); i++) {
-        if (team_competitions[i]->getCompetitionName().find(name) != string::npos)
-            comp.push_back(team_competitions[i]);
-    }
-    if(comp.empty()) throw CompetitionNotFound(name);
-    else return comp;
-}
-
 vector<Staff *> Team::findStaffFunction(string function) {
     vector<Staff *> v_staff;
     for (size_t i = 0; i < team_staff.size(); i++) {
@@ -281,20 +271,6 @@ vector<Staff *> Team::findStaffFunction(string function) {
     }
     if (v_staff.empty()) { throw(FunctionNotFound(function)); }
     else { return v_staff; }
-}
-
-vector<Competition *> Team::findCompetitionDate(Date start, Date end) {
-    vector<Competition *> v_competition;
-    for (size_t i = 0; i < team_competitions.size(); i++) {
-        if ((team_competitions[i]->getStartDate().isBefore(start) || team_competitions[i]->getStartDate().isEqualTo(start)) && ( 
-        team_competitions[i]->getEndDate().isAfter(end) || team_competitions[i]->getEndDate().isEqualTo(end))) {
-            v_competition.push_back(team_competitions[i]);
-        }
-    }
-    if (v_competition.empty()) {
-        throw(NoCompetitionsIn(start, end)); 
-    } else { 
-        return v_competition; }
 }
 
 Player *Team::findPlayer(string name) {
@@ -323,7 +299,7 @@ void Team::removeStaff(Staff *s) {
             break;
         }
     }
-    if(!found_staff) throw (StaffMemberNotFound(s->getName()));
+    if(!found_staff) throw (PersonNotFound(s->getName()));
 }
 
 double Team::getMoneyAccommodation() const {
