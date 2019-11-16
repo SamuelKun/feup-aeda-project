@@ -130,27 +130,7 @@ public:
         return name;
     }
 };
-/// \brief Class for throwing exception when no Competitions were found.
-class NoCompetitionsIn{
-private:
-    Date start; ///< Competition's starting Date
-    Date end;   ///< Competition's ending Date
-public:
-    /// \brief Class constructor for throwing exception when no Competitions were found.
-    /// \param start Starting Date
-    /// \param end Ending Date
-    NoCompetitionsIn(Date start, Date end): start(start), end(end) {}
-    /// \brief Get Method.
-    /// \return Starting Date
-    Date getStart() const{
-        return start;
-    }
-    /// \brief Get Method.
-    /// \return Ending Date
-    Date getEnd() const{
-        return end;
-    }
-};
+
 /// \brief Class for throwing exception when the Competition already exists.
 class CompetitionAlreadyExists{
 private:

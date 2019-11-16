@@ -273,7 +273,7 @@ vector<Staff *> Team::findStaffFunction(string function) {
     else { return v_staff; }
 }
 
-Player *Team::findPlayer(string name) {
+Player * Team::findPlayer(string name) {
     for (size_t i = 0; i < team_players.size(); i++)
     {
         if (team_players[i]->getName().find(name) != string::npos)
@@ -309,13 +309,13 @@ double Team::getMoneyAccommodation() const {
     return money;
 }
 
-void Team::addCompetition(Competition *comp) {
+void Team::addCompetition(Competition *c) {
     for(size_t i = 0; i < team_competitions.size();i++){
-        if(team_competitions[i]->getCompetitionName() == comp->getCompetitionName()){
-            throw CompetitionAlreadyExists(comp->getCompetitionName());
+        if(team_competitions[i]->getCompetitionName() == c->getCompetitionName()){
+            throw CompetitionAlreadyExists(c->getCompetitionName());
         }
     }
-    team_competitions.push_back(comp);
+    team_competitions.push_back(c);
 }
 
 void Team::removeCompetition(Competition *c) {
