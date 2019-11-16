@@ -130,23 +130,17 @@ int menu_addPlayer(){
 
 
     PlayerStatistics *stats_virtual;
-    if (pos == "Goalkeeper") {
+    if (pos == "Goalkeeper")
+        stats_virtual = new GoalkeeperStatistics();
 
-        GoalkeeperStatistics *s = new GoalkeeperStatistics();
-        stats_virtual= s;
-    }
-    else if (pos == "Defender") {
-        DefenderStatistics *s = new DefenderStatistics();
-        stats_virtual = s;
-    }
-    else if (pos == "Midfielder") {
-        MidfielderStatistics *s = new MidfielderStatistics();
-        stats_virtual = s;
-    }
-    else if (pos == "Forward") {
-        ForwardStatistics *s = new ForwardStatistics();
-        stats_virtual = s;
-    }
+    else if (pos == "Defender")
+        stats_virtual = new DefenderStatistics();
+
+    else if (pos == "Midfielder")
+        stats_virtual = new MidfielderStatistics();
+
+    else if (pos == "Forward")
+        stats_virtual = new ForwardStatistics();
 
     Player *play = new Player(n,d,c,pos,wei,hei,val,earn, stats_virtual);
 

@@ -72,6 +72,7 @@ void Player::setEarnings(double value) {
 void Player::setPosition(string pos) {
     int yellow = player_stats->getYellowCards();
     int red = player_stats->getRedCards();
+
     PlayerStatistics *stats_virtual;
     if (pos == "Goalkeeper")
         stats_virtual = new GoalkeeperStatistics(0,0,yellow,red);
@@ -85,8 +86,8 @@ void Player::setPosition(string pos) {
     else if (pos == "Forward")
         stats_virtual = new ForwardStatistics(0,0,yellow,red);
 
-
     this->player_stats = stats_virtual;
+
     this->position = pos;
 }
 
