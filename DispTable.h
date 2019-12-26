@@ -9,7 +9,12 @@ using namespace std;
 struct hashing {
     int operator()(const Staff & s) const {
         //Função de hash, redefinir mais tarde
-        return s.getName().size();
+        int v = 0;
+        string name = s.getName();
+        for (char i : name)
+            v = 37*v + i;
+        return v;
+
     }
 };
 struct equall{
@@ -30,12 +35,15 @@ private:
 public:
     DispTable(vector<Staff> v);
     DispTable(Staff s);
+    DispTable(){;}
     void addStaff(Staff s);
     void removeStaff(Staff s);
-    Staff findStaff(Staff s) const ;
+    vector<Staff> findStaff(string name) const ;
 
     const vector<Staff> &getVAtuais() const;
     const vector<Staff> &getVAntigos() const;
+
+    const tabH &getStaffMembers() const;
 };
 
 

@@ -8,6 +8,7 @@
 #include "coach.h"
 #include "Game.h"
 #include "Competition.h"
+#include "DispTable.h"
 
 /// \brief Class for a Team.
 class Team {
@@ -17,7 +18,7 @@ private:
     std::vector<Player *> team_players; ///< Vector with Team's players
     std::vector<Staff *> team_staff; ///< Vector with Team's staff
     std::vector<Competition *> team_competitions; ///< Vector with Team's competitions
-
+    //DispTable table;
 public:
     /// \brief Class Team empty constructor.
     Team();
@@ -141,6 +142,7 @@ public:
     std::vector<Staff *> findStaffFunction(std::string function);
 
     CoachTree * getCoachs();
+    //DispTable getDispTable() const{ return table;}
 };
 
 #endif

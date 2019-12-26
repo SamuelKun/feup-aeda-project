@@ -2,9 +2,6 @@
 #include "algorithm"
 
 
-bool CompareStaff(Staff s1, Staff s2){
-    return s1.getName() == s2.getName();
-}
 DispTable::DispTable(vector<Staff> v) {
     auto it = v.begin();
 
@@ -21,6 +18,7 @@ void DispTable::addStaff(Staff s) {
 
 DispTable::DispTable(Staff s) {
     staff_members.insert(s);
+    v_atuais.push_back(s);
 }
 
 void DispTable::removeStaff(Staff s) {
@@ -41,9 +39,15 @@ const vector<Staff> &DispTable::getVAntigos() const {
     return v_antigos;
 }
 
-Staff DispTable::findStaff(Staff s) const {
-    if (staff_members.find(s) != staff_members.end()){
-        return (*staff_members.find(s));
+vector<Staff> DispTable::findStaff(string name) const {
+    vector<Staff> v;
+    for (const auto& stf : staff_members){
+        if( stf.getName().find(name)) v.push_back(stf);
     }
-    else throw StaffNotFound(s.getName());
+    if(v.empty()) throw StaffNotFound(name);
+    else return v;
+}
+
+const tabH &DispTable::getStaffMembers() const {
+    return staff_members;
 }

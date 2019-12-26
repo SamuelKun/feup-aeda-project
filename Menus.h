@@ -2,6 +2,7 @@
 #define AEDA_MENUS_H
 
 #include "Competition.h"
+#include "DispTable.h"
 #include <string>
 /// \brief table with information of all players where is possible to sort
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
@@ -119,4 +120,8 @@ int createNewTeamMenu();
 /// \return if 0 the menu is called again, 1 program ends
 int initMenu();
 
+int menuDispersionTable(DispTable table);
+int menu_view_dispersion(DispTable table);
+int menu_update_dispersion(DispTable table);
+int menu_remove_dispersion(DispTable table);
 #endif
