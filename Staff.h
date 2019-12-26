@@ -38,6 +38,8 @@ public:
     /// \param s Staff Member that will be shown
     /// \return Ostream to llow showing Staff Member's data
     friend std::ostream &operator<<(std::ostream &out, const Staff &s);
+    bool operator == (const Staff &s2);
+    bool operator < (const Staff &s2);
 };
 
 /// \brief Class for throwing exception when no Staff Member with such function was found.

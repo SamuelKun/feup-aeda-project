@@ -42,3 +42,11 @@ void Staff::setFunction(std::string function){
 
     this->function = function;
 }
+
+bool Staff::operator==(const Staff &s2) {
+    return Person::getName() == s2.getName();
+}
+
+bool Staff::operator<(const Staff &s2) {
+    return Person::getName() < s2.getName();
+}
