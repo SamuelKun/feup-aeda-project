@@ -13,6 +13,22 @@
 #include "Player.h"
 #include "Statistics.h"
 
+CoachTree read_coachs(std::string file) {
+    CoachTree coachs;
+    ifstream info(file);
+    string str_temp, name_temp, titles_temp;
+
+    while (getline(info, str_temp)) {
+        std::stringstream tmp(str_temp);
+        getline(tmp, name_temp, '!');
+        getline(tmp, titles_temp, '!');
+        Coach c(name_temp, stoi(titles_temp));
+        coachs.addCoach(c);
+    }
+    return coachs;
+}
+
+
 /// \brief Reads a player from a .txt file.
 /// \param info .txt file containing a Team of Players
 /// \return Vector of Players belonging to a team

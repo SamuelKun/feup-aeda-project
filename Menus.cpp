@@ -5,6 +5,7 @@
 #include <algorithm>
 
 #include "Menus.h"
+#include "Coach.h"
 #include "Team.h"
 #include "input_utils.h"
 
@@ -1397,6 +1398,143 @@ int menu_credits() {
     return 1;
 }
 
+int menu_coachs() {
+    char menu;
+
+    cout << "========================================= " << endl;
+    cout << "               Coach Menu                 " << endl;
+    cout << "========================================= \n" << endl;
+
+    cout << "1. View all Coachs In Order" << endl;
+    cout << "2. Search Coachs" << endl;
+    cout << "3. Add Coachs" << endl;
+    cout << "4. Update Coachs" << endl;
+    cout << "5. Remove Coachs" << endl;
+    cout << "6. New Coach to train" << endl;
+    cout << "0. Return to Main Menu " << endl << endl;
+
+    cin.clear();
+    cin >> menu;
+    cin.ignore(1000,'\n');
+
+    string name_coach;
+    int num, n;
+    Coach a;
+    CoachTree *c = national_team->getCoachs();
+    //Print
+    vector<Coach> to_print;
+    switch(menu)
+    {
+        case '1':    //View player info
+            c->imprime();
+            waitInput();
+            return 0;
+        case '2':
+            //Por nome
+            cout << "Coach name:" << endl;
+            getline(cin, name_coach);
+            to_print = c->searchName(name_coach);
+            for (size_t i = 0; i < to_print.size(); i++) {
+                to_print[i].show();
+                cout << "-----------------------------------" << endl << endl;
+            }
+            //Por titulos
+            cout << "Coach number of Titles:" << endl;
+            cin >> num;
+
+            to_print = c->searchTitle(num);
+            for (size_t i = 0; i < to_print.size(); i++) {
+                to_print[i].show();
+                cout << endl << "-----------------------------------" << endl << endl;
+            }
+            cin.ignore(1000,'\n');
+            waitInput();
+            return 0;
+        case '3':
+            cout << "Coach name:" << endl;
+            getline(cin, name_coach);
+            a.setName(name_coach);
+            cout << "Titles:" << endl;
+            cin >> num;
+            a.setTitles(num);
+            c->addCoach(a);
+            cin.ignore(1000,'\n');
+            waitInput();
+            return 0;
+        case '4':
+            //Por nome
+            cout << "Coach name:" << endl;
+            getline(cin, name_coach);
+            to_print = c->searchName(name_coach);
+            for (size_t i = 0; i < to_print.size(); i++) {
+                to_print[i].show();
+                cout << "-----------------------------------" << endl << endl;
+            }
+
+            //Por titulos
+            cout << "Coach number of Titles:" << endl;
+            cin >> num;
+
+            to_print = c->searchTitle(num);
+            for (size_t i = 0; i < to_print.size(); i++) {
+                cout << "Index " << i << endl;
+                to_print[i].show();
+                cout << "-----------------------------------" << endl << endl;
+            }
+            cin.ignore(1000,'\n');
+            //Acaba aqui
+            cout << "Choose index: " << endl;
+            cin >> num;
+
+            //switch nome/title outro atributo
+            //Primeiro
+            cout << "Coach name:" << endl;
+            cin.ignore(1000,'\n');
+            getline(cin, name_coach);
+            c->updateCoachName(to_print[num], name_coach);
+
+            //Segundo
+            cout << "Titles:" << endl;
+            cin >> n;
+            c->updateCoachTitle(to_print[num], n);
+            waitInput();
+            return 0;
+        case '5':
+            //Por nome
+            cout << "Coach name:" << endl;
+            getline(cin, name_coach);
+            to_print = c->searchName(name_coach);
+            for (size_t i = 0; i < to_print.size(); i++) {
+                to_print[i].show();
+                cout << "-----------------------------------" << endl << endl;
+            }
+
+            //Por titulos
+            cout << "Coach number of Titles:" << endl;
+            cin >> num;
+
+            to_print = c->searchTitle(num);
+            for (size_t i = 0; i < to_print.size(); i++) {
+                cout << "Index " << i << endl;
+                to_print[i].show();
+                cout << "-----------------------------------" << endl << endl;
+            }
+            cin.ignore(1000,'\n');
+            //Acaba aqui
+
+            cout << "Choose index: " << endl;
+            cin >> num;
+
+            c->removeCoach(to_print[num]);
+            waitInput();
+            return 0;
+        case '0':    //Exit function
+            return 1;
+        default:     //Invalid input
+            return 0;
+    }
+}
+
 int mainMenu(string &file_name) {
     char menu;
 
@@ -1411,12 +1549,14 @@ int mainMenu(string &file_name) {
     cout << "4. View Team Stats" << endl;
     cout << "5. Save Information" << endl;
     cout << "6. App Info" << endl;
+    cout << "7. parte 2 - binary trees" << endl;
+    cout << "8. parte 2 - hash table" << endl;
+    cout << "9. parte 2 - filas de prioridade" << endl;
     cout << "0. Exit" << endl << endl;
 
     cin.clear();
     cin >> menu;
     cin.ignore(1000,'\n');
-
     switch(menu)
     {
         case '1':    //View player info
@@ -1438,6 +1578,10 @@ int mainMenu(string &file_name) {
             return 0;
         case '6':    //View app info
             while(!menu_credits());
+            return 0;
+        case '7':
+            //Arvore binária
+            while(!menu_coachs());
             return 0;
         case '0':    //Exit function
             char confirmation;

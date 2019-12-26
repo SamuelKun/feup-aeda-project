@@ -5,6 +5,7 @@
 
 #include "Staff.h"
 #include "Player.h"
+#include "coach.h"
 #include "Game.h"
 #include "Competition.h"
 
@@ -12,6 +13,7 @@
 class Team {
 private:
     std::string teamName;  ///< Team file
+    CoachTree coachs; //Binary tree remover depois
     std::vector<Player *> team_players; ///< Vector with Team's players
     std::vector<Staff *> team_staff; ///< Vector with Team's staff
     std::vector<Competition *> team_competitions; ///< Vector with Team's competitions
@@ -137,6 +139,8 @@ public:
     /// \param function Function of the Staff Members you wish to search
     /// \return Vector with pointers for Staff Members with this function
     std::vector<Staff *> findStaffFunction(std::string function);
+
+    CoachTree * getCoachs();
 };
 
 #endif
