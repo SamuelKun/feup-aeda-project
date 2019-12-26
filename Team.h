@@ -2,6 +2,7 @@
 #define AEDA_TEAM_H
 
 #include <vector>
+#include <unordered_set>
 
 #include "Staff.h"
 #include "Player.h"
@@ -10,6 +11,26 @@
 #include "Competition.h"
 #include "DispTable.h"
 
+/*struct hashing {
+    int operator()(const Staff & s) const {
+        //Função de hash, redefinir mais tarde
+        int v = 0;
+        string name = s.getName();
+        for (char i : name)
+            v = 37*v + i;
+        return v;
+
+    }
+};
+struct equall{
+    bool operator() (const Staff& s1, const Staff& s2) const
+    {
+        return s1.getName() == s2.getName();
+    }
+};
+
+typedef unordered_set<Staff, hashing, equall> tabH;
+*/
 /// \brief Class for a Team.
 class Team {
 private:
@@ -17,6 +38,7 @@ private:
     CoachTree coachs; //Binary tree remover depois
     std::vector<Player *> team_players; ///< Vector with Team's players
     std::vector<Staff *> team_staff; ///< Vector with Team's staff
+    std::vector<Staff *> team_staff_antigos;
     std::vector<Competition *> team_competitions; ///< Vector with Team's competitions
     //DispTable table;
 public:

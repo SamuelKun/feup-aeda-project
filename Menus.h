@@ -119,9 +119,17 @@ int createNewTeamMenu();
 /// \brief Menu that either allows the user to open a file or create a new one.
 /// \return if 0 the menu is called again, 1 program ends
 int initMenu();
+//Menus para a árvore binária
 
-int menuDispersionTable(DispTable table);
-int menu_view_dispersion(DispTable table);
-int menu_update_dispersion(DispTable table);
-int menu_remove_dispersion(DispTable table);
+int menu_coach();
+int menu_search_coach();
+int menu_add_coach();
+int menu_update_coach();
+int menu_remove_coach();
+//Menus para a tabela de disperção
+int menuDispersionTable(DispTable *table);
+int menu_view_dispersion(DispTable *table);
+int menu_update_dispersion(DispTable *table);
+int menu_remove_dispersion(DispTable *table);
+int menu_add_dispersion(DispTable *table);
 #endif

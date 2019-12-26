@@ -44,6 +44,11 @@ public:
     const vector<Staff> &getVAntigos() const;
 
     const tabH &getStaffMembers() const;
+    void showStaffTable();
+
+    void setVAtuais(const vector<Staff> &vAtuais);
+
+    void setVAntigos(const vector<Staff> &vAntigos);
 };
 
 

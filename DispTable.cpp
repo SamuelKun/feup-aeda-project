@@ -1,5 +1,6 @@
 #include "DispTable.h"
 #include "algorithm"
+#include <iomanip>
 
 
 DispTable::DispTable(vector<Staff> v) {
@@ -50,4 +51,27 @@ vector<Staff> DispTable::findStaff(string name) const {
 
 const tabH &DispTable::getStaffMembers() const {
     return staff_members;
+}
+
+void DispTable::showStaffTable() {
+    cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
+    cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
+    int i = 0;
+    for(; i < v_atuais.size(); i++){
+        v_atuais[i].infoTable();
+        cout << setw(6) <<  i << " |" << endl;
+    }
+    for(int j = 0; j < v_antigos.size(); j++){
+        v_antigos[j].infoTable();
+        cout << setw(6) <<  i + j + 1 << " |" << endl;
+    }
+
+}
+
+void DispTable::setVAtuais(const vector<Staff> &vAtuais) {
+    v_atuais = vAtuais;
+}
+
+void DispTable::setVAntigos(const vector<Staff> &vAntigos) {
+    v_antigos = vAntigos;
 }
