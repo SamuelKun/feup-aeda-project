@@ -6,11 +6,11 @@
 
 #include "Staff.h"
 #include "Player.h"
-#include "coach.h"
+#include "Coach.h"
 #include "Game.h"
 #include "Competition.h"
 //#include "DispTable.h"
-
+#include "Provider.h"
 
 struct hashing {
     int operator()(const Staff & s) const {
@@ -42,6 +42,7 @@ private:
     std::vector<Staff *> team_staff_antigos;
     std::vector<Competition *> team_competitions; ///< Vector with Team's competitions
     tabH table;
+    ProviderPriorityQueue providers; ///< Priority Queue with Providers
 public:
     /// \brief Class Team empty constructor.
     Team();
@@ -167,6 +168,10 @@ public:
     CoachTree * getCoachs();
     //DispTable getDispTable() const{ return table;}
     //Métodos para DispTables
+
+    /// \brief Function to get the Providers of the National Team.
+    /// \return Pointer to a Priority Queue with all the Providers
+    ProviderPriorityQueue * getProviders();
 
     std::vector<Staff> dispFindStaff(string name);
     void addTable(Staff *s);

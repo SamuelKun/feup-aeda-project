@@ -1,7 +1,7 @@
 #include "Provider.h"
 #include "iostream"
-#include <string>
-#include <vector>
+
+using namespace std;
 
 // Provider Functions
 
@@ -45,11 +45,11 @@ void Provider::setReputation(double rate) {
     this->reputation = rate;
 }
 
-vector<int> Provider::getEquipment() const {
+Equipment Provider::getEquipment() const {
     return equipment;
 }
 
-void Provider::setEquipment(int ncalls, int ncones, int nfootball_boots, int nfootball_kit, int ngoal, int nmedical_kit, int ntactics_board, int nwater_bottles) {
+void Provider::setEquipment(int nballs, int ncones, int nfootball_boots, int nfootball_kit, int ngoal, int nmedical_kit, int ntactics_board, int nwater_bottles) {
     this->equipment.balls = nballs;
     this->equipment.cones = ncones;
     this->equipment.football_boots = nfootball_boots;
@@ -60,12 +60,44 @@ void Provider::setEquipment(int ncalls, int ncones, int nfootball_boots, int nfo
     this->equipment.water_bottles = nwater_bottles;
 }
 
+void Provider::setEquipment(int item, int new_value) {
+    switch (item) {
+        case 1:
+            this->equipment.football_kit = new_value;
+            break;
+        case 2:
+            this->equipment.balls = new_value;
+            break;
+        case 3:
+            this->equipment.football_boots = new_value;
+            break;
+        case 4:
+            this->equipment.cones = new_value;
+            break;
+        case 5:
+            this->equipment.goal = new_value;
+            break;
+        case 6:
+            this->equipment.tactics_board = new_value;
+        case 7:
+            this->equipment.medical_kit = new_value;
+            break;
+        case 8:
+            this->equipment.water_bottles = new_value;
+            break;
+    }
+}
+
 bool Provider::operator<(const Provider &p) const {
     return reputation < p.reputation;
 }
 
 bool Provider::operator==(const Provider &p) const {
     return reputation == p.reputation;
+}
+
+bool Provider::operator!=(const Provider &p) const {
+    return reputation != p.reputation;
 }
 
 // ProviderPriorityQueue Functions
@@ -81,7 +113,7 @@ void ProviderPriorityQueue::removeProvider(Provider p) {
     while (!provider.empty()) {
         prov_auxiliar = provider.top();
         provider.pop();
-        if (prov.auxiliar != p) {
+        if (prov_auxiliar != p) {
             auxiliar.push_back(prov_auxiliar);
         }
     }
@@ -97,7 +129,7 @@ vector<Provider> ProviderPriorityQueue::searchName(std::string name) {
 
     while(!provider.empty()) {
         auxiliar.push_back(provider.top());
-        if (provider.top().name == name) { to_return.push_back(provider.top()); }
+        if (provider.top().getName() == name) { to_return.push_back(provider.top()); }
         provider.pop();
     }
 
@@ -114,7 +146,7 @@ vector<Provider> ProviderPriorityQueue::searchReputation(double rep) {
 
     while(!provider.empty()) {
         auxiliar.push_back(provider.top());
-        if (provider.top().reputation == rep) { to_return.push_back(provider.top()); }
+        if (provider.top().getReputation() >= rep) { to_return.push_back(provider.top()); }
         provider.pop();
     }
 
@@ -133,42 +165,42 @@ vector<Provider> ProviderPriorityQueue::searchEquipment(int item) {
         auxiliar.push_back(provider.top());
         switch (item) {
         case 1:
-            if (provider.top().equipment.football_kit != 0) {
+            if (provider.top().getEquipment().football_kit != 0) {
                 to_return.push_back(provider.top());
             }
             break;
         case 2:
-            if (provider.top().equipment.balls != 0) {
+            if (provider.top().getEquipment().balls != 0) {
                 to_return.push_back(provider.top());
             }
             break;
         case 3:
-            if (provider.top().equipment.football_boots != 0) {
+            if (provider.top().getEquipment().football_boots != 0) {
                 to_return.push_back(provider.top());
             }
             break;
         case 4:
-            if (provider.top().equipment.cones != 0) {
+            if (provider.top().getEquipment().cones != 0) {
                 to_return.push_back(provider.top());
             }
             break;
         case 5:
-            if (provider.top().equipment.goal != 0) {
+            if (provider.top().getEquipment().goal != 0) {
                 to_return.push_back(provider.top());
             }
             break;
         case 6:
-            if (provider.top().equipment.tactics_board != 0) {
+            if (provider.top().getEquipment().tactics_board != 0) {
                 to_return.push_back(provider.top());
             }
             break;
         case 7:
-            if (provider.top().equipment.medical_kit != 0) {
+            if (provider.top().getEquipment().medical_kit != 0) {
                 to_return.push_back(provider.top());
             }
             break;
         case 8:
-            if (provider.top().equipment.water_bottles != 0) {
+            if (provider.top().getEquipment().water_bottles != 0) {
                 to_return.push_back(provider.top());
             }
             break;
@@ -186,21 +218,77 @@ vector<Provider> ProviderPriorityQueue::searchEquipment(int item) {
 }
 
 void ProviderPriorityQueue::updateName(Provider p, std::string name) {
+    vector<Provider> auxiliar;
+    Provider aux;
+
+    while(!provider.empty()) {
+        aux = provider.top();
+        if (provider.top() == p) { aux.setName(name); }
+        auxiliar.push_back(aux);
+        provider.pop();
+    }
+
+    for (int i = 0; i < auxiliar.size(); i++) {
+        provider.push(auxiliar[i]);
+    }
 
 }
 
 void ProviderPriorityQueue::updateReputation(Provider p, double rep) {
+    vector<Provider> auxiliar;
+    Provider aux;
+
+    while(!provider.empty()) {
+        aux = provider.top();
+        if (provider.top() == p) { aux.setReputation(rep); }
+        auxiliar.push_back(aux);
+        provider.pop();
+    }
+
+    for (int i = 0; i < auxiliar.size(); i++) {
+        provider.push(auxiliar[i]);
+    }
 
 }
 
-void ProviderPriorityQueue::updateEquipmentItem(Provider p, int item) {
+void ProviderPriorityQueue::updateEquipmentItem(Provider p, int item, int new_value) {
+    vector<Provider> auxiliar;
+    Provider aux;
+    while(!provider.empty()) {
+        aux = provider.top();
+        if (aux == p) { aux.setEquipment(item, new_value); }
+        auxiliar.push_back(aux);
+        provider.pop();
+    }
+
+    for (int i = 0; i < auxiliar.size(); i++) {
+        provider.push(auxiliar[i]);
+    }
 
 }
 
-void ProviderPriorityQueue::updateEquipmentAll(Provider p, vector<int> new_equip) {
+void ProviderPriorityQueue::updateEquipmentAll(Provider p, Equipment new_equip) {
+     vector<Provider> auxiliar;
+     Provider aux;
+
+    while(!provider.empty()) {
+        aux = provider.top();
+        if (aux == p) { aux.setEquipment(new_equip.balls, new_equip.cones, new_equip.football_boots, new_equip.football_kit, new_equip.goal, new_equip.medical_kit, new_equip.tactics_board, new_equip.water_bottles); }
+        auxiliar.push_back(aux);
+        provider.pop();
+    }
+
+    for (int i = 0; i < auxiliar.size(); i++) {
+        provider.push(auxiliar[i]);
+    }
 
 }
     
 void ProviderPriorityQueue::print() const {
+    priority_queue<Provider> aux = provider;
+    while(!aux.empty()) {
+        aux.top().showInfo();
+        aux.pop();
+    }
 
 }

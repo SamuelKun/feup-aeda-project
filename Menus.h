@@ -132,4 +132,29 @@ int menu_view_dispersion();
 int menu_update_dispersion();
 int menu_remove_dispersion();
 int menu_add_dispersion();
+
+/// \brief Menu that allows the user to Search, Add, Update and Remove Providers.
+/// \return if 0 the menu is called again, 1 goes back to main menu
+int menu_provider();
+
+/// \brief Menu that allows the user to search for a Provider by Name, by Reputation or by Equipment Item.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
+int menu_search_provider();
+
+/// \brief Menu that allows the user to Add a Provider.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
+int menu_add_provider();
+
+/// \brief Menu that allows the user to Update a Provider Info.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
+int menu_update_provider();
+
+/// \brief Menu that allows the user to Remove a Provider.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
+int menu_remove_provider();
+
+/// \brief Menu that allows the user to Buy Equipment from a Provider.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
+int menu_buy_provider();
+
 #endif

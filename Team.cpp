@@ -305,7 +305,9 @@ CoachTree * Team::getCoachs() {
     return &coachs;
 }
 
-
+ProviderPriorityQueue * Team::getProviders() {
+    return &providers;
+}
 
 const vector<Staff *> &Team::getTeamStaff() const {
     return team_staff;
