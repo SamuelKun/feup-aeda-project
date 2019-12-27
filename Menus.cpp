@@ -1567,30 +1567,25 @@ int menu_coach() {
             return 0;
     }
 }
-int menu_remove_dispersion(DispTable *table){
-    //Por nome
+int menu_remove_dispersion(){
+
     unsigned int index;
-    table->showStaffTable();
-    vector<Staff> v_staff = table->getVAtuais();
-    v_staff.insert(v_staff.end(),table->getVAntigos().begin(),table->getVAntigos().end());
+    vector<Staff*> v_staff;
+    national_team->showStaffTable();
 
     cout << "Write the index of the Staff Member you wish to remove " << endl;
     cout << "Press [a] or other letter to exit." << endl;
 
     while(cin >> index && !cin.eof()){
-        table->getVAtuais();
-        v_staff.insert(v_staff.end(),table->getVAntigos().begin(),table->getVAntigos().end());
+        v_staff = national_team->getStaff();
         if (index >= v_staff.size()) {
             cout << "Invalid index" << endl;
             continue;
         }
         else {
-            string name = v_staff[index].getName();
-            vector<Staff> atuais = table->getVAtuais();
-            vector<Staff> antigos = table->getVAntigos();
-            if(index < table->getVAntigos().size()){
-
-            }
+            string name = v_staff[index]->getName();
+            national_team->removeTable(v_staff[index]);
+            national_team->showStaffTable();
             cout << name << " was successfully removed!!" << endl;
             cout << "Press [a] or other letter to exit." << endl;
         }
@@ -1601,27 +1596,30 @@ int menu_remove_dispersion(DispTable *table){
     waitInput();
     return 1;
 }
-int menu_update_dispersion(DispTable *table ){
+int menu_update_dispersion(){
     try{
         unsigned int index;
-        table->showStaffTable();
-        vector<Staff> v_staff = table->getVAtuais();
-        v_staff.insert(v_staff.end(),table->getVAntigos().begin(),table->getVAntigos().end());
+        national_team->dispTable();
+        vector<Staff*> v_staff = national_team->getTeamStaff();
+        vector<Staff*> v_old = national_team->getTeamStaffAntigos();
+
+        tabH table = national_team->getTable();
+        v_staff.insert(v_staff.end(),v_old.begin(),v_old.end());
 
         cout << "Write the index of the Staff Member you wish to update." << endl;
         cout << "Press [a] or other letter to exit." << endl;
 
         while (cin >> index && !cin.eof()) {
-            v_staff = table->getVAtuais();
-            v_staff.insert(v_staff.end(),table->getVAntigos().begin(),table->getVAntigos().end());
+            v_staff = national_team->getTeamStaff();
+            v_staff.insert(v_staff.end(),v_old.begin(),v_old.end());
             if (index >= v_staff.size()) {
                 cout << "Invalid index" << endl;
                 continue;
             } else {
-                Staff staff = v_staff[index]; //vai ser alterada
-                Staff staff2 = v_staff[index];//Vai ser usado para encontrar o antigo
+                Staff* staff = v_staff[index]; //vai ser alterada
+                Staff staff2 = *v_staff[index];//vai ser usada para eliminar da tabela
 
-                string name = staff.getName();
+                string name = staff->getName();
                 string new_name;
                 string function;
                 Date birthday;
@@ -1642,41 +1640,39 @@ int menu_update_dispersion(DispTable *table ){
                         cout << name << "'s new Name: " << endl;
                         getline(cin, new_name);
                         for (auto it = v_staff.begin(); it != v_staff.end(); it++) {
-                            if ((*it).getName() == new_name) throw PersonAlreadyExists(new_name);
+                            if ((*it)->getName() == new_name) throw PersonAlreadyExists(new_name);
                         }
-                        staff.setName(new_name);
+                        staff->setName(new_name);
                         break;
                     case '2':
                         cout << name << "'s new birthday " << endl;
                         cin >> birthday;
-                        staff.setBirthday(birthday);
+                        staff->setBirthday(birthday);
                         break;
                     case '3':
                         cout << name << "'s new function " << endl;
                         cin >> function;
-                        staff.setFunction(function);
+                        staff->setFunction(function);
                         break;
                     case '4':
                         cout << name << "'s new salary " << endl;
                         cin >> salary;
                         failInput(salary);
-                        staff.setSalary(salary);
+                        staff->setSalary(salary);
                         break;
                     default:
                         cout << "Invalid index" << endl;
                         break;
                 }
-                tabH tab = table->getStaffMembers();
-                auto it = tab.find(staff2);
-                tab.erase(it);
-                tab.insert(staff);
-                find(v_staff.begin(),v_staff.end(),staff);
-                v_staff.push_back(staff2);
+                table = national_team->getTable();
+                auto it = table.find(staff2);
+                table.erase(it);
+                table.insert(*staff);
 
 
-                v_staff = table->getVAtuais();
-                v_staff.insert(v_staff.end(),table->getVAntigos().begin(),table->getVAntigos().end());
-                table->showStaffTable();
+                v_staff = national_team->getTeamStaff();
+                v_staff.insert(v_staff.end(),v_old.begin(),v_old.end());;
+                national_team->dispTable();
                 cout << "Write the index of another Player you wish to update." << endl;
                 cout << "Press [a] or other letter to exit." << endl;
             }
@@ -1685,10 +1681,13 @@ int menu_update_dispersion(DispTable *table ){
         cin.clear();
         cin.ignore(1000,'\n');
     }
-    catch(...){}
+    catch(...){
+        cerr << "Exception found" << endl;
+    }
+    waitInput();
     return 1;
 }
-int menu_add_dispersion(DispTable *table){
+int menu_add_dispersion(){
     try{
         string n, f, checker;
         double w;
@@ -1715,9 +1714,7 @@ int menu_add_dispersion(DispTable *table){
             cout << "Staff Member was not added!!" << endl;
         }
         else{
-            table->addStaff(*s);
-            //Apenas atualiza a informação na tabela
-            //national_team->addStaff(s);
+            national_team->addTable(s);
             cout << n << " was successfully added as a Staff member!!" << endl;
         }
     }
@@ -1728,7 +1725,7 @@ int menu_add_dispersion(DispTable *table){
     waitInput();
     return 1;
 }
-int menu_view_dispersion(DispTable *table){
+int menu_view_dispersion(){
     char menu;
     cout << "========================================= " << endl;
     cout << "          View Staff Members Menu         " << endl;
@@ -1744,56 +1741,33 @@ int menu_view_dispersion(DispTable *table){
     cin.ignore(1000,'\n');
     switch(menu) {
         case '1':
-            try{
-                vector<Staff> atuais = table->getVAtuais();
-
-                for(const auto& s  : atuais){
-                    cout << s << endl;
-                }
-            }
-            catch (...) {
-                cerr << "Exception Found!!" << endl;
-            }
+            national_team->showStaffTable();
             waitInput();
             return 0;
         case '2':
-            try{
-                vector<Staff> antigos = table->getVAntigos();
-                for(const auto& s  : antigos){
-                    cout << s << endl;
-                }
-            }
-            catch (...) {
-                cerr << "Exception Found!!" << endl;
-            }
+            national_team->dispRemoved();
             waitInput();
             return 0;
         case '3':
-            try{
-                auto members = table->getStaffMembers();
-                auto it = members.begin();
-                for (const auto& s : members){
-                    cout << s << endl;
-                }
-            }
-            catch (...) {
-                cerr << "Exception Found!!" << endl;
-            }
+            national_team->dispTable();
             waitInput();
             return 0;
         case '4':
             try{
                 string n;
-
-                cout << "Write the name of the Staff Member you wish to add: " << endl;
+                cout << "Write the name of the Staff Member you wish to find: " << endl;
                 getline(cin, n);
-                vector<Staff> v_staff = table->findStaff(n);
-                for( const auto & st : v_staff){
-                    cout << st << endl;
+                vector<Staff> v_staff = national_team->dispFindStaff(n);
+                cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
+                cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
+                auto it = v_staff.begin();
+                for(int i = 0;it!= v_staff.end();i++,it++){
+                    it->infoTable();
+                    cout << setw(6) <<  i << " |" << endl;
                 }
             }
             catch(...){
-                cerr << "Exception not found" << endl;
+                cerr << "Exception found" << endl;
             }
             waitInput();
             return 0;
@@ -1804,7 +1778,7 @@ int menu_view_dispersion(DispTable *table){
 
     }
 }
-int menuDispersionTable(DispTable *table){
+int menuDispersionTable(){
 
 
     char menu;
@@ -1823,16 +1797,16 @@ int menuDispersionTable(DispTable *table){
 
     switch(menu){
         case '1':
-            while(!menu_view_dispersion(table));
+            while(!menu_view_dispersion());
             return 0;
         case '2':
-            while(!menu_add_dispersion(table));
+            while(!menu_add_dispersion());
             return 0;
         case '3':
-            while(!menu_update_dispersion(table));
+            while(!menu_update_dispersion());
             return 0;
         case '4':
-            while(!menu_remove_dispersion(table));
+            while(!menu_remove_dispersion());
             return 0;
         case '0':
             return 1;
@@ -1890,20 +1864,7 @@ int mainMenu(string &file_name) {
             return 0;
         case '8':
             //Tabela de Disperção
-            try{
-                Date d;
-                d.setDay(12);
-                d.setMonth(12);
-                d.setYear(12);
-                auto sss = Staff("Carlos",d,321312,"Médico");
-                auto table = new DispTable(sss);
-                sss.setName("Maria");
-                table->addStaff(sss);
-                while(!menuDispersionTable(table));
-            }
-            catch(...){
-                cerr << "Exception found" << endl;
-            }
+            while(!menuDispersionTable());
             return 0;
         case '0':    //Exit function
             char confirmation;

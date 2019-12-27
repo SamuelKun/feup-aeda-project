@@ -127,9 +127,9 @@ int menu_add_coach();
 int menu_update_coach();
 int menu_remove_coach();
 //Menus para a tabela de disperção
-int menuDispersionTable(DispTable *table);
-int menu_view_dispersion(DispTable *table);
-int menu_update_dispersion(DispTable *table);
-int menu_remove_dispersion(DispTable *table);
-int menu_add_dispersion(DispTable *table);
+int menuDispersionTable();
+int menu_view_dispersion();
+int menu_update_dispersion();
+int menu_remove_dispersion();
+int menu_add_dispersion();
 #endif

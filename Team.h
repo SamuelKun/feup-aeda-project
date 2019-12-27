@@ -9,13 +9,14 @@
 #include "coach.h"
 #include "Game.h"
 #include "Competition.h"
-#include "DispTable.h"
+//#include "DispTable.h"
 
-/*struct hashing {
+
+struct hashing {
     int operator()(const Staff & s) const {
         //Função de hash, redefinir mais tarde
         int v = 0;
-        string name = s.getName();
+        std::string name = s.getName();
         for (char i : name)
             v = 37*v + i;
         return v;
@@ -30,7 +31,7 @@ struct equall{
 };
 
 typedef unordered_set<Staff, hashing, equall> tabH;
-*/
+
 /// \brief Class for a Team.
 class Team {
 private:
@@ -40,7 +41,7 @@ private:
     std::vector<Staff *> team_staff; ///< Vector with Team's staff
     std::vector<Staff *> team_staff_antigos;
     std::vector<Competition *> team_competitions; ///< Vector with Team's competitions
-    //DispTable table;
+    tabH table;
 public:
     /// \brief Class Team empty constructor.
     Team();
@@ -165,6 +166,20 @@ public:
 
     CoachTree * getCoachs();
     //DispTable getDispTable() const{ return table;}
+    //Métodos para DispTables
+
+    std::vector<Staff> dispFindStaff(string name);
+    void addTable(Staff *s);
+    void removeTable(Staff *s);
+    void dispTable();
+    void dispRemoved();
+
+    const vector<Staff *> &getTeamStaff() const;
+
+    const vector<Staff *> &getTeamStaffAntigos() const;
+
+    const tabH &getTable() const;
+
 };
 
 #endif
