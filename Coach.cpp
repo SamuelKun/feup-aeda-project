@@ -7,47 +7,59 @@
 #include <fstream>
 #include <sstream>
 
-Coach::Coach(std::string name, double titles): name(name), numTitles(titles) {
+Coach::Coach(std::string name, Date birth, bool current, double titles): Person(name, birth), currentCoach(current), numTitles(titles) {
 
 }
 
 void Coach::show() const {
-    std::cout << "Name: " << name << std::endl;
+    std::cout << "Name: " << getName() << std::endl;
     std::cout << "Titles: " << numTitles << std::endl;
+    std::cout << "Trained Teams: "<< endl;
+    for(auto &i : trainedTeams){
+        cout << " TeamName: " << get<0>(i)<< endl;
+        cout << " Start: " << get<1>(i)<< endl;
+        cout << " End: " << get<2>(i) << endl;
+    }
+    cout << endl;
 }
 
 bool Coach::operator<(const Coach &c1) const {
     if(numTitles != c1.numTitles)
         return numTitles < c1.numTitles;
     else
-        return name < c1.name;
+        return getName() < c1.getName();
 }
 
 bool Coach::operator==(const Coach &c1) const {
-    return name == c1.name;
+    return getName() == c1.getName();
 }
 
-void Coach::setName(string name) {
-    this->name = name;
-}
 
 void Coach::setTitles(double titles) {
     this->numTitles = titles;
-}
-
-std::string Coach::getName() const {
-    return name;
 }
 
 double Coach::getTitles() const {
     return numTitles;
 }
 
+void Coach::addTrainedTeam(string name, Date start, Date end) {
+    std::tuple<string, Date, Date> newTeam = std::make_tuple(name, start, end);
+    trainedTeams.push_back(newTeam);
+}
+
+bool Coach::getCurrentCoach() const {
+    return currentCoach;
+}
+
 void CoachTree::imprime() const {
+    int index = 0;
     BSTItrIn<Coach> it(tree);
     while (!it.isAtEnd()) {
+        cout << "Index: " << index << endl;
         it.retrieve().show();
         it.advance();
+        index++;
     }
 }
 
@@ -95,5 +107,17 @@ void CoachTree::updateCoachTitle(Coach c, double titles){
     tree.remove(c);
     c.setTitles(titles);
     tree.insert(c);
+}
+
+Coach CoachTree::searchCurrentCoach() {
+    BSTItrIn<Coach> it(tree);
+
+    while (!it.isAtEnd()) {
+        if(it.retrieve().getCurrentCoach()) {
+            return it.retrieve();
+        }
+        it.advance();
+    }
+    return Coach(); //throw an exception;
 }
 

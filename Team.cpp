@@ -21,10 +21,10 @@ Team::Team(string file_name) {
     while (getline(info, str_temp)) file_info.push_back(str_temp);
 
     this->teamName = file_info[0];
-    this->coachs = read_coachs("portugalcoaches.txt");
     this->team_players = read_player(file_info[1]);
     this->team_staff = read_staff(file_info[2]);
     this->team_competitions = read_competion(file_info[3], this);
+    this->coachs = read_coachs(file_info[4]);
 
     for(auto s : team_staff){
         this->table.insert(*s);
