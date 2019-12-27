@@ -2,7 +2,7 @@
 #include "algorithm"
 #include <iomanip>
 
-
+/*
 DispTable::DispTable(vector<Staff> v) {
     auto it = v.begin();
 
@@ -75,3 +75,4 @@ void DispTable::setVAtuais(const vector<Staff> &vAtuais) {
 void DispTable::setVAntigos(const vector<Staff> &vAntigos) {
     v_antigos = vAntigos;
 }
+*/

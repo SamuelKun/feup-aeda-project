@@ -303,6 +303,69 @@ CoachTree * Team::getCoachs() {
 
 
 
+const vector<Staff *> &Team::getTeamStaff() const {
+    return team_staff;
+}
+
+const vector<Staff *> &Team::getTeamStaffAntigos() const {
+    return team_staff_antigos;
+}
+
+const tabH &Team::getTable() const {
+    return table;
+}
+
+std::vector<Staff> Team::dispFindStaff(string name) {
+    vector<Staff> v;
+    for (const auto& stf : table){
+        if( stf.getName().find(name) != string::npos) v.push_back(stf);
+    }
+    if(v.empty()) throw PersonNotFound(name);
+    else return v;
+}
+
+void Team::addTable(Staff *s) {
+    table.insert(*s);
+    team_staff.push_back(s);
+}
+
+void Team::removeTable(Staff *s) {
+    auto it = find(team_staff.begin(),team_staff.end(),s);
+    if(it != team_staff.end()){
+       team_staff_antigos.push_back(*it);
+       team_staff.erase(it);
+    }
+    else throw PersonNotFound(s->getName());
+}
+
+void Team::dispTable() {
+    cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
+    cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
+    int i = 0;
+    auto it = table.begin();
+    for(int i = 0; it != table.end();it++,i++){
+        it->infoTable();
+        cout << setw(6) <<  i << " |" << endl;
+    }
+
+
+
+}
+
+void Team::dispRemoved() {
+    cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
+    cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
+    for(int i = 0; i < team_staff_antigos.size(); i++){
+        team_staff_antigos[i]->infoTable();
+        cout << setw(6) <<  i << " |" << endl;
+    }
+}
+
+
+
+
+
+
 
 
 
