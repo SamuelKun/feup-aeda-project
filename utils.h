@@ -16,14 +16,26 @@
 CoachTree read_coachs(std::string file) {
     CoachTree coachs;
     ifstream info(file);
-    string str_temp, name_temp, titles_temp;
+    std::vector<std::string> tempVec;
+    string str_temp, name_tmp, start_tmp, end_tmp;
 
     while (getline(info, str_temp)) {
-        std::stringstream tmp(str_temp);
-        getline(tmp, name_temp, '!');
-        getline(tmp, titles_temp, '!');
-        Coach c(name_temp, stoi(titles_temp));
-        coachs.addCoach(c);
+        if (str_temp != "-----") tempVec.push_back(str_temp);
+        else{
+            Date tempBirth(tempVec[1]);
+            Coach c(tempVec[0], tempVec[1], stoi(tempVec[2]));
+
+            for (size_t i = 3; i < tempVec.size(); i++) {
+                std::stringstream tmp(tempVec[i]);
+                getline(tmp, name_tmp, '!');
+                getline(tmp, start_tmp, '!');
+                getline(tmp, end_tmp, '!');
+
+                c.addTrainedTeam(name_tmp, Date(start_tmp), Date(end_tmp));
+            }
+            coachs.addCoach(c);
+            tempVec.clear();
+        }
     }
     return coachs;
 }

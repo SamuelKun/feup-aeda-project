@@ -7,40 +7,44 @@
 #include <fstream>
 #include <sstream>
 
-Coach::Coach(std::string name, double titles): name(name), numTitles(titles) {
+Coach::Coach(std::string name, Date birth, double titles): Person(name, birth), numTitles(titles) {
 
 }
 
 void Coach::show() const {
-    std::cout << "Name: " << name << std::endl;
+    std::cout << "Name: " << getName() << std::endl;
     std::cout << "Titles: " << numTitles << std::endl;
+    std::cout << "Trained Teams: ";
+    for(auto &i : trainedTeams){
+        cout << " TeamName: " << get<0>(i);
+        cout << " Start: " << get<1>(i);
+        cout << " End: " << get<2>(i) << endl;
+    }
 }
 
 bool Coach::operator<(const Coach &c1) const {
     if(numTitles != c1.numTitles)
         return numTitles < c1.numTitles;
     else
-        return name < c1.name;
+        return getName() < c1.getName();
 }
 
 bool Coach::operator==(const Coach &c1) const {
-    return name == c1.name;
+    return getName() == c1.getName();
 }
 
-void Coach::setName(string name) {
-    this->name = name;
-}
 
 void Coach::setTitles(double titles) {
     this->numTitles = titles;
 }
 
-std::string Coach::getName() const {
-    return name;
-}
-
 double Coach::getTitles() const {
     return numTitles;
+}
+
+void Coach::addTrainedTeam(string name, Date start, Date end) {
+    std::tuple<string, Date, Date> newTeam = std::make_tuple(name, start, end);
+    trainedTeams.push_back(newTeam);
 }
 
 void CoachTree::imprime() const {

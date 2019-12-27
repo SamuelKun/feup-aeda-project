@@ -36,7 +36,7 @@ typedef unordered_set<Staff, hashing, equall> tabH;
 class Team {
 private:
     std::string teamName;  ///< Team file
-    CoachTree coachs; //Binary tree remover depois
+    CoachTree coachs;
     std::vector<Player *> team_players; ///< Vector with Team's players
     std::vector<Staff *> team_staff; ///< Vector with Team's staff
     std::vector<Staff *> team_staff_antigos;
@@ -168,15 +168,16 @@ public:
     //DispTable getDispTable() const{ return table;}
     //Métodos para DispTables
 
+
     std::vector<Staff> dispFindStaff(string name);
     void addTable(Staff *s);
     void removeTable(Staff *s);
     void dispTable();
     void dispRemoved();
 
-    const vector<Staff *> &getTeamStaff() const;
+    const vector<Staff *> & getTeamStaff() const;
 
-    const vector<Staff *> &getTeamStaffAntigos() const;
+    const vector<Staff *> & getTeamStaffAntigos() const;
 
     const tabH &getTable() const;
 

@@ -1,23 +1,23 @@
-//
-// Created by diogo on 22/12/2019.
-//
-
 #ifndef COACH_H
 #define COACH_H
 
 #include <string>
-#include "bst.h"
+#include <vector>
+#include <tuple>
 
-class Coach{
+#include "bst.h"
+#include "Date.h"
+#include "Person.h"
+
+class Coach: public Person{
 private:
     double numTitles;
-    std::string name;
+    vector<std::tuple<string, Date, Date>> trainedTeams;
 public:
     Coach() {}
-    Coach(std::string name, double titles);
+    Coach(std::string name, Date birth, double titles);
     void show() const;
-    void setName(string n);
-    std::string getName() const;
+    void addTrainedTeam(string name, Date start, Date end);
     double getTitles() const;
     void setTitles(double n);
     bool operator < (const Coach &c1) const;
@@ -31,7 +31,7 @@ private:
     BST<Coach> tree;
 public:
 
-    CoachTree(): tree(Coach("",-1)) {};
+    CoachTree(): tree(Coach("", Date(), -1)) {}; //Ver isto melhor depois
     void addCoach(Coach &c);
 
     vector<Coach> searchName(std::string name);
@@ -41,14 +41,6 @@ public:
     void updateCoachTitle(Coach c, double titles);
     void removeCoach(Coach c);
     void imprime() const;
-
-    /*
-    BST<PalavraSignificado> getPalavras() const;
-    void lerDicionario(ifstream &fich);
-    string consulta(string palavra) const;
-    bool corrige(string palavra, string significado);
-    void imprime() const;
-     */
 };
 
 
