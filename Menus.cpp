@@ -1547,6 +1547,49 @@ int menu_remove_coach(){
     return 0;
 }
 
+int menu_select_coach(){
+    char menu;
+    cout << "========================================= " << endl;
+    cout << "           Select Coach Menu             " << endl;
+    cout << "========================================= \n" << endl;
+
+    cout << "1. View actual coach" << endl;
+    cout << "2. Select a coach" << endl;
+    cout << "3. Dismiss actual coach" << endl;
+    cout << "0. Return to Coaches Menu " << endl << endl;
+
+    cin.clear();
+    cin >> menu;
+    cin.ignore(1000,'\n');
+
+    int num;
+    CoachTree *c = national_team->getCoachs();
+    switch(menu) {
+        case '1':
+            c->searchCurrentCoach().show();
+            waitInput();
+            return 0;
+        case '2':
+            c->imprime();
+            cin >> num;
+            //Destituir o treinador atual, se existir!
+            //Selecione um treinador para ser o da equipa!
+            waitInput();
+            return 0;
+        case '3':
+            c->imprime();
+            cin >> num;
+            //Destituir o treinador atual, se existir!
+            //throw execption otherwise!
+            waitInput();
+            return 0;
+        case '0':
+            return 1;
+        default:
+            return 0;
+    }
+}
+
 int menu_coach() {
     char menu;
 
@@ -1585,6 +1628,9 @@ int menu_coach() {
             return 0;
         case '5':
             while(!menu_remove_coach());
+            return 0;
+        case '6':
+            while(!menu_select_coach());
             return 0;
         case '0':    //Exit function
             return 1;
@@ -1978,4 +2024,3 @@ int initMenu(){
             return 0;
     }
 }
-

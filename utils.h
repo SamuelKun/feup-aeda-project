@@ -23,9 +23,9 @@ CoachTree read_coachs(std::string file) {
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
             Date tempBirth(tempVec[1]);
-            Coach c(tempVec[0], tempVec[1], stoi(tempVec[2]));
+            Coach c(tempVec[0], tempVec[1], stoi(tempVec[2]), stoi(tempVec[3]));
 
-            for (size_t i = 3; i < tempVec.size(); i++) {
+            for (size_t i = 4; i < tempVec.size(); i++) {
                 std::stringstream tmp(tempVec[i]);
                 getline(tmp, name_tmp, '!');
                 getline(tmp, start_tmp, '!');
