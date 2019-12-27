@@ -25,6 +25,10 @@ Team::Team(string file_name) {
     this->team_players = read_player(file_info[1]);
     this->team_staff = read_staff(file_info[2]);
     this->team_competitions = read_competion(file_info[3], this);
+
+    for(auto s : team_staff){
+        this->table.insert(*s);
+    }
 }
 
 void Team::updateFile(string file_name) {
