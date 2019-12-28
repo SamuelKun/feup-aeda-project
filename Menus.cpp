@@ -1920,37 +1920,50 @@ int menu_remove_provider()
     case '1':
         cout << "Provider name:" << endl;
         getline(cin, name_provider);
-        to_print = p->searchName(name_provider);
-        for (size_t i = 0; i < to_print.size(); i++)
-        {
-            cout << "Index " << i << endl;
-            to_print[i].showInfo();
-            cout << "-----------------------------------" << endl
-                 << endl;
-        }
-        return 0;
+            cin.ignore(1000, '\n');
+
+            to_print = p->searchName(name_provider);
+            for (size_t i = 0; i < to_print.size(); i++)  {
+                cout << "Index " << i << endl;
+                to_print[i].showInfo();
+                cout << "-----------------------------------" << endl
+                     << endl;
+            }
+
+        break;
     case '2':
         cout << "Provider's Reputation:" << endl;
         cin >> rep;
+            cin.ignore(1000, '\n');
 
-        to_print = p->searchReputation(rep);
-        for (size_t i = 0; i < to_print.size(); i++)
-        {
-            cout << "Index " << i << endl;
-            to_print[i].showInfo();
-            cout << "-----------------------------------" << endl
-                 << endl;
-        }
-        return 0;
+                to_print = p->searchReputation(rep);
+                for (size_t i = 0; i < to_print.size(); i++)
+                {
+                    cout << "Index " << i << endl;
+                    to_print[i].showInfo();
+                    cout << "-----------------------------------" << endl
+                         << endl;
+                }
+        break;
     case '0':
         return 1;
     }
-
-    cin.ignore(1000, '\n');
-    cout << "Choose index: " << endl;
-    cin >> n;
-
-    p->removeProvider(to_print[n]);
+    if (!to_print.empty()) {
+        cout << "Choose index: " << endl;
+        cin >> n;
+        cin.ignore(1000, '\n');
+        if (n < to_print.size()) {
+            p->removeProvider(to_print[n]);
+            cout << "Removed successfully!" << endl;
+        }
+        else {
+            cout << "Index invalid" << endl;
+        }
+    } else if (menu == '1') {
+        cout << "The Provider " << name_provider << " doesn't exist." << endl;
+    } else {
+        cout << "There's no Provider with a reputation equal or higher than " << rep << "." << endl;
+    }
     waitInput();
     return 0;
 }
@@ -1966,6 +1979,7 @@ int menu_update_provider()
 
     cout << "Provider name:" << endl;
     getline(cin, name_provider);
+    cin.ignore(1000, '\n');
     to_print = p->searchName(name_provider);
     for (size_t i = 0; i < to_print.size(); i++)
     {
@@ -1975,37 +1989,42 @@ int menu_update_provider()
              << endl;
     }
 
-    cin.ignore(1000, '\n');
+    if (!to_print.empty()) {
     cout << "Choose index: " << endl;
     cin >> num;
+    if (num < to_print.size()) {
+        cout << "Provider name:" << endl;
+        cin.ignore(1000, '\n');
+        getline(cin, name_provider);
+        p->updateName(to_print[num], name_provider);
 
-    cout << "Coach name:" << endl;
-    cin.ignore(1000, '\n');
-    getline(cin, name_provider);
-    p->updateName(to_print[num], name_provider);
+        cout << "Reputation:" << endl;
+        cin >> rep;
+        p->updateReputation(to_print[num], rep);
 
-    cout << "Reputation:" << endl;
-    cin >> rep;
-    p->updateReputation(to_print[num], rep);
-
-    cout << "no. Balls:" << endl;
-    cin >> equip.balls;
-    cout << "no. Cones:" << endl;
-    cin >> equip.cones;
-    cout << "no. Football Boots:" << endl;
-    cin >> equip.football_boots;
-    cout << "no. Football Kits:" << endl;
-    cin >> equip.football_kit;
-    cout << "no. Goals:" << endl;
-    cin >> equip.goal;
-    cout << "no. Medical Kits:" << endl;
-    cin >> equip.medical_kit;
-    cout << "no. Tactics Boards:" << endl;
-    cin >> equip.tactics_board;
-    cout << "no. Water Bottles:" << endl;
-    cin >> equip.water_bottles;
-    p->updateEquipmentAll(to_print[num], equip);
-
+        cout << "no. Balls:" << endl;
+        cin >> equip.balls;
+        cout << "no. Cones:" << endl;
+        cin >> equip.cones;
+        cout << "no. Football Boots:" << endl;
+        cin >> equip.football_boots;
+        cout << "no. Football Kits:" << endl;
+        cin >> equip.football_kit;
+        cout << "no. Goals:" << endl;
+        cin >> equip.goal;
+        cout << "no. Medical Kits:" << endl;
+        cin >> equip.medical_kit;
+        cout << "no. Tactics Boards:" << endl;
+        cin >> equip.tactics_board;
+        cout << "no. Water Bottles:" << endl;
+        cin >> equip.water_bottles;
+        p->updateEquipmentAll(to_print[num], equip);
+    } else {
+        cout << "Index invalid" << endl;
+    }
+    } else {
+        cout << "The Provider " << name_provider << " doesn't exist." << endl;
+    }
     waitInput();
     return 1;
 }
@@ -2086,6 +2105,7 @@ int menu_search_provider()
         // Search By Name
         cout << "Provider name:" << endl;
         getline(cin, name_provider);
+        cin.ignore(1000, '\n');
         to_print = p->searchName(name_provider);
         for (auto &i : to_print)
         {
@@ -2093,12 +2113,12 @@ int menu_search_provider()
             cout << "-----------------------------------" << endl
                  << endl;
         }
-        return 0;
+        break;
     case '2':
         // Search By Reputation
         cout << "Provider's Reputation Minimum:" << endl;
         cin >> rep;
-
+        cin.ignore(1000, '\n');
         to_print = p->searchReputation(rep);
         for (auto &i : to_print)
         {
@@ -2107,7 +2127,7 @@ int menu_search_provider()
                  << "-----------------------------------" << endl
                  << endl;
         }
-        return 0;
+        break;
     case '3':
         // Search All With Item in Equipment
         cout << "Please select the item you want to search:" << endl
@@ -2136,7 +2156,7 @@ int menu_search_provider()
                  << "-----------------------------------" << endl
                  << endl;
         }
-        return 0;
+        break;
     case '0':
         return 1;
     }

@@ -121,6 +121,7 @@ void ProviderPriorityQueue::removeProvider(Provider p) {
     for (int i = 0; i < auxiliar.size(); i++) {
         provider.push(auxiliar[i]);
     }
+
 }
 
 vector<Provider> ProviderPriorityQueue::searchName(std::string name) {
@@ -288,6 +289,9 @@ void ProviderPriorityQueue::print() const {
     priority_queue<Provider> aux = provider;
     while(!aux.empty()) {
         aux.top().showInfo();
+        cout << endl
+             << "-----------------------------------" << endl
+             << endl;
         aux.pop();
     }
 

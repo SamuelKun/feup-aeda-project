@@ -21,6 +21,7 @@ void waitInput(){
     std::string waiting;
     std::cout << "Press any key to continue: " << std::endl;
     getline(std::cin,waiting);
+
 }
 
 void checkPosition(std::string &position){
