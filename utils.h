@@ -12,6 +12,7 @@
 #include "Staff.h"
 #include "Player.h"
 #include "Statistics.h"
+#include "Provider.h"
 
 CoachTree read_coachs(std::string file) {
     CoachTree coachs;
@@ -38,6 +39,36 @@ CoachTree read_coachs(std::string file) {
         }
     }
     return coachs;
+}
+
+/// \brief Reads a provider from a .txt file.
+/// \param info .txt file containing a Set of Providers
+/// \return Vector of Providers belonging to a national team
+ProviderPriorityQueue read_providers(std::string info){
+    std::ifstream providers_info(info);
+    ProviderPriorityQueue providers;
+    std::vector<std::string> tempVec;
+    std::string str_temp;
+
+    while (getline(providers_info, str_temp)){
+        if (str_temp != "-----") tempVec.push_back(str_temp);
+        else{
+            Equipment equip;
+            equip.football_kit = stoi(tempVec[2]);
+            equip.balls = stoi(tempVec[3]);
+            equip.football_boots = stoi(tempVec[4]);
+            equip.cones = stoi(tempVec[5]);
+            equip.goal = stoi(tempVec[6]);
+            equip.tactics_board = stoi(tempVec[7]);
+            equip.medical_kit = stoi(tempVec[8]);
+            equip.water_bottles = stoi(tempVec[9]);
+            Provider *p = new Provider(tempVec[0], stod(tempVec[1]), equip);
+            providers.addProvider(*p);
+            tempVec.clear();
+        }
+    }
+
+    return providers;
 }
 
 

@@ -155,6 +155,10 @@ void ProviderPriorityQueue::removeProvider(Provider p) {
 
 }
 
+priority_queue<Provider> ProviderPriorityQueue::getProviders() {
+    return provider;
+}
+
 vector<Provider> ProviderPriorityQueue::searchName(std::string name) {
     vector<Provider> to_return;
     vector<Provider> auxiliar;

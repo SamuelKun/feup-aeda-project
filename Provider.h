@@ -95,6 +95,7 @@ class ProviderPriorityQueue {
 private:
 
     priority_queue<Provider> provider; ///< Provider.
+    Equipment equip;
 
 public:
 
@@ -108,6 +109,10 @@ public:
     /// \brief Function to remove a Provider.
     /// \param p Provider
     void removeProvider(Provider p);
+
+    /// \brief Function to get the providers
+    /// \return returns a priority queue with all the providers
+    priority_queue<Provider > getProviders();
 
     /// \brief Function to search a Provider by name.
     /// \param name Provider's name

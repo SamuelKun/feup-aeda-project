@@ -25,6 +25,7 @@ Team::Team(string file_name) {
     this->team_staff = read_staff(file_info[2]);
     this->team_competitions = read_competion(file_info[3], this);
     this->coachs = read_coachs(file_info[4]);
+    this->providers = read_providers(file_info[5]);
 
     for(auto s : team_staff){
         this->table.insert(*s);
@@ -38,6 +39,8 @@ void Team::updateFile(string file_name) {
     init << teamName + "players.txt" << endl;
     init << teamName + "staff.txt" << endl;
     init << teamName + "competition.txt" << endl;
+    init << teamName + "coaches.txt" << endl;
+    init << teamName + "providers.txt" << endl;
 
 
     ofstream p(teamName + "players.txt");
@@ -79,6 +82,26 @@ void Team::updateFile(string file_name) {
         c << team_competitions[i]->getMoneyAccommodation() << endl;
         c << team_competitions[i]->getPaid() << endl;
         c << "-----" << endl;
+    }
+    Equipment equip;
+    ProviderPriorityQueue *aux = getProviders();
+    priority_queue<Provider> aux2 = aux->getProviders();
+    ofstream pr(teamName + "providers.txt");
+    while (!aux2.empty()) {
+        Provider aux3 = aux2.top();
+        pr << aux3.getName() << endl;
+        pr << aux3.getReputation() << endl;
+        equip = aux3.getEquipment();
+        pr << equip.football_kit << endl;
+        pr << equip.balls << endl;
+        pr << equip.football_boots << endl;
+        pr << equip.cones << endl;
+        pr << equip.goal << endl;
+        pr << equip.tactics_board << endl;
+        pr << equip.medical_kit << endl;
+        pr << equip.water_bottles << endl;
+        pr << "-----" << endl;
+        aux2.pop();
     }
 }
 
