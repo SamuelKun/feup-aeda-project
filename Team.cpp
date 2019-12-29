@@ -83,25 +83,24 @@ void Team::updateFile(string file_name) {
         c << team_competitions[i]->getPaid() << endl;
         c << "-----" << endl;
     }
-    Equipment equip;
-    ProviderPriorityQueue *aux = getProviders();
-    priority_queue<Provider> aux2 = aux->getProviders();
+
+    Equipment equip4;
+    priority_queue<Provider> aux = providers.getProviders();
     ofstream pr(teamName + "providers.txt");
-    while (!aux2.empty()) {
-        Provider aux3 = aux2.top();
-        pr << aux3.getName() << endl;
-        pr << aux3.getReputation() << endl;
-        equip = aux3.getEquipment();
-        pr << equip.football_kit << endl;
-        pr << equip.balls << endl;
-        pr << equip.football_boots << endl;
-        pr << equip.cones << endl;
-        pr << equip.goal << endl;
-        pr << equip.tactics_board << endl;
-        pr << equip.medical_kit << endl;
-        pr << equip.water_bottles << endl;
+    while (!aux.empty()) {
+        pr << aux.top().getName() << endl;
+        pr << aux.top().getReputation() << endl;
+        equip4 = aux.top().getEquipment();
+        pr << equip4.football_kit << endl;
+        pr << equip4.balls << endl;
+        pr << equip4.football_boots << endl;
+        pr << equip4.cones << endl;
+        pr << equip4.goal << endl;
+        pr << equip4.tactics_board << endl;
+        pr << equip4.medical_kit << endl;
+        pr << equip4.water_bottles << endl;
         pr << "-----" << endl;
-        aux2.pop();
+        aux.pop();
     }
 }
 

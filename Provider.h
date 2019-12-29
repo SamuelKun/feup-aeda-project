@@ -75,12 +75,12 @@ public:
     /// \param nmedical_kit Numbers of Medical Kits of the Provider
     /// \param ntactics_board Number of Tactics Boards of the Provider
     /// \param nwater_bottles Number of Water Bottles of the Provider
-    void setEquipment(int nballs, int ncones, int nfootball_boots, int nfootball_kit, int ngoal, int nmedical_kit, int ntactics_board, int nwater_bottles);
+    void setEquipment(int nfootball_kit, int nballs, int nfootball_boots, int ncones, int ngoal, int ntactics_board, int nmedical_kit, int nwater_bottles);
 
     /// \brief Function to set the new value of an item of equipment of a Provider.
     /// \param item Item whose quantity is to be changed
     /// \param new_value New value of the item quantity
-    void setEquipment(int item, int new_value);
+    void setEquipment2(int item, int new_value);
 
     bool operator < (const Provider &p) const;
 
@@ -95,7 +95,6 @@ class ProviderPriorityQueue {
 private:
 
     priority_queue<Provider> provider; ///< Provider.
-    Equipment equip;
 
 public:
 

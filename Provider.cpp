@@ -5,15 +5,7 @@ using namespace std;
 
 // Provider Functions
 
-Provider::Provider(std::string name, double reputation, Equipment equipment): name(name), reputation(reputation) {
-    equipment.balls = 0;
-    equipment.cones = 0;
-    equipment.football_boots = 0;
-    equipment.football_kit = 0;
-    equipment.goal = 0;
-    equipment.medical_kit = 0;
-    equipment.tactics_board = 0;
-    equipment.water_bottles = 0;
+Provider::Provider(std::string name, double reputation, Equipment equipment): name(name), reputation(reputation), equipment(equipment) {
 }
 
 void Provider::showInfo() const {
@@ -80,7 +72,7 @@ Equipment Provider::getEquipment() const {
     return equipment;
 }
 
-void Provider::setEquipment(int nballs, int ncones, int nfootball_boots, int nfootball_kit, int ngoal, int nmedical_kit, int ntactics_board, int nwater_bottles) {
+void Provider::setEquipment(int nfootball_kit, int nballs, int nfootball_boots, int ncones, int ngoal, int ntactics_board, int nmedical_kit, int nwater_bottles) {
     this->equipment.balls = nballs;
     this->equipment.cones = ncones;
     this->equipment.football_boots = nfootball_boots;
@@ -91,7 +83,7 @@ void Provider::setEquipment(int nballs, int ncones, int nfootball_boots, int nfo
     this->equipment.water_bottles = nwater_bottles;
 }
 
-void Provider::setEquipment(int item, int new_value) {
+void Provider::setEquipment2(int item, int new_value) {
     switch (item) {
         case 1:
             this->equipment.football_kit = new_value;
@@ -292,7 +284,7 @@ void ProviderPriorityQueue::updateEquipmentItem(Provider p, int item, int new_va
     Provider aux;
     while(!provider.empty()) {
         aux = provider.top();
-        if (aux == p) { aux.setEquipment(item, new_value); }
+        if (aux == p) { aux.setEquipment2(item, new_value); }
         auxiliar.push_back(aux);
         provider.pop();
     }
@@ -309,7 +301,7 @@ void ProviderPriorityQueue::updateEquipmentAll(Provider p, Equipment new_equip) 
 
     while(!provider.empty()) {
         aux = provider.top();
-        if (aux == p) { aux.setEquipment(new_equip.balls, new_equip.cones, new_equip.football_boots, new_equip.football_kit, new_equip.goal, new_equip.medical_kit, new_equip.tactics_board, new_equip.water_bottles); }
+        if (aux == p) { aux.setEquipment(new_equip.football_kit, new_equip.balls, new_equip.football_boots, new_equip.cones, new_equip.goal, new_equip.tactics_board, new_equip.medical_kit, new_equip.water_bottles); }
         auxiliar.push_back(aux);
         provider.pop();
     }

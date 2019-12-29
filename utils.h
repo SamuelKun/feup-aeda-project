@@ -53,16 +53,16 @@ ProviderPriorityQueue read_providers(std::string info){
     while (getline(providers_info, str_temp)){
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
-            Equipment equip;
-            equip.football_kit = stoi(tempVec[2]);
-            equip.balls = stoi(tempVec[3]);
-            equip.football_boots = stoi(tempVec[4]);
-            equip.cones = stoi(tempVec[5]);
-            equip.goal = stoi(tempVec[6]);
-            equip.tactics_board = stoi(tempVec[7]);
-            equip.medical_kit = stoi(tempVec[8]);
-            equip.water_bottles = stoi(tempVec[9]);
-            Provider *p = new Provider(tempVec[0], stod(tempVec[1]), equip);
+            Equipment equip3;
+            equip3.football_kit = stoi(tempVec[2]);
+            equip3.balls = stoi(tempVec[3]);
+            equip3.football_boots = stoi(tempVec[4]);
+            equip3.cones = stoi(tempVec[5]);
+            equip3.goal = stoi(tempVec[6]);
+            equip3.tactics_board = stoi(tempVec[7]);
+            equip3.medical_kit = stoi(tempVec[8]);
+            equip3.water_bottles = stoi(tempVec[9]);
+            Provider *p = new Provider(tempVec[0], stod(tempVec[1]), equip3);
             providers.addProvider(*p);
             tempVec.clear();
         }
