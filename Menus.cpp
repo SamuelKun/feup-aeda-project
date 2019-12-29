@@ -1924,7 +1924,7 @@ int menu_remove_provider()
 
             to_print = p->searchName(name_provider);
             for (size_t i = 0; i < to_print.size(); i++)  {
-                cout << "Index " << i << endl;
+                cout << "Index: " << i << endl;
                 to_print[i].showInfo();
                 cout << "-----------------------------------" << endl
                      << endl;
@@ -1939,7 +1939,7 @@ int menu_remove_provider()
                 to_print = p->searchReputation(rep);
                 for (size_t i = 0; i < to_print.size(); i++)
                 {
-                    cout << "Index " << i << endl;
+                    cout << "Index: " << i << endl;
                     to_print[i].showInfo();
                     cout << "-----------------------------------" << endl
                          << endl;
@@ -1983,7 +1983,7 @@ int menu_update_provider()
     to_print = p->searchName(name_provider);
     for (size_t i = 0; i < to_print.size(); i++)
     {
-        cout << "Index " << i << endl;
+        cout << "Index: " << i << endl;
         to_print[i].showInfo();
         cout << "-----------------------------------" << endl
              << endl;
@@ -2166,8 +2166,145 @@ int menu_search_provider()
 }
 
 int menu_buy_provider() {
-    // Still to do
-    return 1;
+
+    ProviderPriorityQueue *p = national_team->getProviders();
+
+    /* Show the results of the search */
+    vector<Provider> to_print;
+
+    int menu = -1;
+    int num;
+    int num_item;
+
+    cout << "========================================= " << endl;
+    cout << "           Equipment Buy Menu             " << endl;
+    cout << "========================================= \n"
+         << endl;
+    cout << "Please select which item do you want to buy." << endl << endl;
+    cout << "1. Football Kit" << endl;
+    cout << "2. Balls" << endl;
+    cout << "3. Football Boots" << endl;
+    cout << "4. Cones" << endl;
+    cout << "5. Goal" << endl;
+    cout << "6. Tactics Board" << endl;
+    cout << "7. Medical Kit" << endl;
+    cout << "8. Water Bottles" << endl;
+    cout << "0. Return to Main Menu " << endl
+         << endl;
+
+    while (menu != 1 && menu != 2 && menu != 3 && menu != 4 && menu != 5 && menu != 6 && menu != 7 && menu != 8 && menu != 0)
+        {
+            cin.clear();
+            cin >> menu;
+            cin.ignore(1000, '\n');
+        }
+    
+    if (menu == 0) {return 1;}
+    int idx = 0;
+    to_print = p->searchEquipment(menu);
+    for (auto &i : to_print)
+        {
+            cout << "Index: " << idx << endl;
+            idx++;
+            i.showItem(menu);
+            cout << endl
+                 << "-----------------------------------" << endl
+                 << endl;
+        }
+
+    if (!to_print.empty()) {
+        cout << "Choose index: " << endl;
+        cin >> num;
+        if (num < to_print.size()) {
+            to_print[num].showItem(menu);
+            cout << endl
+                 << "-----------------------------------" << endl
+                 << endl;
+            cout << "How many items do you want to buy?" << endl;
+            cin >> num_item;
+            int units = 0;
+            switch (menu)
+            {
+            case 1:
+                units = to_print[num].getEquipment().football_kit;
+                if (num_item <= units) {
+                    p->updateEquipmentItem(to_print[num], menu, units-num_item);
+                    cout << "The item Football Kit was bought successfully. Number of units selled: " << num_item << endl;
+                } else {
+                    cout << "The Provider doesn't have enough items of type Football Kit." << endl;
+                }
+                break;
+            case 2:
+                units = to_print[num].getEquipment().balls;
+                if (num_item <= units) {
+                    p->updateEquipmentItem(to_print[num], menu, units-num_item);
+                    cout << "The item Balls was bought successfully. Number of units selled: " << num_item << endl;
+                } else {
+                    cout << "The Provider doesn't have enough items of type Balls." << endl;
+                }
+                break;
+            case 3:
+                units = to_print[num].getEquipment().football_boots;
+                if (num_item <= units) {
+                    p->updateEquipmentItem(to_print[num], menu, units-num_item);
+                    cout << "The item Football Boots was bought successfully. Number of units selled: " << num_item << endl;
+                } else {
+                    cout << "The Provider doesn't have enough items of type Football Boots." << endl;
+                }
+                break;
+            case 4:
+                units = to_print[num].getEquipment().cones;
+                if (num_item <= units) {
+                    p->updateEquipmentItem(to_print[num], menu, units-num_item);
+                    cout << "The item Cones was bought successfully. Number of units selled: " << num_item << endl;
+                } else {
+                    cout << "The Provider doesn't have enough items of type Cones." << endl;
+                }
+                break;
+            case 5:
+                units = to_print[num].getEquipment().goal;
+                if (num_item <= units) {
+                    p->updateEquipmentItem(to_print[num], menu, units-num_item);
+                    cout << "The item Goal was bought successfully. Number of units selled: " << num_item << endl;
+                } else {
+                    cout << "The Provider doesn't have enough items of type Goal." << endl;
+                }
+                break;
+            case 6:
+                units = to_print[num].getEquipment().tactics_board;
+                if (num_item <= units) {
+                    p->updateEquipmentItem(to_print[num], menu, units-num_item);
+                    cout << "The item Tactics Board was bought successfully. Number of units selled: " << num_item << endl;
+                } else {
+                    cout << "The Provider doesn't have enough items of type Tactics Board." << endl;
+                }
+                break;
+            case 7:
+                units = to_print[num].getEquipment().medical_kit;
+                if (num_item <= units) {
+                    p->updateEquipmentItem(to_print[num], menu, units-num_item);
+                    cout << "The item Medical Kit was bought successfully. Number of units selled: " << num_item << endl;
+                } else {
+                    cout << "The Provider doesn't have enough items of type Medical Kit." << endl;
+                }
+                break;
+            case 8:
+                units = to_print[num].getEquipment().water_bottles;
+                if (num_item <= units) {
+                    p->updateEquipmentItem(to_print[num], menu, units-num_item);
+                    cout << "The item Water Bottles was bought successfully. Number of units selled: " << num_item << endl;
+                } else {
+                    cout << "The Provider doesn't have enough items of type Water Bottles." << endl;
+                }
+                break;
+            }
+        } else {
+            cout << "Index invalid" << endl;
+        }
+    } else {
+        cout << "There's no Provider with that item." << endl;
+    }
+    return 0;
 }
 
 int menu_provider()

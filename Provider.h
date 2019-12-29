@@ -42,6 +42,10 @@ public:
     /// \brief Function to show the information of a Provider.
     void showInfo() const;
 
+    /// \brief Function to show the Name, Reputation and Item of a Provider.
+    /// \param item Item to show
+    void showItem(int item) const;
+
     /// \brief Function to get the name of a Provider.
     /// \return shows the name of a Provider
     string getName() const;

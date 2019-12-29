@@ -29,6 +29,37 @@ void Provider::showInfo() const {
     std::cout << "Water Bottles: " << equipment.water_bottles << std::endl;
 }
 
+void Provider::showItem(int item) const {
+    std::cout << "Name: " << name << std::endl;
+    std::cout << "Reputation: " << reputation << std::endl;
+    switch (item) {
+        case 1:
+            std::cout << "Football Kit: " << equipment.football_kit << std::endl;
+            break;
+        case 2:
+            std::cout << "Balls: " << equipment.balls << std::endl;
+            break;
+        case 3:
+            std::cout << "Football Boots: " << equipment.football_boots << std::endl;
+            break;
+        case 4:
+            std::cout << "Cones: " << equipment.cones << std::endl;
+            break;
+        case 5:
+            std::cout << "Goal: " << equipment.goal << std::endl;
+            break;
+        case 6:
+            std::cout << "Tactics Board: " << equipment.tactics_board << std::endl;
+        case 7:
+            std::cout << "Medical Kit: " << equipment.medical_kit << std::endl;
+            break;
+        case 8:
+            std::cout << "Water Bottles: " << equipment.water_bottles << std::endl;
+            break;
+    }  
+    
+}
+
 string Provider::getName() const {
     return name;
 }
