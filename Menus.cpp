@@ -1891,7 +1891,7 @@ int menuDispersionTable(){
 int menu_remove_provider()
 {
     string name_provider;
-    double rep;
+    double rep = 5.1;
     int n;
     ProviderPriorityQueue *p = national_team->getProviders();
     vector<Provider> to_print;
@@ -1932,8 +1932,10 @@ int menu_remove_provider()
 
         break;
     case '2':
-        cout << "Provider's Reputation:" << endl;
-        cin >> rep;
+        while (rep < 0.0 || rep > 5.0) {
+            cout << "Provider's Reputation: (Please write a number between 0.0 and 5.0)" << endl;
+            cin >> rep;
+        }
             cin.ignore(1000, '\n');
 
                 to_print = p->searchReputation(rep);
@@ -1972,7 +1974,7 @@ int menu_update_provider()
 {
     string name_provider;
     int num;
-    double rep;
+    double rep = 5.1;
     Equipment equip2;
     Provider p1;
     ProviderPriorityQueue *p = national_team->getProviders();
@@ -2003,8 +2005,10 @@ int menu_update_provider()
         to_print[num].setName(name_provider);
         //p->updateName(to_print[num], name_provider);
 
-        cout << "Reputation:" << endl;
-        cin >> rep;
+        while (rep < 0.0 || rep > 5.0) {
+            cout << "Reputation: (Please write a number between 0.0 and 5.0)" << endl;
+            cin >> rep;
+        }
         to_print[num].setReputation(rep);
         //p->updateReputation(to_print[num], rep);
 
@@ -2041,7 +2045,7 @@ int menu_update_provider()
 int menu_add_provider()
 {
     string name_provider;
-    double rep;
+    double rep = 5.1;
     Provider p1;
     ProviderPriorityQueue *p = national_team->getProviders();
 
@@ -2049,8 +2053,10 @@ int menu_add_provider()
     getline(cin, name_provider);
     p1.setName(name_provider);
 
-    cout << "Provider reputation:" << endl;
-    cin >> rep;
+    while (rep < 0.0 || rep > 5.0) {
+        cout << "Provider reputation: (Please write a number between 0.0 and 5.0)" << endl;
+        cin >> rep;
+    }
     p1.setReputation(rep);
 
     int nballs, ncones, nfootball_boots, nfootball_kit, ngoal, nmedical_kit, ntactics_board, nwater_bottles;
@@ -2101,7 +2107,7 @@ int menu_search_provider()
         cin.ignore(1000, '\n');
     }
     string name_provider;
-    double rep;
+    double rep = 5.1;
     int equip = 0;
     ProviderPriorityQueue *p = national_team->getProviders();
 
@@ -2125,9 +2131,11 @@ int menu_search_provider()
         break;
     case '2':
         // Search By Reputation
-        cout << "Provider's Reputation Minimum:" << endl;
-        cin >> rep;
-        cin.ignore(1000, '\n');
+        while (rep < 0.0 || rep > 5.0) {
+            cout << "Provider's Reputation Minimum: (Please write a number between 0.0 and 5.0)" << endl;
+            cin >> rep;
+            cin.ignore(1000, '\n');
+        }
         to_print = p->searchReputation(rep);
         for (auto &i : to_print)
         {
@@ -2182,7 +2190,7 @@ int menu_buy_provider() {
     vector<Provider> to_print;
 
     int menu = -1;
-    int num_item;
+    int num_item = -1;
     int ver = 0;
 
     cout << "========================================= " << endl;
@@ -2216,8 +2224,10 @@ int menu_buy_provider() {
             cout << endl
                  << "-----------------------------------" << endl
                  << endl;
-            cout << "How many items do you want to buy?" << endl;
+            while (num_item <= 0) {
+            cout << "How many items do you want to buy? (Please write a number equal or higher than 1)" << endl;
             cin >> num_item;
+            }
             int units = 0;
             switch (menu)
             {
@@ -2307,16 +2317,18 @@ int menu_buy_provider() {
     }
 
     char answer;
-    double new_rep = 0.0;
+    double new_rep = 5.1;
     if (ver == 1) {
         cout << "Would you like to set a new Reputation of Provider " << to_print[0].getName() << "? [y/N]" << endl;
         cin >> answer;
         cin.ignore(1000, '\n');
         switch (answer) {
             case 'y':
-                cout << "Please indicate a number between 0.0 and 5.0." << endl;
+                while (new_rep < 0.0 || new_rep > 5.0) {
+                cout << "(Please write a number between 0.0 and 5.0)" << endl;
                 cin >> new_rep;
                 cin.ignore(1000, '\n');
+                }
                 p->updateReputation(to_print[0], new_rep);
                 cout << "Thanks for your feedback!" << endl;
                 break;
