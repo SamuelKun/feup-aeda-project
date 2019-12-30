@@ -52,6 +52,10 @@ bool Coach::getCurrentCoach() const {
     return currentCoach;
 }
 
+void Coach::setCurrentCoach(bool c) {
+    this->currentCoach = c;
+}
+
 void CoachTree::imprime() const {
     int index = 0;
     BSTItrIn<Coach> it(tree);

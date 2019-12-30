@@ -1565,23 +1565,33 @@ int menu_select_coach(){
 
     int num;
     CoachTree *c = national_team->getCoachs();
+    Coach current;
     switch(menu) {
         case '1':
-            c->searchCurrentCoach().show();
+            current = c->searchCurrentCoach();
+            current.show();
             waitInput();
             return 0;
         case '2':
             c->imprime();
             cin >> num;
             //Destituir o treinador atual, se existir!
+            c->removeCoach(current);
+            current.setCurrentCoach(false);
             //Selecione um treinador para ser o da equipa!
+
+            //atualizar informação na árvore
+            c->addCoach(current);
             waitInput();
             return 0;
         case '3':
-            c->imprime();
-            cin >> num;
             //Destituir o treinador atual, se existir!
+            c->removeCoach(current);
+            current.setCurrentCoach(false);
+            //atualizar informação na árvore
+            c->addCoach(current);
             //throw execption otherwise!
+            cout << "Treinador destituido com sucesso!" << endl;
             waitInput();
             return 0;
         case '0':

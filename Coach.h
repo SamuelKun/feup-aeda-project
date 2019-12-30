@@ -19,6 +19,7 @@ public:
     Coach(std::string name, Date birth, bool current, double titles);
     void show() const;
     void addTrainedTeam(string name, Date start, Date end);
+    void setCurrentCoach(bool c);
     double getTitles() const;
     bool getCurrentCoach() const;
     void setTitles(double n);
