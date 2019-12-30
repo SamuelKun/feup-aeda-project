@@ -1460,7 +1460,6 @@ int menu_add_coach() {
     string name_coach, name_team;
     int num;
     Coach a;
-
     Date start, end;
 
     cout << "Coach name:" << endl;
@@ -1649,38 +1648,67 @@ int menu_select_coach(){
     vector<Coach> to_print;
     switch(menu) {
         case '1':
-            current = c->searchCurrentCoach();
-            current.show();
-            waitInput();
+            try {
+                current = c->searchCurrentCoach();
+                current.show();
+                waitInput();
+            }
+            catch(NoCoach &er) {
+                er.show();
+            }
             return 0;
         case '2':
             //Destituir o treinador atual, se existir!
-            current = c->searchCurrentCoach();
-            c->removeCoach(current);
-            current.setCurrentCoach(false);
+            try {
+                current = c->searchCurrentCoach();
+                c->removeCoach(current);
+                current.setCurrentCoach(false);
+                c->addCoach(current);
+                cout << "Treinador destituido! Escolha agora um novo para a equipa: " << endl;
+            }
+            catch(NoCoach &er) {
+                cout << "Escolha um treinador para a equipa da seguinte tabela: " << endl;
+            }
 
-            //Selecione um treinador para ser o da equipa!
-            cout << "Coach name:" << endl;
-            getline(cin, name_coach);
-            to_print = c->searchName(name_coach);
-            to_print[0].show();
-            to_print[0].setCurrentCoach(true);
-            to_print[0].addTrainedTeam("Portugal", Date(30,12,2019), Date(31,12,2019));
-            //atualizar informação na árvore
-            c->removeCoach(to_print[0]);
-            c->addCoach(to_print[0]);
-            waitInput();
+            try {
+                cout << "<Temp> Coach name:" << endl;
+                getline(cin, name_coach);
+                to_print = c->searchName(name_coach);
+                for (size_t i = 0; i < to_print.size(); i++) {
+                    cout << "Index " << i << endl;
+                    to_print[i].show();
+                    cout << "-----------------------------------" << endl << endl;
+                }
+                cout << "Choose index: " << endl;
+                cin >> num;
+
+                //Ver isto melhor depois
+                to_print[num].setCurrentCoach(true);
+                to_print[num].addTrainedTeam("Portugal", Date(30,12,2019), Date(31,12,2019));
+
+                c->removeCoach(to_print[num]);
+                c->addCoach(to_print[num]);
+
+                waitInput();
+            }
+            catch (PersonNotFound &er) {
+                cout << "Coach " << er.getName() << " not found" << endl;
+            }
             return 0;
         case '3':
-            //Destituir o treinador atual, se existir!
-            current = c->searchCurrentCoach();
-            c->removeCoach(current);
-            current.setCurrentCoach(false);
-            //atualizar informação na árvore
-            c->addCoach(current);
-            //throw execption otherwise!
-            cout << "Treinador destituido com sucesso!" << endl;
-            waitInput();
+            try {
+                //Destituir o treinador atual, se existir!
+                current = c->searchCurrentCoach();
+                c->removeCoach(current);
+                current.setCurrentCoach(false);
+                //atualizar informação na árvore
+                c->addCoach(current);
+                cout << "Treinador destituido com sucesso!" << endl;
+                waitInput();
+            }
+            catch(NoCoach &er) {
+                er.show();
+            }
             return 0;
         case '0':
             return 1;
@@ -1696,12 +1724,12 @@ int menu_coach() {
     cout << "               Coach Menu                 " << endl;
     cout << "========================================= \n" << endl;
 
-    cout << "1. View all Coach                      // Working 100% - Test Please " << endl;
-    cout << "2. Search Coach                        // Working 100% - Test Please" << endl;
-    cout << "3. Add Coach                           // Working 100% - Test Please " << endl;
-    cout << "4. Update Coach                        // Update às equipas de treinou - Search Dos Coaches" << endl;
-    cout << "5. Remove Coach                        // Working 100% - Test Please - Borra com idx inválido!" << endl;
-    cout << "6. New Coach to train National Team    // tldr.: Convocar treinador para treinar a seleção ou destituir o atual" << endl;
+    cout << "1. View all Coach                      " << endl;
+    cout << "2. Search Coach                        " << endl;
+    cout << "3. Add Coach                           " << endl;
+    cout << "4. Update Coach                        " << endl;
+    cout << "5. Remove Coach                        " << endl;
+    cout << "6. New Coach to train National Team    " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();

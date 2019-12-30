@@ -125,6 +125,6 @@ Coach CoachTree::searchCurrentCoach() {
         }
         it.advance();
     }
-    return Coach(); //throw an exception;
+    throw NoCoach();
 }
 

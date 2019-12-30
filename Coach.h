@@ -32,13 +32,20 @@ class InvalidNumberTitles {
 private:
     double numTitles;
 public:
-
     InvalidNumberTitles (double num): numTitles(num) {}
-
-    double getNumTitles() const{
+    double getNumTitles() const {
         return numTitles;
     }
 };
+
+class NoCoach {
+public:
+    NoCoach() {}
+    void show() const {
+        cout << "This team dont have a main coach! " << endl;
+    }
+};
+
 
 class CoachTree
 {
