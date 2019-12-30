@@ -22,6 +22,7 @@ public:
     void setCurrentCoach(bool c);
     double getTitles() const;
     bool getCurrentCoach() const;
+    vector<std::tuple<string, Date, Date>> getTrainedTeams() const;
     void setTitles(double n);
     bool operator < (const Coach &c1) const;
     bool operator == (const Coach &c1) const;
@@ -54,7 +55,7 @@ private:
 public:
     CoachTree(): tree(Coach("", Date(), false,-1)) {}; //Ver isto melhor depois
     void addCoach(Coach &c);
-
+    BST<Coach> getTree();
     vector<Coach> searchName(std::string name);
     vector<Coach> searchTitle(double num);
     Coach searchCurrentCoach();

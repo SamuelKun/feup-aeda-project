@@ -128,3 +128,12 @@ Coach CoachTree::searchCurrentCoach() {
     throw NoCoach();
 }
 
+BST<Coach> CoachTree::getTree() {
+    return tree;
+}
+
+
+vector<std::tuple<string, Date, Date>> Coach::getTrainedTeams() const {
+    return trainedTeams;
+}
+

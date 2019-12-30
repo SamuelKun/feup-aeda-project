@@ -21,7 +21,6 @@ struct Equipment {
 
 /// \brief Class for a Provider.
 class Provider {
-
 private:
 
     string name; ///< Name.

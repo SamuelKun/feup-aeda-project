@@ -84,6 +84,24 @@ void Team::updateFile(string file_name) {
         c << "-----" << endl;
     }
 
+    ofstream coach_w(teamName + "coaches.txt");
+    BST<Coach> coach_tree = coachs.getTree();
+    BSTItrIn<Coach> it(coach_tree);
+    while (!it.isAtEnd()) {
+        coach_w << it.retrieve().getName() << endl;
+        coach_w << it.retrieve().getBirthday() << endl;
+        coach_w << it.retrieve().getCurrentCoach() << endl;
+        coach_w << it.retrieve().getTitles() << endl;
+        vector<std::tuple<string, Date, Date>> tr = it.retrieve().getTrainedTeams();
+        for(auto &i : tr) {
+            coach_w << get<0>(i) << "!" <<get<1>(i) << "!" <<get<2>(i) <<endl;
+        }
+        coach_w << "-----" << endl;
+        it.advance();
+    }
+
+
+
     Equipment equip4;
     priority_queue<Provider> aux = providers.getProviders();
     ofstream pr(teamName + "providers.txt");
