@@ -41,6 +41,10 @@ public:
     friend std::ostream &operator<<(std::ostream &out, const Staff &s);
     bool operator == (const Staff &s2);
     bool operator < (const Staff &s2);
+
+    bool isWorking1() const;
+
+    void setIsWorking(bool isWorking);
 };
 
 /// \brief Class for throwing exception when no Staff Member with such function was found.

@@ -28,6 +28,7 @@ Team::Team(string file_name) {
     this->providers = read_providers(file_info[5]);
 
     for(auto s : team_staff){
+        s->setIsWorking(true);
         this->table.insert(*s);
     }
 }
@@ -185,13 +186,19 @@ void Team::showPlayersTable() const {
     }
 }
 
-void Team::showStaffTable() const {
+vector<int> Team::showStaffTable() const {
     cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
     cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
-    for(int i = 0; i < team_staff.size(); i++){
-        team_staff[i]->infoTable();
-        cout << setw(6) <<  i << " |" << endl;
+    auto it = table.begin();
+    vector<int> vec;
+    for(int i = 0; it != table.end();i++, it++){
+        if(it->isWorking1()){
+            it->infoTable();
+            cout << setw(6) <<  i << " |" << endl;
+            vec.push_back(i);
+        }
     }
+    return vec;
 }
 
 void Team::sortPlayersName() {
@@ -375,13 +382,19 @@ void Team::addTable(Staff *s) {
     team_staff.push_back(s);
 }
 
-void Team::removeTable(Staff *s) {
-    auto it = find(team_staff.begin(),team_staff.end(),s);
-    if(it != team_staff.end()){
-       team_staff_antigos.push_back(*it);
-       team_staff.erase(it);
+void Team::deleteTable(Staff s) {
+    auto it = table.find(s);
+    if( it != table.end()) table.erase(it);
+    else throw PersonNotFound(s.getName());
+}
+void Team::removeTable(Staff s) {
+    auto it = table.find(s);
+    if( it != table.end()){
+        table.erase(it);
+        s.setIsWorking(false);
+        table.insert(s);
     }
-    else throw PersonNotFound(s->getName());
+    else throw PersonNotFound(s.getName());
 }
 
 void Team::dispTable() {
@@ -395,14 +408,21 @@ void Team::dispTable() {
     }
 }
 
-void Team::dispRemoved() {
+int Team::dispRemoved() {
     cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
     cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
-    for(int i = 0; i < team_staff_antigos.size(); i++){
-        team_staff_antigos[i]->infoTable();
-        cout << setw(6) <<  i << " |" << endl;
+    auto it = table.begin();
+    int i = 0;
+    for(; it != table.end();i++, it++){
+        if(!it->isWorking1()){
+            it->infoTable();
+            cout << setw(6) <<  i << " |" << endl;
+        }
     }
+    return i;
 }
+
+
 
 
 

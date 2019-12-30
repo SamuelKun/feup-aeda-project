@@ -6,7 +6,8 @@ using namespace std;
 
 
 Staff::Staff(string name, Date birth, double salary, string function) : Person(name,birth),
-                                                                       salary(salary), function(function){}
+                                                                       salary(salary), function(function),
+                                                                       isWorking(true){}
 double Staff::getSalary() const {
     return salary;
 }
@@ -49,4 +50,12 @@ bool Staff::operator==(const Staff &s2) {
 
 bool Staff::operator<(const Staff &s2) {
     return Person::getName() < s2.getName();
+}
+
+bool Staff::isWorking1() const {
+    return isWorking;
+}
+
+void Staff::setIsWorking(bool isWorking) {
+    Staff::isWorking = isWorking;
 }

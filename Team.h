@@ -39,7 +39,7 @@ private:
     CoachTree coachs; ///< Binary Search Tree with all coaches
     std::vector<Player *> team_players; ///< Vector with Team's players
     std::vector<Staff *> team_staff; ///< Vector with Team's staff
-    std::vector<Staff *> team_staff_antigos;
+    std::vector<Staff *> team_staff_antigos; //Remover quando estiver pronto
     std::vector<Competition *> team_competitions; ///< Vector with Team's competitions
     tabH table; ///< Dispersion table
     ProviderPriorityQueue providers; ///< Priority Queue with Providers
@@ -123,7 +123,7 @@ public:
     void showPlayersTable() const;
 
     /// \brief Shows Team's Players' info.
-    void showStaffTable() const;
+    std::vector<int> showStaffTable() const;
 
     /// \brief Sorts team_players by name.
     void sortPlayersName();
@@ -175,9 +175,10 @@ public:
 
     std::vector<Staff> dispFindStaff(string name);
     void addTable(Staff *s);
-    void removeTable(Staff *s);
+    void deleteTable(Staff s);
+    void removeTable(Staff s);
     void dispTable();
-    void dispRemoved();
+    int dispRemoved();
 
     const vector<Staff *> & getTeamStaff() const;
 

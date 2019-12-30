@@ -1774,21 +1774,23 @@ int menu_remove_dispersion() {
 
     unsigned int index;
     vector<Staff*> v_staff;
-    national_team->showStaffTable();
+    vector<int> vec = national_team->showStaffTable();
 
     cout << "Write the index of the Staff Member you wish to remove " << endl;
     cout << "Press [a] or other letter to exit." << endl;
 
     while(cin >> index && !cin.eof()){
-        v_staff = national_team->getStaff();
-        if (index >= v_staff.size()) {
+        if (index >= national_team->getTable().size() || find(vec.begin(),vec.end(),index) == vec.end()) {
             cout << "Invalid index" << endl;
             continue;
         }
         else {
-            string name = v_staff[index]->getName();
-            national_team->removeTable(v_staff[index]);
-            national_team->showStaffTable();
+            auto it = national_team->getTable().begin();
+            for(int i = 0; i < index ;i++, it++){}
+            string name = it->getName();
+            auto temp = new Staff(it->getName(),it->getBirthday(),it->getSalary(),it->getFunction());
+            national_team->removeTable(*temp);
+            vec = national_team->showStaffTable();
             cout << name << " was successfully removed!!" << endl;
             cout << "Press [a] or other letter to exit." << endl;
         }
@@ -1803,26 +1805,24 @@ int menu_update_dispersion(){
     try{
         unsigned int index;
         national_team->dispTable();
-        vector<Staff*> v_staff = national_team->getTeamStaff();
-        vector<Staff*> v_old = national_team->getTeamStaffAntigos();
-
         tabH table = national_team->getTable();
-        v_staff.insert(v_staff.end(),v_old.begin(),v_old.end());
 
         cout << "Write the index of the Staff Member you wish to update." << endl;
         cout << "Press [a] or other letter to exit." << endl;
 
         while (cin >> index && !cin.eof()) {
-            v_staff = national_team->getTeamStaff();
-            v_staff.insert(v_staff.end(),v_old.begin(),v_old.end());
-            if (index >= v_staff.size()) {
+
+            if (index >= national_team->getTable().size()) {
                 cout << "Invalid index" << endl;
                 continue;
             } else {
-                Staff* staff = v_staff[index]; //vai ser alterada
-                Staff staff2 = *v_staff[index];//vai ser usada para eliminar da tabela
 
-                string name = staff->getName();
+                auto it = national_team->getTable().begin();
+                for(int i = 0; i < index ;i++, it++){}
+                string name = it->getName();
+                auto staff = new Staff(name,it->getBirthday(),it->getSalary(),it->getFunction());
+                national_team->deleteTable(*staff);
+
                 string new_name;
                 string function;
                 Date birthday;
@@ -1842,8 +1842,8 @@ int menu_update_dispersion(){
                         cin.ignore(1000, '\n');
                         cout << name << "'s new Name: " << endl;
                         getline(cin, new_name);
-                        for (auto it = v_staff.begin(); it != v_staff.end(); it++) {
-                            if ((*it)->getName() == new_name) throw PersonAlreadyExists(new_name);
+                        for (auto it = table.begin(); it != table.end(); it++) {
+                            if (it->getName() == new_name) throw PersonAlreadyExists(new_name);
                         }
                         staff->setName(new_name);
                         break;
@@ -1867,14 +1867,9 @@ int menu_update_dispersion(){
                         cout << "Invalid index" << endl;
                         break;
                 }
-                table = national_team->getTable();
-                auto it = table.find(staff2);
-                table.erase(it);
-                table.insert(*staff);
 
+                national_team->addTable(staff);
 
-                v_staff = national_team->getTeamStaff();
-                v_staff.insert(v_staff.end(),v_old.begin(),v_old.end());;
                 national_team->dispTable();
                 cout << "Write the index of another Player you wish to update." << endl;
                 cout << "Press [a] or other letter to exit." << endl;
