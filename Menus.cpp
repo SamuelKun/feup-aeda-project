@@ -1387,9 +1387,7 @@ int menu_info()
 }
 
 int menu_credits() {
-
     //cout << string(50, '\n');  //Clear Screen that works on linux(more portable)
-
     cout << "This app was created by:" << endl << endl;
     cout << "Diogo Samuel Fernandes" << endl;
     cout << "Hugo Guimaraes" << endl;
@@ -1419,25 +1417,35 @@ int menu_search_coach(){
     CoachTree *c = national_team->getCoachs();
     switch(menu) {
         case '1':
-            cout << "Coach name:" << endl;
-            getline(cin, name_coach);
-            to_print = c->searchName(name_coach);
-            for (auto & i : to_print) {
-                i.show();
-                cout << "-----------------------------------" << endl;
+            try {
+                cout << "Coach name:" << endl;
+                getline(cin, name_coach);
+                to_print = c->searchName(name_coach);
+                for (auto &i : to_print) {
+                    i.show();
+                    cout << "-----------------------------------" << endl;
+                }
+                waitInput();
             }
-            waitInput();
+            catch (PersonNotFound &er) {
+                cout << "Coach " << er.getName() << " not found" << endl;
+            }
             return 0;
         case '2':
-            cout << "Coach number of Titles:" << endl;
-            cin >> num;
-            to_print = c->searchTitle(num);
-            for (auto & i : to_print) {
-                i.show();
-                cout << endl << "-----------------------------------" << endl;
+            try {
+                cout << "Coach number of Titles:" << endl;
+                cin >> num;
+                to_print = c->searchTitle(num);
+                for (auto &i : to_print) {
+                    i.show();
+                    cout << endl << "-----------------------------------" << endl;
+                }
+                cin.ignore(1000, '\n');
+                waitInput();
             }
-            cin.ignore(1000,'\n');
-            waitInput();
+            catch (InvalidNumberTitles &er) {
+                cout << "There has no coaches with " << er.getNumTitles() << " titles" << endl;
+            }
             return 0;
         case '0':
             return 1;
@@ -1448,16 +1456,43 @@ int menu_search_coach(){
 
 int menu_add_coach() {
     CoachTree *c = national_team->getCoachs();
-    string name_coach;
+    char confirmation;
+    string name_coach, name_team;
     int num;
     Coach a;
+
+    Date start, end;
 
     cout << "Coach name:" << endl;
     getline(cin, name_coach);
     a.setName(name_coach);
+
     cout << "Titles:" << endl;
     cin >> num;
+    cin.ignore(1000, '\n');
     a.setTitles(num);
+
+    cout << "This trainer already trainned a team? [y/n]" << endl;
+    cin >> confirmation;
+    cin.ignore(1000, '\n');
+    while (confirmation == 'y') {
+        cout << "Write team name: " << endl;
+        cin >> name_team;
+
+        //Loop
+        cout << "Write beginning date: " << endl;
+        cin >> start;
+        cout << "Write ending date: " << endl;
+        cin >> end;
+        while (start.isAfter(end)){
+            cout << "Date of end is before of date of start! ";
+            cin >> end;
+        }
+        a.addTrainedTeam(name_team, start, end);
+        cout << "Add another trainned team? [y/n] " << endl;
+        cin >> confirmation;
+    }
+
     c->addCoach(a);
     cin.ignore(1000,'\n');
     waitInput();
@@ -1465,87 +1500,131 @@ int menu_add_coach() {
 }
 
 int menu_update_coach() {
+    char menu;
+    cout << "========================================= " << endl;
+    cout << "           Search Coaches Menu             " << endl;
+    cout << "========================================= \n" << endl;
+
+    cout << "Choose the field you want to change: " << endl;
+    cout << "1. Change coach name" << endl;
+    cout << "2. Change coach birthday" << endl;
+    cout << "3. Change number of titles" << endl;
+    cout << "4. Change teams trained" << endl;
+    cout << "0. Return to main menu" << endl;
+
     string name_coach;
     int num, n;
-    Coach a;
+
     CoachTree *c = national_team->getCoachs();
-    vector<Coach> to_print;
-
-    cout << "Coach name:" << endl;
-    getline(cin, name_coach);
-    to_print = c->searchName(name_coach);
-    for (size_t i = 0; i < to_print.size(); i++) {
-        to_print[i].show();
-        cout << "-----------------------------------" << endl << endl;
-    }
-
-    //Por titulos
-    cout << "Coach number of Titles:" << endl;
-    cin >> num;
-
-    to_print = c->searchTitle(num);
-    for (size_t i = 0; i < to_print.size(); i++) {
-        cout << "Index " << i << endl;
-        to_print[i].show();
-        cout << "-----------------------------------" << endl << endl;
-    }
+    vector<Coach> to_print =  c->searchName("Rui");
+    Coach a = to_print[0];
+    cin >> menu;
+    Date birth;
     cin.ignore(1000, '\n');
-    //Acaba aqui
-    cout << "Choose index: " << endl;
-    cin >> num;
-
-    //switch nome/title outro atributo
-    //Primeiro
-    cout << "Coach name:" << endl;
-    cin.ignore(1000, '\n');
-    getline(cin, name_coach);
-    c->updateCoachName(to_print[num], name_coach);
-
-    //Segundo
-    cout << "Titles:" << endl;
-    cin >> n;
-    c->updateCoachTitle(to_print[num], n);
-    waitInput();
-    return 0;
+    switch(menu) {
+        case '1':
+            cout << "Coach name:" << endl;
+            getline(cin, name_coach);
+            c->updateCoachName(a, name_coach);
+            waitInput();
+            return 0;
+        case '2':
+            cout << "Write coach birthday: " << endl;
+            cin >> birth;
+            a.setBirthday(birth);
+            waitInput();
+            return 0;
+        case '3':
+            cout << "New number of titles:" << endl;
+            cin >> n;
+            c->updateCoachTitle(a, n);
+            waitInput();
+            return 0;
+        case '4':
+            /// TO DO
+            return 0;
+        case '0':
+            return 1;
+        default:
+            return 0;
+    }
 }
 
 
 int menu_remove_coach(){
+    char menu;
+    cout << "========================================= " << endl;
+    cout << "           Search Remove Menu             " << endl;
+    cout << "========================================= \n" << endl;
+
+    cout << "1. Remove by Name " << endl;
+    cout << "2. Remove by number of Titles " << endl;
+    cout << "0. Return to Coaches Menu " << endl << endl;
+
+    cin.clear();
+    cin >> menu;
+    cin.ignore(1000,'\n');
+
     string name_coach;
     int num;
     Coach a;
     CoachTree *c = national_team->getCoachs();
-    //Print
+    // Print
     vector<Coach> to_print;
 
-    //Por nome
-    cout << "Coach name:" << endl;
-    getline(cin, name_coach);
-    to_print = c->searchName(name_coach);
-    for (auto & i : to_print) {
-        i.show();
-        cout << "-----------------------------------" << endl << endl;
+    switch(menu) {
+        case '1':
+            try {
+                cout << "Coach name:" << endl;
+                getline(cin, name_coach);
+
+                to_print = c->searchName(name_coach);
+                for (size_t i = 0; i < to_print.size(); i++) {
+                    cout << "Index " << i << endl;
+                    to_print[i].show();
+                    cout << "-----------------------------------" << endl << endl;
+                }
+
+                cout << "Choose index: " << endl;
+                cin >> num;
+
+                c->removeCoach(to_print[num]);
+
+                waitInput();
+            }
+            catch (PersonNotFound &er) {
+                cout << "Coach " << er.getName() << " not found" << endl;
+            }
+            return 0;
+        case '2':
+            try {
+                cout << "Coach number of Titles:" << endl;
+                cin >> num;
+                cin.ignore(1000, '\n');
+
+                to_print = c->searchTitle(num);
+                for (size_t i = 0; i < to_print.size(); i++) {
+                    cout << "Index " << i << endl;
+                    to_print[i].show();
+                    cout << "-----------------------------------" << endl << endl;
+                }
+
+                cout << "Choose index: " << endl;
+                cin >> num;
+
+                c->removeCoach(to_print[num]);
+                waitInput();
+            }
+            catch (InvalidNumberTitles &er) {
+                cout << "There has no coaches with " << er.getNumTitles() << " titles" << endl;
+            }
+            return 0;
+        case '0':
+
+            return 1;
+        default:
+            return 0;
     }
-
-    //Por titulos
-    cout << "Coach number of Titles:" << endl;
-    cin >> num;
-
-    to_print = c->searchTitle(num);
-    for (size_t i = 0; i < to_print.size(); i++) {
-        cout << "Index " << i << endl;
-        to_print[i].show();
-        cout << "-----------------------------------" << endl << endl;
-    }
-    cin.ignore(1000,'\n');
-    //Acaba aqui
-
-    cout << "Choose index: " << endl;
-    cin >> num;
-
-    c->removeCoach(to_print[num]);
-    waitInput();
-    return 0;
 }
 
 int menu_select_coach(){
@@ -1566,6 +1645,8 @@ int menu_select_coach(){
     int num;
     CoachTree *c = national_team->getCoachs();
     Coach current;
+    string name_coach;
+    vector<Coach> to_print;
     switch(menu) {
         case '1':
             current = c->searchCurrentCoach();
@@ -1573,19 +1654,26 @@ int menu_select_coach(){
             waitInput();
             return 0;
         case '2':
-            c->imprime();
-            cin >> num;
             //Destituir o treinador atual, se existir!
+            current = c->searchCurrentCoach();
             c->removeCoach(current);
             current.setCurrentCoach(false);
-            //Selecione um treinador para ser o da equipa!
 
+            //Selecione um treinador para ser o da equipa!
+            cout << "Coach name:" << endl;
+            getline(cin, name_coach);
+            to_print = c->searchName(name_coach);
+            to_print[0].show();
+            to_print[0].setCurrentCoach(true);
+            to_print[0].addTrainedTeam("Portugal", Date(30,12,2019), Date(31,12,2019));
             //atualizar informação na árvore
-            c->addCoach(current);
+            c->removeCoach(to_print[0]);
+            c->addCoach(to_print[0]);
             waitInput();
             return 0;
         case '3':
             //Destituir o treinador atual, se existir!
+            current = c->searchCurrentCoach();
             c->removeCoach(current);
             current.setCurrentCoach(false);
             //atualizar informação na árvore
@@ -1606,14 +1694,14 @@ int menu_coach() {
 
     cout << "========================================= " << endl;
     cout << "               Coach Menu                 " << endl;
-    cout << "========================================= \n Quando tudo que está depois do // estiver feito, esta parte fica a 100%!" << endl;
+    cout << "========================================= \n" << endl;
 
-    cout << "1. View all Coach" << endl;
-    cout << "2. Search Coach" << endl;
-    cout << "3. Add Coach // Fazer para adicionar as equipas que já treinou!!" << endl;
-    cout << "4. Update Coach // Fazer para dar update às equipas depois!!!!" << endl;
-    cout << "5. Remove Coach" << endl;
-    cout << "6. New Coach to train National Team // tldr.: Convocar treinador para treinar a seleção ou destituir o atual" << endl;
+    cout << "1. View all Coach                      // Working 100% - Test Please " << endl;
+    cout << "2. Search Coach                        // Working 100% - Test Please" << endl;
+    cout << "3. Add Coach                           // Working 100% - Test Please " << endl;
+    cout << "4. Update Coach                        // Update às equipas de treinou - Search Dos Coaches" << endl;
+    cout << "5. Remove Coach                        // Working 100% - Test Please - Borra com idx inválido!" << endl;
+    cout << "6. New Coach to train National Team    // tldr.: Convocar treinador para treinar a seleção ou destituir o atual" << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -1860,9 +1948,7 @@ int menu_view_dispersion(){
 
     }
 }
-int menuDispersionTable(){
-
-
+int menuDispersionTable() {
     char menu;
     cout << "========================================= " << endl;
     cout << "          Dispersion Table Menu           " << endl;

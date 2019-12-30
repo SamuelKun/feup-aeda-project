@@ -28,13 +28,23 @@ public:
 
 };
 
+class InvalidNumberTitles {
+private:
+    double numTitles;
+public:
+
+    InvalidNumberTitles (double num): numTitles(num) {}
+
+    double getNumTitles() const{
+        return numTitles;
+    }
+};
+
 class CoachTree
 {
 private:
     BST<Coach> tree;
-
 public:
-
     CoachTree(): tree(Coach("", Date(), false,-1)) {}; //Ver isto melhor depois
     void addCoach(Coach &c);
 
@@ -46,6 +56,9 @@ public:
     void removeCoach(Coach c);
     void imprime() const;
 };
+
+
+
 
 
 

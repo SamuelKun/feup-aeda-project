@@ -18,7 +18,7 @@ void Coach::show() const {
     for(auto &i : trainedTeams){
         cout << " TeamName: " << get<0>(i)<< endl;
         cout << " Start: " << get<1>(i)<< endl;
-        cout << " End: " << get<2>(i) << endl;
+        cout << " End: " << get<2>(i) << endl << endl;
     }
     cout << endl;
 }
@@ -81,8 +81,10 @@ vector<Coach> CoachTree::searchName(string name) {
         }
         it.advance();
     }
-    return c1;
+    if(c1.empty()) throw PersonNotFound(name);
+    else return c1;
 }
+
 
 vector<Coach> CoachTree::searchTitle(double num) {
     vector<Coach> c1;
@@ -94,7 +96,8 @@ vector<Coach> CoachTree::searchTitle(double num) {
         }
         it.advance();
     }
-    return c1;
+    if(c1.empty()) throw InvalidNumberTitles(num);
+    else return c1;
 }
 
 void CoachTree::removeCoach(Coach c) {

@@ -375,9 +375,6 @@ void Team::dispTable() {
         it->infoTable();
         cout << setw(6) <<  i << " |" << endl;
     }
-
-
-
 }
 
 void Team::dispRemoved() {
