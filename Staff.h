@@ -8,8 +8,9 @@
 class Staff : public Person
 {
 private:
-    double salary;       ///< Staff's salary
-    std::string function;///< Staff's function
+    double salary;           ///< Staff's salary
+    std::string function;    ///< Staff's function
+    bool isWorking;          ///< True if the Staff member is working in the team. False to old staff members
 public:
     /// \brief Staff Constructor.
     /// \param name Staff's name

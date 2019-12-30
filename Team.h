@@ -36,12 +36,12 @@ typedef unordered_set<Staff, hashing, equall> tabH;
 class Team {
 private:
     std::string teamName;  ///< Team file
-    CoachTree coachs;
+    CoachTree coachs; ///< Binary Search Tree with all coaches
     std::vector<Player *> team_players; ///< Vector with Team's players
     std::vector<Staff *> team_staff; ///< Vector with Team's staff
     std::vector<Staff *> team_staff_antigos;
     std::vector<Competition *> team_competitions; ///< Vector with Team's competitions
-    tabH table;
+    tabH table; ///< Dispersion table
     ProviderPriorityQueue providers; ///< Priority Queue with Providers
 public:
     /// \brief Class Team empty constructor.

@@ -1541,6 +1541,9 @@ int menu_update_coach() {
             return 0;
         case '4':
             /// TO DO
+            //Remover equipas que já treinou anteriormente
+
+            //Alterar informação sobre alguma equipa que já treinou anteriormente
             return 0;
         case '0':
             return 1;
@@ -1765,7 +1768,9 @@ int menu_coach() {
             return 0;
     }
 }
-int menu_remove_dispersion(){
+
+
+int menu_remove_dispersion() {
 
     unsigned int index;
     vector<Staff*> v_staff;

@@ -142,7 +142,7 @@ public:
     /// \param item Item of the Provider
     /// \param new_value New Value to the Item of the Provider
     void updateEquipmentItem(Provider p, int item, int new_value);
-    
+
     /// \brief Function to update the equipment of a Provider.
     /// \param p Provider
     /// \param new_equip Equipment of the Provider
