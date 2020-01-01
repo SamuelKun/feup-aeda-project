@@ -381,68 +381,6 @@ int menu_allStaff() {
     return 1;
 }
 
-int menu_searchStaffMembers(){
-    char menu;
-
-    cout << "========================================= " << endl;
-    cout << "           Search Staff Menu              " << endl;
-    cout << "========================================= \n" << endl;
-
-    cout << "1. Search by Name " << endl;
-    cout << "2. Search by Staff Function " << endl;
-    cout << "0. Return to Staff Menu " << endl << endl;
-
-    cin.clear();
-    cin >> menu;
-    cin.ignore(1000,'\n');
-
-    switch(menu){
-        case '1':
-            cout << "   Write the name of the Staff you want to search: " << endl;
-            cout << "0. Return to Staff Menu" << endl << endl;
-
-            try {
-                string name;
-                getline(cin, name);
-                if(name == "0") return 0;
-
-                vector<Staff *> to_print = national_team->findStaffName(name);
-                for (size_t i = 0; i < to_print.size(); i++) {
-                    to_print[i]->info();
-                    cout << endl;
-                }
-            }
-            catch(PersonNotFound & er) {
-                cout << "Staff member " << er.getName() << " not found" << endl;
-            }
-            waitInput();
-            return 0;
-        case '2':
-            cout << "Write the function of the Staff you want to search: " << endl;
-            cout << "0. Return to Staff Menu" << endl;
-            try {
-                string function;
-                getline(cin, function);
-                if(function == "0") return 0;
-
-                vector<Staff *> to_print = national_team->findStaffFunction(function);
-                for (size_t i = 0; i < to_print.size(); i++) {
-                    to_print[i]->info();
-                    cout << endl;
-                }
-            }
-            catch(FunctionNotFound & er) {
-                cout << "No Staff members for function " << er.getFunction() << endl;
-            }
-            waitInput();
-            return 0;
-        case '0':
-            return 1;
-        default:
-            return 0;
-    }
-}
-
 int menu_addStaff() {
     string n, f, checker;
     double w;
@@ -2099,6 +2037,70 @@ int menu_view_dispersion(){
 
     }
 }
+
+int menu_search_dispersion(){
+    char menu;
+
+    cout << "========================================= " << endl;
+    cout << "           Search Staff Menu              " << endl;
+    cout << "========================================= \n" << endl;
+
+    cout << "1. Search by Name " << endl;
+    cout << "2. Search by Staff Function " << endl;
+    cout << "0. Return to Staff Menu " << endl << endl;
+
+    cin.clear();
+    cin >> menu;
+    cin.ignore(1000,'\n');
+
+    switch(menu){
+        case '1':
+            cout << "   Write the name of the Staff you want to search: " << endl;
+            cout << "0. Return to Staff Menu" << endl << endl;
+
+            try {
+                string name;
+                getline(cin, name);
+                if(name == "0") return 0;
+
+                vector<Staff> to_print = national_team->findStaffName(name);
+                for (size_t i = 0; i < to_print.size(); i++) {
+                    to_print[i].info();
+                    cout << endl;
+                }
+            }
+            catch(PersonNotFound & er) {
+                cout << "Staff member " << er.getName() << " not found" << endl;
+            }
+            waitInput();
+            return 0;
+        case '2':
+            cout << "Write the function of the Staff you want to search: " << endl;
+            cout << "0. Return to Staff Menu" << endl;
+            try {
+                string function;
+                getline(cin, function);
+                if(function == "0") return 0;
+
+                vector<Staff> to_print = national_team->findStaffFunction(function);
+                for (size_t i = 0; i < to_print.size(); i++) {
+                    to_print[i].info();
+                    cout << endl;
+                }
+            }
+            catch(FunctionNotFound & er) {
+                cout << "No Staff members for function " << er.getFunction() << endl;
+            }
+            waitInput();
+            return 0;
+        case '0':
+            return 1;
+        default:
+            return 0;
+    }
+}
+
+
 int menuDispersionTable() {
     char menu;
     cout << "========================================= " << endl;
@@ -2120,8 +2122,7 @@ int menuDispersionTable() {
             while(!menu_view_dispersion());
             return 0;
         case '2':
-            //while(!menu_add_dispersion());
-            //Search
+            while(!menu_search_dispersion());
             return 0;
         case '3':
             while(!menu_add_dispersion());

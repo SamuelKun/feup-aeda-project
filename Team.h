@@ -151,7 +151,7 @@ public:
     /// \brief Finds all Staff Members containing name as a substring.
     /// \param name Staff Member's name or substring of name
     /// \return Vector of Staff Member Pointers containing name as substring, throws exception otherwise
-    std::vector<Staff *> findStaffName(std::string name);
+    std::vector<Staff> findStaffName(std::string name);
 
     /// \brief Finds all Team PLayers that play in this position.
     /// \param position Position of the Players you wish to search
@@ -161,7 +161,7 @@ public:
     /// \brief Finds all Staff Members with this function.
     /// \param function Function of the Staff Members you wish to search
     /// \return Vector with pointers for Staff Members with this function
-    std::vector<Staff *> findStaffFunction(std::string function);
+    std::vector<Staff> findStaffFunction(std::string function);
 
     CoachTree * getCoachs();
 

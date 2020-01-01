@@ -254,13 +254,14 @@ vector<Player *> Team::findPlayerName(string name) {
     else return v_players;
 }
 
-vector<Staff *> Team::findStaffName(string name) {
-    vector<Staff *> v_staff;
-    for (size_t i = 0; i < team_staff.size(); i++)
-    {
-        if (team_staff[i]->getName().find(name) != string::npos)
-            v_staff.push_back(team_staff[i]);
+vector<Staff> Team::findStaffName(string name) {
+    auto it = table.begin();
+    vector<Staff> v_staff;
+    for( ; it != table.end(); it++) {
+        if (it->getName().find(name) != string::npos)
+            v_staff.push_back(*it);
     }
+
     if (v_staff.empty()) throw(PersonNotFound(name));
     else return v_staff;
 }
@@ -276,15 +277,16 @@ vector<Player *> Team::findPlayerPos(string position) {
     else return v_players;
 }
 
-vector<Staff *> Team::findStaffFunction(string function) {
-    vector<Staff *> v_staff;
-    for (size_t i = 0; i < team_staff.size(); i++) {
-        if (team_staff[i]->getFunction() == function) {
-            v_staff.push_back(team_staff[i]);
-        }
+vector<Staff> Team::findStaffFunction(string function) {
+    auto it = table.begin();
+    vector<Staff> v_staff;
+    for( ; it != table.end(); it++) {
+        if (it->getFunction() == function)
+            v_staff.push_back(*it);
     }
-    if (v_staff.empty()) { throw(FunctionNotFound(function)); }
-    else { return v_staff; }
+
+    if (v_staff.empty()) throw(FunctionNotFound(function));
+    else return v_staff;
 }
 
 Player * Team::findPlayer(string name) {
