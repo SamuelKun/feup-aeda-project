@@ -37,7 +37,6 @@ private:
     CoachTree coachs; ///< Binary Search Tree with all coaches
     std::vector<Player *> team_players; ///< Vector with Team's players
     std::vector<Staff *> team_staff; ///< Vector with Team's staff
-    std::vector<Staff *> team_staff_antigos; //Remover quando estiver pronto
     std::vector<Competition *> team_competitions; ///< Vector with Team's competitions
     tabH table; ///< Dispersion table
     ProviderPriorityQueue providers; ///< Priority Queue with Providers
@@ -170,17 +169,25 @@ public:
     ProviderPriorityQueue * getProviders();
 
     std::vector<Staff> dispFindStaff(string name);
-    void addTable(Staff *s);
-    void deleteTable(Staff s);
-    void removeTable(Staff s);
-    void dispTable();
-    int dispRemoved();
 
-    const vector<Staff *> & getTeamStaff() const;
 
-    const vector<Staff *> & getTeamStaffAntigos() const;
-
+    //Get staff
     const tabH &getTable() const;
+
+    //Adicionar staff
+    void addTable(Staff *s);
+
+    //Delete staff
+    void deleteTable(Staff s);
+
+    //Remove staff
+    void removeTable(Staff s);
+
+    //Mostrar staff
+    void dispTable();
+
+    //Mostrar removido
+    int dispRemoved();
 
 };
 

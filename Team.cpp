@@ -355,13 +355,6 @@ ProviderPriorityQueue * Team::getProviders() {
     return &providers;
 }
 
-const vector<Staff *> &Team::getTeamStaff() const {
-    return team_staff;
-}
-
-const vector<Staff *> &Team::getTeamStaffAntigos() const {
-    return team_staff_antigos;
-}
 
 const tabH &Team::getTable() const {
     return table;
