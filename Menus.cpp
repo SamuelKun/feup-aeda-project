@@ -1397,6 +1397,45 @@ int menu_credits() {
     return 1;
 }
 
+int menu_show_coach() {
+    char menu;
+    cout << "========================================= " << endl;
+    cout << "           Show Coaches Menu             " << endl;
+    cout << "========================================= \n" << endl;
+
+    cout << "1. Show all coaches " << endl;
+    cout << "2. Show coaches with less than a certain number of titles " << endl;
+    cout << "3. Show coaches with more than a certain number of titles " << endl;
+    cout << "0. Return to Coaches Menu " << endl << endl;
+    cin.clear();
+    cin >> menu;
+    cin.ignore(1000,'\n');
+
+    CoachTree *c = national_team->getCoachs();
+    int num;
+    switch(menu) {
+        case '1':
+            c->imprime();
+            return 0;
+        case '2':
+            cout << "Number of titles: ";
+            cin >> num;
+            failInput(num);
+            c->showLessTitles(num);
+            return 0;
+        case '3':
+            cout << "Number of titles: ";
+            cin >> num;
+            failInput(num);
+            c->showMoreTitles(num);
+            return 0;
+        case '0':
+            return 1;
+        default:
+            return 0;
+    }
+}
+
 int menu_search_coach(){
     char menu;
     cout << "========================================= " << endl;
@@ -1468,6 +1507,7 @@ int menu_add_coach() {
 
     cout << "Titles:" << endl;
     cin >> num;
+    failInput(num);
     cin.ignore(1000, '\n');
     a.setTitles(num);
 
@@ -1499,9 +1539,33 @@ int menu_add_coach() {
 }
 
 int menu_update_coach() {
+    int num;
+    string name_coach;
+    CoachTree *c = national_team->getCoachs();
+
+    cout << "Coach name:" << endl;
+    getline(cin, name_coach);
+
+    vector<Coach>  to_print = c->searchName(name_coach);
+    for (size_t i = 0; i < to_print.size(); i++) {
+        cout << "Index " << i << endl;
+        to_print[i].show();
+        cout << "-----------------------------------" << endl << endl;
+    }
+
+    cout << "Choose index: " << endl;
+    cin >> num;
+    failInput(num);
+    while (num >= to_print.size()) {
+        cout << "Invalid index. Choose index: " << endl;
+        cin >> num;
+        failInput(num);
+    }
+    Coach coachChange = to_print[num];
+
     char menu;
     cout << "========================================= " << endl;
-    cout << "           Search Coaches Menu             " << endl;
+    cout << "           Update Coach Menu             " << endl;
     cout << "========================================= \n" << endl;
 
     cout << "Choose the field you want to change: " << endl;
@@ -1510,41 +1574,78 @@ int menu_update_coach() {
     cout << "3. Change number of titles" << endl;
     cout << "4. Change teams trained" << endl;
     cout << "0. Return to main menu" << endl;
-
-    string name_coach;
-    int num, n;
-
-    CoachTree *c = national_team->getCoachs();
-    vector<Coach> to_print =  c->searchName("Rui");
-    Coach a = to_print[0];
     cin >> menu;
-    Date birth;
     cin.ignore(1000, '\n');
+
+    int n, index;
+    char confirmation;
+
+    Date birth;
+    vector<std::tuple<string, Date, Date>> trainedT = coachChange.getTrainedTeams();
+    auto it = trainedT.begin();
+
     switch(menu) {
         case '1':
             cout << "Coach name:" << endl;
             getline(cin, name_coach);
-            c->updateCoachName(a, name_coach);
+            c->updateCoachName(coachChange, name_coach);
             waitInput();
-            return 0;
+            return 1;
         case '2':
             cout << "Write coach birthday: " << endl;
             cin >> birth;
-            a.setBirthday(birth);
+            c->removeCoach(coachChange);
+            coachChange.setBirthday(birth);
+            c->addCoach(coachChange);
             waitInput();
-            return 0;
+            return 1;
         case '3':
             cout << "New number of titles:" << endl;
             cin >> n;
-            c->updateCoachTitle(a, n);
+            failInput(n);
+            c->removeCoach(coachChange);
+            c->updateCoachTitle(coachChange, n);
+            c->addCoach(coachChange);
             waitInput();
-            return 0;
+            return 1;
         case '4':
-            /// TO DO
             //Remover equipas que já treinou anteriormente
+            cout << "Do you wish remove a team from trainned teams? [y/n]" << endl;
+            cin >> confirmation;
+            cin.ignore(1000, '\n');
+            index = 0;
+            c->removeCoach(coachChange);
+            while (confirmation == 'y') {
+                for (auto &i : trainedT) {
+                    cout << "Index: " << index << endl;
+                    cout << " TeamName: " << get<0>(i) << endl;
+                    cout << " Start: " << get<1>(i) << endl;
+                    cout << " End: " << get<2>(i) << endl << endl;
+                }
 
+                cout << "Choose index: " << endl;
+                cin >> n;
+                failInput(n);
+                while (n >= trainedT.size()) {
+                    cout << "Invalid index. Choose index: " << endl;
+                    cin >> n;
+                    failInput(n);
+                }
+
+                it = trainedT.begin();
+                while (n)
+                    it++;
+
+                trainedT.erase(it);
+                c->updateCoachTeams(coachChange, trainedT);
+                if(!trainedT.empty()) {
+                    cout << "Remove another trainned team? [y/n] " << endl;
+                    cin >> confirmation;
+                }
+                else confirmation = 'n';
+            }
             //Alterar informação sobre alguma equipa que já treinou anteriormente
-            return 0;
+            return 1;
         case '0':
             return 1;
         default:
@@ -1571,7 +1672,6 @@ int menu_remove_coach(){
     int num;
     Coach a;
     CoachTree *c = national_team->getCoachs();
-    // Print
     vector<Coach> to_print;
 
     switch(menu) {
@@ -1589,7 +1689,12 @@ int menu_remove_coach(){
 
                 cout << "Choose index: " << endl;
                 cin >> num;
-
+                failInput(num);
+                while (num >= to_print.size()) {
+                    cout << "Invalid index. Choose index: " << endl;
+                    cin >> num;
+                    failInput(num);
+                }
                 c->removeCoach(to_print[num]);
 
                 waitInput();
@@ -1613,6 +1718,12 @@ int menu_remove_coach(){
 
                 cout << "Choose index: " << endl;
                 cin >> num;
+                failInput(num);
+                while (num >= to_print.size()) {
+                    cout << "Invalid index. Choose index: " << endl;
+                    cin >> num;
+                    failInput(num);
+                }
 
                 c->removeCoach(to_print[num]);
                 waitInput();
@@ -1647,6 +1758,7 @@ int menu_select_coach(){
     int num;
     CoachTree *c = national_team->getCoachs();
     Coach current;
+    Date start, end;
     string name_coach;
     vector<Coach> to_print;
     switch(menu) {
@@ -1684,10 +1796,20 @@ int menu_select_coach(){
                 }
                 cout << "Choose index: " << endl;
                 cin >> num;
-
+                failInput(num);
+                if (num >= to_print.size()) {
+                    cout << "Invalid index. Choose index: " << endl;
+                    cin >> num;
+                    failInput(num);
+                }
                 //Ver isto melhor depois
                 to_print[num].setCurrentCoach(true);
-                to_print[num].addTrainedTeam("Portugal", Date(30,12,2019), Date(31,12,2019));
+                cout << "Start working in: " << endl;
+                cin >> start;
+                cout << "End working in: " << endl;
+                cin >> end;
+
+                to_print[num].addTrainedTeam("Portugal", start, end);
 
                 c->removeCoach(to_print[num]);
                 c->addCoach(to_print[num]);
@@ -1724,15 +1846,15 @@ int menu_coach() {
     char menu;
 
     cout << "========================================= " << endl;
-    cout << "               Coach Menu                 " << endl;
+    cout << "               Coaches Menu                 " << endl;
     cout << "========================================= \n" << endl;
 
-    cout << "1. View all Coach                      " << endl;
-    cout << "2. Search Coach                        " << endl;
-    cout << "3. Add Coach                           " << endl;
-    cout << "4. Update Coach                        " << endl;
-    cout << "5. Remove Coach                        " << endl;
-    cout << "6. New Coach to train National Team    " << endl;
+    cout << "1. View all Coaches                      " << endl;
+    cout << "2. Search Coach es                       " << endl;
+    cout << "3. Add Coaches                           " << endl;
+    cout << "4. Update Coaches                        " << endl;
+    cout << "5. Remove Coaches                        " << endl;
+    cout << "6. New Coach to train National Team      " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -1744,7 +1866,7 @@ int menu_coach() {
     switch(menu)
     {
         case '1':
-            c->imprime();
+            while(!menu_show_coach());
             waitInput();
             return 0;
         case '2':
@@ -1982,9 +2104,10 @@ int menuDispersionTable() {
     cout << "          Dispersion Table Menu           " << endl;
     cout << "========================================= \n" << endl;
     cout << "1. View Staff Members" << endl;
-    cout << "2. Add StaffMembers" << endl;
-    cout << "3. Update StaffMembers" << endl;
-    cout << "4. Remove StaffMembers" << endl;
+    cout << "2. Search Members" << endl;
+    cout << "3. Add Staff Members" << endl;
+    cout << "4. Update Staff Members" << endl;
+    cout << "5. Remove Staff Members" << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -1996,12 +2119,16 @@ int menuDispersionTable() {
             while(!menu_view_dispersion());
             return 0;
         case '2':
-            while(!menu_add_dispersion());
+            //while(!menu_add_dispersion());
+            //Search
             return 0;
         case '3':
-            while(!menu_update_dispersion());
+            while(!menu_add_dispersion());
             return 0;
         case '4':
+            while(!menu_update_dispersion());
+            return 0;
+        case '5':
             while(!menu_remove_dispersion());
             return 0;
         case '0':
@@ -2534,9 +2661,9 @@ int mainMenu(string &file_name) {
     cout << "4. View Team Stats" << endl;
     cout << "5. Save Information" << endl;
     cout << "6. App Info" << endl;
-    cout << "7. parte 2 - binary trees" << endl;
-    cout << "8. parte 2 - hash table" << endl;
-    cout << "9. Providers Menu (Priority Queue)" << endl;
+    cout << "7. parte 2 - binary trees - Coaches (Futuro submenu no menu Staff)" << endl;
+    cout << "8. parte 2 - hash table - Staff (Futuro menu Staff)" << endl;
+    cout << "9. parte 2 - priority queue - Providers Menu (Menu Separado)" << endl;
     cout << "0. Exit" << endl << endl;
 
     cin.clear();

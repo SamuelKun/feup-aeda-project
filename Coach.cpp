@@ -116,6 +116,12 @@ void CoachTree::updateCoachTitle(Coach c, double titles){
     tree.insert(c);
 }
 
+void CoachTree::updateCoachTeams(Coach c, vector<std::tuple<string, Date, Date>> t){
+    tree.remove(c);
+    c.setTrainedTeam(t);
+    tree.insert(c);
+}
+
 Coach CoachTree::searchCurrentCoach() {
     BSTItrIn<Coach> it(tree);
 
@@ -132,8 +138,37 @@ BST<Coach> CoachTree::getTree() {
     return tree;
 }
 
+void CoachTree::showMoreTitles(int num) {
+    int index = 0;
+    BSTItrIn<Coach> it(tree);
+    while (!it.isAtEnd()) {
+        if(it.retrieve().getTitles() > num) {
+            it.retrieve().show();
+            it.advance();
+            index++;
+        }
+        else return;
+    }
+}
+
+void CoachTree::showLessTitles(int num) {
+    int index = 0;
+    BSTItrIn<Coach> it(tree);
+    while (!it.isAtEnd()) {
+        if(it.retrieve().getTitles() <= num) {
+            it.retrieve().show();
+            index++;
+        }
+        it.advance();
+    }
+}
+
 
 vector<std::tuple<string, Date, Date>> Coach::getTrainedTeams() const {
     return trainedTeams;
+}
+
+void Coach::setTrainedTeam(vector<std::tuple<string, Date, Date>> t) {
+    this->trainedTeams = t;
 }
 

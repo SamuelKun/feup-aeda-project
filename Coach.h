@@ -22,6 +22,7 @@ public:
     void setCurrentCoach(bool c);
     double getTitles() const;
     bool getCurrentCoach() const;
+    void setTrainedTeam(vector<std::tuple<string, Date, Date>> t);
     vector<std::tuple<string, Date, Date>> getTrainedTeams() const;
     void setTitles(double n);
     bool operator < (const Coach &c1) const;
@@ -61,7 +62,10 @@ public:
     Coach searchCurrentCoach();
     void updateCoachName(Coach c, std::string name);
     void updateCoachTitle(Coach c, double titles);
+    void updateCoachTeams(Coach c, vector<std::tuple<string, Date, Date>> t);
     void removeCoach(Coach c);
+    void showLessTitles(int num);
+    void showMoreTitles(int num);
     void imprime() const;
 };
 
