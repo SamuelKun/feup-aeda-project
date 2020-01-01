@@ -363,7 +363,7 @@ int menu_players()
 }
 
 // Staff
-
+/*
 int menu_allStaff() {
     string toSort;
     national_team->showStaffTable();
@@ -632,6 +632,7 @@ int menu_staff() {
             return 0;
     }
 }
+ */
 
 //Competition!
 
@@ -1910,7 +1911,7 @@ int menu_remove_dispersion() {
             auto it = national_team->getTable().begin();
             for(int i = 0; i < index ;i++, it++){}
             string name = it->getName();
-            auto temp = new Staff(it->getName(),it->getBirthday(),it->getSalary(),it->getFunction());
+            auto temp = new Staff(it->getName(),it->getBirthday(),it->getSalary(),it->getFunction(), false);
             national_team->removeTable(*temp);
             vec = national_team->showStaffTable();
             cout << name << " was successfully removed!!" << endl;
@@ -1942,7 +1943,7 @@ int menu_update_dispersion(){
                 auto it = national_team->getTable().begin();
                 for(int i = 0; i < index ;i++, it++){}
                 string name = it->getName();
-                auto staff = new Staff(name,it->getBirthday(),it->getSalary(),it->getFunction());
+                auto staff = new Staff(name,it->getBirthday(),it->getSalary(),it->getFunction(), true);
                 national_team->deleteTable(*staff);
 
                 string new_name;
@@ -2023,7 +2024,7 @@ int menu_add_dispersion(){
         cin >> f;
         failInput(f);
 
-        Staff *s = new Staff(n, d, w, f);
+        Staff *s = new Staff(n, d, w, f, true);
 
         cout << "Do you wish to add the Staff Member you have created?: " << endl;
         cout << "1. Add Staff Member " << endl;
@@ -2675,7 +2676,7 @@ int mainMenu(string &file_name) {
             while(!menu_players());
             return 0;
         case '2':    //View staff info
-            while(!menu_staff());
+            //while(!menu_staff());
             return 0;
         case '3':    //View app info
             while(!menu_tournaments());

@@ -17,7 +17,7 @@ public:
     /// \param birth Staff's birthday
     /// \param salary Staff's salary in euros
     /// \param function Staff's function
-    Staff(std::string name, Date birth, double salary, std::string function);
+    Staff(std::string name, Date birth, double salary, std::string function, bool active);
     /// \brief Get Method.
     /// \return Staff's salary in euros
     double getSalary() const;

@@ -109,22 +109,23 @@ std::vector<Player *> read_player(std::string info){
 /// \brief Reads a Staff Member from a .txt file.
 /// \param info .txt file containing Staff Members
 /// \return Vector of Staff Members belonging to a team
-std::vector<Staff *> read_staff(std::string info){
+tabH read_staff(std::string info){
     std::ifstream staff_info(info);
     std::vector<Staff *> staff;
     std::vector<std::string> tempVec;
     std::string str_temp;
+    tabH table;
 
     while (getline(staff_info, str_temp)){
         if (str_temp != "-----") tempVec.push_back(str_temp);
         else{
             Date tempBirth(tempVec[1]);
-            Staff *p = new Staff(tempVec[0], tempBirth, stod(tempVec[2]), tempVec[3]);
-            staff.push_back(p);
+            Staff *p = new Staff(tempVec[0], tempBirth, stod(tempVec[2]), tempVec[3], stoi(tempVec[4]));
+            table.insert(*p);
             tempVec.clear();
         }
     }
-    return staff;
+    return table;
 }
 /// \brief Reads a Game from a .txt file.
 /// \param info .txt file containing Games

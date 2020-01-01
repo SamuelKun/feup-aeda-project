@@ -5,9 +5,10 @@
 using namespace std;
 
 
-Staff::Staff(string name, Date birth, double salary, string function) : Person(name,birth),
+Staff::Staff(string name, Date birth, double salary, string function, bool active) : Person(name,birth),
                                                                        salary(salary), function(function),
-                                                                       isWorking(true){}
+                                                                       isWorking(active) {}
+
 double Staff::getSalary() const {
     return salary;
 }
@@ -30,7 +31,8 @@ std::ostream &operator<<(std::ostream &out, const Staff &s) {
     out << s.getName() << endl;
     out << s.getBirthday() << endl;
     out << s.salary << endl;
-    out << s.function;
+    out << s.function << endl;
+    out << s.isWorking;
 
     return out;
 }

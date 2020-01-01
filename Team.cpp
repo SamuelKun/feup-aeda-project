@@ -22,15 +22,10 @@ Team::Team(string file_name) {
 
     this->teamName = file_info[0];
     this->team_players = read_player(file_info[1]);
-    this->team_staff = read_staff(file_info[2]);
+    this->table = read_staff(file_info[2]);
     this->team_competitions = read_competion(file_info[3], this);
     this->coachs = read_coachs(file_info[4]);
     this->providers = read_providers(file_info[5]);
-
-    for(auto s : team_staff){
-        s->setIsWorking(true);
-        this->table.insert(*s);
-    }
 }
 
 void Team::updateFile(string file_name) {
@@ -49,9 +44,11 @@ void Team::updateFile(string file_name) {
         p << (*team_players[i]) << endl;
         p << "-----" << endl;
     }
+
     ofstream s(teamName + "staff.txt");
-    for (size_t i = 0; i < team_staff.size(); i++) {
-        s << (*team_staff[i]) << endl;
+    auto itTable = table.begin();
+    for(int i = 0;  itTable  != table.end(); itTable ++,i++){
+        s << (* itTable )<< endl;
         s << "-----" << endl;
     }
 

@@ -9,7 +9,6 @@
 #include "Coach.h"
 #include "Game.h"
 #include "Competition.h"
-//#include "DispTable.h"
 #include "Provider.h"
 
 struct hashing {
@@ -20,7 +19,6 @@ struct hashing {
         for (char i : name)
             v = 37*v + i;
         return v;
-
     }
 };
 struct equall{
@@ -166,8 +164,6 @@ public:
     std::vector<Staff *> findStaffFunction(std::string function);
 
     CoachTree * getCoachs();
-    //DispTable getDispTable() const{ return table;}
-    //Métodos para DispTables
 
     /// \brief Function to get the Providers of the National Team.
     /// \return Pointer to a Priority Queue with all the Providers
