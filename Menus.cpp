@@ -1841,6 +1841,7 @@ int menu_remove_dispersion() {
     cout << "Press [a] or other letter to exit." << endl;
 
     while(cin >> index && !cin.eof()){
+        cin.ignore(1000,'\n');
         if (index >= national_team->getStaff().size() || find(vec.begin(),vec.end(),index) == vec.end()) {
             cout << "Invalid index" << endl;
             continue;
@@ -1875,6 +1876,7 @@ int menu_update_dispersion(){
 
             if (index >= national_team->getStaff().size()) {
                 cout << "Invalid index" << endl;
+                cin.ignore(1000, '\n');
                 continue;
             } else {
 
@@ -1884,54 +1886,55 @@ int menu_update_dispersion(){
                 auto staff = new Staff(name,it->getBirthday(),it->getSalary(),it->getFunction(), true);
                 national_team->deleteStaff(*staff);
 
-                string new_name;
+                string new_name, changed = "nothing";
                 string function;
                 Date birthday;
                 double salary;
                 char n;
-                cout << "Which field you want to change in staff member " << name << endl;
+                cout << "Which field do you want to change in staff member " << name << "?" << endl;
                 cout << "Select the correspondent index: " << endl;
                 cout << "1. Change name" << endl;
                 cout << "2. Change birthday" << endl;
                 cout << "3. Change function" << endl;
                 cout << "4. Change salary" << endl;
 
+                cin.ignore(1000,'\n');
                 cin >> n;
+                cin.ignore(1000, '\n');
 
                 switch(n) {
                     case '1':
-                        cin.ignore(1000, '\n');
                         cout << name << "'s new Name: " << endl;
                         getline(cin, new_name);
-                        for (auto it = table.begin(); it != table.end(); it++) {
-                            if (it->getName() == new_name) throw PersonAlreadyExists(new_name);
-                        }
                         staff->setName(new_name);
+                        changed = "name";
                         break;
                     case '2':
                         cout << name << "'s new birthday " << endl;
                         cin >> birthday;
                         staff->setBirthday(birthday);
+                        changed = "birthday";
                         break;
                     case '3':
                         cout << name << "'s new function " << endl;
-                        cin >> function;
+                        getline(cin,function);
                         staff->setFunction(function);
+                        changed = "function";
                         break;
                     case '4':
                         cout << name << "'s new salary " << endl;
-                        cin >> salary;
-                        failInput(salary);
+                        cin >> salary; failInput(salary); cin.ignore(1000,'\n');
                         staff->setSalary(salary);
+                        changed = "salary";
                         break;
                     default:
-                        cout << "Invalid index" << endl;
                         break;
                 }
-
                 national_team->addStaff(staff);
-
                 national_team->showStaff();
+                if (changed != "nothing")
+                    cout << name << "'s " << changed << " was sucessfully changed." << endl;
+                else cout << "Invalid Index!! No changes were made." << endl;
                 cout << "Write the index of another Player you wish to update." << endl;
                 cout << "Press [a] or other letter to exit." << endl;
             }
@@ -1940,8 +1943,8 @@ int menu_update_dispersion(){
         cin.clear();
         cin.ignore(1000,'\n');
     }
-    catch(...){
-        cerr << "Exception found" << endl;
+    catch(PersonAlreadyExists & er){
+        cerr << "Staff Member named " << er.getName() << " already exists!!" << endl;
     }
     waitInput();
     return 1;
@@ -1959,15 +1962,13 @@ int menu_add_dispersion(){
         cout << "Write " << n << "'s wage " << endl;
         cin >> w; failInput(w); cin.ignore(1000,'\n');
         cout << "Write " << n << "'s function " << endl;
-        cin >> f;
-        failInput(f);
+        getline(cin,f);
 
         Staff *s = new Staff(n, d, w, f, true);
 
         cout << "Do you wish to add the Staff Member you have created?: " << endl;
         cout << "1. Add Staff Member " << endl;
-        cout << "Any other key. Cancel adding Staff Member " << endl;
-        cin.ignore(1000,'\n');
+        cout << "Any other key. Cancel adding Staff Member." << endl;
         getline(cin,checker);
         if (checker != "1"){
             cout << "Staff Member was not added!!" << endl;
@@ -1977,10 +1978,9 @@ int menu_add_dispersion(){
             cout << n << " was successfully added as a Staff member!!" << endl;
         }
     }
-    catch (...) {
-        cerr << "Exception Found!!" << endl;
+    catch (PersonAlreadyExists & er) {
+        cerr << "Staff Member named " << er.getName() << " already exists!!" << endl;
     }
-
     waitInput();
     return 1;
 }
@@ -1992,7 +1992,6 @@ int menu_view_dispersion(){
     cout << "1. View Current Staff Members" << endl;
     cout << "2. View Old Staff Members" << endl;
     cout << "3. View All Staff Members" << endl;
-    cout << "4. View Specific Staff Member" << endl;
     cout << "0. Return to Dispersion Table Menu" << endl << endl;
 
     cin.clear();
@@ -2009,25 +2008,6 @@ int menu_view_dispersion(){
             return 0;
         case '3':
             national_team->showStaff();
-            waitInput();
-            return 0;
-        case '4':
-            try{
-                string n;
-                cout << "Write the name of the Staff Member you wish to find: " << endl;
-                getline(cin, n);
-                vector<Staff> v_staff = national_team->findStaffName(n);
-                cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
-                cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
-                auto it = v_staff.begin();
-                for(int i = 0;it!= v_staff.end();i++,it++){
-                    it->infoTable();
-                    cout << setw(6) <<  i << " |" << endl;
-                }
-            }
-            catch(...){
-                cerr << "Exception found" << endl;
-            }
             waitInput();
             return 0;
         case '0':
@@ -2055,41 +2035,40 @@ int menu_search_dispersion(){
 
     switch(menu){
         case '1':
-            cout << "   Write the name of the Staff you want to search: " << endl;
-            cout << "0. Return to Staff Menu" << endl << endl;
-
-            try {
-                string name;
-                getline(cin, name);
-                if(name == "0") return 0;
-
-                vector<Staff> to_print = national_team->findStaffName(name);
-                for (size_t i = 0; i < to_print.size(); i++) {
-                    to_print[i].info();
-                    cout << endl;
+            try{
+                string n;
+                cout << "Write the name of the Staff Member you wish to find: " << endl;
+                getline(cin, n);
+                vector<Staff> v_staff = national_team->findStaffName(n);
+                cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
+                cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
+                auto it = v_staff.begin();
+                for(int i = 0;it!= v_staff.end();i++,it++){
+                    it->infoTable();
+                    cout << setw(6) <<  i << " |" << endl;
                 }
             }
-            catch(PersonNotFound & er) {
-                cout << "Staff member " << er.getName() << " not found" << endl;
+            catch(PersonNotFound & er){
+                cout << "No Staff Member named " << er.getName() << endl;
             }
             waitInput();
             return 0;
         case '2':
-            cout << "Write the function of the Staff you want to search: " << endl;
-            cout << "0. Return to Staff Menu" << endl;
-            try {
-                string function;
-                getline(cin, function);
-                if(function == "0") return 0;
-
-                vector<Staff> to_print = national_team->findStaffFunction(function);
-                for (size_t i = 0; i < to_print.size(); i++) {
-                    to_print[i].info();
-                    cout << endl;
+            try{
+                string f;
+                cout << "Write the function of the Staff Member you wish to find: " << endl;
+                getline(cin, f);
+                vector<Staff> v_staff = national_team->findStaffFunction(f);
+                cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
+                cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
+                auto it = v_staff.begin();
+                for(int i = 0;it!= v_staff.end();i++,it++){
+                    it->infoTable();
+                    cout << setw(6) <<  i << " |" << endl;
                 }
             }
-            catch(FunctionNotFound & er) {
-                cout << "No Staff members for function " << er.getFunction() << endl;
+            catch(FunctionNotFound & er){
+                cout << "No Staff Member named " << er.getFunction() << endl;
             }
             waitInput();
             return 0;

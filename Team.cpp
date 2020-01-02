@@ -372,7 +372,8 @@ std::vector<Staff> Team::findStaffName(string name) {
 }
 */
 void Team::addStaff(Staff *s) {
-    team_staff.insert(*s);
+    auto p = team_staff.insert(*s);
+    if (!p.second) throw PersonAlreadyExists(s->getName());
 }
 
 void Team::deleteStaff(Staff s) {
