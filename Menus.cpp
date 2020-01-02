@@ -1841,16 +1841,16 @@ int menu_remove_dispersion() {
     cout << "Press [a] or other letter to exit." << endl;
 
     while(cin >> index && !cin.eof()){
-        if (index >= national_team->getTable().size() || find(vec.begin(),vec.end(),index) == vec.end()) {
+        if (index >= national_team->getStaff().size() || find(vec.begin(),vec.end(),index) == vec.end()) {
             cout << "Invalid index" << endl;
             continue;
         }
         else {
-            auto it = national_team->getTable().begin();
+            auto it = national_team->getStaff().begin();
             for(int i = 0; i < index ;i++, it++){}
             string name = it->getName();
             auto temp = new Staff(it->getName(),it->getBirthday(),it->getSalary(),it->getFunction(), false);
-            national_team->removeTable(*temp);
+            national_team->removeStaff(*temp);
             vec = national_team->showStaffTable();
             cout << name << " was successfully removed!!" << endl;
             cout << "Press [a] or other letter to exit." << endl;
@@ -1865,24 +1865,24 @@ int menu_remove_dispersion() {
 int menu_update_dispersion(){
     try{
         unsigned int index;
-        national_team->dispTable();
-        tabH table = national_team->getTable();
+        national_team->showStaff();
+        tabH table = national_team->getStaff();
 
         cout << "Write the index of the Staff Member you wish to update." << endl;
         cout << "Press [a] or other letter to exit." << endl;
 
         while (cin >> index && !cin.eof()) {
 
-            if (index >= national_team->getTable().size()) {
+            if (index >= national_team->getStaff().size()) {
                 cout << "Invalid index" << endl;
                 continue;
             } else {
 
-                auto it = national_team->getTable().begin();
+                auto it = national_team->getStaff().begin();
                 for(int i = 0; i < index ;i++, it++){}
                 string name = it->getName();
                 auto staff = new Staff(name,it->getBirthday(),it->getSalary(),it->getFunction(), true);
-                national_team->deleteTable(*staff);
+                national_team->deleteStaff(*staff);
 
                 string new_name;
                 string function;
@@ -1929,9 +1929,9 @@ int menu_update_dispersion(){
                         break;
                 }
 
-                national_team->addTable(staff);
+                national_team->addStaff(staff);
 
-                national_team->dispTable();
+                national_team->showStaff();
                 cout << "Write the index of another Player you wish to update." << endl;
                 cout << "Press [a] or other letter to exit." << endl;
             }
@@ -1973,7 +1973,7 @@ int menu_add_dispersion(){
             cout << "Staff Member was not added!!" << endl;
         }
         else{
-            national_team->addTable(s);
+            national_team->addStaff(s);
             cout << n << " was successfully added as a Staff member!!" << endl;
         }
     }
@@ -2004,11 +2004,11 @@ int menu_view_dispersion(){
             waitInput();
             return 0;
         case '2':
-            national_team->dispRemoved();
+            national_team->showStaffRemoved();
             waitInput();
             return 0;
         case '3':
-            national_team->dispTable();
+            national_team->showStaff();
             waitInput();
             return 0;
         case '4':
@@ -2016,7 +2016,7 @@ int menu_view_dispersion(){
                 string n;
                 cout << "Write the name of the Staff Member you wish to find: " << endl;
                 getline(cin, n);
-                vector<Staff> v_staff = national_team->dispFindStaff(n);
+                vector<Staff> v_staff = national_team->findStaffName(n);
                 cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
                 cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
                 auto it = v_staff.begin();

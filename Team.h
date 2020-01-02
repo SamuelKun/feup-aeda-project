@@ -62,7 +62,7 @@ public:
 
     /// \brief Get Method.
     /// \return vector of Team's Staff Members pointers
-    std::vector<Staff *> getStaff() const;
+    //std::vector<Staff *> getStaff() const;
 
     /// \brief Get Method.
     /// \return vector of Team's Games pointers
@@ -82,7 +82,7 @@ public:
 
     /// \brief Adds a Staff Member pointer to the vector of Team's Staff Member pointers.
     /// \param s Staff Member pointer to add
-    void addStaff(Staff * s);
+    //void addStaff(Staff * s);
 
     /// \brief Adds a Competition pointer to the vector of Team's Competition pointers.
     /// \param c Competition pointer to add
@@ -94,7 +94,7 @@ public:
 
     /// \brief Removes a Staff Member pointer from the vector of Team's Staff Members pointers.
     /// \param s Staff Member pointer to be removed
-    void removeStaff(Staff * s);
+    //void removeStaff(Staff * s);
 
     /// \brief Removes a Competition from the vector of Team's Competitions
     /// \param c
@@ -132,10 +132,10 @@ public:
     void sortPlayersValue();
 
     /// \brief Sorts team_staff by name
-    void sortStaffName();
+    //void sortStaffName();
 
     /// \brief Sorts team_staff by function
-    void sortStaffFunction();
+    //void sortStaffFunction();
 
     /// \brief Finds a Player in the Team by its name.
     /// \param name Player's name
@@ -168,26 +168,25 @@ public:
     /// \return Pointer to a Priority Queue with all the Providers
     ProviderPriorityQueue * getProviders();
 
-    std::vector<Staff> dispFindStaff(string name);
-
+    //std::vector<Staff> findStaffName(string name);
 
     //Get staff
-    const tabH &getTable() const;
+    const tabH &getStaff() const;
 
     //Adicionar staff
-    void addTable(Staff *s);
+    void addStaff(Staff *s);
 
     //Delete staff
-    void deleteTable(Staff s);
+    void deleteStaff(Staff s);
 
     //Remove staff
-    void removeTable(Staff s);
+    void removeStaff(Staff s);
 
     //Mostrar staff
-    void dispTable();
+    void showStaff();
 
     //Mostrar removido
-    int dispRemoved();
+    int showStaffRemoved();
 
 };
 

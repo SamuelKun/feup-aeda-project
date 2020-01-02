@@ -132,11 +132,11 @@ string Team::getTeamName() const {
 vector<Player *> Team::getPlayers() const {
     return team_players;
 }
-
+/*
 vector<Staff *> Team::getStaff() const {
     return team_staff;
 }
-
+*/
 vector<Competition *> Team::getCompetition() const {
     return team_competitions;
 }
@@ -209,7 +209,7 @@ void Team::sortPlayersPosition() {
 void Team::sortPlayersValue() {
     sort(team_players.begin(), team_players.end(), cmpValue);
 }
-
+/*
 void Team::sortStaffName() {
     sort(team_staff.begin(), team_staff.end(), cmpName);
 }
@@ -217,7 +217,7 @@ void Team::sortStaffName() {
 void Team::sortStaffFunction() {
     sort(team_staff.begin(), team_staff.end(), cmpFunction);
 }
-
+*/
 void Team::addPlayer(Player* p) {
 
     if(p->getName() == "") throw CantUseThatName(p->getName());
@@ -230,6 +230,7 @@ void Team::addPlayer(Player* p) {
    team_players.push_back(p);
 }
 
+/*
 void Team::addStaff(Staff* s) {
     if(s->getName() == "") throw CantUseThatName(s->getName());
 
@@ -240,8 +241,8 @@ void Team::addStaff(Staff* s) {
     }
 
     team_staff.push_back(s);
-
 }
+*/
 
 vector<Player *> Team::findPlayerName(string name) {
     vector<Player *> v_players;
@@ -305,7 +306,7 @@ void Team::removePlayer( Player * p) {
         }
     }
 }
-
+/*
 void Team::removeStaff(Staff *s) {
     bool found_staff = false;
     for(size_t i = 0; i < team_staff.size();i++){
@@ -317,7 +318,7 @@ void Team::removeStaff(Staff *s) {
     }
     if(!found_staff) throw (PersonNotFound(s->getName()));
 }
-
+*/
 double Team::getMoneyAccommodation() const {
     double money = 0;
     for (size_t i = 0; i < team_competitions.size(); i++)
@@ -356,11 +357,11 @@ ProviderPriorityQueue * Team::getProviders() {
 }
 
 
-const tabH &Team::getTable() const {
+const tabH &Team::getStaff() const {
     return table;
 }
-
-std::vector<Staff> Team::dispFindStaff(string name) {
+/*
+std::vector<Staff> Team::findStaffName(string name) {
     vector<Staff> v;
     for (const auto& stf : table){
         if( stf.getName().find(name) != string::npos) v.push_back(stf);
@@ -368,18 +369,18 @@ std::vector<Staff> Team::dispFindStaff(string name) {
     if(v.empty()) throw PersonNotFound(name);
     else return v;
 }
-
-void Team::addTable(Staff *s) {
+*/
+void Team::addStaff(Staff *s) {
     table.insert(*s);
     team_staff.push_back(s);
 }
 
-void Team::deleteTable(Staff s) {
+void Team::deleteStaff(Staff s) {
     auto it = table.find(s);
     if( it != table.end()) table.erase(it);
     else throw PersonNotFound(s.getName());
 }
-void Team::removeTable(Staff s) {
+void Team::removeStaff(Staff s) {
     auto it = table.find(s);
     if( it != table.end()){
         table.erase(it);
@@ -389,7 +390,7 @@ void Team::removeTable(Staff s) {
     else throw PersonNotFound(s.getName());
 }
 
-void Team::dispTable() {
+void Team::showStaff() {
     cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
     cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
     int i = 0;
@@ -400,7 +401,7 @@ void Team::dispTable() {
     }
 }
 
-int Team::dispRemoved() {
+int Team::showStaffRemoved() {
     cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
     cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
     auto it = table.begin();
