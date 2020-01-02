@@ -1343,7 +1343,7 @@ int menu_show_coach() {
     cout << "========================================= \n" << endl;
 
     cout << "1. Show all coaches " << endl;
-    cout << "2. Show coaches with less than a certain number of titles " << endl;
+    cout << "2. Show coaches with less or equal to a certain number of titles " << endl;
     cout << "3. Show coaches with more than a certain number of titles " << endl;
     cout << "0. Return to Coaches Menu " << endl << endl;
     cin.clear();
@@ -1355,18 +1355,29 @@ int menu_show_coach() {
     switch(menu) {
         case '1':
             c->imprime();
+            waitInput();
             return 0;
         case '2':
-            cout << "Number of titles: ";
-            cin >> num;
-            failInput(num);
-            c->showLessTitles(num);
+            try{
+                cout << "Number of titles: ";
+                cin >> num; failInput(num); cin.ignore(1000,'\n');
+                c->showLessTitles(num);
+            }
+            catch(InvalidNumberTitles & er){
+                cerr << "No coaches were found with, at most, " << er.getNumTitles() << " titles!" << endl;
+            }
+            waitInput();
             return 0;
         case '3':
-            cout << "Number of titles: ";
-            cin >> num;
-            failInput(num);
-            c->showMoreTitles(num);
+            try{
+                cout << "Number of titles: ";
+                cin >> num; failInput(num); cin.ignore(1000,'\n');
+                c->showMoreTitles(num);
+            }
+            catch(InvalidNumberTitles & er){
+                cerr << "No coaches were found with more than " << er.getNumTitles() << " titles!" << endl;
+            }
+            waitInput();
             return 0;
         case '0':
             return 1;
@@ -1403,27 +1414,26 @@ int menu_search_coach(){
                     i.show();
                     cout << "-----------------------------------" << endl;
                 }
-                waitInput();
             }
             catch (PersonNotFound &er) {
-                cout << "Coach " << er.getName() << " not found" << endl;
+                cerr << "Coach named " << er.getName() << " not found" << endl;
             }
+            waitInput();
             return 0;
         case '2':
             try {
                 cout << "Coach number of Titles:" << endl;
-                cin >> num;
+                cin >> num; failInput(num); cin.ignore(1000,'\n');
                 to_print = c->searchTitle(num);
                 for (auto &i : to_print) {
                     i.show();
                     cout << endl << "-----------------------------------" << endl;
                 }
-                cin.ignore(1000, '\n');
-                waitInput();
             }
             catch (InvalidNumberTitles &er) {
-                cout << "There has no coaches with " << er.getNumTitles() << " titles" << endl;
+                cerr << "There are no coaches with " << er.getNumTitles() << " titles" << endl;
             }
+            waitInput();
             return 0;
         case '0':
             return 1;
@@ -1435,7 +1445,7 @@ int menu_search_coach(){
 int menu_add_coach() {
     CoachTree *c = national_team->getCoachs();
     char confirmation;
-    string name_coach, name_team;
+    string name_coach, name_team , checker;
     int num;
     Coach a;
     Date start, end;
@@ -1445,18 +1455,14 @@ int menu_add_coach() {
     a.setName(name_coach);
 
     cout << "Titles:" << endl;
-    cin >> num;
-    failInput(num);
-    cin.ignore(1000, '\n');
+    cin >> num; failInput(num); cin.ignore(1000, '\n');
     a.setTitles(num);
 
-    cout << "This trainer already trainned a team? [y/n]" << endl;
-    cin >> confirmation;
-    cin.ignore(1000, '\n');
+    cout << "This trainer already trained a team? [y/n]" << endl;
+    cin >> confirmation; cin.ignore(1000, '\n');
     while (confirmation == 'y') {
         cout << "Write team name: " << endl;
-        cin >> name_team;
-
+        getline(cin,name_team);
         //Loop
         cout << "Write beginning date: " << endl;
         cin >> start;
@@ -1468,11 +1474,20 @@ int menu_add_coach() {
         }
         a.addTrainedTeam(name_team, start, end);
         cout << "Add another trainned team? [y/n] " << endl;
-        cin >> confirmation;
+        cin >> confirmation; cin.ignore(1000, '\n');
     }
-
-    c->addCoach(a);
-    cin.ignore(1000,'\n');
+    cout << "Stopped adding trained teams!" << endl;
+    cout << "Do you wish to add the Coach you have created?: " << endl;
+    cout << "1. Add " << name_coach << endl;
+    cout << "Any other key. Cancel adding Coach." << endl;
+    getline(cin,checker);
+    if (checker != "1"){
+        cout << name_coach << " was not added!!" << endl;
+    }
+    else{
+        c->addCoach(a);
+        cout << name_coach << " was successfully added as a Coach!!" << endl;
+    }
     waitInput();
     return 1;
 }
@@ -1493,12 +1508,10 @@ int menu_update_coach() {
     }
 
     cout << "Choose index: " << endl;
-    cin >> num;
-    failInput(num);
+    cin >> num; failInput(num); cin.ignore(1000,'\n');
     while (num >= to_print.size()) {
         cout << "Invalid index. Choose index: " << endl;
-        cin >> num;
-        failInput(num);
+        cin >> num; failInput(num); cin.ignore(1000,'\n');
     }
     Coach coachChange = to_print[num];
 
@@ -1513,6 +1526,7 @@ int menu_update_coach() {
     cout << "3. Change number of titles" << endl;
     cout << "4. Change teams trained" << endl;
     cout << "0. Return to main menu" << endl;
+
     cin >> menu;
     cin.ignore(1000, '\n');
 
@@ -1540,8 +1554,7 @@ int menu_update_coach() {
             return 1;
         case '3':
             cout << "New number of titles:" << endl;
-            cin >> n;
-            failInput(n);
+            cin >> n; failInput(n); cin.ignore(1000,'\n');
             c->removeCoach(coachChange);
             c->updateCoachTitle(coachChange, n);
             c->addCoach(coachChange);
@@ -1563,12 +1576,10 @@ int menu_update_coach() {
                 }
 
                 cout << "Choose index: " << endl;
-                cin >> n;
-                failInput(n);
+                cin >> n; failInput(n); cin.ignore(1000,'\n');
                 while (n >= trainedT.size()) {
                     cout << "Invalid index. Choose index: " << endl;
-                    cin >> n;
-                    failInput(n);
+                    cin >> n; failInput(n); cin.ignore(1000,'\n');
                 }
 
                 it = trainedT.begin();
@@ -1579,7 +1590,7 @@ int menu_update_coach() {
                 c->updateCoachTeams(coachChange, trainedT);
                 if(!trainedT.empty()) {
                     cout << "Remove another trainned team? [y/n] " << endl;
-                    cin >> confirmation;
+                    cin >> confirmation; cin.ignore(1000,'\n');
                 }
                 else confirmation = 'n';
             }
@@ -1618,7 +1629,6 @@ int menu_remove_coach(){
             try {
                 cout << "Coach name:" << endl;
                 getline(cin, name_coach);
-
                 to_print = c->searchName(name_coach);
                 for (size_t i = 0; i < to_print.size(); i++) {
                     cout << "Index " << i << endl;
@@ -1627,26 +1637,23 @@ int menu_remove_coach(){
                 }
 
                 cout << "Choose index: " << endl;
-                cin >> num;
-                failInput(num);
+                cin >> num; failInput(num); cin.ignore(1000,'\n');
                 while (num >= to_print.size()) {
                     cout << "Invalid index. Choose index: " << endl;
-                    cin >> num;
-                    failInput(num);
+                    cin >> num; failInput(num); cin.ignore(1000,'\n');
                 }
+                cout << to_print[num].getName() << " was successfully removed!!" << endl;
                 c->removeCoach(to_print[num]);
-
-                waitInput();
             }
             catch (PersonNotFound &er) {
                 cout << "Coach " << er.getName() << " not found" << endl;
             }
+            waitInput();
             return 0;
         case '2':
             try {
                 cout << "Coach number of Titles:" << endl;
-                cin >> num;
-                cin.ignore(1000, '\n');
+                cin >> num; failInput(num); cin.ignore(1000,'\n');
 
                 to_print = c->searchTitle(num);
                 for (size_t i = 0; i < to_print.size(); i++) {
@@ -1656,20 +1663,18 @@ int menu_remove_coach(){
                 }
 
                 cout << "Choose index: " << endl;
-                cin >> num;
-                failInput(num);
+                cin >> num; failInput(num); cin.ignore(1000,'\n');
                 while (num >= to_print.size()) {
                     cout << "Invalid index. Choose index: " << endl;
-                    cin >> num;
-                    failInput(num);
+                    cin >> num; failInput(num); cin.ignore(1000,'\n');
                 }
 
                 c->removeCoach(to_print[num]);
-                waitInput();
             }
             catch (InvalidNumberTitles &er) {
                 cout << "There has no coaches with " << er.getNumTitles() << " titles" << endl;
             }
+            waitInput();
             return 0;
         case '0':
 
@@ -1705,11 +1710,11 @@ int menu_select_coach(){
             try {
                 current = c->searchCurrentCoach();
                 current.show();
-                waitInput();
             }
             catch(NoCoach &er) {
                 er.show();
             }
+            waitInput();
             return 0;
         case '2':
             //Destituir o treinador atual, se existir!
@@ -1734,12 +1739,10 @@ int menu_select_coach(){
                     cout << "-----------------------------------" << endl << endl;
                 }
                 cout << "Choose index: " << endl;
-                cin >> num;
-                failInput(num);
+                cin >> num; failInput(num); cin.ignore(1000,'\n');
                 if (num >= to_print.size()) {
                     cout << "Invalid index. Choose index: " << endl;
-                    cin >> num;
-                    failInput(num);
+                    cin >> num; failInput(num); cin.ignore(1000,'\n');
                 }
                 //Ver isto melhor depois
                 to_print[num].setCurrentCoach(true);
@@ -1752,6 +1755,8 @@ int menu_select_coach(){
 
                 c->removeCoach(to_print[num]);
                 c->addCoach(to_print[num]);
+                cout << "Coach was successfully changed!!";
+                cout << to_print[num].getName() << " is now the new Coach!!" << endl;
 
                 waitInput();
             }
@@ -1767,7 +1772,7 @@ int menu_select_coach(){
                 current.setCurrentCoach(false);
                 //atualizar informação na árvore
                 c->addCoach(current);
-                cout << "Treinador destituido com sucesso!" << endl;
+                cout << "Coach was successfully dismissed!!" << endl;
                 waitInput();
             }
             catch(NoCoach &er) {
@@ -1806,7 +1811,6 @@ int menu_coach() {
     {
         case '1':
             while(!menu_show_coach());
-            waitInput();
             return 0;
         case '2':
             while(!menu_search_coach());
@@ -2579,8 +2583,7 @@ int menu_provider()
 
     cout << "========================================= " << endl;
     cout << "               Provider Menu              " << endl;
-    cout << "========================================= \n"
-         << endl;
+    cout << "========================================= \n" << endl;
 
     cout << "1. View all Providers" << endl;
     cout << "2. Search Provider" << endl;
@@ -2588,8 +2591,7 @@ int menu_provider()
     cout << "4. Update Provider" << endl;
     cout << "5. Remove Provider" << endl;
     cout << "6. Buy Equipment" << endl;
-    cout << "0. Return to Main Menu " << endl
-         << endl;
+    cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
     cin >> menu;
@@ -2603,24 +2605,19 @@ int menu_provider()
         waitInput();
         return 0;
     case '2':
-        while (!menu_search_provider())
-            ;
+        while (!menu_search_provider());
         return 0;
     case '3':
-        while (!menu_add_provider())
-            ;
+        while (!menu_add_provider());
         return 0;
     case '4':
-        while (!menu_update_provider())
-            ;
+        while (!menu_update_provider());
         return 0;
     case '5':
-        while (!menu_remove_provider())
-            ;
+        while (!menu_remove_provider());
         return 0;
     case '6':
-        while (!menu_buy_provider())
-            ;
+        while (!menu_buy_provider());
         return 0;
     case '0': // Exit
         return 1;

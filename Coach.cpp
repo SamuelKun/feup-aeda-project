@@ -144,11 +144,11 @@ void CoachTree::showMoreTitles(int num) {
     while (!it.isAtEnd()) {
         if(it.retrieve().getTitles() > num) {
             it.retrieve().show();
-            it.advance();
             index++;
         }
-        else return;
+        it.advance();
     }
+    if(index == 0) throw InvalidNumberTitles(num);
 }
 
 void CoachTree::showLessTitles(int num) {
@@ -161,6 +161,7 @@ void CoachTree::showLessTitles(int num) {
         }
         it.advance();
     }
+    if(index == 0) throw InvalidNumberTitles(num);
 }
 
 
