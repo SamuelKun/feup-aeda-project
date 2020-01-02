@@ -22,7 +22,7 @@ Team::Team(string file_name) {
 
     this->teamName = file_info[0];
     this->team_players = read_player(file_info[1]);
-    this->table = read_staff(file_info[2]);
+    this->team_staff = read_staff(file_info[2]);
     this->team_competitions = read_competion(file_info[3], this);
     this->coachs = read_coachs(file_info[4]);
     this->providers = read_providers(file_info[5]);
@@ -46,8 +46,8 @@ void Team::updateFile(string file_name) {
     }
 
     ofstream s(teamName + "staff.txt");
-    auto itTable = table.begin();
-    for(int i = 0;  itTable  != table.end(); itTable ++,i++){
+    auto itTable = team_staff.begin();
+    for(int i = 0;  itTable  != team_staff.end(); itTable ++,i++){
         s << (* itTable )<< endl;
         s << "-----" << endl;
     }
@@ -160,8 +160,9 @@ double Team::getMoneyPlayers() const {
 
 double Team::getMoneyStaff() const {
     double money = 0;
-    for (size_t i = 0; i < team_staff.size(); i++)
-        money += team_staff[i]->getSalary();
+    auto it = team_staff.begin();
+    for (;it != team_staff.end(); it++)
+        money += it->getSalary();
     return money;
 }
 
@@ -186,9 +187,9 @@ void Team::showPlayersTable() const {
 vector<int> Team::showStaffTable() const {
     cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
     cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
-    auto it = table.begin();
+    auto it = team_staff.begin();
     vector<int> vec;
-    for(int i = 0; it != table.end();i++, it++){
+    for(int i = 0; it != team_staff.end();i++, it++){
         if(it->isWorking1()){
             it->infoTable();
             cout << setw(6) <<  i << " |" << endl;
@@ -256,9 +257,9 @@ vector<Player *> Team::findPlayerName(string name) {
 }
 
 vector<Staff> Team::findStaffName(string name) {
-    auto it = table.begin();
+    auto it = team_staff.begin();
     vector<Staff> v_staff;
-    for( ; it != table.end(); it++) {
+    for( ; it != team_staff.end(); it++) {
         if (it->getName().find(name) != string::npos)
             v_staff.push_back(*it);
     }
@@ -279,9 +280,9 @@ vector<Player *> Team::findPlayerPos(string position) {
 }
 
 vector<Staff> Team::findStaffFunction(string function) {
-    auto it = table.begin();
+    auto it = team_staff.begin();
     vector<Staff> v_staff;
-    for( ; it != table.end(); it++) {
+    for( ; it != team_staff.end(); it++) {
         if (it->getFunction() == function)
             v_staff.push_back(*it);
     }
@@ -358,7 +359,7 @@ ProviderPriorityQueue * Team::getProviders() {
 
 
 const tabH &Team::getStaff() const {
-    return table;
+    return team_staff;
 }
 /*
 std::vector<Staff> Team::findStaffName(string name) {
@@ -371,21 +372,20 @@ std::vector<Staff> Team::findStaffName(string name) {
 }
 */
 void Team::addStaff(Staff *s) {
-    table.insert(*s);
-    team_staff.push_back(s);
+    team_staff.insert(*s);
 }
 
 void Team::deleteStaff(Staff s) {
-    auto it = table.find(s);
-    if( it != table.end()) table.erase(it);
+    auto it = team_staff.find(s);
+    if( it != team_staff.end()) team_staff.erase(it);
     else throw PersonNotFound(s.getName());
 }
 void Team::removeStaff(Staff s) {
-    auto it = table.find(s);
-    if( it != table.end()){
-        table.erase(it);
+    auto it = team_staff.find(s);
+    if( it != team_staff.end()){
+        team_staff.erase(it);
         s.setIsWorking(false);
-        table.insert(s);
+        team_staff.insert(s);
     }
     else throw PersonNotFound(s.getName());
 }
@@ -394,8 +394,8 @@ void Team::showStaff() {
     cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
     cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
     int i = 0;
-    auto it = table.begin();
-    for(int i = 0; it != table.end();it++,i++){
+    auto it = team_staff.begin();
+    for(int i = 0; it != team_staff.end();it++,i++){
         it->infoTable();
         cout << setw(6) <<  i << " |" << endl;
     }
@@ -404,9 +404,9 @@ void Team::showStaff() {
 int Team::showStaffRemoved() {
     cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
     cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
-    auto it = table.begin();
+    auto it = team_staff.begin();
     int i = 0;
-    for(; it != table.end();i++, it++){
+    for(; it != team_staff.end();i++, it++){
         if(!it->isWorking1()){
             it->infoTable();
             cout << setw(6) <<  i << " |" << endl;

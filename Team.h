@@ -36,9 +36,9 @@ private:
     std::string teamName;  ///< Team file
     CoachTree coachs; ///< Binary Search Tree with all coaches
     std::vector<Player *> team_players; ///< Vector with Team's players
-    std::vector<Staff *> team_staff; ///< Vector with Team's staff
+    //std::vector<Staff *> team_staff; ///< Vector with Team's staff
     std::vector<Competition *> team_competitions; ///< Vector with Team's competitions
-    tabH table; ///< Dispersion table
+    tabH team_staff; ///< Dispersion table
     ProviderPriorityQueue providers; ///< Priority Queue with Providers
 public:
     /// \brief Class Team empty constructor.
