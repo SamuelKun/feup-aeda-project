@@ -24,7 +24,7 @@ Team::Team(string file_name) {
     this->team_players = read_player(file_info[1]);
     this->team_staff = read_staff(file_info[2]);
     this->team_competitions = read_competion(file_info[3], this);
-    this->coachs = read_coachs(file_info[4]);
+    this->coaches = read_coachs(file_info[4]);
     this->providers = read_providers(file_info[5]);
     this->equip_buy = read_equipment(file_info[6]);
 }
@@ -85,7 +85,7 @@ void Team::updateFile(string file_name) {
     }
 
     ofstream coach_w(teamName + "coaches.txt");
-    BST<Coach> coach_tree = coachs.getTree();
+    BST<Coach> coach_tree = coaches.getTree();
     BSTItrIn<Coach> it(coach_tree);
     while (!it.isAtEnd()) {
         coach_w << it.retrieve().getName() << endl;
@@ -145,11 +145,23 @@ string Team::getTeamName() const {
 vector<Player *> Team::getPlayers() const {
     return team_players;
 }
-/*
-vector<Staff *> Team::getStaff() const {
+
+const tabH &Team::getStaff() const {
     return team_staff;
 }
-*/
+
+CoachTree * Team::getCoachs() {
+    return &coaches;
+}
+
+ProviderPriorityQueue * Team::getProviders() {
+    return &providers;
+}
+
+Equipment * Team::getEquipment() {
+    return &equip_buy;
+}
+
 vector<Competition *> Team::getCompetition() const {
     return team_competitions;
 }
@@ -223,15 +235,7 @@ void Team::sortPlayersPosition() {
 void Team::sortPlayersValue() {
     sort(team_players.begin(), team_players.end(), cmpValue);
 }
-/*
-void Team::sortStaffName() {
-    sort(team_staff.begin(), team_staff.end(), cmpName);
-}
 
-void Team::sortStaffFunction() {
-    sort(team_staff.begin(), team_staff.end(), cmpFunction);
-}
-*/
 void Team::addPlayer(Player* p) {
 
     if(p->getName() == "") throw CantUseThatName(p->getName());
@@ -244,19 +248,11 @@ void Team::addPlayer(Player* p) {
    team_players.push_back(p);
 }
 
-/*
-void Team::addStaff(Staff* s) {
-    if(s->getName() == "") throw CantUseThatName(s->getName());
-
-    for(size_t i = 0; i < team_staff.size();i++){
-        if(team_staff[i]->getName() == s->getName()){
-            throw PersonAlreadyExists(s->getName());
-        }
-    }
-
-    team_staff.push_back(s);
+void Team::addStaff(Staff *s) {
+    auto p = team_staff.insert(*s);
+    if (!p.second)
+        throw PersonAlreadyExists(s->getName());
 }
-*/
 
 vector<Player *> Team::findPlayerName(string name) {
     vector<Player *> v_players;
@@ -320,19 +316,13 @@ void Team::removePlayer( Player * p) {
         }
     }
 }
-/*
-void Team::removeStaff(Staff *s) {
-    bool found_staff = false;
-    for(size_t i = 0; i < team_staff.size();i++){
-        if(team_staff[i]->getName() == s->getName()){
-            found_staff = true;
-            team_staff.erase(team_staff.begin()+i);
-            break;
-        }
-    }
-    if(!found_staff) throw (PersonNotFound(s->getName()));
+
+void Team::deleteStaff(Staff s) {
+    auto it = team_staff.find(s);
+    if( it != team_staff.end()) team_staff.erase(it);
+    else throw PersonNotFound(s.getName());
 }
-*/
+
 double Team::getMoneyAccommodation() const {
     double money = 0;
     for (size_t i = 0; i < team_competitions.size(); i++)
@@ -362,43 +352,7 @@ void Team::removeCompetition(Competition *c) {
     }
 }
 
-CoachTree * Team::getCoachs() {
-    return &coachs;
-}
-
-ProviderPriorityQueue * Team::getProviders() {
-    return &providers;
-}
-
-Equipment * Team::getEquipment() {
-    return &equip_buy;
-}
-
-const tabH &Team::getStaff() const {
-    return team_staff;
-}
-
-/*
-std::vector<Staff> Team::findStaffName(string name) {
-    vector<Staff> v;
-    for (const auto& stf : table){
-        if( stf.getName().find(name) != string::npos) v.push_back(stf);
-    }
-    if(v.empty()) throw PersonNotFound(name);
-    else return v;
-}
-*/
-
-void Team::addStaff(Staff *s) {
-    auto p = team_staff.insert(*s);
-    if (!p.second) throw PersonAlreadyExists(s->getName());
-}
-
-void Team::deleteStaff(Staff s) {
-    auto it = team_staff.find(s);
-    if( it != team_staff.end()) team_staff.erase(it);
-    else throw PersonNotFound(s.getName());
-}
+//Aqui abaixo
 void Team::removeStaff(Staff s) {
     auto it = team_staff.find(s);
     if( it != team_staff.end()){

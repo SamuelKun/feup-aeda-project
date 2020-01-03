@@ -246,22 +246,6 @@ bool cmpPosition(const Player * p1, const Player * p2){
     return p1v < p2v;
 }
 
-/// \brief Compares the function of 2 Staff
-/// \param p1 Pointer to Staff1
-/// \param p2 Pointer to Staff2
-/// \return true if function of Staff1 come first alphabetically
-bool cmpFunction(const Staff * p1, const Staff * p2){
-    std::string pos[2] = {"Coach", "Doctor"};
-    int p1v, p2v;
-    for(size_t i = 0; i < 2; i++)
-        if (pos[i] == p1->getFunction()) p1v = i;
-
-    for(size_t i = 0; i < 2; i++)
-        if (pos[i] == p2->getFunction()) p2v = i;
-
-    return p1v < p2v;
-}
-
 /// \brief Compares the value of 2 Players
 /// \param p1 Pointer to Player1
 /// \param p2 Pointer to Player2

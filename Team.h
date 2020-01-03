@@ -35,7 +35,7 @@ typedef unordered_set<Staff, hashing, equall> tabH;
 class Team {
 private:
     std::string teamName;  ///< Team file
-    CoachTree coachs; ///< Binary Search Tree with all coaches
+    CoachTree coaches; ///< Binary Search Tree with all coaches
     std::vector<Player *> team_players; ///< Vector with Team's players
     std::vector<Competition *> team_competitions; ///< Vector with Team's competitions
     tabH team_staff; ///< Dispersion table with Team's Staff Members
@@ -61,9 +61,17 @@ public:
     /// \return vector of Team's Players pointers
     std::vector<Player *> getPlayers() const;
 
-    /// \brief Get Method.
-    /// \return vector of Team's Staff Members pointers
-    //std::vector<Staff *> getStaff() const;
+    /// \brief Get Method
+    /// \return Coach Tree of Team's Coaches
+    CoachTree * getCoachs();
+
+    /// \brief Function to get the Providers of the National Team.
+    /// \return Pointer to a Priority Queue with all the Providers
+    ProviderPriorityQueue * getProviders();
+
+    /// \brief Get Method
+    /// \return Staff Members in a dispersion table
+    const tabH &getStaff() const;
 
     /// \brief Get Method.
     /// \return vector of Team's Games pointers
@@ -81,9 +89,9 @@ public:
     /// \param p Player pointer to add
     void addPlayer(Player* p);
 
-    /// \brief Adds a Staff Member pointer to the vector of Team's Staff Member pointers.
-    /// \param s Staff Member pointer to add
-    //void addStaff(Staff * s);
+    /// \brief Adds a Staff Members to the Dispersion Table
+    /// \param s Staff Member to be added as a pointer
+    void addStaff(Staff *s);
 
     /// \brief Adds a Competition pointer to the vector of Team's Competition pointers.
     /// \param c Competition pointer to add
@@ -93,9 +101,9 @@ public:
     /// \param p Player pointer to be removed
     void removePlayer(Player * p);
 
-    /// \brief Removes a Staff Member pointer from the vector of Team's Staff Members pointers.
-    /// \param s Staff Member pointer to be removed
-    //void removeStaff(Staff * s);
+    /// \brief Deletes a Staff Member from the Dispersion Table
+    /// \param s Staff Member to be deleted
+    void deleteStaff(Staff s);
 
     /// \brief Removes a Competition from the vector of Team's Competitions
     /// \param c
@@ -133,12 +141,6 @@ public:
     /// \brief Sorts team_players by value
     void sortPlayersValue();
 
-    /// \brief Sorts team_staff by name
-    //void sortStaffName();
-
-    /// \brief Sorts team_staff by function
-    //void sortStaffFunction();
-
     /// \brief Finds a Player in the Team by its name.
     /// \param name Player's name
     /// \return Pointer for Player with the indicated name, throws exception otherwise
@@ -164,29 +166,10 @@ public:
     /// \return Vector with pointers for Staff Members with this function
     std::vector<Staff> findStaffFunction(std::string function);
 
-    /// \brief Get Method
-    /// \return Coach Tree of Team's Coaches
-    CoachTree * getCoachs();
-
-    /// \brief Function to get the Providers of the National Team.
-    /// \return Pointer to a Priority Queue with all the Providers
-    ProviderPriorityQueue * getProviders();
-
+    //Para ordenar ainda falta estes em baixo
     /// \brief Function to get the Equipment of the National Team.
     /// \return Pointer to a Equipment Structure with all the Items
     Equipment * getEquipment();
-
-    /// \brief Get Method
-    /// \return Staff Members in a dispersion table
-    const tabH &getStaff() const;
-
-    /// \brief Adds a Staff Members to the Dispersion Table
-    /// \param s Staff Member to be added as a pointer
-    void addStaff(Staff *s);
-
-    /// \brief Deletes a Staff Member from the Dispersion Table
-    /// \param s Staff Member to be deleted
-    void deleteStaff(Staff s);
 
     /// \brief Removes a Staff member from working, setting his status has a former worker
     /// \param s Staff Member to be removed
