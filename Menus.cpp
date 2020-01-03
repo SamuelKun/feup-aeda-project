@@ -372,6 +372,8 @@ int menu_view_staff(){
     cout << "1. View Current Staff Members" << endl;
     cout << "2. View Old Staff Members" << endl;
     cout << "3. View All Staff Members" << endl;
+    cout << "4. View All Staff Members sorted by Name" << endl;
+    cout << "5. View All Staff Members sorted by Function" << endl;
     cout << "0. Return to Dispersion Table Menu" << endl << endl;
 
     cin.clear();
@@ -388,6 +390,14 @@ int menu_view_staff(){
             return 0;
         case '3':
             national_team->showStaff();
+            waitInput();
+            return 0;
+        case '4':
+            national_team->sortStaffName();
+            waitInput();
+            return 0;
+        case '5':
+            national_team->sortStaffFunction();
             waitInput();
             return 0;
         case '0':
@@ -513,13 +523,14 @@ int menu_update_staff(){
                 continue;
             } else {
 
+                cin.ignore(1000,'\n');
                 auto it = national_team->getStaff().begin();
                 for(int i = 0; i < index ;i++, it++){}
                 string name = it->getName();
                 auto staff = new Staff(name,it->getBirthday(),it->getSalary(),it->getFunction(), true);
-                national_team->deleteStaff(*staff);
+                national_team->removeStaff(*staff);
 
-                string new_name, changed = "nothing";
+                string new_name, changed = "nothing", checker;
                 string function;
                 Date birthday;
                 double salary;
@@ -530,8 +541,8 @@ int menu_update_staff(){
                 cout << "2. Change birthday" << endl;
                 cout << "3. Change function" << endl;
                 cout << "4. Change salary" << endl;
+                cout << "5. Change Working Status" << endl << endl;
 
-                cin.ignore(1000,'\n');
                 cin >> n;
                 cin.ignore(1000, '\n');
 
@@ -560,12 +571,44 @@ int menu_update_staff(){
                         staff->setSalary(salary);
                         changed = "salary";
                         break;
+                    case '5':
+                        if( staff->isWorking1()){
+                            cout << name << " is currently working, do you want do dismiss him?" << endl;
+                            cout << "Press 1 to dismiss him " << endl;
+                            cout << "Press any other key to do keep his working status" << endl;
+                            getline(cin,checker);
+                            if (checker != "1"){
+                                changed = "working status was not changed!!";
+                            }
+                            else{
+                                staff->setIsWorking(false);
+                                cout << name << " was dismissed!!" << endl;
+                                changed = "working status";
+                            }
+                        }
+                        else{
+                            cout << name << " is a former Staff Member, do you want do hire him again?" << endl;
+                            cout << "Press 1 to hire him, any other key otherwise" << endl;
+                            cout << "Press any other key to do keep his working status" << endl;
+                            getline(cin,checker);
+                            if (checker != "1"){
+                                changed = "working status was not changed!!";
+                            }
+                            else{
+                                staff->setIsWorking(true);
+                                cout << name << " was hired again!!" << endl;
+                                changed = "working status";
+                            }
+                        }
                     default:
                         break;
                 }
                 national_team->addStaff(staff);
                 national_team->showStaff();
-                if (changed != "nothing")
+                if(changed == "working status was not changed!!"){
+                    cout << changed << endl;
+                }
+                else if (changed != "nothing")
                     cout << name << "'s " << changed << " was sucessfully changed." << endl;
                 else cout << "Invalid Index!! No changes were made." << endl;
                 cout << "Write the index of another Player you wish to update." << endl;
@@ -603,7 +646,7 @@ int menu_remove_staff() {
             for(int i = 0; i < index ;i++, it++){}
             string name = it->getName();
             auto temp = new Staff(it->getName(),it->getBirthday(),it->getSalary(),it->getFunction(), false);
-            national_team->removeStaff(*temp);
+            national_team->setStaffNotWorking(*temp);
             vec = national_team->showStaffTable();
             cout << name << " was successfully removed!!" << endl;
             cout << "Press [a] or other letter to exit." << endl;

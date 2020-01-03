@@ -253,5 +253,18 @@ bool cmpPosition(const Player * p1, const Player * p2){
 bool cmpValue(const Player * p1, const Player * p2){
     return p1->getValue() > p2->getValue();
 }
-
+/// \brief Compares the name of 2 Staff Members
+/// \param s1 Staff Member 1
+/// \param s2 Staff Member 2
+/// \return True if p1's name is first alphabetically, false otherwise
+bool cmpStaffName(const Person s1, const Person s2){
+    return s1.getName() < s2.getName();
+}
+/// \brief Compares the function of 2 Staff Members
+/// \param s1 Staff Member 1
+/// \param s2 Staff Member 2
+/// \return True if s1's function is first alphabetically, false otherwise
+bool cmpFunction(const Staff s1 , const Staff s2){
+    return s1.getFunction() < s2.getFunction();
+}
 #endif //AEDA_UTILS_H

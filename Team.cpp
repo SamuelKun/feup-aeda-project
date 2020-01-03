@@ -317,7 +317,7 @@ void Team::removePlayer( Player * p) {
     }
 }
 
-void Team::deleteStaff(Staff s) {
+void Team::removeStaff(Staff s) {
     auto it = team_staff.find(s);
     if( it != team_staff.end()) team_staff.erase(it);
     else throw PersonNotFound(s.getName());
@@ -353,7 +353,7 @@ void Team::removeCompetition(Competition *c) {
 }
 
 //Aqui abaixo
-void Team::removeStaff(Staff s) {
+void Team::setStaffNotWorking(Staff s) {
     auto it = team_staff.find(s);
     if( it != team_staff.end()){
         team_staff.erase(it);
@@ -388,7 +388,41 @@ int Team::showStaffRemoved() {
     return i;
 }
 
+void Team::sortStaffName() {
 
+    auto it = team_staff.begin();
+    vector<Staff> v;
+    for(;it != team_staff.end();it++){
+        v.push_back(*it);
+    }
+    sort(v.begin(), v.end(), cmpStaffName);
+    cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
+    cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
+
+    for(size_t i = 0; i < v.size();i++){
+        v[i].infoTable();
+        cout << setw(6) <<  i << " |" << endl;
+    }
+
+}
+
+void Team::sortStaffFunction() {
+
+
+    auto it = team_staff.begin();
+    vector<Staff> v;
+    for(;it != team_staff.end();it++){
+        v.push_back(*it);
+    }
+    sort(v.begin(), v.end(), cmpFunction);
+    cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
+    cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
+
+    for(size_t i = 0; i < v.size();i++){
+        v[i].infoTable();
+        cout << setw(6) <<  i << " |" << endl;
+    }
+}
 
 
 

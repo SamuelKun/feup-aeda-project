@@ -103,7 +103,7 @@ public:
 
     /// \brief Deletes a Staff Member from the Dispersion Table
     /// \param s Staff Member to be deleted
-    void deleteStaff(Staff s);
+    void removeStaff(Staff s);
 
     /// \brief Removes a Competition from the vector of Team's Competitions
     /// \param c
@@ -173,7 +173,7 @@ public:
 
     /// \brief Removes a Staff member from working, setting his status has a former worker
     /// \param s Staff Member to be removed
-    void removeStaff(Staff s);
+    void setStaffNotWorking(Staff s);
 
     /// \brief Shows all Staff Members from the table
     void showStaff();
@@ -181,6 +181,11 @@ public:
     /// \brief Shows all Staff Members that used to work from the table
     int showStaffRemoved();
 
+    /// \brief Sorts team_staff by name
+    void sortStaffName();
+
+    /// \brief Sorts team_staff by function
+    void sortStaffFunction();
 };
 
 #endif
