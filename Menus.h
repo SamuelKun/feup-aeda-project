@@ -27,25 +27,21 @@ int menu_removePlayer();
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_players();
 
-/// \briefA table with information of all players where is possible to sort
+/// \brief Menu to view Staff Members.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
-int menu_allStaff();
+int menu_view_staff();
 
-/// \brief Menu for searching Staff Members by Name or Position.
+/// \brief Menu to Add Staff Members.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
-int menu_searchStaffMembers();
+int menu_add_staff();
 
-/// \brief Menu to add Staff members
+/// \brief Menu to Update Staff Members.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
-int menu_addStaff();
+int menu_update_staff();
 
-/// \brief Menu to update Staff members
+/// \brief Menu to Remove Staff Members.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
-int menu_updateStaff();
-
-/// \brief Menu to remove Staff members
-/// \return if 0 the menu is called again, 1 goes back to the previous menu
-int menu_removeStaff();
+int menu_remove_staff();
 
 /// \brief All Staff Member information is here.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
@@ -135,22 +131,6 @@ int menu_update_coach();
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_remove_coach();
 
-
-/// \brief Menu that allows the user to Search, Add, Update and Remove Staff Members.
-/// \return if 0 the menu is called again, 1 goes back to the previous menu
-int menuDispersionTable();
-/// \brief Menu to view Staff Members.
-/// \return if 0 the menu is called again, 1 goes back to the previous menu
-int menu_view_dispersion();
-/// \brief Menu to Update Staff Members.
-/// \return if 0 the menu is called again, 1 goes back to the previous menu
-int menu_update_dispersion();
-/// \brief Menu to Remove Staff Members.
-/// \return if 0 the menu is called again, 1 goes back to the previous menu
-int menu_remove_dispersion();
-/// \brief Menu to Add Staff Members.
-/// \return if 0 the menu is called again, 1 goes back to the previous menu
-int menu_add_dispersion();
 
 /// \brief Menu that allows the user to Search, Add, Update and Remove Providers.
 /// \return if 0 the menu is called again, 1 goes back to main menu

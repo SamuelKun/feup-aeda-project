@@ -377,6 +377,7 @@ Equipment * Team::getEquipment() {
 const tabH &Team::getStaff() const {
     return team_staff;
 }
+
 /*
 std::vector<Staff> Team::findStaffName(string name) {
     vector<Staff> v;
@@ -387,6 +388,7 @@ std::vector<Staff> Team::findStaffName(string name) {
     else return v;
 }
 */
+
 void Team::addStaff(Staff *s) {
     auto p = team_staff.insert(*s);
     if (!p.second) throw PersonAlreadyExists(s->getName());
