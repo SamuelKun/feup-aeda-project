@@ -42,6 +42,7 @@ void Provider::showItem(int item) const {
             break;
         case 6:
             std::cout << "Tactics Board: " << equipment.tactics_board << std::endl;
+            break;
         case 7:
             std::cout << "Medical Kit: " << equipment.medical_kit << std::endl;
             break;

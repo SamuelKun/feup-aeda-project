@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "Statistics.h"
 #include "Provider.h"
+#include "Team.h"
 
 CoachTree read_coachs(std::string file) {
     CoachTree coachs;
@@ -69,6 +70,35 @@ ProviderPriorityQueue read_providers(std::string info){
     }
 
     return providers;
+}
+
+/// \brief Reads a equipment from a .txt file.
+/// \param info .txt file containing all Equipment Items
+/// \return Equipment Structure belonging to a national team
+Equipment read_equipment(std::string info){
+    std::ifstream equipment_info(info);
+    Equipment aux;
+    std::string str_temp;
+
+    getline(equipment_info, str_temp);
+    aux.football_kit = stoi(str_temp);
+    getline(equipment_info, str_temp);
+    aux.balls = stoi(str_temp);
+    getline(equipment_info, str_temp);
+    aux.football_boots = stoi(str_temp);
+    getline(equipment_info, str_temp);
+    aux.cones = stoi(str_temp);
+    getline(equipment_info, str_temp);
+    aux.goal = stoi(str_temp);
+    getline(equipment_info, str_temp);
+    aux.tactics_board = stoi(str_temp);
+    getline(equipment_info, str_temp);
+    aux.medical_kit = stoi(str_temp);
+    getline(equipment_info, str_temp);
+    aux.water_bottles = stoi(str_temp);
+
+
+    return aux;
 }
 
 

@@ -26,6 +26,7 @@ Team::Team(string file_name) {
     this->team_competitions = read_competion(file_info[3], this);
     this->coachs = read_coachs(file_info[4]);
     this->providers = read_providers(file_info[5]);
+    this->equip_buy = read_equipment(file_info[6]);
 }
 
 void Team::updateFile(string file_name) {
@@ -37,6 +38,7 @@ void Team::updateFile(string file_name) {
     init << teamName + "competition.txt" << endl;
     init << teamName + "coaches.txt" << endl;
     init << teamName + "providers.txt" << endl;
+    init << teamName + "equipment.txt" << endl;
 
 
     ofstream p(teamName + "players.txt");
@@ -118,6 +120,17 @@ void Team::updateFile(string file_name) {
         pr << "-----" << endl;
         aux.pop();
     }
+
+    ofstream eq(teamName + "equipment.txt");
+    Equipment * equip5 = getEquipment();
+    eq << equip5->football_kit << endl;
+    eq << equip5->balls << endl;
+    eq << equip5->football_boots << endl;
+    eq << equip5->cones << endl;
+    eq << equip5->goal << endl;
+    eq << equip5->tactics_board << endl;
+    eq << equip5->medical_kit << endl;
+    eq << equip5->water_bottles << endl;
 }
 
 void Team::setTeamName(string team_name) {
@@ -357,6 +370,9 @@ ProviderPriorityQueue * Team::getProviders() {
     return &providers;
 }
 
+Equipment * Team::getEquipment() {
+    return &equip_buy;
+}
 
 const tabH &Team::getStaff() const {
     return team_staff;

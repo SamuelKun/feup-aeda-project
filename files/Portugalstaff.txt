@@ -1,13 +1,13 @@
-Fernando Justino
-14/10/1960
-100
-GKCoach
-0
------
 Ilidio Vale
 13/12/1957
 100
 Assistent
+0
+-----
+Fernando Justino
+14/10/1960
+100
+GKCoach
 0
 -----
 Jorge Rosario
@@ -16,14 +16,14 @@ Jorge Rosario
 Obervator
 1
 -----
-Ricardo Santos
-1/9/1981
+Joao Costa
+23/6/1973
 100
 Assistent
 1
 -----
-Joao Costa
-23/6/1973
+Ricardo Santos
+1/9/1981
 100
 Assistent
 1

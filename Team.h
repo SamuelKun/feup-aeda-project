@@ -40,6 +40,7 @@ private:
     std::vector<Competition *> team_competitions; ///< Vector with Team's competitions
     tabH team_staff; ///< Dispersion table with Team's Staff Members
     ProviderPriorityQueue providers; ///< Priority Queue with Providers
+    Equipment equip_buy; ///< Equipment Structure with All Equipment Itens of National Team
 public:
     /// \brief Class Team empty constructor.
     Team();
@@ -170,6 +171,10 @@ public:
     /// \brief Function to get the Providers of the National Team.
     /// \return Pointer to a Priority Queue with all the Providers
     ProviderPriorityQueue * getProviders();
+
+    /// \brief Function to get the Equipment of the National Team.
+    /// \return Pointer to a Equipment Structure with all the Items
+    Equipment * getEquipment();
 
     /// \brief Get Method
     /// \return Staff Members in a dispersion table
