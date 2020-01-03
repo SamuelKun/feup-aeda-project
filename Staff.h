@@ -10,7 +10,7 @@ class Staff : public Person
 private:
     double salary;           ///< Staff's salary
     std::string function;    ///< Staff's function
-    bool isWorking;          ///< True if the Staff member is working in the team. False to old staff members
+    bool isWorking;          ///< Staff's working status
 public:
     /// \brief Staff Constructor.
     /// \param name Staff's name
@@ -39,11 +39,19 @@ public:
     /// \param s Staff Member that will be shown
     /// \return Ostream to llow showing Staff Member's data
     friend std::ostream &operator<<(std::ostream &out, const Staff &s);
+    /// \brief Overload of operator == to compare Staff Members by name.
+    /// \param s2 Staff Member to compare with
+    /// \return true if s2 has the same name as the object, false otherwise
     bool operator == (const Staff &s2);
+    /// \brief Overload of operator < to sort Staff Member's by name, alphabetically.
+    /// \param s2 Staff member to compare with
+    /// \return true if the object is first, alphabetically, false otherwise
     bool operator < (const Staff &s2);
-
+    /// \brief Equivalent to a Get Method.
+    /// \return true if Staff memberis working, false otherwise
     bool isWorking1() const;
-
+    /// \brief Set Method.
+    /// \param isWorking new working status for the Staff Member
     void setIsWorking(bool isWorking);
 };
 

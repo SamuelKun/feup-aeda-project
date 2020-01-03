@@ -3,7 +3,7 @@
 
 #include "Competition.h"
 #include <string>
-/// \brief table with information of all players where is possible to sort
+/// \brief table with information of all players where is possible to sort.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_allPlayers();
 
@@ -11,15 +11,15 @@ int menu_allPlayers();
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_searchPlayers();
 
-/// \brief Menu to add a new Player
+/// \brief Menu to add a new Player.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_addPlayer();
 
-/// \brief Menu to update Players
+/// \brief Menu to update Players.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_updatePlayers();
 
-/// \brief Menu to remove players
+/// \brief Menu to remove players.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_removePlayer();
 
@@ -51,7 +51,7 @@ int menu_removeStaff();
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_staff();
 
-/// \brief Menu to Search Games
+/// \brief Menu to Search Games.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_searchGame();
 
@@ -59,39 +59,39 @@ int menu_searchGame();
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_games();
 
-/// \brief Menu to pay competition fees to players
+/// \brief Menu to pay competition fees to players.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_payCompetitions();
 
-/// \brief Show games for one particular competition
+/// \brief Show games for one particular competition.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_competitionGames(Competition * comp);
 
-/// \brief Show called players in one competetition
+/// \brief Show called players in one competition.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_calledCompetition(Competition* comp);
 
-/// \brief Show detailed information about one competition
+/// \brief Show detailed information about one competition.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_detailedCompetition(Competition * comp);
 
-/// \brief Menu to select a competition to see deatailed information about
+/// \brief Menu to select a competition to see detailed information about.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_chooseCompetition();
 
-/// \brief Menu to create a new Competition
+/// \brief Menu to create a new Competition.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_creatCompetition();
 
-/// \brief Menu to update a Competition
+/// \brief Menu to update a Competition.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_updateCompetition();
 
-/// \brief Menu to remove a Competition
+/// \brief Menu to remove a Competition.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_removeCompetition();
 
-/// \brief This menu show Competition Information
+/// \brief This menu show Competition Information.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_tournaments();
 
@@ -118,18 +118,38 @@ int createNewTeamMenu();
 /// \brief Menu that either allows the user to open a file or create a new one.
 /// \return if 0 the menu is called again, 1 program ends
 int initMenu();
-//Menus para a árvore binária
 
+/// \brief Menu that allows the user to Search, Add, Update and Remove Coaches.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_coach();
+/// \brief Menu to Search Coaches.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_search_coach();
+/// \brief Menu to add Coaches.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_add_coach();
+/// \brief Menu to update Coaches.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_update_coach();
+/// \brief Menu to remove Coaches.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_remove_coach();
-//Menus para a tabela de disperção
+
+
+/// \brief Menu that allows the user to Search, Add, Update and Remove Staff Members.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menuDispersionTable();
+/// \brief Menu to view Staff Members.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_view_dispersion();
+/// \brief Menu to Update Staff Members.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_update_dispersion();
+/// \brief Menu to Remove Staff Members.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_remove_dispersion();
+/// \brief Menu to Add Staff Members.
+/// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_add_dispersion();
 
 /// \brief Menu that allows the user to Search, Add, Update and Remove Providers.

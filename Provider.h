@@ -81,10 +81,19 @@ public:
     /// \param new_value New value of the item quantity
     void setEquipment2(int item, int new_value);
 
+    /// \brief Overload of < operator comparing them by reputation
+    /// \param p Provider ot compare the object with
+    /// \return true if object's reputation is lower than p's reputation
     bool operator < (const Provider &p) const;
 
+    /// \brief Overload of == operator comparing them by reputation
+    /// \param p Provider ot compare the object with
+    /// \return true if objects' reputation is the same, false otherwise
     bool operator == (const Provider &p) const;
 
+    /// \brief Overload of != operator comparing them by reputation
+    /// \param p Provider ot compare the object with
+    /// \return true if objects' reputation is different, false if equal
     bool operator != (const Provider &p) const;
 };
 

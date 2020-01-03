@@ -11,9 +11,9 @@
 #include "Competition.h"
 #include "Provider.h"
 
+/// \brief Dispersion Table hash function
 struct hashing {
     int operator()(const Staff & s) const {
-        //Função de hash, redefinir mais tarde
         int v = 0;
         std::string name = s.getName();
         for (char i : name)
@@ -21,13 +21,14 @@ struct hashing {
         return v;
     }
 };
+/// \brief Dispersion Table equality function
 struct equall{
     bool operator() (const Staff& s1, const Staff& s2) const
     {
         return s1.getName() == s2.getName();
     }
 };
-
+/// \brief Defining a dispersion table as an unordered set
 typedef unordered_set<Staff, hashing, equall> tabH;
 
 /// \brief Class for a Team.
@@ -36,9 +37,8 @@ private:
     std::string teamName;  ///< Team file
     CoachTree coachs; ///< Binary Search Tree with all coaches
     std::vector<Player *> team_players; ///< Vector with Team's players
-    //std::vector<Staff *> team_staff; ///< Vector with Team's staff
     std::vector<Competition *> team_competitions; ///< Vector with Team's competitions
-    tabH team_staff; ///< Dispersion table
+    tabH team_staff; ///< Dispersion table with Team's Staff Members
     ProviderPriorityQueue providers; ///< Priority Queue with Providers
 public:
     /// \brief Class Team empty constructor.
@@ -119,7 +119,8 @@ public:
     /// \brief Shows Team's Players' info as a Table.
     void showPlayersTable() const;
 
-    /// \brief Shows Team's Players' info.
+    /// \brief Shows Staff Player's currently working members
+    /// \return Vector of the index of Staff Members that still work there
     std::vector<int> showStaffTable() const;
 
     /// \brief Sorts team_players by name.
@@ -162,30 +163,34 @@ public:
     /// \return Vector with pointers for Staff Members with this function
     std::vector<Staff> findStaffFunction(std::string function);
 
+    /// \brief Get Method
+    /// \return Coach Tree of Team's Coaches
     CoachTree * getCoachs();
 
     /// \brief Function to get the Providers of the National Team.
     /// \return Pointer to a Priority Queue with all the Providers
     ProviderPriorityQueue * getProviders();
 
-    //std::vector<Staff> findStaffName(string name);
-
-    //Get staff
+    /// \brief Get Method
+    /// \return Staff Members in a dispersion table
     const tabH &getStaff() const;
 
-    //Adicionar staff
+    /// \brief Adds a Staff Members to the Dispersion Table
+    /// \param s Staff Member to be added as a pointer
     void addStaff(Staff *s);
 
-    //Delete staff
+    /// \brief Deletes a Staff Member from the Dispersion Table
+    /// \param s Staff Member to be deleted
     void deleteStaff(Staff s);
 
-    //Remove staff
+    /// \brief Removes a Staff member from working, setting his status has a former worker
+    /// \param s Staff Member to be removed
     void removeStaff(Staff s);
 
-    //Mostrar staff
+    /// \brief Shows all Staff Members from the table
     void showStaff();
 
-    //Mostrar removido
+    /// \brief Shows all Staff Members that used to work from the table
     int showStaffRemoved();
 
 };
