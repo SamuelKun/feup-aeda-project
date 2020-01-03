@@ -1983,7 +1983,6 @@ int menu_buy_provider() {
 
     int menu = -1;
     int num_item = -1;
-    int ver = 0;
 
     cout << "========================================= " << endl;
     cout << "           Equipment Buy Menu             " << endl;
@@ -2027,7 +2026,6 @@ int menu_buy_provider() {
                 if (num_item <= units) {
                     p->updateEquipmentItem(to_print[0], menu, units-num_item);
                     cout << "The item Football Kit was bought successfully. Number of units selled: " << num_item << endl;
-                    ver = 1;
                     equip_aux->football_kit += num_item;
                 } else {
                     cout << "The Provider doesn't have enough items of type Football Kit." << endl;
@@ -2038,7 +2036,6 @@ int menu_buy_provider() {
                 if (num_item <= units) {
                     p->updateEquipmentItem(to_print[0], menu, units-num_item);
                     cout << "The item Balls was bought successfully. Number of units selled: " << num_item << endl;
-                    ver = 1;
                     equip_aux->balls += num_item;
                 } else {
                     cout << "The Provider doesn't have enough items of type Balls." << endl;
@@ -2049,7 +2046,6 @@ int menu_buy_provider() {
                 if (num_item <= units) {
                     p->updateEquipmentItem(to_print[0], menu, units-num_item);
                     cout << "The item Football Boots was bought successfully. Number of units selled: " << num_item << endl;
-                    ver = 1;
                     equip_aux->football_boots += num_item;
                 } else {
                     cout << "The Provider doesn't have enough items of type Football Boots." << endl;
@@ -2060,7 +2056,6 @@ int menu_buy_provider() {
                 if (num_item <= units) {
                     p->updateEquipmentItem(to_print[0], menu, units-num_item);
                     cout << "The item Cones was bought successfully. Number of units selled: " << num_item << endl;
-                    ver = 1;
                     equip_aux->cones += num_item;
                 } else {
                     cout << "The Provider doesn't have enough items of type Cones." << endl;
@@ -2071,7 +2066,6 @@ int menu_buy_provider() {
                 if (num_item <= units) {
                     p->updateEquipmentItem(to_print[0], menu, units-num_item);
                     cout << "The item Goal was bought successfully. Number of units selled: " << num_item << endl;
-                    ver = 1;
                     equip_aux->goal += num_item;
                 } else {
                     cout << "The Provider doesn't have enough items of type Goal." << endl;
@@ -2082,7 +2076,6 @@ int menu_buy_provider() {
                 if (num_item <= units) {
                     p->updateEquipmentItem(to_print[0], menu, units-num_item);
                     cout << "The item Tactics Board was bought successfully. Number of units selled: " << num_item << endl;
-                    ver = 1;
                     equip_aux->tactics_board += num_item;
                 } else {
                     cout << "The Provider doesn't have enough items of type Tactics Board." << endl;
@@ -2093,7 +2086,6 @@ int menu_buy_provider() {
                 if (num_item <= units) {
                     p->updateEquipmentItem(to_print[0], menu, units-num_item);
                     cout << "The item Medical Kit was bought successfully. Number of units selled: " << num_item << endl;
-                    ver = 1;
                     equip_aux->medical_kit += num_item;
                 } else {
                     cout << "The Provider doesn't have enough items of type Medical Kit." << endl;
@@ -2104,7 +2096,6 @@ int menu_buy_provider() {
                 if (num_item <= units) {
                     p->updateEquipmentItem(to_print[0], menu, units-num_item);
                     cout << "The item Water Bottles was bought successfully. Number of units selled: " << num_item << endl;
-                    ver = 1;
                     equip_aux->water_bottles += num_item;
                 } else {
                     cout << "The Provider doesn't have enough items of type Water Bottles." << endl;
@@ -2113,14 +2104,8 @@ int menu_buy_provider() {
             default:
                 break;
         }
-
-    } else {
-        cout << "There's no Provider with that item." << endl;
-    }
-
-    char answer;
-    double new_rep = 5.1;
-    if (ver == 1) {
+        char answer;
+        double new_rep = 5.1;
         cout << "Would you like to set a new Reputation of Provider " << to_print[0].getName() << "? [y/N]" << endl;
         cin >> answer;
         cin.ignore(1000, '\n');
@@ -2138,7 +2123,10 @@ int menu_buy_provider() {
             default:
                 break;
         }
+    } else {
+        cout << "There's no Provider with that item." << endl;
     }
+
     return 0;
 }
 
