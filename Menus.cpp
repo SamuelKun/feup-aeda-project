@@ -1929,288 +1929,6 @@ int menu_coach() {
 
 
 // Provider's Menus
-int menu_remove_provider()
-{
-    string name_provider;
-    double rep = 5.1;
-    int n;
-    ProviderPriorityQueue *p = national_team->getProviders();
-    vector<Provider> to_print;
-
-    char menu = '3';
-
-    cout << "========================================= " << endl;
-    cout << "         Provider's Remove Menu           " << endl;
-    cout << "========================================= \n"
-         << endl;
-
-    cout << "1. Remove By Provider's Name" << endl;
-    cout << "2. Remove By Provider's Reputation" << endl;
-    cout << "0. Return to Previous Menu" << endl
-         << endl;
-
-    while (menu != '1' && menu != '2' && menu != '0')
-    {
-        cin.clear();
-        cin >> menu;
-        cin.ignore(1000, '\n');
-    }
-
-    switch (menu)
-    {
-    case '1':
-        cout << "Provider name:" << endl;
-        getline(cin, name_provider);
-
-        to_print = p->searchName(name_provider);
-        for (size_t i = 0; i < to_print.size(); i++)  {
-            cout << "Index: " << i << endl;
-            to_print[i].showInfo();
-            cout << "-----------------------------------" << endl
-                 << endl;
-        }
-
-        break;
-    case '2':
-        while (rep < 0.0 || rep > 5.0) {
-            cout << "Provider's Reputation: (Please write a number between 0.0 and 5.0)" << endl;
-            cin >> rep; failInput(rep); cin.ignore(1000,'\n');
-        }
-
-        to_print = p->searchReputation(rep);
-        for (size_t i = 0; i < to_print.size(); i++)
-        {
-            cout << "Index: " << i << endl;
-            to_print[i].showInfo();
-            cout << "-----------------------------------" << endl
-                 << endl;
-        }
-        break;
-    case '0':
-        return 1;
-    }
-    if (!to_print.empty()) {
-        cout << "Choose index: " << endl;
-        cin >> n; failInput(n); cin.ignore(1000, '\n');
-        if (n < to_print.size()) {
-            p->removeProvider(to_print[n]);
-            cout << "Removed successfully!" << endl;
-        }
-        else {
-            cout << "Index invalid" << endl;
-        }
-    } else if (menu == '1') {
-        cout << "The Provider " << name_provider << " doesn't exist." << endl;
-    } else {
-        cout << "There's no Provider with a reputation equal or higher than " << rep << "." << endl;
-    }
-    waitInput();
-    return 0;
-}
-
-int menu_update_provider()
-{
-    string name_provider;
-    int num;
-    double rep = 5.1;
-    Equipment equip2;
-    Provider p1;
-    ProviderPriorityQueue *p = national_team->getProviders();
-    vector<Provider> to_print;
-
-    cout << "Provider name:" << endl;
-    getline(cin, name_provider);
-    to_print = p->searchName(name_provider);
-    for (size_t i = 0; i < to_print.size(); i++)
-    {
-        cout << "Index: " << i << endl;
-        to_print[i].showInfo();
-        cout << "-----------------------------------" << endl
-             << endl;
-    }
-
-    if (!to_print.empty()) {
-    cout << "Choose index: " << endl;
-    cin >> num; failInput(num); cin.ignore(1000, '\n');
-
-    if (num < to_print.size()) {
-        p->removeProvider(to_print[num]);
-        cout << "Provider name:" << endl;
-        getline(cin, name_provider);
-        to_print[num].setName(name_provider);
-
-        while (rep < 0.0 || rep > 5.0) {
-            cout << "Reputation: (Please write a number between 0.0 and 5.0)" << endl;
-            cin >> rep; failInput(rep); cin.ignore(1000,'\n');
-        }
-        to_print[num].setReputation(rep);
-
-        //n sei como funcina esta classe equipment,
-        //mas devias meter algo do genero em cada cin:
-        //cin >> equip2.balls; failinput(equip2.balls); cin.ignore(1000,'\n')
-        cout << "no. Balls:" << endl;
-        cin >> equip2.balls;
-        cout << "no. Cones:" << endl;
-        cin >> equip2.cones;
-        cout << "no. Football Boots:" << endl;
-        cin >> equip2.football_boots;
-        cout << "no. Football Kits:" << endl;
-        cin >> equip2.football_kit;
-        cout << "no. Goals:" << endl;
-        cin >> equip2.goal;
-        cout << "no. Medical Kits:" << endl;
-        cin >> equip2.medical_kit;
-        cout << "no. Tactics Boards:" << endl;
-        cin >> equip2.tactics_board;
-        cout << "no. Water Bottles:" << endl;
-        cin >> equip2.water_bottles;
-        to_print[num].setEquipment(equip2.football_kit, equip2.balls, equip2.football_boots, equip2.cones, equip2.goal, equip2.tactics_board, equip2.medical_kit, equip2.water_bottles);
-        p->addProvider(to_print[num]);
-    } else {
-        cout << "Index invalid" << endl;
-    }
-    } else {
-        cout << "The Provider " << name_provider << " doesn't exist." << endl;
-    }
-    waitInput();
-    return 1;
-}
-
-int menu_add_provider()
-{
-    string name_provider;
-    double rep = 5.1;
-    Provider p1;
-    ProviderPriorityQueue *p = national_team->getProviders();
-
-    cout << "Provider name:" << endl;
-    getline(cin, name_provider);
-    p1.setName(name_provider);
-
-    while (rep < 0.0 || rep > 5.0) {
-        cout << "Provider reputation: (Please write a number between 0.0 and 5.0)" << endl;
-        cin >> rep; failInput(rep); cin.ignore(1000,'\n');
-    }
-    p1.setReputation(rep);
-
-    int nballs, ncones, nfootball_boots, nfootball_kit, ngoal, nmedical_kit, ntactics_board, nwater_bottles;
-    cout << "no. Balls:" << endl;
-    cin >> nballs; failInput(nballs); cin.ignore(1000,'\n');
-    cout << "no. Cones:" << endl;
-    cin >> ncones; failInput(ncones); cin.ignore(1000,'\n');
-    cout << "no. Football Boots:" << endl;
-    cin >> nfootball_boots; failInput(nfootball_boots); cin.ignore(1000,'\n');
-    cout << "no. Football Kits:" << endl;
-    cin >> nfootball_kit; failInput(nfootball_kit); cin.ignore(1000,'\n');
-    cout << "no. Goals:" << endl;
-    cin >> ngoal; failInput(ngoal); cin.ignore(1000,'\n');
-    cout << "no. Medical Kits:" << endl;
-    cin >> nmedical_kit; failInput(nmedical_kit); cin.ignore(1000,'\n');
-    cout << "no. Tactics Boards:" << endl;
-    cin >> ntactics_board; failInput(ntactics_board); cin.ignore(1000,'\n');
-    cout << "no. Water Bottles:" << endl;
-    cin >> nwater_bottles; failInput(nwater_bottles); cin.ignore(1000,'\n');
-    p1.setEquipment(nballs, ncones, nfootball_boots, nfootball_kit, ngoal, nmedical_kit, ntactics_board, nwater_bottles);
-
-    p->addProvider(p1);
-
-    waitInput();
-    return 1;
-}
-
-int menu_search_provider()
-{
-    char menu = '4';
-
-    cout << "========================================= " << endl;
-    cout << "         Provider's Search Menu           " << endl;
-    cout << "========================================= \n"
-         << endl;
-
-    cout << "1. Search By Provider's Name" << endl;
-    cout << "2. Search By Provider's Reputation" << endl;
-    cout << "3. Search By Equipment Item" << endl;
-    cout << "0. Return to Previous Menu" << endl
-         << endl;
-
-    while (menu != '1' && menu != '2' && menu != '3' && menu != '0')
-    {
-        cin.clear();
-        cin >> menu;
-        cin.ignore(1000, '\n');
-    }
-    string name_provider;
-    double rep = 5.1;
-    int equip = 0;
-    ProviderPriorityQueue *p = national_team->getProviders();
-
-    /* Show the results of the search */
-    vector<Provider> to_print;
-
-    switch (menu)
-    {
-    case '1':
-        // Search By Name
-        cout << "Provider name:" << endl;
-        getline(cin, name_provider);
-        to_print = p->searchName(name_provider);
-        for (auto &i : to_print)
-        {
-            i.showInfo();
-            cout << "-----------------------------------" << endl
-                 << endl;
-        }
-        break;
-    case '2':
-        // Search By Reputation
-        while (rep < 0.0 || rep > 5.0) {
-            cout << "Provider's Reputation Minimum: (Please write a number between 0.0 and 5.0)" << endl;
-            cin >> rep;
-            cin.ignore(1000, '\n');
-        }
-        to_print = p->searchReputation(rep);
-        for (auto &i : to_print)
-        {
-            i.showInfo();
-            cout << endl
-                 << "-----------------------------------" << endl
-                 << endl;
-        }
-        break;
-    case '3':
-        // Search All With Item in Equipment
-        cout << "Please select the item you want to search:" << endl << endl;
-        cout << "1. Football Kit" << endl;
-        cout << "2. Balls" << endl;
-        cout << "3. Football Boots" << endl;
-        cout << "4. Cones" << endl;
-        cout << "5. Goal" << endl;
-        cout << "6. Tactics Board" << endl;
-        cout << "7. Medical Kit" << endl;
-        cout << "8. Water Bottles" << endl;
-
-        while (equip != 1 && equip != 2 && equip != 3 && equip != 4 && equip != 5 && equip != 6 && equip != 7 && equip != 8)
-        {
-            cin.clear();
-            cin >> equip; failInput(equip); cin.ignore(1000, '\n');
-        }
-
-        to_print = p->searchEquipment(equip);
-        for (auto &i : to_print)
-        {
-            i.showInfo();
-            cout << endl
-                 << "-----------------------------------" << endl
-                 << endl;
-        }
-        break;
-    case '0':
-        return 1;
-    }
-
-    waitInput();
-    return 0;
-}
 
 int menu_buy_provider() {
 
@@ -2241,26 +1959,26 @@ int menu_buy_provider() {
          << endl;
 
     while (menu != 1 && menu != 2 && menu != 3 && menu != 4 && menu != 5 && menu != 6 && menu != 7 && menu != 8 && menu != 0)
-        {
-            cin.clear();
-            cin >> menu; failInput(menu); cin.ignore(1000, '\n');
-        }
-    
+    {
+        cin.clear();
+        cin >> menu; failInput(menu); cin.ignore(1000, '\n');
+    }
+
     if (menu == 0) {return 1;}
     to_print = p->searchEquipment(menu);
 
     if (!to_print.empty()) {
-            to_print[0].showItem(menu);
-            cout << endl
-                 << "-----------------------------------" << endl
-                 << endl;
-            while (num_item <= 0) {
+        to_print[0].showItem(menu);
+        cout << endl
+             << "-----------------------------------" << endl
+             << endl;
+        while (num_item <= 0) {
             cout << "How many items do you want to buy? (Please write a number equal or higher than 1)" << endl;
             cin >> num_item; failInput(num_item); cin.ignore(1000,'\n');
-            }
-            int units = 0;
-            switch (menu)
-            {
+        }
+        int units = 0;
+        switch (menu)
+        {
             case 1:
                 units = to_print[0].getEquipment().football_kit;
                 if (num_item <= units) {
@@ -2351,7 +2069,7 @@ int menu_buy_provider() {
                 break;
             default:
                 break;
-            }
+        }
 
     } else {
         cout << "There's no Provider with that item." << endl;
@@ -2366,8 +2084,8 @@ int menu_buy_provider() {
         switch (answer) {
             case 'y':
                 while (new_rep < 0.0 || new_rep > 5.0) {
-                cout << "(Please write a number between 0.0 and 5.0)" << endl;
-                cin >> new_rep; failInput(new_rep); cin.ignore(1000, '\n');
+                    cout << "(Please write a number between 0.0 and 5.0)" << endl;
+                    cin >> new_rep; failInput(new_rep); cin.ignore(1000, '\n');
                 }
                 p->updateReputation(to_print[0], new_rep);
                 cout << "Thanks for your feedback!" << endl;
@@ -2381,6 +2099,303 @@ int menu_buy_provider() {
     return 0;
 }
 
+int menu_search_provider()
+{
+    char menu = '4';
+
+    cout << "========================================= " << endl;
+    cout << "         Provider's Search Menu           " << endl;
+    cout << "========================================= \n"
+         << endl;
+
+    cout << "1. Search By Provider's Name" << endl;
+    cout << "2. Search By Provider's Reputation" << endl;
+    cout << "3. Search By Equipment Item" << endl;
+    cout << "0. Return to Previous Menu" << endl
+         << endl;
+
+    while (menu != '1' && menu != '2' && menu != '3' && menu != '0')
+    {
+        cin.clear();
+        cin >> menu;
+        cin.ignore(1000, '\n');
+    }
+    string name_provider;
+    double rep = 5.1;
+    int equip = 0;
+    ProviderPriorityQueue *p = national_team->getProviders();
+
+    /* Show the results of the search */
+    vector<Provider> to_print;
+
+    switch (menu)
+    {
+        case '1':
+            // Search By Name
+            cout << "Provider name:" << endl;
+            getline(cin, name_provider);
+            to_print = p->searchName(name_provider);
+            for (auto &i : to_print)
+            {
+                i.showInfo();
+                cout << "-----------------------------------" << endl
+                     << endl;
+            }
+            break;
+        case '2':
+            // Search By Reputation
+            while (rep < 0.0 || rep > 5.0) {
+                cout << "Provider's Reputation Minimum: (Please write a number between 0.0 and 5.0)" << endl;
+                cin >> rep;
+                cin.ignore(1000, '\n');
+            }
+            to_print = p->searchReputation(rep);
+            for (auto &i : to_print)
+            {
+                i.showInfo();
+                cout << endl
+                     << "-----------------------------------" << endl
+                     << endl;
+            }
+            break;
+        case '3':
+            // Search All With Item in Equipment
+            cout << "Please select the item you want to search:" << endl << endl;
+            cout << "1. Football Kit" << endl;
+            cout << "2. Balls" << endl;
+            cout << "3. Football Boots" << endl;
+            cout << "4. Cones" << endl;
+            cout << "5. Goal" << endl;
+            cout << "6. Tactics Board" << endl;
+            cout << "7. Medical Kit" << endl;
+            cout << "8. Water Bottles" << endl;
+
+            while (equip != 1 && equip != 2 && equip != 3 && equip != 4 && equip != 5 && equip != 6 && equip != 7 && equip != 8)
+            {
+                cin.clear();
+                cin >> equip; failInput(equip); cin.ignore(1000, '\n');
+            }
+
+            to_print = p->searchEquipment(equip);
+            for (auto &i : to_print)
+            {
+                i.showInfo();
+                cout << endl
+                     << "-----------------------------------" << endl
+                     << endl;
+            }
+            break;
+        case '0':
+            return 1;
+    }
+
+    waitInput();
+    return 0;
+}
+
+int menu_add_provider()
+{
+    string name_provider;
+    double rep = 5.1;
+    Provider p1;
+    ProviderPriorityQueue *p = national_team->getProviders();
+
+    cout << "Provider name:" << endl;
+    getline(cin, name_provider);
+    p1.setName(name_provider);
+
+    while (rep < 0.0 || rep > 5.0) {
+        cout << "Provider reputation: (Please write a number between 0.0 and 5.0)" << endl;
+        cin >> rep; failInput(rep); cin.ignore(1000,'\n');
+    }
+    p1.setReputation(rep);
+
+    int nballs, ncones, nfootball_boots, nfootball_kit, ngoal, nmedical_kit, ntactics_board, nwater_bottles;
+    cout << "no. Balls:" << endl;
+    cin >> nballs; failInput(nballs); cin.ignore(1000,'\n');
+    cout << "no. Cones:" << endl;
+    cin >> ncones; failInput(ncones); cin.ignore(1000,'\n');
+    cout << "no. Football Boots:" << endl;
+    cin >> nfootball_boots; failInput(nfootball_boots); cin.ignore(1000,'\n');
+    cout << "no. Football Kits:" << endl;
+    cin >> nfootball_kit; failInput(nfootball_kit); cin.ignore(1000,'\n');
+    cout << "no. Goals:" << endl;
+    cin >> ngoal; failInput(ngoal); cin.ignore(1000,'\n');
+    cout << "no. Medical Kits:" << endl;
+    cin >> nmedical_kit; failInput(nmedical_kit); cin.ignore(1000,'\n');
+    cout << "no. Tactics Boards:" << endl;
+    cin >> ntactics_board; failInput(ntactics_board); cin.ignore(1000,'\n');
+    cout << "no. Water Bottles:" << endl;
+    cin >> nwater_bottles; failInput(nwater_bottles); cin.ignore(1000,'\n');
+    p1.setEquipment(nballs, ncones, nfootball_boots, nfootball_kit, ngoal, nmedical_kit, ntactics_board, nwater_bottles);
+
+    p->addProvider(p1);
+
+    waitInput();
+    return 1;
+}
+
+int menu_update_provider()
+{
+    string name_provider;
+    int num;
+    double rep = 5.1;
+    Equipment equip2;
+    Provider p1;
+    ProviderPriorityQueue *p = national_team->getProviders();
+    vector<Provider> to_print;
+
+    cout << "Provider name:" << endl;
+    getline(cin, name_provider);
+    to_print = p->searchName(name_provider);
+    for (size_t i = 0; i < to_print.size(); i++)
+    {
+        cout << "Index: " << i << endl;
+        to_print[i].showInfo();
+        cout << "-----------------------------------" << endl
+             << endl;
+    }
+
+    if (!to_print.empty()) {
+    cout << "Choose index: " << endl;
+    cin >> num; failInput(num); cin.ignore(1000, '\n');
+
+    if (num < to_print.size()) {
+        p->removeProvider(to_print[num]);
+        cout << "Provider name:" << endl;
+        getline(cin, name_provider);
+        to_print[num].setName(name_provider);
+
+        while (rep < 0.0 || rep > 5.0) {
+            cout << "Reputation: (Please write a number between 0.0 and 5.0)" << endl;
+            cin >> rep; failInput(rep); cin.ignore(1000,'\n');
+        }
+        to_print[num].setReputation(rep);
+
+        cout << "no. Balls:" << endl;
+        cin >> equip2.balls;
+        failInput(equip2.balls);
+        cin.ignore(1000,'\n');
+        cout << "no. Cones:" << endl;
+        cin >> equip2.cones;
+        failInput(equip2.cones);
+        cin.ignore(1000,'\n');
+        cout << "no. Football Boots:" << endl;
+        cin >> equip2.football_boots;
+        failInput(equip2.football_kit);
+        cin.ignore(1000,'\n');
+        cout << "no. Football Kits:" << endl;
+        cin >> equip2.football_kit;
+        failInput(equip2.football_kit);
+        cin.ignore(1000,'\n');
+        cout << "no. Goals:" << endl;
+        cin >> equip2.goal;
+        failInput(equip2.goal);
+        cin.ignore(1000,'\n');
+        cout << "no. Medical Kits:" << endl;
+        cin >> equip2.medical_kit;
+        failInput(equip2.medical_kit);
+        cin.ignore(1000,'\n');
+        cout << "no. Tactics Boards:" << endl;
+        cin >> equip2.tactics_board;
+        failInput(equip2.tactics_board);
+        cin.ignore(1000,'\n');
+        cout << "no. Water Bottles:" << endl;
+        cin >> equip2.water_bottles;
+        failInput(equip2.water_bottles);
+        cin.ignore(1000,'\n');
+        to_print[num].setEquipment(equip2.football_kit, equip2.balls, equip2.football_boots, equip2.cones, equip2.goal, equip2.tactics_board, equip2.medical_kit, equip2.water_bottles);
+        p->addProvider(to_print[num]);
+    } else {
+        cout << "Index invalid" << endl;
+    }
+    } else {
+        cout << "The Provider " << name_provider << " doesn't exist." << endl;
+    }
+    waitInput();
+    return 1;
+}
+int menu_remove_provider()
+{
+    string name_provider;
+    double rep = 5.1;
+    int n;
+    ProviderPriorityQueue *p = national_team->getProviders();
+    vector<Provider> to_print;
+
+    char menu = '3';
+
+    cout << "========================================= " << endl;
+    cout << "         Provider's Remove Menu           " << endl;
+    cout << "========================================= \n"
+         << endl;
+
+    cout << "1. Remove By Provider's Name" << endl;
+    cout << "2. Remove By Provider's Reputation" << endl;
+    cout << "0. Return to Previous Menu" << endl
+         << endl;
+
+    while (menu != '1' && menu != '2' && menu != '0')
+    {
+        cin.clear();
+        cin >> menu;
+        cin.ignore(1000, '\n');
+    }
+
+    switch (menu)
+    {
+        case '1':
+            cout << "Provider name:" << endl;
+            getline(cin, name_provider);
+
+            to_print = p->searchName(name_provider);
+            for (size_t i = 0; i < to_print.size(); i++)  {
+                cout << "Index: " << i << endl;
+                to_print[i].showInfo();
+                cout << "-----------------------------------" << endl
+                     << endl;
+            }
+
+            break;
+        case '2':
+            while (rep < 0.0 || rep > 5.0) {
+                cout << "Provider's Reputation: (Please write a number between 0.0 and 5.0)" << endl;
+                cin >> rep;
+                failInput(rep);
+                cin.ignore(1000,'\n');
+            }
+
+            to_print = p->searchReputation(rep);
+            for (size_t i = 0; i < to_print.size(); i++)
+            {
+                cout << "Index: " << i << endl;
+                to_print[i].showInfo();
+                cout << "-----------------------------------" << endl
+                     << endl;
+            }
+            break;
+        case '0':
+            return 1;
+    }
+    if (!to_print.empty()) {
+        cout << "Choose index: " << endl;
+        cin >> n; failInput(n); cin.ignore(1000, '\n');
+        if (n < to_print.size()) {
+            p->removeProvider(to_print[n]);
+            cout << "Removed successfully!" << endl;
+        }
+        else {
+            cout << "Index invalid" << endl;
+        }
+    } else if (menu == '1') {
+        cout << "The Provider " << name_provider << " doesn't exist." << endl;
+    } else {
+        cout << "There's no Provider with a reputation equal or higher than " << rep << "." << endl;
+    }
+    waitInput();
+    return 0;
+}
+
 int menu_provider()
 {
     char menu;
@@ -2390,11 +2405,11 @@ int menu_provider()
     cout << "========================================= \n" << endl;
 
     cout << "1. View all Providers" << endl;
-    cout << "2. Search Provider" << endl;
-    cout << "3. Add Provider" << endl;
-    cout << "4. Update Provider" << endl;
-    cout << "5. Remove Provider" << endl;
-    cout << "6. Buy Equipment" << endl;
+    cout << "2. Buy Equipment" << endl;
+    cout << "3. Search Provider" << endl;
+    cout << "4. Add Provider" << endl;
+    cout << "5. Update Provider" << endl;
+    cout << "6. Remove Provider" << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
@@ -2409,19 +2424,19 @@ int menu_provider()
         waitInput();
         return 0;
     case '2':
-        while (!menu_search_provider());
+        while (!menu_buy_provider());
         return 0;
     case '3':
-        while (!menu_add_provider());
+        while (!menu_search_provider());
         return 0;
     case '4':
-        while (!menu_update_provider());
+        while (!menu_add_provider());
         return 0;
     case '5':
-        while (!menu_remove_provider());
+        while (!menu_update_provider());
         return 0;
     case '6':
-        while (!menu_buy_provider());
+        while (!menu_remove_provider());
         return 0;
     case '0': // Exit
         return 1;

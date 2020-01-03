@@ -322,5 +322,4 @@ void ProviderPriorityQueue::print() const {
              << endl;
         aux.pop();
     }
-
 }

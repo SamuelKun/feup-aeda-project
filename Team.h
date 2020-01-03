@@ -144,7 +144,7 @@ public:
     /// \brief Finds a Player in the Team by its name.
     /// \param name Player's name
     /// \return Pointer for Player with the indicated name, throws exception otherwise
-    Player * findPlayer(std::string name); // Necessário para ler, alterar depois
+    Player * findPlayer(std::string name);
 
     /// \brief Finds all Team PLayers containing name as a substring.
     /// \param name Player's name or substring of name
