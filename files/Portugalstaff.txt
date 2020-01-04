@@ -1,3 +1,9 @@
+Ricardo Santos
+1/9/1981
+100
+Assistent
+1
+-----
 Ilidio Vale
 13/12/1957
 100
@@ -18,12 +24,6 @@ Obervator
 -----
 Joao Costa
 23/6/1973
-100
-Assistent
-1
------
-Ricardo Santos
-1/9/1981
 100
 Assistent
 1

@@ -1712,9 +1712,7 @@ int menu_update_coach() {
             cin >> n;
             failInput(n);
             cin.ignore(1000, '\n');
-            c->removeCoach(coachChange);
             c->updateCoachTitle(coachChange, n);
-            c->addCoach(coachChange);
             waitInput();
             return 1;
         case '4':
@@ -1753,7 +1751,6 @@ int menu_update_coach() {
                     cin.ignore(1000, '\n');
                 }
 
-                c->removeCoach(coachChange);
                 trainedT.erase(it);
                 c->updateCoachTeams(coachChange, trainedT);
                 if (!trainedT.empty()) {
@@ -1792,7 +1789,6 @@ int menu_update_coach() {
                 while (n)
                     it++;
 
-                c->removeCoach(coachChange);
                 cout << "What you want to to change? " << index << endl;
                 cout << "1. Team Name " << endl;
                 cout << "2. Date " << endl;
