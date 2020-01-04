@@ -1,3 +1,15 @@
+Jorge Rosario
+18/7/1961
+100
+Obervator
+1
+-----
+Joao Costa
+23/6/1973
+100
+Assistent
+1
+-----
 Ricardo Santos
 1/9/1981
 100
@@ -14,17 +26,5 @@ Fernando Justino
 14/10/1960
 100
 GKCoach
-1
------
-Jorge Rosario
-18/7/1961
-100
-Obervator
-1
------
-Joao Costa
-23/6/1973
-100
-Assistent
 1
 -----

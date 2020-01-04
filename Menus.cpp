@@ -1590,7 +1590,7 @@ int menu_add_coach() {
     int num;
     Coach a;
     Date start, end;
-
+    a.setCurrentCoach(false);
     cout << "Coach name:" << endl;
     getline(cin, name_coach);
     a.setName(name_coach);
