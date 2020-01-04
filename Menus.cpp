@@ -2243,7 +2243,7 @@ int menu_buy_provider() {
         }
         char answer;
         double new_rep = 5.1;
-        cout << "Would you like to set a new Reputation of Provider " << to_print[0].getName() << "? [y/N]" << endl;
+        cout << "Would you like to set a new Reputation of Provider " << to_print[0].getName() << "? [y/n]" << endl;
         cin >> answer;
         cin.ignore(1000, '\n');
         switch (answer) {
@@ -2380,21 +2380,61 @@ int menu_add_provider()
 
     int nballs, ncones, nfootball_boots, nfootball_kit, ngoal, nmedical_kit, ntactics_board, nwater_bottles;
     cout << "no. Balls:" << endl;
-    cin >> nballs; failInput(nballs); cin.ignore(1000,'\n');
+    do{
+        cin >> nballs;
+        failInput(nballs);
+        cin.ignore(1000,'\n');
+    } while(nballs < 0);
+
     cout << "no. Cones:" << endl;
-    cin >> ncones; failInput(ncones); cin.ignore(1000,'\n');
+    do {
+        cin >> ncones;
+        failInput(ncones);
+        cin.ignore(1000, '\n');
+    }while(ncones < 0);
+
     cout << "no. Football Boots:" << endl;
-    cin >> nfootball_boots; failInput(nfootball_boots); cin.ignore(1000,'\n');
+    do {
+        cin >> nfootball_boots;
+        failInput(nfootball_boots);
+        cin.ignore(1000, '\n');
+    }while(nfootball_boots < 0);
+
     cout << "no. Football Kits:" << endl;
-    cin >> nfootball_kit; failInput(nfootball_kit); cin.ignore(1000,'\n');
+    do {
+        cin >> nfootball_kit;
+        failInput(nfootball_kit);
+        cin.ignore(1000, '\n');
+    }while(nfootball_kit < 0);
+
     cout << "no. Goals:" << endl;
-    cin >> ngoal; failInput(ngoal); cin.ignore(1000,'\n');
+    do {
+        cin >> ngoal;
+        failInput(ngoal);
+        cin.ignore(1000, '\n');
+    }while(ngoal< 0);
+
     cout << "no. Medical Kits:" << endl;
-    cin >> nmedical_kit; failInput(nmedical_kit); cin.ignore(1000,'\n');
+    do {
+        cin >> nmedical_kit;
+        failInput(nmedical_kit);
+        cin.ignore(1000, '\n');
+    }while(nmedical_kit < 0);
+
     cout << "no. Tactics Boards:" << endl;
-    cin >> ntactics_board; failInput(ntactics_board); cin.ignore(1000,'\n');
+    do {
+        cin >> ntactics_board;
+        failInput(ntactics_board);
+        cin.ignore(1000, '\n');
+    }while(ntactics_board < 0);
+
     cout << "no. Water Bottles:" << endl;
-    cin >> nwater_bottles; failInput(nwater_bottles); cin.ignore(1000,'\n');
+    do {
+        cin >> nwater_bottles;
+        failInput(nwater_bottles);
+        cin.ignore(1000, '\n');
+    }while(nwater_bottles < 0);
+
     p1.setEquipment(nballs, ncones, nfootball_boots, nfootball_kit, ngoal, nmedical_kit, ntactics_board, nwater_bottles);
 
     p->addProvider(p1);
@@ -2466,65 +2506,81 @@ int menu_update_provider()
                 break;
             case '2':
                 cout << "no. Football Kits:" << endl;
-                cin >> changed;
-                failInput(changed);
-                cin.ignore(1000,'\n');
+                do {
+                    cin >> changed;
+                    failInput(changed);
+                    cin.ignore(1000, '\n');
+                }while(changed < 0);
                 to_print[num].setEquipment2(1,changed);
                 cout << "no. Football Kits successfully changed!!" << endl;
                 break;
             case '3':
                 cout << "no. Balls:" << endl;
-                cin >> changed;
-                failInput(changed);
-                cin.ignore(1000,'\n');
+                do {
+                    cin >> changed;
+                    failInput(changed);
+                    cin.ignore(1000, '\n');
+                }while(changed < 0);
                 to_print[num].setEquipment2(2,changed);
                 cout << "no. Balls successfully changed!!" << endl;
                 break;
             case '4':
                 cout << "no. Football Boots:" << endl;
-                cin >> changed;
-                failInput(changed);
-                cin.ignore(1000,'\n');
+                do {
+                    cin >> changed;
+                    failInput(changed);
+                    cin.ignore(1000, '\n');
+                }while(changed < 0);
                 to_print[num].setEquipment2(3,changed);
                 cout << "no. Football Boots successfully changed!!" << endl;
                 break;
             case '5':
                 cout << "no. Cones:" << endl;
+                do{
                 cin >> changed;
                 failInput(changed);
                 cin.ignore(1000,'\n');
+                }while(changed < 0);
                 to_print[num].setEquipment2(4,changed);
                 cout << "no. Cones successfully changed!!" << endl;
                 break;
             case '6':
                 cout << "no. Goals:" << endl;
+                do{
                 cin >> changed;
                 failInput(changed);
                 cin.ignore(1000,'\n');
+                }while(changed < 0);
                 to_print[num].setEquipment2(5,changed);
                 cout << "no. Goals successfully changed!!" << endl;
                 break;
             case '7':
                 cout << "no. Tactics Boards:" << endl;
+                do{
                 cin >> changed;
                 failInput(changed);
                 cin.ignore(1000,'\n');
+                }while(changed < 0);
                 to_print[num].setEquipment2(6,changed);
                 cout << "no. Tactics Boards successfully changed!!" << endl;
                 break;
             case '8':
                 cout << "no. Medical Kits:" << endl;
+                do{
                 cin >> changed;
                 failInput(changed);
                 cin.ignore(1000,'\n');
+                }while(changed < 0);
                 to_print[num].setEquipment2(7,changed);
                 cout << "no. Medical Kits successfully changed!!" << endl;
                 break;
             case '9':
                 cout << "no. Water Bottles:" << endl;
+                do{
                 cin >> changed;
                 failInput(changed);
                 cin.ignore(1000,'\n');
+                }while(changed < 0);
                 to_print[num].setEquipment2(8,changed);
                 cout << "no. Water Bottles successfully changed!!" << endl;
                 break;
