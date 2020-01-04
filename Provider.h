@@ -5,8 +5,6 @@
 #include <queue>
 #include <vector>
 
-using namespace std;
-
 /// \brief Struct for a Provider's Equipment.
 struct Equipment {
     int football_kit; ///< Football Kit.
@@ -22,7 +20,7 @@ struct Equipment {
 /// \brief Class for a Provider.
 class Provider {
 private:
-    string name; ///< Name.
+    std::string name; ///< Name.
     double reputation; ///< Reputation.
     Equipment equipment; ///< Equipment.
 
@@ -33,7 +31,7 @@ public:
     /// \param name Name of the Provider
     /// \param reputation Reputation of the Provider
     /// \param equipment Struct of type Equipment
-    Provider(string name, double reputation, Equipment equipment);
+    Provider(std::string name, double reputation, Equipment equipment);
     
     /// \brief Function to show the information of a Provider.
     void showInfo() const;
@@ -44,11 +42,11 @@ public:
 
     /// \brief Function to get the name of a Provider.
     /// \return shows the name of a Provider
-    string getName() const;
+    std::string getName() const;
 
     /// \brief Function to set the name of a Provider.
     /// \param n Name of the Provider
-    void setName(string n);
+    void setName(std::string n);
     
     /// \brief Function to get the reputation of a Provider.
     /// \return shows the reputation of a Provider
@@ -99,7 +97,7 @@ class ProviderPriorityQueue {
 
 private:
 
-    priority_queue<Provider> provider; ///< Provider.
+    std::priority_queue<Provider> provider; ///< Provider.
 
 public:
 
@@ -116,27 +114,27 @@ public:
 
     /// \brief Function to get the providers
     /// \return returns a priority queue with all the providers
-    priority_queue<Provider > getProviders();
+    std::priority_queue<Provider > getProviders();
 
     /// \brief Function to search a Provider by name.
     /// \param name Provider's name
     /// \return shows the Providers with that name
-    vector<Provider> searchName(string name);
+    std::vector<Provider> searchName(std::string name);
 
     /// \brief Function to search a Provider by reputation.
     /// \param rep Provider's reputation
     /// \return shows the Providers with a reputation equal or higher than rep
-    vector<Provider> searchReputation(double rep);
+    std::vector<Provider> searchReputation(double rep);
     
     /// \brief Function to search a Provider by equipment item.
     /// \param item Provider's Equipment Item
     /// \return shows the Providers with that item in equipment
-    vector<Provider> searchEquipment(int item);
+    std::vector<Provider> searchEquipment(int item);
 
     /// \brief Function to update the name of a Provider.
     /// \param p Provider
     /// \param name Name of the Provider
-    void updateName(Provider p, string name);
+    void updateName(Provider p, std::string name);
     
     /// \brief Function to update the reputation of a Provider.
     /// \param p Provider

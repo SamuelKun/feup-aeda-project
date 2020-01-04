@@ -355,7 +355,6 @@ void Team::removeCompetition(Competition *c) {
     }
 }
 
-//Aqui abaixo
 void Team::setStaffNotWorking(Staff s) {
     auto it = team_staff.find(s);
     if( it != team_staff.end()){

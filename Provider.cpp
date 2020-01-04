@@ -1,8 +1,6 @@
 #include "Provider.h"
 #include "iostream"
 
-using namespace std;
-
 // Provider Functions
 
 Provider::Provider(std::string name, double reputation, Equipment equipment): name(name), reputation(reputation), equipment(equipment) {
@@ -53,11 +51,11 @@ void Provider::showItem(int item) const {
     
 }
 
-string Provider::getName() const {
+std::string Provider::getName() const {
     return name;
 }
 
-void Provider::setName(string n) {
+void Provider::setName(std::string n) {
     this->name = n;
 }
 
@@ -131,7 +129,7 @@ void ProviderPriorityQueue::addProvider(Provider &p) {
 }
 
 void ProviderPriorityQueue::removeProvider(Provider p) {
-    vector<Provider> auxiliar;
+    std::vector<Provider> auxiliar;
     Provider prov_auxiliar;
 
     while (!provider.empty()) {
@@ -148,13 +146,13 @@ void ProviderPriorityQueue::removeProvider(Provider p) {
 
 }
 
-priority_queue<Provider> ProviderPriorityQueue::getProviders() {
+std::priority_queue<Provider> ProviderPriorityQueue::getProviders() {
     return provider;
 }
 
-vector<Provider> ProviderPriorityQueue::searchName(std::string name) {
-    vector<Provider> to_return;
-    vector<Provider> auxiliar;
+std::vector<Provider> ProviderPriorityQueue::searchName(std::string name) {
+    std::vector<Provider> to_return;
+    std::vector<Provider> auxiliar;
 
     while(!provider.empty()) {
         auxiliar.push_back(provider.top());
@@ -169,9 +167,9 @@ vector<Provider> ProviderPriorityQueue::searchName(std::string name) {
     return to_return;
 }
 
-vector<Provider> ProviderPriorityQueue::searchReputation(double rep) {
-    vector<Provider> to_return;
-    vector<Provider> auxiliar;
+std::vector<Provider> ProviderPriorityQueue::searchReputation(double rep) {
+    std::vector<Provider> to_return;
+    std::vector<Provider> auxiliar;
 
     while(!provider.empty()) {
         auxiliar.push_back(provider.top());
@@ -186,9 +184,9 @@ vector<Provider> ProviderPriorityQueue::searchReputation(double rep) {
     return to_return;
 }
 
-vector<Provider> ProviderPriorityQueue::searchEquipment(int item) {
-    vector<Provider> to_return;
-    vector<Provider> auxiliar;
+std::vector<Provider> ProviderPriorityQueue::searchEquipment(int item) {
+    std::vector<Provider> to_return;
+    std::vector<Provider> auxiliar;
 
     while(!provider.empty()) {
         auxiliar.push_back(provider.top());
@@ -247,7 +245,7 @@ vector<Provider> ProviderPriorityQueue::searchEquipment(int item) {
 }
 
 void ProviderPriorityQueue::updateName(Provider p, std::string name) {
-    vector<Provider> auxiliar;
+    std::vector<Provider> auxiliar;
     Provider aux;
 
     while(!provider.empty()) {
@@ -264,7 +262,7 @@ void ProviderPriorityQueue::updateName(Provider p, std::string name) {
 }
 
 void ProviderPriorityQueue::updateReputation(Provider p, double rep) {
-    vector<Provider> auxiliar;
+    std::vector<Provider> auxiliar;
     Provider aux;
 
     while(!provider.empty()) {
@@ -281,7 +279,7 @@ void ProviderPriorityQueue::updateReputation(Provider p, double rep) {
 }
 
 void ProviderPriorityQueue::updateEquipmentItem(Provider p, int item, int new_value) {
-    vector<Provider> auxiliar;
+    std::vector<Provider> auxiliar;
     Provider aux;
     while(!provider.empty()) {
         aux = provider.top();
@@ -297,7 +295,7 @@ void ProviderPriorityQueue::updateEquipmentItem(Provider p, int item, int new_va
 }
 
 void ProviderPriorityQueue::updateEquipmentAll(Provider p, Equipment new_equip) {
-     vector<Provider> auxiliar;
+    std::vector<Provider> auxiliar;
      Provider aux;
 
     while(!provider.empty()) {
@@ -314,12 +312,12 @@ void ProviderPriorityQueue::updateEquipmentAll(Provider p, Equipment new_equip) 
 }
     
 void ProviderPriorityQueue::print() const {
-    priority_queue<Provider> aux = provider;
+    std::priority_queue<Provider> aux = provider;
     while(!aux.empty()) {
         aux.top().showInfo();
-        cout << endl
-             << "-----------------------------------" << endl
-             << endl;
+        std::cout << std::endl;
+        std::cout << "-----------------------------------" << std::endl;
+        std::cout << std::endl;
         aux.pop();
     }
 }

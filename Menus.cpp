@@ -1657,7 +1657,7 @@ int menu_update_coach() {
     }
     Coach coachChange = to_print[num];
 
-    char menu;
+    char menu, menu2;
     cout << "========================================= " << endl;
     cout << "           Update Coach Menu             " << endl;
     cout << "========================================= \n" << endl;
@@ -1675,7 +1675,7 @@ int menu_update_coach() {
     int n, index;
     char confirmation;
 
-    Date birth;
+    Date birth, start, end;
     vector<std::tuple<string, Date, Date>> trainedT = coachChange.getTrainedTeams();
     auto it = trainedT.begin();
 
@@ -1705,11 +1705,11 @@ int menu_update_coach() {
             waitInput();
             return 1;
         case '4':
-            cout << "Do you wish remove a team from trainned teams? [y/n]" << endl;
+            cout << "Do you wish remove a team from trained teams? [y/n]" << endl;
             cin >> confirmation;
             cin.ignore(1000, '\n');
             index = 0;
-            c->removeCoach(coachChange);
+
             while (confirmation == 'y') {
                 for (auto &i : trainedT) {
                     cout << "Index: " << index << endl;
@@ -1729,15 +1729,77 @@ int menu_update_coach() {
                 while (n)
                     it++;
 
+                c->removeCoach(coachChange);
                 trainedT.erase(it);
                 c->updateCoachTeams(coachChange, trainedT);
                 if(!trainedT.empty()) {
-                    cout << "Remove another trainned team? [y/n] " << endl;
+                    cout << "Remove another trained team? [y/n] " << endl;
                     cin >> confirmation; cin.ignore(1000,'\n');
                 }
                 else confirmation = 'n';
             }
             //Alterar informação sobre alguma equipa que já treinou anteriormente
+
+            cout << "Change a trained teams? [y/n]" << endl;
+            cin >> confirmation;
+            cin.ignore(1000, '\n');
+            index = 0;
+
+            while (confirmation == 'y') {
+                for (auto &i : trainedT) {
+                    cout << "Index: " << index << endl;
+                    cout << " TeamName: " << get<0>(i) << endl;
+                    cout << " Start: " << get<1>(i) << endl;
+                    cout << " End: " << get<2>(i) << endl << endl;
+                }
+
+                cout << "Choose index: " << endl;
+                cin >> n; failInput(n); cin.ignore(1000,'\n');
+                while (n >= trainedT.size()) {
+                    cout << "Invalid index. Choose index: " << endl;
+                    cin >> n; failInput(n); cin.ignore(1000,'\n');
+                }
+
+                it = trainedT.begin();
+                while (n)
+                    it++;
+
+                c->removeCoach(coachChange);
+                cout << "What you want to to change? " << index << endl;
+                cout << "1. Team Name "<< endl;
+                cout << "2. Date " << endl;
+                cout << "Any key to not change" << endl;
+                cin >> menu2;
+                cin.ignore(1000, '\n');
+                switch (menu2) {
+                    case '1':
+                        cout << "Coach name:" << endl;
+                        getline(cin, name_coach);
+                        get<0>(*it) = name_coach;
+                        break;
+                    case '2':
+                        cout << "Write start date" << endl;
+                        cin >> start;
+                        cout << "Write end date" << endl;
+                        cin >> end;
+                        while (start.isAfter(end)){
+                            cout << "Date of end is before of date of start! ";
+                            cin >> end;
+                        }
+                        get<1>(*it) = start;
+                        get<2>(*it) = end;
+                        break;
+                    default:
+                        break;
+                }
+
+                c->updateCoachTeams(coachChange, trainedT);
+                if(!trainedT.empty()) {
+                    cout << "Change another trained team? [y/n] " << endl;
+                    cin >> confirmation; cin.ignore(1000,'\n');
+                }
+                else confirmation = 'n';
+            }
             return 1;
         case '0':
             return 1;
