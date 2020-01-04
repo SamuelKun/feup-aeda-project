@@ -1717,6 +1717,11 @@ int menu_update_coach() {
             cout << name << "'s number of titles were successfully changed!!" << endl;
             break;
         case '4':
+            if(trainedT.empty()) {
+                cout << "No teams to remove/change!" << endl;
+                waitInput();
+                return 1;
+            }
             cout << "Do you wish remove a team from trained teams? [y/n]" << endl;
             cin >> confirmation;
             cin.ignore(1000, '\n');
