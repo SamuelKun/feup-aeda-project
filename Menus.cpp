@@ -1641,9 +1641,10 @@ int menu_update_coach() {
 
     cout << "Coach name:" << endl;
     getline(cin, name_coach);
+    vector<Coach> to_print;
 
     try {
-        vector<Coach> to_print = c->searchName(name_coach);
+        to_print = c->searchName(name_coach);
         for (size_t i = 0; i < to_print.size(); i++) {
             cout << "Index " << i << endl;
             to_print[i].show();
@@ -1660,7 +1661,14 @@ int menu_update_coach() {
             failInput(num);
             cin.ignore(1000, '\n');
         }
-        Coach coachChange = to_print[num];
+    }
+    catch (PersonNotFound & er) {
+        cerr << "No coach named " << er.getName() << " was found!!" << endl;
+        waitInput();
+        return 1;
+    }
+
+    Coach coachChange = to_print[num];
 
     char menu, menu2;
     cout << "========================================= " << endl;
@@ -1703,7 +1711,7 @@ int menu_update_coach() {
             cout << "New number of titles:" << endl;
             cin >> n;
             failInput(n);
-            cin.ignore(1000,'\n');
+            cin.ignore(1000, '\n');
             c->removeCoach(coachChange);
             c->updateCoachTitle(coachChange, n);
             c->addCoach(coachChange);
@@ -1724,31 +1732,35 @@ int menu_update_coach() {
                 }
 
                 cout << "Choose index: " << endl;
-                cin >> n; failInput(n); cin.ignore(1000,'\n');
+                cin >> n;
+                failInput(n);
+                cin.ignore(1000, '\n');
                 while (n >= trainedT.size()) {
                     cout << "Invalid index. Choose index: " << endl;
-                    cin >> n; failInput(n); cin.ignore(1000,'\n');
-                }
-
-                    cout << "Choose index: " << endl;
                     cin >> n;
                     failInput(n);
                     cin.ignore(1000, '\n');
-                    while (n >= trainedT.size()) {
-                        cout << "Invalid index. Choose index: " << endl;
-                        cin >> n;
-                        failInput(n);
-                        cin.ignore(1000, '\n');
-                    }
+                }
+
+                cout << "Choose index: " << endl;
+                cin >> n;
+                failInput(n);
+                cin.ignore(1000, '\n');
+                while (n >= trainedT.size()) {
+                    cout << "Invalid index. Choose index: " << endl;
+                    cin >> n;
+                    failInput(n);
+                    cin.ignore(1000, '\n');
+                }
 
                 c->removeCoach(coachChange);
                 trainedT.erase(it);
                 c->updateCoachTeams(coachChange, trainedT);
-                if(!trainedT.empty()) {
+                if (!trainedT.empty()) {
                     cout << "Remove another trained team? [y/n] " << endl;
-                    cin >> confirmation; cin.ignore(1000,'\n');
-                }
-                else confirmation = 'n';
+                    cin >> confirmation;
+                    cin.ignore(1000, '\n');
+                } else confirmation = 'n';
             }
             //Alterar informação sobre alguma equipa que já treinou anteriormente
 
@@ -1766,10 +1778,14 @@ int menu_update_coach() {
                 }
 
                 cout << "Choose index: " << endl;
-                cin >> n; failInput(n); cin.ignore(1000,'\n');
+                cin >> n;
+                failInput(n);
+                cin.ignore(1000, '\n');
                 while (n >= trainedT.size()) {
                     cout << "Invalid index. Choose index: " << endl;
-                    cin >> n; failInput(n); cin.ignore(1000,'\n');
+                    cin >> n;
+                    failInput(n);
+                    cin.ignore(1000, '\n');
                 }
 
                 it = trainedT.begin();
@@ -1778,7 +1794,7 @@ int menu_update_coach() {
 
                 c->removeCoach(coachChange);
                 cout << "What you want to to change? " << index << endl;
-                cout << "1. Team Name "<< endl;
+                cout << "1. Team Name " << endl;
                 cout << "2. Date " << endl;
                 cout << "Any key to not change" << endl;
                 cin >> menu2;
@@ -1794,7 +1810,7 @@ int menu_update_coach() {
                         cin >> start;
                         cout << "Write end date" << endl;
                         cin >> end;
-                        while (start.isAfter(end)){
+                        while (start.isAfter(end)) {
                             cout << "Date of end is before of date of start! ";
                             cin >> end;
                         }
@@ -1806,21 +1822,17 @@ int menu_update_coach() {
                 }
 
                 c->updateCoachTeams(coachChange, trainedT);
-                if(!trainedT.empty()) {
+                if (!trainedT.empty()) {
                     cout << "Change another trained team? [y/n] " << endl;
-                    cin >> confirmation; cin.ignore(1000,'\n');
-                }
-                else confirmation = 'n';
+                    cin >> confirmation;
+                    cin.ignore(1000, '\n');
+                } else confirmation = 'n';
             }
             return 1;
         case '0':
             return 1;
         default:
             return 0;
-        catch (PersonNotFound & er){
-        cerr << "No coach named " << er.getName() << " was found!!" << endl;
-        waitInput();
-        return 1;
     }
 }
 
