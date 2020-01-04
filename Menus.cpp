@@ -2275,7 +2275,7 @@ int menu_add_provider()
 int menu_update_provider()
 {
     string name_provider;
-    int num;
+    int num,changed;
     double rep = 5.1;
     Equipment equip2;
     Provider p1;
@@ -2298,50 +2298,111 @@ int menu_update_provider()
     cin >> num; failInput(num); cin.ignore(1000, '\n');
 
     if (num < to_print.size()) {
+
         p->removeProvider(to_print[num]);
-        cout << "Provider name:" << endl;
-        getline(cin, name_provider);
-        to_print[num].setName(name_provider);
+        char choice;
 
-        while (rep < 0.0 || rep > 5.0) {
-            cout << "Reputation: (Please write a number between 0.0 and 5.0)" << endl;
-            cin >> rep; failInput(rep); cin.ignore(1000,'\n');
+        cout << "Which field you want to change in Provider "  << endl;
+        cout << "Select the correspondent index: " << endl;
+        cout << "0. Change name" << endl;
+        cout << "1. Change reputation" << endl;
+        cout << "2. Change football kit" << endl;
+        cout << "3. Change balls" << endl;
+        cout << "4. Change football boots" << endl;
+        cout << "5. Change cones" << endl;
+        cout << "6. Change goal" << endl;
+        cout << "7. Change tactics board" << endl;
+        cout << "8. Change medical kit" << endl;
+        cout << "9. Change water bottles" << endl << endl;
+
+        cin >> choice;
+        cin.ignore(1000,'\n');
+
+        switch(choice){
+            case '0':
+                cout << "Provider name:" << endl;
+                getline(cin, name_provider);
+                to_print[num].setName(name_provider);
+                cout << "Name successfully changed!!" << endl;
+                break;
+            case '1':
+                while (rep < 0.0 || rep > 5.0) {
+                    cout << "Reputation: (Please write a number between 0.0 and 5.0)" << endl;
+                    cin >> rep; failInput(rep); cin.ignore(1000,'\n');
+                }
+                to_print[num].setReputation(rep);
+                cout << "Reputation successfully changed!!" << endl;
+                break;
+            case '2':
+                cout << "no. Football Kits:" << endl;
+                cin >> changed;
+                failInput(changed);
+                cin.ignore(1000,'\n');
+                to_print[num].setEquipment2(1,changed);
+                cout << "no. Football Kits successfully changed!!" << endl;
+                break;
+            case '3':
+                cout << "no. Balls:" << endl;
+                cin >> changed;
+                failInput(changed);
+                cin.ignore(1000,'\n');
+                to_print[num].setEquipment2(2,changed);
+                cout << "no. Balls successfully changed!!" << endl;
+                break;
+            case '4':
+                cout << "no. Football Boots:" << endl;
+                cin >> changed;
+                failInput(changed);
+                cin.ignore(1000,'\n');
+                to_print[num].setEquipment2(3,changed);
+                cout << "no. Football Boots successfully changed!!" << endl;
+                break;
+            case '5':
+                cout << "no. Cones:" << endl;
+                cin >> changed;
+                failInput(changed);
+                cin.ignore(1000,'\n');
+                to_print[num].setEquipment2(4,changed);
+                cout << "no. Cones successfully changed!!" << endl;
+                break;
+            case '6':
+                cout << "no. Goals:" << endl;
+                cin >> changed;
+                failInput(changed);
+                cin.ignore(1000,'\n');
+                to_print[num].setEquipment2(5,changed);
+                cout << "no. Goals successfully changed!!" << endl;
+                break;
+            case '7':
+                cout << "no. Tactics Boards:" << endl;
+                cin >> changed;
+                failInput(changed);
+                cin.ignore(1000,'\n');
+                to_print[num].setEquipment2(6,changed);
+                cout << "no. Tactics Boards successfully changed!!" << endl;
+                break;
+            case '8':
+                cout << "no. Medical Kits:" << endl;
+                cin >> changed;
+                failInput(changed);
+                cin.ignore(1000,'\n');
+                to_print[num].setEquipment2(7,changed);
+                cout << "no. Medical Kits successfully changed!!" << endl;
+                break;
+            case '9':
+                cout << "no. Water Bottles:" << endl;
+                cin >> changed;
+                failInput(changed);
+                cin.ignore(1000,'\n');
+                to_print[num].setEquipment2(8,changed);
+                cout << "no. Water Bottles successfully changed!!" << endl;
+                break;
+            default:
+                cout << "Invalid Field Index !!" << endl;
+                break;
+
         }
-        to_print[num].setReputation(rep);
 
-        cout << "no. Balls:" << endl;
-        cin >> equip2.balls;
-        failInput(equip2.balls);
-        cin.ignore(1000,'\n');
-        cout << "no. Cones:" << endl;
-        cin >> equip2.cones;
-        failInput(equip2.cones);
-        cin.ignore(1000,'\n');
-        cout << "no. Football Boots:" << endl;
-        cin >> equip2.football_boots;
-        failInput(equip2.football_kit);
-        cin.ignore(1000,'\n');
-        cout << "no. Football Kits:" << endl;
-        cin >> equip2.football_kit;
-        failInput(equip2.football_kit);
-        cin.ignore(1000,'\n');
-        cout << "no. Goals:" << endl;
-        cin >> equip2.goal;
-        failInput(equip2.goal);
-        cin.ignore(1000,'\n');
-        cout << "no. Medical Kits:" << endl;
-        cin >> equip2.medical_kit;
-        failInput(equip2.medical_kit);
-        cin.ignore(1000,'\n');
-        cout << "no. Tactics Boards:" << endl;
-        cin >> equip2.tactics_board;
-        failInput(equip2.tactics_board);
-        cin.ignore(1000,'\n');
-        cout << "no. Water Bottles:" << endl;
-        cin >> equip2.water_bottles;
-        failInput(equip2.water_bottles);
-        cin.ignore(1000,'\n');
-        to_print[num].setEquipment(equip2.football_kit, equip2.balls, equip2.football_boots, equip2.cones, equip2.goal, equip2.tactics_board, equip2.medical_kit, equip2.water_bottles);
         p->addProvider(to_print[num]);
     } else {
         cout << "Index invalid" << endl;
