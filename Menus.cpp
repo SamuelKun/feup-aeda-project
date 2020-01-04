@@ -1680,7 +1680,6 @@ int menu_update_coach() {
         cout << "2. Change coach birthday" << endl;
         cout << "3. Change number of titles" << endl;
         cout << "4. Change teams trained" << endl;
-        cout << "0. Return to main menu" << endl;
 
         cin >> menu;
         cin.ignore(1000, '\n');
@@ -1691,30 +1690,31 @@ int menu_update_coach() {
     Date birth, start, end;
     vector<std::tuple<string, Date, Date>> trainedT = coachChange.getTrainedTeams();
     auto it = trainedT.begin();
+    string name = coachChange.getName();
 
     switch(menu) {
         case '1':
             cout << "Coach name:" << endl;
             getline(cin, name_coach);
             c->updateCoachName(coachChange, name_coach);
-            waitInput();
-            return 1;
+            cout << name << "'s name was successfully changed!!" << endl;
+            break;
         case '2':
             cout << "Write coach birthday: " << endl;
             cin >> birth;
             c->removeCoach(coachChange);
             coachChange.setBirthday(birth);
             c->addCoach(coachChange);
-            waitInput();
-            return 1;
+            cout << name << "'s Birthday was successfully changed!!" << endl;
+            break;
         case '3':
             cout << "New number of titles:" << endl;
             cin >> n;
             failInput(n);
             cin.ignore(1000, '\n');
             c->updateCoachTitle(coachChange, n);
-            waitInput();
-            return 1;
+            cout << name << "'s number of titles were successfully changed!!" << endl;
+            break;
         case '4':
             cout << "Do you wish remove a team from trained teams? [y/n]" << endl;
             cin >> confirmation;
@@ -1824,12 +1824,13 @@ int menu_update_coach() {
                     cin.ignore(1000, '\n');
                 } else confirmation = 'n';
             }
-            return 1;
-        case '0':
-            return 1;
+            cout << name << "'s Trained teams were successfully changed!!" << endl;
         default:
-            return 0;
+            cout << "Invalid Index!!" << endl;
+            break;
     }
+    waitInput();
+    return 1;
 }
 
 

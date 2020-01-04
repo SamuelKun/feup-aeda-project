@@ -118,19 +118,22 @@ int initMenu();
 /// \brief Menu that allows the user to Search, Add, Update and Remove Coaches.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_coach();
+
 /// \brief Menu to Search Coaches.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_search_coach();
+
 /// \brief Menu to add Coaches.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_add_coach();
+
 /// \brief Menu to update Coaches.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_update_coach();
+
 /// \brief Menu to remove Coaches.
 /// \return if 0 the menu is called again, 1 goes back to the previous menu
 int menu_remove_coach();
-
 
 /// \brief Menu that allows the user to Search, Add, Update and Remove Providers.
 /// \return if 0 the menu is called again, 1 goes back to main menu
