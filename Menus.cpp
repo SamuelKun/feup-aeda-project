@@ -1445,7 +1445,8 @@ int menu_info()
     cout << "========================================= \n" << endl;
 
     cout << "Team Name: " << national_team->getTeamName() << endl;
-    cout << "Number of Players: " << national_team->getPlayers().size() << endl;
+    cout << "Number of players: " << national_team->getPlayers().size() << endl;
+    cout << "Number of working staff members: " << national_team->workingStaff() << endl;
     cout << "Number of Competitions: " << national_team->getCompetition().size() << endl;
     cout << "Competitions not paid: " << national_team->missingPay() << endl;
     cout << "Money spent with accommodation: " << national_team->getMoneyAccommodation() << endl;

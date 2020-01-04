@@ -179,13 +179,17 @@ public:
     void showStaff();
 
     /// \brief Shows all Staff Members that used to work from the table
-    int showStaffRemoved();
+    void showStaffRemoved();
 
     /// \brief Sorts team_staff by name
     void sortStaffName();
 
     /// \brief Sorts team_staff by function
     void sortStaffFunction();
+
+    /// \brief  Count the number of working members on dispersion table
+    /// \return Number of members on Staff that are actually working
+    int workingStaff();
 };
 
 #endif

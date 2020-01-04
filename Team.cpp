@@ -376,7 +376,7 @@ void Team::showStaff() {
     }
 }
 
-int Team::showStaffRemoved() {
+void Team::showStaffRemoved() {
     cout << setw(19) << "Name" << " | " << setw(10) << "Birthday" <<" | ";
     cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
     auto it = team_staff.begin();
@@ -387,7 +387,6 @@ int Team::showStaffRemoved() {
             cout << setw(6) <<  i << " |" << endl;
         }
     }
-    return i;
 }
 
 void Team::sortStaffName() {
@@ -424,6 +423,17 @@ void Team::sortStaffFunction() {
         v[i].infoTable();
         cout << setw(6) <<  i << " |" << endl;
     }
+}
+
+int Team::workingStaff() {
+    auto it = team_staff.begin();
+    int i = 0;
+    for(; it != team_staff.end(); it++){
+        if(it->isWorking1())
+            i++;
+    }
+
+    return i;
 }
 
 
