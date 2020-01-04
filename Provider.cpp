@@ -158,7 +158,7 @@ vector<Provider> ProviderPriorityQueue::searchName(std::string name) {
 
     while(!provider.empty()) {
         auxiliar.push_back(provider.top());
-        if (provider.top().getName() == name) { to_return.push_back(provider.top()); }
+        if (provider.top().getName().find(name) != string::npos) { to_return.push_back(provider.top()); }
         provider.pop();
     }
 
