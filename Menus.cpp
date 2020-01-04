@@ -1796,7 +1796,7 @@ int menu_update_coach() {
                 cin.ignore(1000, '\n');
                 switch (menu2) {
                     case '1':
-                        cout << "Coach name:" << endl;
+                        cout << "Team name:" << endl;
                         getline(cin, name_coach);
                         get<0>(*it) = name_coach;
                         break;
