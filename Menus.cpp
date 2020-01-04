@@ -1681,6 +1681,7 @@ int menu_update_coach() {
         cout << "2. Change coach birthday" << endl;
         cout << "3. Change number of titles" << endl;
         cout << "4. Change teams trained" << endl;
+        cout << "5. Add teams trained" << endl;
 
         cin >> menu;
         cin.ignore(1000, '\n');
@@ -1692,6 +1693,7 @@ int menu_update_coach() {
     vector<std::tuple<string, Date, Date>> trainedT = coachChange.getTrainedTeams();
     auto it = trainedT.begin();
     string name = coachChange.getName();
+    string name_team;
 
     switch(menu) {
         case '1':
@@ -1834,6 +1836,25 @@ int menu_update_coach() {
                 }
             }
             cout << name << "'s Trained teams were successfully changed!!" << endl;
+            break;
+        case '5':
+            do {
+                c->removeCoach(coachChange);
+                cout << "Write team name: " << endl;
+                getline(cin, name_team);
+                cout << "Write beginning date: " << endl;
+                cin >> start;
+                cout << "Write ending date: " << endl;
+                cin >> end;
+                while (start.isAfter(end)){
+                    cout << "Date of end is before of date of start! ";
+                    cin >> end;
+                }
+                coachChange.addTrainedTeam(name_team, start, end);
+                c->addCoach(coachChange);
+                cout << "Add another trained team? [y/n] " << endl;
+                cin >> confirmation; cin.ignore(1000, '\n');
+            }while (confirmation == 'y');
             break;
         default:
             cout << "Invalid Index!!" << endl;
