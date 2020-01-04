@@ -22,16 +22,13 @@ struct Equipment {
 /// \brief Class for a Provider.
 class Provider {
 private:
-
     string name; ///< Name.
     double reputation; ///< Reputation.
     Equipment equipment; ///< Equipment.
 
 public:
-
     /// \brief Default Empty-Constructor.
     Provider() {}
-    
     /// \brief Constructor to initialize a Provider.
     /// \param name Name of the Provider
     /// \param reputation Reputation of the Provider

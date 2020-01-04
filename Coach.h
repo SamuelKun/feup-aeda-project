@@ -62,7 +62,7 @@ public:
 /// \brief Class for throwing exception when no Coach with such number of titles was found
 class InvalidNumberTitles {
 private:
-    double numTitles; //< Number of titles which is not associated with any coach
+    double numTitles; ///< Number of titles which is not associated with any coach
 public:
     /// \brief Class constructor for throwing exception when no Coach with such number of titles was found
     /// \param num Number of titles which is not associated with any coach
@@ -87,7 +87,7 @@ public:
 class CoachTree
 {
 private:
-    BST<Coach> tree; //< BST of Coaches
+    BST<Coach> tree; ///< BST of Coaches
 public:
     CoachTree(): tree(Coach("", Date(), false,-1)) {}; //Ver isto melhor depois
     /// \brief Adds a Coach to the tree

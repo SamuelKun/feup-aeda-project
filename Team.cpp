@@ -24,9 +24,9 @@ Team::Team(string file_name) {
     this->team_players = read_player(file_info[1]);
     this->team_staff = read_staff(file_info[2]);
     this->team_competitions = read_competion(file_info[3], this);
-    this->coaches = read_coachs(file_info[4]);
-    this->providers = read_providers(file_info[5]);
-    this->equip_buy = read_equipment(file_info[6]);
+    this->team_coaches = read_coachs(file_info[4]);
+    this->team_providers = read_providers(file_info[5]);
+    this->team_equipment = read_equipment(file_info[6]);
 }
 
 void Team::updateFile(string file_name) {
@@ -49,7 +49,7 @@ void Team::updateFile(string file_name) {
 
     ofstream s(teamName + "staff.txt");
     auto itTable = team_staff.begin();
-    for(int i = 0;  itTable  != team_staff.end(); itTable ++,i++){
+    for(;  itTable  != team_staff.end(); itTable ++){
         s << (* itTable )<< endl;
         s << "-----" << endl;
     }
@@ -85,7 +85,7 @@ void Team::updateFile(string file_name) {
     }
 
     ofstream coach_w(teamName + "coaches.txt");
-    BST<Coach> coach_tree = coaches.getTree();
+    BST<Coach> coach_tree = team_coaches.getTree();
     BSTItrIn<Coach> it(coach_tree);
     while (!it.isAtEnd()) {
         coach_w << it.retrieve().getName() << endl;
@@ -103,7 +103,7 @@ void Team::updateFile(string file_name) {
 
 
     Equipment equip4;
-    priority_queue<Provider> aux = providers.getProviders();
+    priority_queue<Provider> aux = team_providers.getProviders();
     ofstream pr(teamName + "providers.txt");
     while (!aux.empty()) {
         pr << aux.top().getName() << endl;
@@ -151,15 +151,15 @@ const tabH &Team::getStaff() const {
 }
 
 CoachTree * Team::getCoachs() {
-    return &coaches;
+    return &team_coaches;
 }
 
 ProviderPriorityQueue * Team::getProviders() {
-    return &providers;
+    return &team_providers;
 }
 
 Equipment * Team::getEquipment() {
-    return &equip_buy;
+    return &team_equipment;
 }
 
 vector<Competition *> Team::getCompetition() const {

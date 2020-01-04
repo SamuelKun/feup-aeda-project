@@ -1198,13 +1198,19 @@ int menu_updateCompetition() {
             continue;
         }
         else {
+            Competition * co = comp[index];
+            if(co->getPaid()) {
+                cout << "This competition has already been paid, so it cannot be changed." << endl;
+                cin.ignore(1000, '\n');
+                waitInput();
+                return 1;
+            }
             string players, checker;
             Date start,end;
             map<Player*, int> m_players;
             vector<Player*> team_players = national_team->getPlayers();
             vector<int> v_index;
             size_t num = team_players.size();
-            Competition * co = comp[index];
             string name = co->getCompetitionName();
             string new_name;
             int money;
@@ -1498,7 +1504,7 @@ int menu_show_coach() {
                 c->showLessTitles(num);
             }
             catch(InvalidNumberTitles & er){
-                cerr << "No coaches were found with, at most, " << er.getNumTitles() << " titles!" << endl;
+                cout << "No coaches were found with, at most, " << er.getNumTitles() << " titles!" << endl;
             }
             waitInput();
             return 0;
@@ -1509,7 +1515,7 @@ int menu_show_coach() {
                 c->showMoreTitles(num);
             }
             catch(InvalidNumberTitles & er){
-                cerr << "No coaches were found with more than " << er.getNumTitles() << " titles!" << endl;
+                cout << "No coaches were found with more than " << er.getNumTitles() << " titles!" << endl;
             }
             waitInput();
             return 0;
@@ -1932,11 +1938,11 @@ int menu_coach() {
     cout << "========================================= \n" << endl;
 
     cout << "1. View all Coaches " << endl;
-    cout << "2. Search Coaches " << endl;
-    cout << "3. Add Coaches " << endl;
-    cout << "4. Update Coaches " << endl;
-    cout << "5. Remove Coaches " << endl;
-    cout << "6. Hire a Coach for team " << endl;
+    cout << "2. Hire a Coach for team " << endl;
+    cout << "3. Search Coaches " << endl;
+    cout << "4. Add Coaches " << endl;
+    cout << "5. Update Coaches " << endl;
+    cout << "6. Remove Coaches " << endl;
     cout << "0. Return to Main Menu " << endl << endl;
 
     cin.clear();
