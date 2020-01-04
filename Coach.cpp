@@ -56,7 +56,7 @@ void Coach::setCurrentCoach(bool c) {
     this->currentCoach = c;
 }
 
-void CoachTree::imprime() const {
+void CoachTree::showCoachInfo() const {
     int index = 0;
     BSTItrIn<Coach> it(tree);
     while (!it.isAtEnd()) {
@@ -162,6 +162,29 @@ void CoachTree::showLessTitles(int num) {
         it.advance();
     }
     if(index == 0) throw InvalidNumberTitles(num);
+}
+
+Coach CoachTree::suggestedCoach(std::string teamName) {
+    BSTItrIn<Coach> it(tree);
+    Coach suggested;
+    int highest = 0;
+    while (!it.isAtEnd()) {
+        bool alreadyTrained = false;
+        if(it.retrieve().getTitles() >= highest) {
+            for(auto &i : it.retrieve().getTrainedTeams()){
+                if(get<0>(i) == teamName)
+                    alreadyTrained = true;
+            }
+            if(!alreadyTrained) {
+                suggested = it.retrieve();
+                highest = it.retrieve().getTitles();
+            }
+        }
+        it.advance();
+    }
+    if(suggested.getName().empty())
+            throw NoSuggestedCoach();
+    return suggested;
 }
 
 

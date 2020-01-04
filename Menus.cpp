@@ -1495,7 +1495,7 @@ int menu_show_coach() {
     int num;
     switch(menu) {
         case '1':
-            c->imprime();
+            c->showCoachInfo();
             waitInput();
             return 0;
         case '2':
@@ -1979,6 +1979,13 @@ int menu_select_coach(){
             }
             catch(NoCoach &er) {
                 er.show();
+                cout << "Suggested Coach for this Team: " << endl;
+                try {
+                    coachTree->suggestedCoach(national_team->getTeamName()).show();
+                }
+                catch (NoSuggestedCoach &er) {
+                    er.show();
+                }
             }
             waitInput();
             return 0;

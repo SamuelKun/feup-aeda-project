@@ -79,7 +79,18 @@ public:
     NoCoach() {}
     /// \brief Method for showing that the exception means that the team has no Coach
     void show() const {
-        cout << "This team dont have a main coach! " << endl;
+        cout << "This team don't have a main coach! " << endl;
+    }
+};
+
+/// \brief Class for throwing exception when the team has no Coaches in database
+class NoSuggestedCoach {
+public:
+    /// \brief Class constructor for throwing exception when the team has no Coach
+    NoSuggestedCoach() {}
+    /// \brief Method for showing that the exception means that the team has no Coach
+    void show() const {
+        cout << "No coaches suggested since all are former national team coaches" << endl;
     }
 };
 
@@ -129,13 +140,9 @@ public:
     /// \param num Minimum number of titles
     void showMoreTitles(int num);
     /// \brief Prints Coaches info
-    void imprime() const;
+    void showCoachInfo() const;
+
+    Coach suggestedCoach(std::string teamName);
 };
 
-
-
-
-
-
 #endif
-
