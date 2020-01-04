@@ -141,7 +141,8 @@ public:
     void showMoreTitles(int num);
     /// \brief Prints Coaches info
     void showCoachInfo() const;
-
+    /// \brief Show the suggested Coach
+    /// \return Coach with most number of titles who didn't work on national team
     Coach suggestedCoach(std::string teamName);
 };
 

@@ -216,12 +216,11 @@ vector<int> Team::showStaffTable() const {
     auto it = team_staff.begin();
     vector<int> vec;
     int i = 0;
-    for(; it != team_staff.end(); it++){
+    for(; it != team_staff.end();i++, it++){
         if(it->isWorking1()){
             it->infoTable();
             cout << setw(6) <<  i << " |" << endl;
             vec.push_back(i);
-            i++;
         }
     }
     return vec;

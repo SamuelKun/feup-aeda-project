@@ -527,7 +527,7 @@ int menu_update_staff(){
                 auto it = national_team->getStaff().begin();
                 for(int i = 0; i < index ;i++, it++){}
                 string name = it->getName();
-                auto staff = new Staff(name,it->getBirthday(),it->getSalary(),it->getFunction(), true);
+                auto staff = new Staff(name,it->getBirthday(),it->getSalary(),it->getFunction(), it->isWorking1());
                 national_team->removeStaff(*staff);
 
                 string new_name, changed = "nothing", checker;
@@ -572,7 +572,7 @@ int menu_update_staff(){
                         changed = "salary";
                         break;
                     case '5':
-                        if( staff->isWorking1()){
+                        if(staff->isWorking1()){
                             cout << name << " is currently working, do you want do dismiss him?" << endl;
                             cout << "Press 1 to dismiss him " << endl;
                             cout << "Press any other key to do keep his working status" << endl;
@@ -631,18 +631,18 @@ int menu_remove_staff() {
     unsigned int index;
     vector<Staff*> v_staff;
     vector<int> vec = national_team->showStaffTable();
-
+    tabH table = national_team->getStaff();
     cout << "Write the index of the Staff Member you wish to remove " << endl;
     cout << "Press [a] or other letter to exit." << endl;
 
     while(cin >> index && !cin.eof()){
         cin.ignore(1000,'\n');
-        if (index >= national_team->getStaff().size() || find(vec.begin(),vec.end(),index) == vec.end()) {
+        if (index >= table.size() || find(vec.begin(),vec.end(),index) == vec.end()) {
             cout << "Invalid index" << endl;
             continue;
         }
         else {
-            auto it = national_team->getStaff().begin();
+            auto it = table.begin();
             for(int i = 0; i < index ;i++, it++){}
             string name = it->getName();
             auto temp = new Staff(it->getName(),it->getBirthday(),it->getSalary(),it->getFunction(), false);
@@ -2023,6 +2023,10 @@ int menu_select_coach(){
                 cin >> start;
                 cout << "End working in: " << endl;
                 cin >> end;
+                while (start.isAfter(end)){
+                    cout << "Date of end is before of date of start! ";
+                    cin >> end;
+                }
 
                 to_print[num].addTrainedTeam(national_team->getTeamName(), start, end);
 
