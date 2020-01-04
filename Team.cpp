@@ -187,7 +187,8 @@ double Team::getMoneyStaff() const {
     double money = 0;
     auto it = team_staff.begin();
     for (;it != team_staff.end(); it++)
-        money += it->getSalary();
+        if(it->isWorking1())
+            money += it->getSalary();
     return money;
 }
 
@@ -319,8 +320,10 @@ void Team::removePlayer( Player * p) {
 
 void Team::removeStaff(Staff s) {
     auto it = team_staff.find(s);
-    if( it != team_staff.end()) team_staff.erase(it);
-    else throw PersonNotFound(s.getName());
+    if(it != team_staff.end())
+        team_staff.erase(it);
+    else
+        throw PersonNotFound(s.getName());
 }
 
 double Team::getMoneyAccommodation() const {

@@ -141,7 +141,6 @@ std::vector<Player *> read_player(std::string info){
 /// \return Vector of Staff Members belonging to a team
 tabH read_staff(std::string info){
     std::ifstream staff_info(info);
-    std::vector<Staff *> staff;
     std::vector<std::string> tempVec;
     std::string str_temp;
     tabH table;
