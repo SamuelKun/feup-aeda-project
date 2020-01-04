@@ -369,12 +369,12 @@ int menu_view_staff(){
     cout << "========================================= " << endl;
     cout << "          View Staff Members Menu         " << endl;
     cout << "========================================= \n" << endl;
-    cout << "1. View Current Staff Members" << endl;
-    cout << "2. View Old Staff Members" << endl;
-    cout << "3. View All Staff Members" << endl;
-    cout << "4. View All Staff Members sorted by Name" << endl;
-    cout << "5. View All Staff Members sorted by Function" << endl;
-    cout << "0. Return to Dispersion Table Menu" << endl << endl;
+    cout << "1. View current staff members" << endl;
+    cout << "2. View old staff members" << endl;
+    cout << "3. View all staff members" << endl;
+    cout << "4. View all staff members sorted by Name" << endl;
+    cout << "5. View all staff members sorted by Function" << endl;
+    cout << "0. Return to Staff Menu" << endl << endl;
 
     cin.clear();
     cin >> menu;
@@ -495,7 +495,7 @@ int menu_search_staff(){
                 }
             }
             catch(FunctionNotFound & er){
-                cout << "No Staff Member named " << er.getFunction() << endl;
+                cout << "No Staff with function" << er.getFunction() << endl;
             }
             waitInput();
             return 0;

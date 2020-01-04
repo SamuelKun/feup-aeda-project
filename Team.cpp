@@ -215,11 +215,13 @@ vector<int> Team::showStaffTable() const {
     cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
     auto it = team_staff.begin();
     vector<int> vec;
-    for(int i = 0; it != team_staff.end();i++, it++){
+    int i = 0;
+    for(; it != team_staff.end(); it++){
         if(it->isWorking1()){
             it->infoTable();
             cout << setw(6) <<  i << " |" << endl;
             vec.push_back(i);
+            i++;
         }
     }
     return vec;
@@ -370,9 +372,10 @@ void Team::showStaff() {
     cout << setw(12) << "Function" << " | " << setw(9) << "Salary" << " | " <<setw(6) <<  "Index" << " |" << endl;;
     int i = 0;
     auto it = team_staff.begin();
-    for(int i = 0; it != team_staff.end();it++,i++){
+    for(; it != team_staff.end();it++){
         it->infoTable();
         cout << setw(6) <<  i << " |" << endl;
+        i++;
     }
 }
 
