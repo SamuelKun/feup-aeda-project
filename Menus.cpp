@@ -1720,37 +1720,30 @@ int menu_update_coach() {
             cout << "Do you wish remove a team from trained teams? [y/n]" << endl;
             cin >> confirmation;
             cin.ignore(1000, '\n');
-            index = 0;
-
             while (confirmation == 'y') {
+                index = 0;
                 for (auto &i : trainedT) {
                     cout << "Index: " << index << endl;
                     cout << " TeamName: " << get<0>(i) << endl;
                     cout << " Start: " << get<1>(i) << endl;
                     cout << " End: " << get<2>(i) << endl << endl;
+                    index++;
                 }
 
                 cout << "Choose index: " << endl;
                 cin >> n;
                 failInput(n);
                 cin.ignore(1000, '\n');
-                while (n >= trainedT.size()) {
+                while (n > trainedT.size()) {
                     cout << "Invalid index. Choose index: " << endl;
                     cin >> n;
                     failInput(n);
                     cin.ignore(1000, '\n');
                 }
 
-                cout << "Choose index: " << endl;
-                cin >> n;
-                failInput(n);
-                cin.ignore(1000, '\n');
-                while (n >= trainedT.size()) {
-                    cout << "Invalid index. Choose index: " << endl;
-                    cin >> n;
-                    failInput(n);
-                    cin.ignore(1000, '\n');
-                }
+                it = trainedT.begin();
+                for(int i = 0; i < n; i++)
+                    it++;
 
                 trainedT.erase(it);
                 c->updateCoachTeams(coachChange, trainedT);
@@ -1758,16 +1751,20 @@ int menu_update_coach() {
                     cout << "Remove another trained team? [y/n] " << endl;
                     cin >> confirmation;
                     cin.ignore(1000, '\n');
-                } else confirmation = 'n';
+                } else{
+                    confirmation = 'n';
+                    cout << "No more teams to remove/change!" << endl;
+                    waitInput();
+                    return 1;
+                }
             }
             //Alterar informação sobre alguma equipa que já treinou anteriormente
-
-            cout << "Change a trained teams? [y/n]" << endl;
+            cout << "Do you wish to change a team from trained teams? [y/n]" << endl;
             cin >> confirmation;
             cin.ignore(1000, '\n');
-            index = 0;
 
             while (confirmation == 'y') {
+                index = 0;
                 for (auto &i : trainedT) {
                     cout << "Index: " << index << endl;
                     cout << " TeamName: " << get<0>(i) << endl;
@@ -1787,8 +1784,9 @@ int menu_update_coach() {
                 }
 
                 it = trainedT.begin();
-                while (n)
+                for(int i = 0; i < n; i++)
                     it++;
+
 
                 cout << "What you want to to change? " << index << endl;
                 cout << "1. Team Name " << endl;
@@ -1823,9 +1821,15 @@ int menu_update_coach() {
                     cout << "Change another trained team? [y/n] " << endl;
                     cin >> confirmation;
                     cin.ignore(1000, '\n');
-                } else confirmation = 'n';
+                } else {
+                    confirmation = 'n';
+                    cout << "No more teams to remove/change!" << endl;
+                    waitInput();
+                    return 1;
+                }
             }
             cout << name << "'s Trained teams were successfully changed!!" << endl;
+            break;
         default:
             cout << "Invalid Index!!" << endl;
             break;
