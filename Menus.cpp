@@ -631,11 +631,12 @@ int menu_remove_staff() {
     unsigned int index;
     vector<Staff*> v_staff;
     vector<int> vec = national_team->showStaffTable();
-    tabH table = national_team->getStaff();
+
     cout << "Write the index of the Staff Member you wish to remove " << endl;
     cout << "Press [a] or other letter to exit." << endl;
 
     while(cin >> index && !cin.eof()){
+        tabH table = national_team->getStaff();
         cin.ignore(1000,'\n');
         if (index >= table.size() || find(vec.begin(),vec.end(),index) == vec.end()) {
             cout << "Invalid index" << endl;
