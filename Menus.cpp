@@ -1642,107 +1642,122 @@ int menu_update_coach() {
     cout << "Coach name:" << endl;
     getline(cin, name_coach);
 
-    vector<Coach>  to_print = c->searchName(name_coach);
-    for (size_t i = 0; i < to_print.size(); i++) {
-        cout << "Index " << i << endl;
-        to_print[i].show();
-        cout << "-----------------------------------" << endl << endl;
-    }
+    try {
+        vector<Coach> to_print = c->searchName(name_coach);
+        for (size_t i = 0; i < to_print.size(); i++) {
+            cout << "Index " << i << endl;
+            to_print[i].show();
+            cout << "-----------------------------------" << endl << endl;
+        }
 
-    cout << "Choose index: " << endl;
-    cin >> num; failInput(num); cin.ignore(1000,'\n');
-    while (num >= to_print.size()) {
-        cout << "Invalid index. Choose index: " << endl;
-        cin >> num; failInput(num); cin.ignore(1000,'\n');
-    }
-    Coach coachChange = to_print[num];
-
-    char menu;
-    cout << "========================================= " << endl;
-    cout << "           Update Coach Menu             " << endl;
-    cout << "========================================= \n" << endl;
-
-    cout << "Choose the field you want to change: " << endl;
-    cout << "1. Change coach name" << endl;
-    cout << "2. Change coach birthday" << endl;
-    cout << "3. Change number of titles" << endl;
-    cout << "4. Change teams trained" << endl;
-    cout << "0. Return to main menu" << endl;
-
-    cin >> menu;
-    cin.ignore(1000, '\n');
-
-    int n, index;
-    char confirmation;
-
-    Date birth;
-    vector<std::tuple<string, Date, Date>> trainedT = coachChange.getTrainedTeams();
-    auto it = trainedT.begin();
-
-    switch(menu) {
-        case '1':
-            cout << "Coach name:" << endl;
-            getline(cin, name_coach);
-            c->updateCoachName(coachChange, name_coach);
-            waitInput();
-            return 1;
-        case '2':
-            cout << "Write coach birthday: " << endl;
-            cin >> birth;
-            c->removeCoach(coachChange);
-            coachChange.setBirthday(birth);
-            c->addCoach(coachChange);
-            waitInput();
-            return 1;
-        case '3':
-            cout << "New number of titles:" << endl;
-            cin >> n;
-            failInput(n);
-            cin.ignore(1000,'\n');
-            c->removeCoach(coachChange);
-            c->updateCoachTitle(coachChange, n);
-            c->addCoach(coachChange);
-            waitInput();
-            return 1;
-        case '4':
-            cout << "Do you wish remove a team from trainned teams? [y/n]" << endl;
-            cin >> confirmation;
+        cout << "Choose index: " << endl;
+        cin >> num;
+        failInput(num);
+        cin.ignore(1000, '\n');
+        while (num >= to_print.size()) {
+            cout << "Invalid index. Choose index: " << endl;
+            cin >> num;
+            failInput(num);
             cin.ignore(1000, '\n');
-            index = 0;
-            c->removeCoach(coachChange);
-            while (confirmation == 'y') {
-                for (auto &i : trainedT) {
-                    cout << "Index: " << index << endl;
-                    cout << " TeamName: " << get<0>(i) << endl;
-                    cout << " Start: " << get<1>(i) << endl;
-                    cout << " End: " << get<2>(i) << endl << endl;
-                }
+        }
+        Coach coachChange = to_print[num];
 
-                cout << "Choose index: " << endl;
-                cin >> n; failInput(n); cin.ignore(1000,'\n');
-                while (n >= trainedT.size()) {
-                    cout << "Invalid index. Choose index: " << endl;
-                    cin >> n; failInput(n); cin.ignore(1000,'\n');
-                }
+        char menu;
+        cout << "========================================= " << endl;
+        cout << "           Update Coach Menu             " << endl;
+        cout << "========================================= \n" << endl;
 
-                it = trainedT.begin();
-                while (n)
-                    it++;
+        cout << "Choose the field you want to change: " << endl;
+        cout << "1. Change coach name" << endl;
+        cout << "2. Change coach birthday" << endl;
+        cout << "3. Change number of titles" << endl;
+        cout << "4. Change teams trained" << endl;
+        cout << "0. Return to main menu" << endl;
 
-                trainedT.erase(it);
-                c->updateCoachTeams(coachChange, trainedT);
-                if(!trainedT.empty()) {
-                    cout << "Remove another trainned team? [y/n] " << endl;
-                    cin >> confirmation; cin.ignore(1000,'\n');
+        cin >> menu;
+        cin.ignore(1000, '\n');
+
+        int n, index;
+        char confirmation;
+
+        Date birth;
+        vector<std::tuple<string, Date, Date>> trainedT = coachChange.getTrainedTeams();
+        auto it = trainedT.begin();
+
+        switch (menu) {
+            case '1':
+                cout << "Coach name:" << endl;
+                getline(cin, name_coach);
+                c->updateCoachName(coachChange, name_coach);
+                waitInput();
+                return 1;
+            case '2':
+                cout << "Write coach birthday: " << endl;
+                cin >> birth;
+                c->removeCoach(coachChange);
+                coachChange.setBirthday(birth);
+                c->addCoach(coachChange);
+                waitInput();
+                return 1;
+            case '3':
+                cout << "New number of titles:" << endl;
+                cin >> n;
+                failInput(n);
+                cin.ignore(1000, '\n');
+                c->removeCoach(coachChange);
+                c->updateCoachTitle(coachChange, n);
+                c->addCoach(coachChange);
+                waitInput();
+                return 1;
+            case '4':
+                cout << "Do you wish remove a team from trainned teams? [y/n]" << endl;
+                cin >> confirmation;
+                cin.ignore(1000, '\n');
+                index = 0;
+                c->removeCoach(coachChange);
+                while (confirmation == 'y') {
+                    for (auto &i : trainedT) {
+                        cout << "Index: " << index << endl;
+                        cout << " TeamName: " << get<0>(i) << endl;
+                        cout << " Start: " << get<1>(i) << endl;
+                        cout << " End: " << get<2>(i) << endl << endl;
+                    }
+
+                    cout << "Choose index: " << endl;
+                    cin >> n;
+                    failInput(n);
+                    cin.ignore(1000, '\n');
+                    while (n >= trainedT.size()) {
+                        cout << "Invalid index. Choose index: " << endl;
+                        cin >> n;
+                        failInput(n);
+                        cin.ignore(1000, '\n');
+                    }
+
+                    it = trainedT.begin();
+                    while (n)
+                        it++;
+
+                    trainedT.erase(it);
+                    c->updateCoachTeams(coachChange, trainedT);
+                    if (!trainedT.empty()) {
+                        cout << "Remove another trainned team? [y/n] " << endl;
+                        cin >> confirmation;
+                        cin.ignore(1000, '\n');
+                    } else confirmation = 'n';
                 }
-                else confirmation = 'n';
-            }
-            //Alterar informação sobre alguma equipa que já treinou anteriormente
-            return 1;
-        case '0':
-            return 1;
-        default:
-            return 0;
+                //Alterar informação sobre alguma equipa que já treinou anteriormente
+                return 1;
+            case '0':
+                return 1;
+            default:
+                return 0;
+        }
+    }
+    catch (PersonNotFound & er){
+        cerr << "No coach named " << er.getName() << " was found!!" << endl;
+        waitInput();
+        return 1;
     }
 }
 
