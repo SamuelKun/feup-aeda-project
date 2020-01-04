@@ -1682,6 +1682,7 @@ int menu_update_coach() {
         cout << "3. Change number of titles" << endl;
         cout << "4. Change teams trained" << endl;
         cout << "5. Add teams trained" << endl;
+        cout << "0. Back to main menu" << endl;
 
         cin >> menu;
         cin.ignore(1000, '\n');
@@ -1741,7 +1742,7 @@ int menu_update_coach() {
                 cin >> n;
                 failInput(n);
                 cin.ignore(1000, '\n');
-                while (n > trainedT.size()) {
+                while (n >= trainedT.size()) {
                     cout << "Invalid index. Choose index: " << endl;
                     cin >> n;
                     failInput(n);
@@ -1777,6 +1778,7 @@ int menu_update_coach() {
                     cout << " TeamName: " << get<0>(i) << endl;
                     cout << " Start: " << get<1>(i) << endl;
                     cout << " End: " << get<2>(i) << endl << endl;
+                    index++;
                 }
 
                 cout << "Choose index: " << endl;
@@ -1857,8 +1859,7 @@ int menu_update_coach() {
             }while (confirmation == 'y');
             break;
         default:
-            cout << "Invalid Index!!" << endl;
-            break;
+            return 1;
     }
     waitInput();
     return 1;
