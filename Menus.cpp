@@ -1642,38 +1642,43 @@ int menu_update_coach() {
     cout << "Coach name:" << endl;
     getline(cin, name_coach);
 
-    vector<Coach>  to_print = c->searchName(name_coach);
-    for (size_t i = 0; i < to_print.size(); i++) {
-        cout << "Index " << i << endl;
-        to_print[i].show();
-        cout << "-----------------------------------" << endl << endl;
-    }
+    try {
+        vector<Coach> to_print = c->searchName(name_coach);
+        for (size_t i = 0; i < to_print.size(); i++) {
+            cout << "Index " << i << endl;
+            to_print[i].show();
+            cout << "-----------------------------------" << endl << endl;
+        }
 
-    cout << "Choose index: " << endl;
-    cin >> num; failInput(num); cin.ignore(1000,'\n');
-    while (num >= to_print.size()) {
-        cout << "Invalid index. Choose index: " << endl;
-        cin >> num; failInput(num); cin.ignore(1000,'\n');
-    }
-    Coach coachChange = to_print[num];
+        cout << "Choose index: " << endl;
+        cin >> num;
+        failInput(num);
+        cin.ignore(1000, '\n');
+        while (num >= to_print.size()) {
+            cout << "Invalid index. Choose index: " << endl;
+            cin >> num;
+            failInput(num);
+            cin.ignore(1000, '\n');
+        }
+        Coach coachChange = to_print[num];
 
     char menu, menu2;
     cout << "========================================= " << endl;
     cout << "           Update Coach Menu             " << endl;
     cout << "========================================= \n" << endl;
 
-    cout << "Choose the field you want to change: " << endl;
-    cout << "1. Change coach name" << endl;
-    cout << "2. Change coach birthday" << endl;
-    cout << "3. Change number of titles" << endl;
-    cout << "4. Change teams trained" << endl;
-    cout << "0. Return to main menu" << endl;
+        cout << "Choose the field you want to change: " << endl;
+        cout << "1. Change coach name" << endl;
+        cout << "2. Change coach birthday" << endl;
+        cout << "3. Change number of titles" << endl;
+        cout << "4. Change teams trained" << endl;
+        cout << "0. Return to main menu" << endl;
 
-    cin >> menu;
-    cin.ignore(1000, '\n');
+        cin >> menu;
+        cin.ignore(1000, '\n');
 
-    int n, index;
-    char confirmation;
+        int n, index;
+        char confirmation;
 
     Date birth, start, end;
     vector<std::tuple<string, Date, Date>> trainedT = coachChange.getTrainedTeams();
@@ -1725,9 +1730,16 @@ int menu_update_coach() {
                     cin >> n; failInput(n); cin.ignore(1000,'\n');
                 }
 
-                it = trainedT.begin();
-                while (n)
-                    it++;
+                    cout << "Choose index: " << endl;
+                    cin >> n;
+                    failInput(n);
+                    cin.ignore(1000, '\n');
+                    while (n >= trainedT.size()) {
+                        cout << "Invalid index. Choose index: " << endl;
+                        cin >> n;
+                        failInput(n);
+                        cin.ignore(1000, '\n');
+                    }
 
                 c->removeCoach(coachChange);
                 trainedT.erase(it);
@@ -1805,6 +1817,10 @@ int menu_update_coach() {
             return 1;
         default:
             return 0;
+        catch (PersonNotFound & er){
+        cerr << "No coach named " << er.getName() << " was found!!" << endl;
+        waitInput();
+        return 1;
     }
 }
 
